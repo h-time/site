@@ -3,41 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout & Factură | H-TIME</title>
+    <title>Checkout | H-TIME</title>
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* --- Footer --- */
-        footer {
-            background-color: #f5f5f5;
-            color: black;
-            padding: 50px;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 30px;
-            border-top: 1px solid #ddd;
-            font-family: 'Space Mono', monospace;
-            text-align: left;
-        }
-        .footer-col { flex: 1; min-width: 200px; }
-        .footer-col h2, .footer-col h3 { font-family: 'Syncopate', sans-serif; text-transform: uppercase; margin-bottom: 20px; font-size: 1.2rem; }
-        .footer-col ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-        .footer-col a:hover { text-decoration: underline; }
-        
-        /* --- Setări Generale --- */
         :root {
             --dark-header: #4a4541;
             --light-bg: #f5f5f5;
             --peach-bg: #fcbf88;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Space Mono', monospace; background-color: var(--light-bg); color: black; padding-top: 80px; }
+        body { font-family: 'Space Mono', monospace; background-color: var(--light-bg); color: black; padding-top: 80px; display: flex; flex-direction: column; min-height: 100vh; }
         h1, h2, h3, .sync-font { font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
         a { text-decoration: none; color: inherit; }
 
-        /* --- Bara de Navigație --- */
         nav {
             background-color: var(--dark-header); color: white; display: flex;
             justify-content: space-between; align-items: center; padding: 15px 50px;
@@ -47,17 +26,14 @@
         .nav-links { display: flex; gap: 20px; }
         .nav-links a:hover { text-decoration: underline; color: var(--peach-bg); }
 
-        /* --- Container Checkout --- */
-        .checkout-container { max-width: 1000px; margin: 40px auto; padding: 20px; background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-radius: 8px; }
+        .checkout-container { max-width: 1000px; margin: 40px auto; padding: 20px; background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-radius: 8px; flex-grow: 1; width: 90%; }
         .checkout-header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid black; padding-bottom: 10px; }
 
-        /* Tabel Coș */
         table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
         th, td { padding: 15px; text-align: left; border-bottom: 1px solid #ddd; }
         th { background-color: var(--dark-header); color: white; }
         .total-row { font-weight: bold; font-size: 1.2rem; background-color: var(--peach-bg); }
 
-        /* Formular Date Client */
         .billing-form { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; }
         .form-group { display: flex; flex-direction: column; }
         .form-group label { margin-bottom: 5px; font-weight: bold; }
@@ -68,19 +44,26 @@
         .btn-action:hover { background-color: var(--peach-bg); color: black; }
         .btn-clear { background-color: #ff4c4c; margin-top: 10px; }
 
-        /* --- Zona de Factură (Ascunsă inițial) --- */
         #invoice-section { display: none; padding: 40px; background: white; }
         .invoice-header { display: flex; justify-content: space-between; border-bottom: 2px solid black; padding-bottom: 20px; margin-bottom: 20px; }
         .invoice-details { margin-bottom: 30px; }
         .invoice-stamp { text-align: right; margin-top: 50px; font-style: italic; color: #555; }
 
-        /* --- Magia pentru Printare / PDF --- */
-        /* Când se apasă print, ascundem tot site-ul și lăsăm doar factura! */
+        /* --- Footer --- */
+        footer {
+            background-color: #eaddd7;
+            padding: 50px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; border-top: 1px solid #ddd; margin-top: auto;
+        }
+        .footer-col { flex: 1; min-width: 200px; }
+        .footer-col h2, .footer-col h3 { font-family: 'Syncopate', sans-serif; text-transform: uppercase; margin-bottom: 20px; font-size: 1.2rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-col a:hover { text-decoration: underline; }
+
         @media print {
             body * { visibility: hidden; }
             #invoice-section, #invoice-section * { visibility: visible; }
             #invoice-section { position: absolute; left: 0; top: 0; width: 100%; }
-            nav { display: none; }
+            nav, footer { display: none !important; }
         }
     </style>
 </head>
@@ -92,6 +75,7 @@
             <a href="index.html">Acasă</a>
             <a href="magazin.html">Magazin</a>
             <a href="echipa.html">Echipa H-Time</a>
+            <a href="contact.html">Contactează-ne</a>
         </div>
     </nav>
 
@@ -101,46 +85,24 @@
         </div>
 
         <div id="empty-cart-msg" style="display: none; text-align: center; padding: 50px;">
-            <h3>Coșul tău este gol.</h3>
-            <br>
+            <h3>Coșul tău este gol.</h3><br>
             <a href="magazin.html" style="color: blue; text-decoration: underline;">Întoarce-te la magazin</a>
         </div>
 
         <div id="cart-content">
             <table id="cart-table">
-                <thead>
-                    <tr>
-                        <th>Produs</th>
-                        <th>Preț Unitar</th>
-                    </tr>
-                </thead>
-                <tbody id="cart-items">
-                    </tbody>
-                <tfoot>
-                    <tr class="total-row">
-                        <td>TOTAL DE PLATĂ:</td>
-                        <td id="cart-total">€0.00</td>
-                    </tr>
-                </tfoot>
+                <thead><tr><th>Produs</th><th>Preț Unitar</th></tr></thead>
+                <tbody id="cart-items"></tbody>
+                <tfoot><tr class="total-row"><td>TOTAL DE PLATĂ:</td><td id="cart-total">€0.00</td></tr></tfoot>
             </table>
 
             <h3 style="margin-bottom: 15px;">Date de Facturare (Simulare)</h3>
             <form id="billing-form" onsubmit="generateInvoice(event)">
                 <div class="billing-form">
-                    <div class="form-group">
-                        <label>Nume și Prenume / Firma</label>
-                        <input type="text" id="b-name" required placeholder="Ex: Popescu Ion">
-                    </div>
-                    <div class="form-group">
-                        <label>Adresa de Email</label>
-                        <input type="email" id="b-email" required placeholder="email@exemplu.com">
-                    </div>
-                    <div class="form-group full-width">
-                        <label>Adresa completă</label>
-                        <input type="text" id="b-address" required placeholder="Strada, Număr, Oraș, Județ">
-                    </div>
+                    <div class="form-group"><label>Nume și Prenume</label><input type="text" id="b-name" required placeholder="Ex: Popescu Ion"></div>
+                    <div class="form-group"><label>Adresa de Email</label><input type="email" id="b-email" required placeholder="email@exemplu.com"></div>
+                    <div class="form-group full-width"><label>Adresa completă</label><input type="text" id="b-address" required placeholder="Strada, Număr, Oraș, Județ"></div>
                 </div>
-                
                 <button type="submit" class="btn-action">Emite Factura & Plasează Comanda</button>
             </form>
             <button onclick="clearCart()" class="btn-action btn-clear">Golește Coșul</button>
@@ -149,121 +111,73 @@
 
     <div id="invoice-section">
         <div class="invoice-header">
-            <div>
-                <h1 class="sync-font" style="font-size: 2rem;">H-TIME F.E.</h1>
-                <p>Str. Milcov 18A, Iași, 700259</p>
-                <p>CUI: RO12345678 (Simulat)</p>
-                <p>Email: h.time.business@gmail.com</p>
-            </div>
-            <div style="text-align: right;">
-                <h2 class="sync-font">FACTURĂ FISCALĂ</h2>
-                <p>Seria HT Nr. <span id="inv-number"></span></p>
-                <p>Data: <span id="inv-date"></span></p>
-            </div>
+            <div><h1 class="sync-font" style="font-size: 2rem;">H-TIME F.E.</h1><p>Str. Milcov 18A, Iași, 700259</p><p>CUI: RO12345678 (Simulat)</p><p>Email: h.time.business@gmail.com</p></div>
+            <div style="text-align: right;"><h2 class="sync-font">FACTURĂ FISCALĂ</h2><p>Seria HT Nr. <span id="inv-number"></span></p><p>Data: <span id="inv-date"></span></p></div>
         </div>
-
-        <div class="invoice-details">
-            <h3>Cumpărător:</h3>
-            <p><strong>Nume:</strong> <span id="inv-client-name"></span></p>
-            <p><strong>Adresă:</strong> <span id="inv-client-address"></span></p>
-            <p><strong>Email:</strong> <span id="inv-client-email"></span></p>
-        </div>
-
+        <div class="invoice-details"><h3>Cumpărător:</h3><p><strong>Nume:</strong> <span id="inv-client-name"></span></p><p><strong>Adresă:</strong> <span id="inv-client-address"></span></p><p><strong>Email:</strong> <span id="inv-client-email"></span></p></div>
         <table style="width: 100%;">
-            <thead>
-                <tr>
-                    <th style="background-color: #eee; color: black; border: 1px solid #000;">Denumire Produs</th>
-                    <th style="background-color: #eee; color: black; border: 1px solid #000;">Preț (€)</th>
-                </tr>
-            </thead>
-            <tbody id="inv-items">
-                </tbody>
-            <tfoot>
-                <tr style="font-weight: bold; font-size: 1.2rem;">
-                    <td style="text-align: right; padding-right: 20px; border: 1px solid #000;">TOTAL ACHITAT:</td>
-                    <td style="border: 1px solid #000;" id="inv-total">€0.00</td>
-                </tr>
-            </tfoot>
+            <thead><tr><th style="background-color: #eee; color: black; border: 1px solid #000;">Denumire Produs</th><th style="background-color: #eee; color: black; border: 1px solid #000;">Preț (€)</th></tr></thead>
+            <tbody id="inv-items"></tbody>
+            <tfoot><tr style="font-weight: bold; font-size: 1.2rem;"><td style="text-align: right; padding-right: 20px; border: 1px solid #000;">TOTAL ACHITAT:</td><td style="border: 1px solid #000;" id="inv-total">€0.00</td></tr></tfoot>
         </table>
-
-        <div class="invoice-stamp">
-            <p>Această factură a fost generată electronic și circulă fără ștampilă și semnătură conform Legii 227/2015.</p>
-            <p><strong>Proiect Firmă de Exercițiu - Document Fictiv</strong></p>
-        </div>
+        <div class="invoice-stamp"><p>Această factură a fost generată electronic și circulă fără ștampilă și semnătură conform Legii 227/2015.</p><p><strong>Proiect Firmă de Exercițiu - Document Fictiv</strong></p></div>
     </div>
 
+    <footer>
+        <div class="footer-col">
+            <h2>H-TIME</h2>
+            <p style="margin-top: 10px;">Copyright © 2026 H-TIME FE.</p>
+        </div>
+        <div class="footer-col">
+            <h3>LINK-URI UTILE</h3>
+            <ul>
+                <li><a href="termeni.html">Termeni și condiții</a></li>
+                <li><a href="confidentialitate.html">Politica de confidențialitate</a></li>
+                <li><a href="https://anpc.ro/" target="_blank">ANPC</a></li>
+                <li><a href="https://ec.europa.eu/consumers/odr" target="_blank">SOL (Soluționarea Litigiilor)</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3>LOCATION</h3>
+            <p>Strada Milcov 18A, Iași<br>700259</p>
+        </div>
+        <div class="footer-col">
+            <h3>CONTACT</h3>
+            <p>h.time.business@gmail.com</p>
+        </div>
+    </footer>
+
     <script>
-        // 1. Încărcăm produsele când se deschide pagina
         document.addEventListener("DOMContentLoaded", loadCart);
-
         let globalTotal = 0;
-
         function loadCart() {
             const cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
             const tbody = document.getElementById('cart-items');
             const cartContent = document.getElementById('cart-content');
             const emptyMsg = document.getElementById('empty-cart-msg');
-            
-            tbody.innerHTML = '';
-            globalTotal = 0;
-
-            if (cart.length === 0) {
-                cartContent.style.display = 'none';
-                emptyMsg.style.display = 'block';
-                return;
-            }
-
-            cart.forEach(item => {
-                globalTotal += item.price;
-                const tr = document.createElement('tr');
-                tr.innerHTML = `<td>${item.name}</td><td>€${item.price.toFixed(2)}</td>`;
-                tbody.appendChild(tr);
-            });
-
+            tbody.innerHTML = ''; globalTotal = 0;
+            if (cart.length === 0) { cartContent.style.display = 'none'; emptyMsg.style.display = 'block'; return; }
+            cart.forEach(item => { globalTotal += item.price; tbody.innerHTML += `<tr><td>${item.name}</td><td>€${item.price.toFixed(2)}</td></tr>`; });
             document.getElementById('cart-total').innerText = '€' + globalTotal.toFixed(2);
         }
-
-        function clearCart() {
-            localStorage.removeItem('htimeCart');
-            loadCart();
-        }
-
-        // 2. Funcția de generare a facturii
+        function clearCart() { localStorage.removeItem('htimeCart'); loadCart(); }
         function generateInvoice(event) {
-            event.preventDefault(); // Oprim reîncărcarea paginii
-
+            event.preventDefault();
             const cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
             if(cart.length === 0) return;
-
-            // Preluăm datele clientului
             document.getElementById('inv-client-name').innerText = document.getElementById('b-name').value;
             document.getElementById('inv-client-email').innerText = document.getElementById('b-email').value;
             document.getElementById('inv-client-address').innerText = document.getElementById('b-address').value;
-
-            // Setăm numărul facturii și data
-            document.getElementById('inv-number').innerText = Math.floor(Math.random() * 90000) + 10000; // Număr random 5 cifre
-            const azi = new Date();
-            document.getElementById('inv-date').innerText = azi.toLocaleDateString('ro-RO');
-
-            // Punem produsele în factură
+            document.getElementById('inv-number').innerText = Math.floor(Math.random() * 90000) + 10000;
+            document.getElementById('inv-date').innerText = new Date().toLocaleDateString('ro-RO');
             const invTbody = document.getElementById('inv-items');
             invTbody.innerHTML = '';
-            cart.forEach(item => {
-                invTbody.innerHTML += `<tr><td style="border: 1px solid #000;">${item.name}</td><td style="border: 1px solid #000;">€${item.price.toFixed(2)}</td></tr>`;
-            });
+            cart.forEach(item => { invTbody.innerHTML += `<tr><td style="border: 1px solid #000;">${item.name}</td><td style="border: 1px solid #000;">€${item.price.toFixed(2)}</td></tr>`; });
             document.getElementById('inv-total').innerText = '€' + globalTotal.toFixed(2);
-
-            // Ascundem checkout-ul și arătăm factura
             document.getElementById('checkout-section').style.display = 'none';
             document.getElementById('invoice-section').style.display = 'block';
-
-            // Golim coșul pentru următoarea comandă
             localStorage.removeItem('htimeCart');
-
-            // Declanșăm fereastra de printare automat (pentru salvare ca PDF)
-            setTimeout(() => {
-                window.print();
-            }, 500);
+            setTimeout(() => { window.print(); }, 500);
         }
     </script>
 </body>
