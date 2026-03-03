@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Despre Noi | H-TIME</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --dark-header: #4a4541;
+            --light-bg: #f5f5f5;
+            --peach-bg: #fcbf88;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Space Mono', monospace; background-color: var(--light-bg); color: black; padding-top: 80px; display: flex; flex-direction: column; min-height: 100vh; }
+        h1, h2, h3, .sync-font { font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- Navigația --- */
+        nav {
+            background-color: var(--dark-header); color: white; display: flex;
+            justify-content: space-between; align-items: center; padding: 15px 50px;
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+        }
+        .logo { font-size: 24px; font-weight: bold; color: #d4af37; font-family: 'Syncopate', sans-serif;}
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a:hover { text-decoration: underline; color: var(--peach-bg); }
+        .cart-btn {
+            border: 1px solid white; padding: 5px 15px; border-radius: 20px;
+            background: transparent; color: white; cursor: pointer; font-family: 'Space Mono';
+        }
+        .cart-btn:hover { background-color: white; color: black; }
+        .cart-count { background: var(--peach-bg); color: black; border-radius: 50%; padding: 2px 8px; font-size: 0.8rem; margin-left: 5px; font-weight: bold; }
+
+        /* --- Secțiunea Hero (Despre Noi) --- */
+        .about-hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 40px;
+            gap: 60px;
+        }
+        .about-text { flex: 1; }
+        .about-text h1 { font-size: 3rem; margin-bottom: 30px; line-height: 1.2; }
+        .about-text p { font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; text-align: justify; }
+        
+        .about-image { flex: 1; position: relative; }
+        .about-image img { 
+            width: 100%; 
+            border-radius: 10px; 
+            box-shadow: -15px 15px 0px var(--peach-bg); /* Un efect vizual de umbră portocalie */
+            object-fit: cover;
+        }
+
+        /* --- Secțiunea Video --- */
+        .video-section {
+            background-color: var(--dark-header);
+            color: white;
+            padding: 80px 40px;
+            text-align: center;
+        }
+        .video-section h2 { font-size: 2.5rem; margin-bottom: 20px; color: var(--peach-bg); }
+        .video-section p { font-size: 1.1rem; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto;
+            border: 4px solid var(--peach-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            background: black;
+        }
+        .video-container video {
+            width: 100%;
+            display: block;
+            outline: none;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #eaddd7;
+            padding: 50px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; border-top: 1px solid #ddd;
+            margin-top: auto;
+        }
+        .footer-col { flex: 1; min-width: 200px; }
+        .footer-col h2, .footer-col h3 { font-family: 'Syncopate', sans-serif; text-transform: uppercase; margin-bottom: 20px; font-size: 1.2rem; }
+        .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+        .footer-col a:hover { text-decoration: underline; }
+
+        /* --- Responsive --- */
+        @media (max-width: 900px) {
+            .about-hero { flex-direction: column; text-align: center; gap: 40px; margin: 40px auto; }
+            .about-text p { text-align: center; }
+            .about-image img { box-shadow: 0px 10px 20px rgba(0,0,0,0.1); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="logo.png" alt="Logo H-Time" style="height: 75px; width: auto; object-fit: contain; margin-top: 3px;">
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Acasă</a>
+            <a href="magazin.html">Magazin</a>
+            <a href="despre-noi.html">Despre Noi</a>
+            <a href="echipa.html">Echipa H-Time</a>
+            <a href="contact.html">Contactează-ne</a>
+        </div>
+        <div class="nav-icons">
+            <a href="checkout.html">
+                <button class="cart-btn">Cart <span id="cart-counter" class="cart-count">0</span></button>
+            </a>
+        </div>
+    </nav>
+
+    <section class="about-hero">
+        <div class="about-text">
+            <h1>Cine<br>Suntem<br>Noi?</h1>
+            <p>Firma de exercițiu <strong>H-TIME</strong> a luat naștere din pasiunea pentru frumos și dorința de a capta esența timpului.</p>
+            <p>Cu o viziune ce îmbină mitologia greacă cu estetica modernă, H-TIME își propune să îmbogățească lumea accesoriilor cu un strop de rafinament mitologic și să reamintească oricărui client că momentul merită celebrat și prețuit.</p>
+        </div>
+        <div class="about-image">
+            <img src="cercel1.jpg" alt="Bijuterie H-TIME">
+        </div>
+    </section>
+
+    <section class="video-section">
+        <h2>Descoperă Povestea Noastră</h2>
+        <p>Apasă play și intră în universul H-TIME, unde fiecare secundă capătă valoare prin eleganță și rafinament.</p>
+        
+        <div class="video-container">
+            <video controls poster="logo.png">
+                <source src="video.mp4" type="video/mp4">
+                Browserul tău nu suportă redarea videoclipurilor.
+            </video>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-col">
+            <h2>H-TIME</h2>
+            <p style="margin-top: 10px;">Copyright © 2026 H-TIME FE.</p>
+        </div>
+        <div class="footer-col">
+            <h3>LINK-URI UTILE</h3>
+            <ul>
+                <li><a href="termeni.html">Termeni și condiții</a></li>
+                <li><a href="confidentialitate.html">Politica de confidențialitate</a></li>
+                <li><a href="https://anpc.ro/" target="_blank">ANPC</a></li>
+                <li><a href="https://ec.europa.eu/consumers/odr" target="_blank">SOL (Soluționarea Litigiilor)</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3>LOCATION</h3>
+            <p>Strada Milcov 18A, Iași<br>700259</p>
+        </div>
+        <div class="footer-col">
+            <h3>CONTACT</h3>
+            <p>h.time.business@gmail.com</p>
+        </div>
+    </footer>
+
+    <script>
+        function updateCartCounter() {
+            let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+            document.getElementById('cart-counter').innerText = cart.length;
+        }
+        window.onload = updateCartCounter;
+    </script>
+</body>
+</html>
