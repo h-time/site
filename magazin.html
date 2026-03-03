@@ -40,7 +40,6 @@
         .category-list li { margin-bottom: 15px; cursor: pointer; transition: 0.2s; }
         .category-list li:hover, .category-list li.active { font-weight: bold; text-decoration: underline; }
 
-        /* AICI AM FĂCUT MODIFICAREA: Forțăm 4 produse pe un rând */
         .products-grid {
             display: grid; 
             grid-template-columns: repeat(4, 1fr); 
@@ -51,11 +50,18 @@
             width: 100%;
         }
 
-        .product-card { text-align: center; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        /* Am adaugat position: relative pentru ca eticheta SALE sa stea corect in colt */
+        .product-card { position: relative; text-align: center; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         .product-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 5px; margin-bottom: 15px; }
         .product-card h3 { font-size: 0.9rem; margin-bottom: 10px; min-height: 40px; }
-        .product-card p { font-size: 1rem; font-weight: bold; margin-bottom: 15px; }
+        .product-card p { font-size: 1rem; margin-bottom: 15px; }
         
+        /* Design pentru sectiunea de SALE */
+        .sale-badge { position: absolute; top: 15px; left: 15px; background: black; color: white; padding: 5px 10px; font-size: 0.8rem; font-weight: bold; }
+        .old-price { text-decoration: line-through; color: #888; font-size: 0.9rem; margin-right: 10px; }
+        .new-price { color: black; font-weight: bold; font-size: 1.1rem; }
+        .regular-price { font-weight: bold; color: black; }
+
         .add-to-cart-btn {
             background-color: black; color: white; border: none; padding: 10px 0; width: 100%; border-radius: 25px; cursor: pointer; font-family: 'Space Mono'; transition: 0.3s;
         }
@@ -77,8 +83,8 @@
 
     <nav>
         <a href="index.html" class="logo">
-    <img src="logo.png" alt="Logo H-Time" style="height: 75px; width: auto; object-fit: contain; margin-top: 3px;">
-</a>
+            <img src="logo.png" alt="Logo H-Time" style="height: 75px; width: auto; object-fit: contain; margin-top: 3px;">
+        </a>
         <div class="nav-links">
             <a href="index.html">Acasă</a>
             <a href="magazin.html">Magazin</a>
@@ -106,22 +112,113 @@
         </div>
 
         <div class="products-grid" id="products-container">
-            <div class="product-card" data-category="ceasuri"><img src="ceas.jpg" alt="Poza"><h3 class="sync-font">Ceas Rolex Oyster Perpetual</h3><p>€1200.00</p><button class="add-to-cart-btn" onclick="addToCart('Ceas Rolex Oyster Perpetual', 1200)">Adaugă în coș</button></div>
-            <div class="product-card" data-category="ceasuri"><img src="ceas1.jpg" alt="Poza"><h3 class="sync-font">Ceas Rolex</h3><p>€1450.00</p><button class="add-to-cart-btn" onclick="addToCart('Ceas Rolex', 1450)">Adaugă în coș</button></div>
-            <div class="product-card" data-category="ceasuri"><img src="ceas2.jpg" alt="Poza"><h3 class="sync-font">Ceas TISSOT</h3><p>€980.00</p><button class="add-to-cart-btn" onclick="addToCart('Ceas TISSOT', 980)">Adaugă în coș</button></div>
-            <div class="product-card" data-category="ceasuri"><img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?auto=format&fit=crop&w=400&q=80" alt="Poza"><h3 class="sync-font">NUME CEAS 4</h3><p>€2100.00</p><button class="add-to-cart-btn" onclick="addToCart('Nume Ceas 4', 2100)">Adaugă în coș</button></div>
-            <div class="product-card" data-category="inele"><img src="inel1.jpg" alt="Poza"><h3 class="sync-font">Inel De Aur 18K cu Diamant</h3><p>€250.00</p><button class="add-to-cart-btn" onclick="addToCart('Inel De Aur 18K cu Diamant', 250)">Adaugă în coș</button></div>
-            <div class="product-card" data-category="inele"><img src="inel2.jpg" alt="Poza"><h3 class="sync-font">Inel Din Argint Cu Diamante</h3><p>€120.00</p><button class="add-to-cart-btn" onclick="addToCart('Inel Din Argint Cu Diamante', 120)">Adaugă în coș</button></div>
-            <div class="product-card" data-category="inele"><img src="ring.jpg" alt="Poza"><h3 class="sync-font">Inel De Aur 14K Cu Diamant</h3><p>€185.00</p><button class="add-to-cart-btn" onclick="addToCart('Inel De Aur 14K Cu Diamant', 185)">Adaugă în coș</button></div>
-            <div class="product-card" data-category="inele"><img src="https://images.unsplash.com/photo-1589674781759-c21c37956a44?auto=format&fit=crop&w=400&q=80" alt="Poza"><h3 class="sync-font">NUME INEL 4</h3><p>€310.00</p><button class="add-to-cart-btn" onclick="addToCart('Nume Inel 4', 310)">Adaugă în coș</button></div>
-            <div class="product-card" data-category="cercei"><img src="earring.jpg" alt="Poza"><h3 class="sync-font">Cercei Din Aur Alb Cu Diamante</h3><p>€310.00</p><button class="add-to-cart-btn" onclick="addToCart('Cercei Din Aur Alb Cu Diamante', 310)">Adaugă în coș</button></div>
-            <div class="product-card" data-category="cercei"><img src="cercel1.jpg" alt="Poza"><h3 class="sync-font">Cercel Din Argint Si Aur 14K</h3><p>€121.00</p><button class="add-to-cart-btn" onclick="addToCart('Cercel Din Argint Si Aur 14K', 121)">Adaugă în coș</button></div>
-            <div class="product-card" data-category="cercei"><img src="https://images.unsplash.com/photo-1629224316810-9d8805b95e76?auto=format&fit=crop&w=400&q=80" alt="Poza"><h3 class="sync-font">NUME CERCEI 3</h3><p>€75.00</p><button class="add-to-cart-btn" onclick="addToCart('Nume Cercei 3', 75)">Adaugă în coș</button></div>
-            <div class="product-card" data-category="cercei"><img src="https://images.unsplash.com/photo-1599643478514-46b15d21a8cd?auto=format&fit=crop&w=400&q=80" alt="Poza"><h3 class="sync-font">NUME CERCEI 4</h3><p>€240.00</p><button class="add-to-cart-btn" onclick="addToCart('Nume Cercei 4', 240)">Adaugă în coș</button></div>
-            <div class="product-card" data-category="bratari"><img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=400&q=80" alt="Poza"><h3 class="sync-font">NUME BRATARA 1</h3><p>€65.00</p><button class="add-to-cart-btn" onclick="addToCart('Nume Bratara 1', 65)">Adaugă în coș</button></div>
-            <div class="product-card" data-category="bratari"><img src="https://images.unsplash.com/photo-1573408301145-b98c4af01086?auto=format&fit=crop&w=400&q=80" alt="Poza"><h3 class="sync-font">NUME BRATARA 2</h3><p>€130.00</p><button class="add-to-cart-btn" onclick="addToCart('Nume Bratara 2', 130)">Adaugă în coș</button></div>
-            <div class="product-card" data-category="bratari"><img src="https://images.unsplash.com/photo-1602752250014-411db109559c?auto=format&fit=crop&w=400&q=80" alt="Poza"><h3 class="sync-font">NUME BRATARA 3</h3><p>€90.00</p><button class="add-to-cart-btn" onclick="addToCart('Nume Bratara 3', 90)">Adaugă în coș</button></div>
-            <div class="product-card" data-category="bratari"><img src="https://images.unsplash.com/photo-1531315630201-bb15abeb1653?auto=format&fit=crop&w=400&q=80" alt="Poza"><h3 class="sync-font">NUME BRATARA 4</h3><p>€180.00</p><button class="add-to-cart-btn" onclick="addToCart('Nume Bratara 4', 180)">Adaugă în coș</button></div>
+            <div class="product-card" data-category="ceasuri">
+                <div class="sale-badge">SALE</div>
+                <img src="ceas.jpg" alt="Poza">
+                <h3 class="sync-font">Ceas Rolex Oyster Perpetual</h3>
+                <p><span class="old-price">€1200.00</span> <span class="new-price">€950.00</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Ceas Rolex Oyster Perpetual', 950)">Adaugă în coș</button>
+            </div>
+            <div class="product-card" data-category="ceasuri">
+                <img src="ceas1.jpg" alt="Poza">
+                <h3 class="sync-font">Ceas Rolex</h3>
+                <p><span class="regular-price">€1450.00</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Ceas Rolex', 1450)">Adaugă în coș</button>
+            </div>
+            <div class="product-card" data-category="ceasuri">
+                <div class="sale-badge">SALE</div>
+                <img src="ceas2.jpg" alt="Poza">
+                <h3 class="sync-font">Ceas TISSOT</h3>
+                <p><span class="old-price">€980.00</span> <span class="new-price">€750.00</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Ceas TISSOT', 750)">Adaugă în coș</button>
+            </div>
+            <div class="product-card" data-category="ceasuri">
+                <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?auto=format&fit=crop&w=400&q=80" alt="Poza">
+                <h3 class="sync-font">NUME CEAS 4</h3>
+                <p><span class="regular-price">€2100.00</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Nume Ceas 4', 2100)">Adaugă în coș</button>
+            </div>
+
+            <div class="product-card" data-category="inele">
+                <img src="inel1.jpg" alt="Poza">
+                <h3 class="sync-font">Inel De Aur 18K cu Diamant</h3>
+                <p><span class="regular-price">€250.00</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Inel De Aur 18K cu Diamant', 250)">Adaugă în coș</button>
+            </div>
+            <div class="product-card" data-category="inele">
+                <div class="sale-badge">SALE</div>
+                <img src="inel2.jpg" alt="Poza">
+                <h3 class="sync-font">Inel Din Argint Cu Diamante</h3>
+                <p><span class="old-price">€120.00</span> <span class="new-price">€95.00</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Inel Din Argint Cu Diamante', 95)">Adaugă în coș</button>
+            </div>
+            <div class="product-card" data-category="inele">
+                <div class="sale-badge">SALE</div>
+                <img src="ring.jpg" alt="Poza">
+                <h3 class="sync-font">Inel De Aur 14K Cu Diamant</h3>
+                <p><span class="old-price">€185.00</span> <span class="new-price">€140.00</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Inel De Aur 14K Cu Diamant', 140)">Adaugă în coș</button>
+            </div>
+            <div class="product-card" data-category="inele">
+                <img src="https://images.unsplash.com/photo-1589674781759-c21c37956a44?auto=format&fit=crop&w=400&q=80" alt="Poza">
+                <h3 class="sync-font">NUME INEL 4</h3>
+                <p><span class="regular-price">€310.00</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Nume Inel 4', 310)">Adaugă în coș</button>
+            </div>
+
+            <div class="product-card" data-category="cercei">
+                <div class="sale-badge">SALE</div>
+                <img src="earring.jpg" alt="Poza">
+                <h3 class="sync-font">Cercei Din Aur Alb Cu Diamante</h3>
+                <p><span class="old-price">€310.00</span> <span class="new-price">€240.00</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Cercei Din Aur Alb Cu Diamante', 240)">Adaugă în coș</button>
+            </div>
+            <div class="product-card" data-category="cercei">
+                <img src="cercel1.jpg" alt="Poza">
+                <h3 class="sync-font">Cercel Din Argint Si Aur 14K</h3>
+                <p><span class="regular-price">€121.00</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Cercel Din Argint Si Aur 14K', 121)">Adaugă în coș</button>
+            </div>
+            <div class="product-card" data-category="cercei">
+                <div class="sale-badge">SALE</div>
+                <img src="https://images.unsplash.com/photo-1629224316810-9d8805b95e76?auto=format&fit=crop&w=400&q=80" alt="Poza">
+                <h3 class="sync-font">NUME CERCEI 3</h3>
+                <p><span class="old-price">€75.00</span> <span class="new-price">€50.00</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Nume Cercei 3', 50)">Adaugă în coș</button>
+            </div>
+            <div class="product-card" data-category="cercei">
+                <img src="https://images.unsplash.com/photo-1599643478514-46b15d21a8cd?auto=format&fit=crop&w=400&q=80" alt="Poza">
+                <h3 class="sync-font">NUME CERCEI 4</h3>
+                <p><span class="regular-price">€240.00</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Nume Cercei 4', 240)">Adaugă în coș</button>
+            </div>
+
+            <div class="product-card" data-category="bratari">
+                <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=400&q=80" alt="Poza">
+                <h3 class="sync-font">NUME BRATARA 1</h3>
+                <p><span class="regular-price">€65.00</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Nume Bratara 1', 65)">Adaugă în coș</button>
+            </div>
+            <div class="product-card" data-category="bratari">
+                <div class="sale-badge">SALE</div>
+                <img src="https://images.unsplash.com/photo-1573408301145-b98c4af01086?auto=format&fit=crop&w=400&q=80" alt="Poza">
+                <h3 class="sync-font">NUME BRATARA 2</h3>
+                <p><span class="old-price">€130.00</span> <span class="new-price">€99.00</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Nume Bratara 2', 99)">Adaugă în coș</button>
+            </div>
+            <div class="product-card" data-category="bratari">
+                <img src="https://images.unsplash.com/photo-1602752250014-411db109559c?auto=format&fit=crop&w=400&q=80" alt="Poza">
+                <h3 class="sync-font">NUME BRATARA 3</h3>
+                <p><span class="regular-price">€90.00</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Nume Bratara 3', 90)">Adaugă în coș</button>
+            </div>
+            <div class="product-card" data-category="bratari">
+                <div class="sale-badge">SALE</div>
+                <img src="https://images.unsplash.com/photo-1531315630201-bb15abeb1653?auto=format&fit=crop&w=400&q=80" alt="Poza">
+                <h3 class="sync-font">NUME BRATARA 4</h3>
+                <p><span class="old-price">€180.00</span> <span class="new-price">€150.00</span></p>
+                <button class="add-to-cart-btn" onclick="addToCart('Nume Bratara 4', 150)">Adaugă în coș</button>
+            </div>
         </div>
     </div>
 
@@ -154,6 +251,11 @@
             const products = document.querySelectorAll('.product-card');
             const title = document.getElementById('category-title');
             title.innerText = category.toUpperCase();
+            
+            // Gestionam clasa "active" pe meniu
+            document.querySelectorAll('.category-list li').forEach(li => li.classList.remove('active'));
+            event.target.classList.add('active');
+
             products.forEach(product => {
                 if(category === 'all' || product.getAttribute('data-category') === category) {
                     product.style.display = 'block';
@@ -167,6 +269,7 @@
             cart.push({ name: name, price: price });
             localStorage.setItem('htimeCart', JSON.stringify(cart));
             updateCartCounter();
+            
             const btn = event.target;
             const originalText = btn.innerText;
             btn.innerText = "Adăugat! ✔";
