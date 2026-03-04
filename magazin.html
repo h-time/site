@@ -13,110 +13,119 @@
             --light-bg: #f5f5f5;
             --peach-bg: #fcbf88;
             --footer-bg: #efe8e4;
+            --accent-black: #1a1a1a;
         }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Space Mono', monospace; background-color: var(--light-bg); color: black; padding-top: 80px; display: flex; flex-direction: column; min-height: 100vh; }
+        body { font-family: 'Space Mono', monospace; background-color: var(--light-bg); color: black; padding-top: 100px; display: flex; flex-direction: column; min-height: 100vh; }
         h1, h2, h3, .sync-font { font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
 
-        /* --- Sidebar & Layout --- */
-        .shop-container { display: flex; width: 100%; max-width: 1400px; margin: 40px auto; padding: 0 20px; flex-grow: 1; }
-        .sidebar { width: 250px; flex-shrink: 0; padding-right: 20px; }
+        /* --- Navigație --- */
+        nav { background: var(--dark-header); color: white; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .logo img { height: 70px; }
+        .cart-btn { border: 1px solid white; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: white; transition: 0.3s; }
+        .cart-btn:hover { background: white; color: var(--dark-header); }
+
+        /* --- Layout --- */
+        .shop-container { display: flex; width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 40px; flex-grow: 1; }
+        
+        /* --- Sidebar (Categorii + Filtre) --- */
+        .sidebar { width: 280px; flex-shrink: 0; padding-right: 50px; border-right: 1px solid #ddd; }
+        
+        .category-header p { font-size: 0.75rem; color: #888; margin-bottom: 5px; }
+        .category-header h2 { font-size: 2.2rem; margin-bottom: 30px; letter-spacing: -1px; }
+
+        .category-list { list-style: none; margin-bottom: 50px; }
+        .category-list li { font-size: 1.1rem; margin-bottom: 15px; cursor: pointer; transition: 0.2s; position: relative; width: fit-content; }
+        .category-list li:hover, .category-list li.active { color: var(--peach-bg); font-weight: bold; }
+        .category-list li.active::before { content: ''; position: absolute; left: -15px; top: 50%; width: 6px; height: 6px; background: var(--peach-bg); border-radius: 50%; transform: translateY(-50%); }
+
         .filter-section { margin-bottom: 40px; }
-        .filter-section h4 { font-size: 0.75rem; color: #888; margin-bottom: 15px; text-transform: uppercase; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+        .filter-section h4 { font-size: 0.75rem; color: #888; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* --- DUAL RANGE SLIDER STYLE --- */
-        .range-slider-container {
-            position: relative;
-            width: 100%;
-            height: 50px;
-            margin-top: 10px;
+        /* --- PREMIUM DUAL RANGE SLIDER --- */
+        .slider-wrapper { position: relative; width: 100%; height: 40px; display: flex; align-items: center; }
+        .slider-track { position: absolute; width: 100%; height: 4px; background: #ddd; border-radius: 5px; z-index: 1; }
+        .slider-inner-track { position: absolute; height: 4px; background: var(--accent-black); border-radius: 5px; z-index: 2; }
+        
+        .slider-wrapper input[type="range"] {
+            position: absolute; width: 100%; background: none; pointer-events: none; -webkit-appearance: none; z-index: 3; outline: none;
         }
-        .range-slider-container input[type="range"] {
-            position: absolute;
-            left: 0;
-            width: 100%;
-            pointer-events: none;
-            -webkit-appearance: none;
-            height: 5px;
-            background: #ddd;
-            border-radius: 5px;
-            outline: none;
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: white; 
+            border: 3px solid var(--accent-black); cursor: pointer; pointer-events: auto; transition: 0.2s;
         }
-        /* Stil pentru cercurile de control (thumbs) */
-        .range-slider-container input[type="range"]::-webkit-slider-thumb {
-            pointer-events: auto;
-            -webkit-appearance: none;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: black;
-            cursor: pointer;
-            border: 2px solid var(--peach-bg);
-            z-index: 2;
-        }
-        .price-values {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-            font-weight: bold;
-            margin-top: 25px;
-        }
+        input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); background: var(--peach-bg); }
 
-        /* --- Produse Grid --- */
-        .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; flex-grow: 1; }
-        .product-card { background: white; padding: 20px; border-radius: 10px; text-align: center; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between;}
-        .product-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 5px; }
-        .add-to-cart-btn { background: black; color: white; border: none; padding: 12px; border-radius: 25px; cursor: pointer; margin-top: 15px; font-family: 'Space Mono'; text-transform: uppercase; font-size: 0.75rem; }
+        .price-labels { display: flex; justify-content: space-between; margin-top: 15px; font-family: 'Space Mono'; font-weight: bold; font-size: 0.9rem; }
+
+        /* --- Produse --- */
+        .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; flex-grow: 1; padding-left: 50px; }
+        .product-card { background: white; padding: 20px; border-radius: 12px; transition: 0.3s; display: flex; flex-direction: column; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.06); }
+        .product-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; margin-bottom: 20px; }
+        .product-card h3 { font-size: 0.85rem; margin-bottom: 10px; min-height: 40px; }
+        .price-tag { font-weight: bold; font-size: 1.1rem; color: var(--accent-black); }
+        
+        .add-to-cart-btn { 
+            background: black; color: white; border: none; padding: 14px; border-radius: 30px; 
+            cursor: pointer; margin-top: 20px; font-family: 'Space Mono'; text-transform: uppercase; font-size: 0.7rem; transition: 0.3s;
+        }
         .add-to-cart-btn:hover { background: var(--peach-bg); color: black; }
 
-        /* Nav & Footer Simple */
-        nav { background: var(--dark-header); color: white; padding: 15px 50px; display: flex; justify-content: space-between; position: fixed; width: 100%; top: 0; z-index: 1000; }
-        .cart-btn { border: 1px solid white; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: white; }
-        footer { background: var(--footer-bg); padding: 40px; margin-top: auto; }
+        /* Modal Stil */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(5px); }
+        .modal-box { background: white; padding: 40px; border-radius: 20px; width: 400px; text-align: center; }
+        .modal-box select { width: 100%; padding: 12px; margin: 20px 0; font-family: 'Space Mono'; border-radius: 8px; border: 1px solid #ddd; }
+        
+        footer { background: var(--footer-bg); padding: 60px 50px; margin-top: 100px; }
 
-        /* Modal */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 2000; }
-        .modal-box { background: white; padding: 30px; border-radius: 15px; width: 350px; text-align: center; }
-        select { width: 100%; padding: 10px; margin: 15px 0; font-family: 'Space Mono'; }
+        @media (max-width: 1024px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="index.html" style="font-weight:bold; color:white; font-size:1.5rem; font-family:'Syncopate'">H-TIME</a>
+        <a href="index.html" class="logo"><img src="logo.png" alt="H-TIME"></a>
         <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
     </nav>
 
     <div class="shop-container">
         <div class="sidebar">
-            <div class="filter-section">
-                <h4>Categorie</h4>
-                <select id="cat-select" class="sort-select" onchange="updateFilters({cat: this.value})" style="width:100%; padding:8px;">
-                    <option value="all">Toate categoriile</option>
-                    <option value="ceasuri">Ceasuri</option>
-                    <option value="inele">Inele</option>
-                    <option value="bratari">Brățări</option>
-                </select>
+            <div class="category-header">
+                <p id="path-label">All /</p>
+                <h2 id="category-title">TOATE</h2>
             </div>
+            
+            <ul class="category-list">
+                <li class="active" onclick="updateFilters({cat: 'all'}, event)">All</li>
+                <li onclick="updateFilters({cat: 'oferte'}, event)">Oferte</li>
+                <li onclick="updateFilters({cat: 'bratari'}, event)">Brățări</li>
+                <li onclick="updateFilters({cat: 'ceasuri'}, event)">Ceasuri</li>
+                <li onclick="updateFilters({cat: 'inele'}, event)">Inele</li>
+                <li onclick="updateFilters({cat: 'cercei'}, event)">Cercei</li>
+            </ul>
 
             <div class="filter-section">
                 <h4>Interval Preț</h4>
-                <div class="range-slider-container">
-                    <input type="range" id="min-price-slider" min="0" max="1000" value="0" oninput="controlMinSlider()">
-                    <input type="range" id="max-price-slider" min="0" max="1000" value="1000" oninput="controlMaxSlider()">
+                <div class="slider-wrapper">
+                    <div class="slider-track"></div>
+                    <div id="inner-track" class="slider-inner-track"></div>
+                    <input type="range" id="min-price" min="0" max="2500" value="0" oninput="handlePriceChange()">
+                    <input type="range" id="max-price" min="0" max="2500" value="2500" oninput="handlePriceChange()">
                 </div>
-                <div class="price-values">
-                    <span>Min: €<span id="min-price-display">0</span></span>
-                    <span>Max: €<span id="max-price-display">1000</span></span>
+                <div class="price-labels">
+                    <span>€<span id="min-val">0</span></span>
+                    <span>€<span id="max-val">2500</span></span>
                 </div>
             </div>
 
             <div class="filter-section">
-                <h4>Sortează</h4>
-                <select onchange="updateFilters({sort: this.value})" style="width:100%; padding:8px;">
+                <h4>Sortează după</h4>
+                <select onchange="updateFilters({sort: this.value})" style="width:100%; padding:10px; border-radius:5px; font-family:'Space Mono'; border:1px solid #ddd;">
                     <option value="default">Implicit</option>
-                    <option value="price-asc">Preț: Mic -> Mare</option>
-                    <option value="price-desc">Preț: Mare -> Mic</option>
+                    <option value="price-asc">Preț: Mic la Mare</option>
+                    <option value="price-desc">Preț: Mare la Mic</option>
                 </select>
             </div>
         </div>
@@ -129,51 +138,59 @@
             <h3 id="modal-product-name" class="sync-font">Alege Varianta</h3>
             <select id="variant-dropdown"></select>
             <div style="display:flex; gap:10px;">
-                <button onclick="closeModal()" style="flex:1; padding:10px; cursor:pointer; border-radius:20px; border:none;">Anulează</button>
-                <button onclick="processAddToCart()" style="flex:1; padding:10px; cursor:pointer; border-radius:20px; border:none; background:black; color:white;">Confirmă</button>
+                <button onclick="closeModal()" style="flex:1; padding:12px; border-radius:30px; border:none; cursor:pointer;">Anulează</button>
+                <button onclick="processAddToCart()" style="flex:1; padding:12px; border-radius:30px; border:none; background:black; color:white; cursor:pointer;">Confirmă</button>
             </div>
         </div>
     </div>
 
     <script src="produse.js"></script>
     <script>
-        let state = {
-            category: 'all',
-            sortType: 'default',
-            minP: 0,
-            maxP: 1000
-        };
-
+        let state = { category: 'all', sortType: 'default', minP: 0, maxP: 2500 };
         let currentProductForModal = null;
 
-        // --- Logica pentru Dual Slider ---
-        const minSlider = document.getElementById('min-price-slider');
-        const maxSlider = document.getElementById('max-price-slider');
-        const minDisplay = document.getElementById('min-price-display');
-        const maxDisplay = document.getElementById('max-price-display');
+        // --- Logica Bara de Pret (Premium Look) ---
+        function handlePriceChange() {
+            const minInput = document.getElementById('min-price');
+            const maxInput = document.getElementById('max-price');
+            const innerTrack = document.getElementById('inner-track');
+            
+            let minVal = parseInt(minInput.value);
+            let maxVal = parseInt(maxInput.value);
 
-        function controlMinSlider() {
-            if (parseInt(minSlider.value) > parseInt(maxSlider.value) - 50) {
-                minSlider.value = parseInt(maxSlider.value) - 50;
+            if (minVal > maxVal - 100) {
+                minInput.value = maxVal - 100;
+                minVal = maxVal - 100;
             }
-            minDisplay.innerText = minSlider.value;
-            updateFilters({minP: minSlider.value});
+
+            // Calculăm poziția barei negre din mijloc
+            const minPercent = (minVal / minInput.max) * 100;
+            const maxPercent = (maxVal / maxInput.max) * 100;
+
+            innerTrack.style.left = minPercent + "%";
+            innerTrack.style.width = (maxPercent - minPercent) + "%";
+
+            document.getElementById('min-val').innerText = minVal;
+            document.getElementById('max-val').innerText = maxVal;
+
+            updateFilters({minP: minVal, maxP: maxVal});
         }
 
-        function controlMaxSlider() {
-            if (parseInt(maxSlider.value) < parseInt(minSlider.value) + 50) {
-                maxSlider.value = parseInt(minSlider.value) + 50;
+        function updateFilters(params, event) {
+            if (params.cat) {
+                state.category = params.cat;
+                document.getElementById('category-title').innerText = params.cat.toUpperCase();
+                document.getElementById('path-label').innerText = `All / ${params.cat}`;
+                
+                // Schimbăm clasa activă pe listă
+                if (event) {
+                    document.querySelectorAll('.category-list li').forEach(li => li.classList.remove('active'));
+                    event.target.classList.add('active');
+                }
             }
-            maxDisplay.innerText = maxSlider.value;
-            updateFilters({maxP: maxSlider.value});
-        }
-
-        // --- Filtrare și Sortare ---
-        function updateFilters(params) {
-            if (params.cat) state.category = params.cat;
             if (params.sort) state.sortType = params.sort;
-            if (params.minP !== undefined) state.minP = parseInt(params.minP);
-            if (params.maxP !== undefined) state.maxP = parseInt(params.maxP);
+            if (params.minP !== undefined) state.minP = params.minP;
+            if (params.maxP !== undefined) state.maxP = params.maxP;
 
             let filtered = produse.filter(p => {
                 const matchCat = state.category === 'all' || p.categorie === state.category;
@@ -189,28 +206,27 @@
 
         function renderProducts(lista) {
             const container = document.getElementById('products-container');
-            container.innerHTML = lista.length === 0 ? '<p style="grid-column: 1/-1; padding: 50px;">Niciun produs găsit în acest interval.</p>' : '';
+            container.innerHTML = lista.length === 0 ? '<p style="padding:40px;">Niciun produs găsit în acest interval.</p>' : '';
             
             lista.forEach(p => {
                 container.innerHTML += `
                     <div class="product-card">
                         <img src="${p.imagine}" alt="${p.nume}">
-                        <h3 style="font-size:0.8rem; margin:15px 0;">${p.nume}</h3>
-                        <p style="font-weight:bold;">€${p.pret}</p>
+                        <h3 class="sync-font">${p.nume}</h3>
+                        <p class="price-tag">€${p.pret}</p>
                         <button class="add-to-cart-btn" onclick="handleAddToCart(${p.id})">Adaugă în coș</button>
                     </div>
                 `;
             });
         }
 
-        // --- Coș și Modal ---
+        // --- Logica Modal & Coș ---
         function handleAddToCart(productId) {
             const product = produse.find(p => p.id === productId);
             if (product.variante && product.variante.length > 0) {
                 currentProductForModal = product;
                 document.getElementById('modal-product-name').innerText = product.nume;
-                const dropdown = document.getElementById('variant-dropdown');
-                dropdown.innerHTML = product.variante.map(v => `<option value="${v}">${v}</option>`).join('');
+                document.getElementById('variant-dropdown').innerHTML = product.variante.map(v => `<option value="${v}">${v}</option>`).join('');
                 document.getElementById('variant-modal').style.display = 'flex';
             } else {
                 executeAdd(product.nume, product.pret, "Standard");
@@ -229,7 +245,7 @@
             cart.push({ name, price, variant });
             localStorage.setItem('htimeCart', JSON.stringify(cart));
             updateCartCounter();
-            alert(`Adăugat: ${name} (${variant})`);
+            alert(`Succes: ${name} (${variant}) a fost adăugat.`);
         }
 
         function updateCartCounter() {
@@ -238,7 +254,8 @@
         }
 
         window.onload = () => {
-            updateFilters({});
+            handlePriceChange(); // Inițializăm slider-ul
+            updateFilters({}); 
             updateCartCounter();
         };
     </script>
