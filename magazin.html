@@ -30,7 +30,10 @@
         .social-icon { display: flex; align-items: center; }
         .cart-btn { border: 1px solid white; padding: 8px 20px; border-radius: 30px; display: inline-block; }
         .cart-btn:hover { background-color: white; color: var(--dark-header); border-color: white; }
-
+        .img-container { position: relative; overflow: hidden; border-radius: 5px; margin-bottom: 15px; }
+        .hover-img { position: absolute; top: 0; left: 0; opacity: 0; transition: 0.5s ease; width: 100%; }
+        .product-card:hover .hover-img { opacity: 1; transform: scale(1.05); }
+        .product-card:hover .main-img { opacity: 0; }
         /* --- Layout Magazin --- */
         .shop-container { display: flex; width: 100%; max-width: 1400px; margin: 40px auto; padding: 0 20px; flex-grow: 1; }
         
@@ -163,27 +166,29 @@
     <script>
         const container = document.getElementById('products-container');
         
-        // Funcția care afișează produsele
-        function renderProducts(lista) {
-            container.innerHTML = "";
-            lista.forEach(p => {
-                let priceHTML = p.isSale 
-                    ? `<p><span class="old-price">€${p.pretVechi}</span> <span class="new-price">€${p.pret}</span></p>`
-                    : `<p><span class="regular-price">€${p.pret}</span></p>`;
-                
-                let badgeHTML = p.isSale ? `<div class="sale-badge">SALE</div>` : ``;
-
-                container.innerHTML += `
-                    <div class="product-card" data-category="${p.categorie}">
-                        ${badgeHTML}
-                        <img src="${p.imagine}" alt="${p.nume}">
-                        <h3 class="sync-font">${p.nume}</h3>
-                        ${priceHTML}
-                        <button class="add-to-cart-btn" onclick="addToCart('${p.nume}', ${p.pret}, event)">Adaugă în coș</button>
+// În magazin.html, înlocuiește funcția renderProducts
+function renderProducts(lista) {
+    container.innerHTML = "";
+    lista.forEach(p => {
+        let priceHTML = p.isSale 
+            ? `<p><span class="old-price">€${p.pretVechi}</span> <span class="new-price">€${p.pret}</span></p>`
+            : `<p><span class="regular-price">€${p.pret}</span></p>`;
+        
+        container.innerHTML += `
+            <div class="product-card" data-category="${p.categorie}">
+                <a href="produs.html?id=${p.id}" class="product-link">
+                    <div class="img-container">
+                        <img src="${p.imagine}" class="main-img" alt="${p.nume}">
+                        <img src="${p.galerie ? p.galerie[0] : p.imagine}" class="hover-img" alt="${p.nume}">
                     </div>
-                `;
-            });
-        }
+                    <h3 class="sync-font">${p.nume}</h3>
+                </a>
+                ${priceHTML}
+                <button class="add-to-cart-btn" onclick="addToCart('${p.nume}', ${p.pret}, event)">Adaugă în coș</button>
+            </div>
+        `;
+    });
+}
 
         // Inițializare: afișăm toate produsele la încărcare
         renderProducts(produse);
