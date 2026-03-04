@@ -142,6 +142,52 @@
         .footer-col h2, .footer-col h3 { font-family: 'Syncopate', sans-serif; text-transform: uppercase; margin-bottom: 20px; font-size: 1.2rem; }
         .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
         .footer-col a:hover { text-decoration: underline; }
+
+        /* --- Stiluri noi pentru Citate --- */
+.quotes-section {
+    padding: 60px 0;
+    background: #fff;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.quote-track {
+    display: flex;
+    white-space: nowrap;
+    gap: 50px;
+    font-family: 'Syncopate', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-transform: uppercase;
+}
+
+.scroll-right-fast { animation: scroll-right 40s linear infinite; }
+.scroll-left-fast { animation: scroll-left 40s linear infinite; }
+
+@keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.quote-item span {
+    color: var(--peach);
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    margin-left: 10px;
+}
+
+/* Titlu pentru sectiunea Sale */
+.sale-title {
+    text-align: center;
+    background: var(--dark);
+    color: white;
+    padding-top: 40px;
+}
+.sale-title h2 { font-size: 2rem; color: var(--peach); }
+        
     </style>
 </head>
 <body>
@@ -220,6 +266,33 @@
         </div>
     </section>
 
+    <section class="sale-title">
+        <h2 class="sync-font">Oferte Exclusive</h2>
+    </section>
+    <section class="sale-marquee-section">
+        <div class="sale-track" id="sale-track-container"></div>
+    </section>
+
+    <section class="quotes-section">
+        <div class="quote-track scroll-right-fast">
+            <div class="quote-item">"Bijuteriile sunt cele care fac femeia să se simtă unică" <span>- Coco Chanel</span></div>
+            <div class="quote-item">"Bijuteriile sunt cele care fac femeia să se simtă unică" <span>- Coco Chanel</span></div>
+            <div class="quote-item">"Bijuteriile sunt cele care fac femeia să se simtă unică" <span>- Coco Chanel</span></div>
+        </div>
+        
+        <div class="quote-track scroll-left-fast">
+            <div class="quote-item">"Diamantele sunt cele mai bune prietene ale unei fete" <span>- Marilyn Monroe</span></div>
+            <div class="quote-item">"Diamantele sunt cele mai bune prietene ale unei fete" <span>- Marilyn Monroe</span></div>
+            <div class="quote-item">"Diamantele sunt cele mai bune prietene ale unei fete" <span>- Marilyn Monroe</span></div>
+        </div>
+
+        <div class="quote-track scroll-right-fast">
+            <div class="quote-item">"Eleganța nu înseamnă să ieși în evidență, ci să fii memorabil" <span>- Giorgio Armani</span></div>
+            <div class="quote-item">"Eleganța nu înseamnă să ieși în evidență, ci să fii memorabil" <span>- Giorgio Armani</span></div>
+            <div class="quote-item">"Eleganța nu înseamnă să ieși în evidență, ci să fii memorabil" <span>- Giorgio Armani</span></div>
+        </div>
+    </section>
+    
     <section class="contact-teaser">
         <h2 class="sync-font">CONTACTEAZĂ-NE</h2>
         <p>Ai vrea să ne sugerezi o idee sau să colaborezi cu noi? Scrie-ne, abia așteptăm să auzim!</p>
