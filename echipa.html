@@ -21,7 +21,7 @@
         
         /* Zona din dreapta: Login, Social, Cart */
         .nav-icons { display: flex; align-items: center; gap: 25px; }
-        .nav-icons a { font-family: 'Space Mono', monospace; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; }
+        .nav-icons a { font-family: 'Space Mono', monospace; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; color: white;}
         .nav-icons a:hover { color: var(--peach-bg); }
         .social-icon { display: flex; align-items: center; }
         .cart-btn { border: 1px solid white; padding: 8px 20px; border-radius: 30px; }
@@ -32,7 +32,7 @@
         .page-header h1 { font-size: 2.5rem; color: var(--dark-header); }
         .page-header p { margin-top: 15px; color: #555; max-width: 600px; margin-left: auto; margin-right: auto; }
 
-.team-grid { 
+        .team-grid { 
             display: flex; 
             flex-wrap: wrap; 
             justify-content: center; /* Centrează perfect toate cardurile */
@@ -81,9 +81,23 @@
     <nav>
         <a href="index.html" class="logo"><img src="logo.png" alt="Logo H-Time"></a>
         <div class="nav-links">
-            <a href="index.html">Acasă</a> <a href="magazin.html">Magazin</a>
-            <a href="despre-noi.html">Despre Noi</a> <a href="echipa.html">Echipa H-Time</a>
+            <a href="index.html">Acasă</a> 
+            <a href="magazin.html">Magazin</a>
+            <a href="despre-noi.html">Despre Noi</a> 
+            <a href="echipa.html">Echipa H-Time</a>
             <a href="contact.html">Contactează-ne</a>
+        </div>
+
+        <div class="nav-icons">
+            <a href="#">Login</a>
+            <a href="#" class="social-icon" title="Instagram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+            </a>
+            <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
         </div>
     </nav>
 
@@ -132,5 +146,19 @@
     <footer>
         <div><h2 class="sync-font">H-TIME</h2><p>Copyright © 2026 H-TIME FE.</p></div>
     </footer>
+
+    <script>
+        // SCRIPT PENTRU CITIREA COȘULUI DIN MEMORIE
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+            const cartBtn = document.getElementById('cart-nav-btn');
+            if (cartBtn) {
+                cartBtn.innerText = `Cart (${cart.length})`;
+            }
+        }
+
+        // Rulăm funcția imediat cum se încarcă pagina
+        document.addEventListener('DOMContentLoaded', updateCartCount);
+    </script>
 </body>
 </html>
