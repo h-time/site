@@ -88,8 +88,55 @@
         .invoice-table th { background-color: #eee; }
         .invoice-stamp { text-align: right; margin-top: 50px; font-style: italic; color: #555; }
 
-        footer { background-color: #eaddd7; padding: 50px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; border-top: 1px solid #ddd; margin-top: auto; }
-        .footer-col h2, .footer-col h3 { font-family: 'Syncopate', sans-serif; text-transform: uppercase; margin-bottom: 20px; font-size: 1.2rem; }
+        /* --- FOOTER CORECTAT --- */
+        footer { 
+            background-color: #efe8e4; 
+            padding: 60px 50px; 
+            display: flex; 
+            justify-content: space-between; 
+            flex-wrap: wrap; 
+            gap: 30px; 
+            margin-top: auto; 
+            border-top: none; /* Am scos bordura pentru un look mai clean ca in poza */
+        }
+        .footer-col { flex: 1; min-width: 200px; }
+        .footer-col h2, .footer-col h3 { 
+            font-family: 'Syncopate', sans-serif; 
+            text-transform: uppercase; 
+            margin-bottom: 25px; 
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            color: #000;
+        }
+        .footer-col p, .footer-col ul { 
+            font-family: 'Space Mono', monospace; 
+            font-size: 0.9rem; 
+            line-height: 1.8; 
+            color: #000; 
+        }
+        /* Fortam stergerea bullet-urilor direct in ul si li */
+        .footer-col ul { 
+            list-style: none !important; 
+            padding: 0; 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+        }
+        .footer-col ul li { 
+            list-style-type: none !important; 
+            margin: 0; 
+            padding: 0; 
+        }
+        .footer-col a { 
+            text-decoration: none; 
+            color: inherit; 
+            transition: 0.3s; 
+        }
+        .footer-col a:hover { 
+            color: var(--peach-bg); 
+            text-decoration: underline; 
+        }
 
         @media print {
             body * { visibility: hidden; }
@@ -204,7 +251,7 @@
     <footer>
         <div class="footer-col">
             <h2>H-TIME</h2>
-            <p style="margin-top: 10px;">Copyright © 2026 H-TIME FE.</p>
+            <p>Copyright © 2026 H-TIME FE.</p>
         </div>
         <div class="footer-col">
             <h3>LINK-URI UTILE</h3>
