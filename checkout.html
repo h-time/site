@@ -20,11 +20,19 @@
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
 
-        /* --- Navigația --- */
+        /* --- Navigația (Standardizată) --- */
         nav { background-color: var(--dark-header); color: white; display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: fixed; width: 100%; top: 0; z-index: 1000; }
         .logo { font-size: 24px; font-weight: bold; color: #d4af37; font-family: 'Syncopate', sans-serif;}
         .nav-links { display: flex; gap: 20px; }
         .nav-links a:hover { text-decoration: underline; color: var(--peach-bg); }
+        
+        /* Zona din dreapta: Login, Social, Cart */
+        .nav-icons { display: flex; align-items: center; gap: 25px; }
+        .nav-icons a { font-family: 'Space Mono', monospace; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; color: white; }
+        .nav-icons a:hover { color: var(--peach-bg); }
+        .social-icon { display: flex; align-items: center; }
+        .cart-btn { border: 1px solid white; padding: 8px 20px; border-radius: 30px; display: inline-block; }
+        .cart-btn:hover { background-color: white; color: var(--dark-header); border-color: white; }
 
         /* --- Layout Checkout --- */
         .checkout-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; display: flex; gap: 40px; flex-grow: 1; width: 100%; }
@@ -104,6 +112,18 @@
             <a href="despre-noi.html">Despre Noi</a>
             <a href="echipa.html">Echipa H-Time</a>
             <a href="contact.html">Contactează-ne</a>
+        </div>
+        
+        <div class="nav-icons">
+            <a href="#">Login</a>
+            <a href="#" class="social-icon" title="Instagram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+            </a>
+            <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
         </div>
     </nav>
 
@@ -192,6 +212,15 @@
         let finalCalculatedTotal = 0;
         let rateMessage = "";
 
+        // Funcția nouă care ține bara de navigație actualizată
+        function updateNavCartCount() {
+            let currentRawCart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+            const cartBtn = document.getElementById('cart-nav-btn');
+            if (cartBtn) {
+                cartBtn.innerText = `Cart (${currentRawCart.length})`;
+            }
+        }
+
         function initCart() {
             let tempObj = {};
             rawCart.forEach(item => {
@@ -200,6 +229,7 @@
             });
             groupedCart = Object.values(tempObj);
             renderCart();
+            updateNavCartCount(); // Actualizare meniu la încărcare
         }
 
         function renderCart() {
@@ -238,6 +268,7 @@
             let newRawCart = [];
             groupedCart.forEach(item => { for(let i=0; i<item.quantity; i++) newRawCart.push({name: item.name, price: item.price}); });
             localStorage.setItem('htimeCart', JSON.stringify(newRawCart));
+            updateNavCartCount(); // Actualizează meniul când modifici cantitatea
         }
 
         function applyVoucher() {
@@ -336,8 +367,9 @@
             document.getElementById('checkout-section').style.display = 'none';
             document.getElementById('invoice-section').style.display = 'block';
             
-            // Golește coșul și printează
+            // Golește coșul, actualizează navigația și printează
             localStorage.removeItem('htimeCart');
+            updateNavCartCount(); // Resetează coșul din header la 0
             setTimeout(() => { window.print(); }, 500);
         }
 
