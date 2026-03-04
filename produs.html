@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalii Produs | H-TIME</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --dark: #4a4541; --peach: #fcbf88; --light: #f5f5f5; --pink: #efe8e4; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Space Mono', monospace; background-color: var(--light); color: black; padding-top: 100px; display: flex; flex-direction: column; min-height: 100vh; }
+        h1, h2, h3, .sync-font { font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
+        a { text-decoration: none; color: inherit; }
+
+        /* --- Navigație --- */
+        nav { background-color: var(--dark); color: white; display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .logo img { height: 75px; width: auto; object-fit: contain; }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a:hover { color: var(--peach); text-decoration: underline; }
+        .nav-icons { display: flex; align-items: center; gap: 25px; }
+        .cart-btn { border: 1px solid white; padding: 8px 20px; border-radius: 30px; }
+
+        /* --- Layout Pagina Produs --- */
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; flex-grow: 1; }
+        .product-wrapper { display: flex; gap: 60px; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+
+        /* Galerie */
+        .gallery-container { flex: 1.2; }
+        .main-img-view { width: 100%; border-radius: 10px; overflow: hidden; background: var(--pink); border: 1px solid #eee; }
+        .main-img-view img { width: 100%; height: 500px; object-fit: cover; transition: 0.3s; }
+        .thumb-grid { display: flex; gap: 15px; margin-top: 20px; }
+        .thumb-grid img { width: 90px; height: 90px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: 0.3s; }
+        .thumb-grid img:hover, .thumb-grid img.active { border-color: var(--peach); opacity: 0.8; }
+
+        /* Detalii */
+        .details-container { flex: 1; display: flex; flex-direction: column; }
+        .product-cat { color: #888; font-size: 0.8rem; margin-bottom: 10px; }
+        .product-title { font-size: 1.8rem; margin-bottom: 15px; line-height: 1.2; }
+        .price-tag { font-size: 2rem; font-weight: bold; color: var(--dark); margin-bottom: 30px; }
+        
+        .selection-box { background: var(--pink); padding: 20px; border-radius: 10px; margin-bottom: 30px; }
+        .selection-box label { display: block; font-weight: bold; font-size: 0.8rem; margin-bottom: 10px; }
+        select { width: 100%; padding: 12px; border-radius: 5px; border: 1px solid #ccc; font-family: 'Space Mono'; cursor: pointer; }
+
+        .desc-box { margin-bottom: 40px; border-top: 1px solid #eee; padding-top: 20px; }
+        .desc-box h3 { font-size: 0.9rem; margin-bottom: 10px; color: var(--dark); }
+        .desc-box p { font-size: 0.95rem; line-height: 1.6; color: #555; }
+
+        .add-cart-large { background: black; color: white; border: none; padding: 20px; border-radius: 40px; font-family: 'Syncopate'; font-weight: bold; cursor: pointer; transition: 0.3s; width: 100%; }
+        .add-cart-large:hover { background: var(--peach); color: black; transform: scale(1.02); }
+
+        /* --- Footer --- */
+        footer { background-color: var(--pink); padding: 60px 50px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; }
+        .footer-col { flex: 1; min-width: 200px; }
+        .footer-col h3 { margin-bottom: 20px; font-size: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-col a:hover { color: var(--peach); }
+
+        @media (max-width: 850px) {
+            .product-wrapper { flex-direction: column; padding: 20px; }
+            .main-img-view img { height: 350px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo"><img src="logo.png" alt="Logo H-Time"></a>
+        <div class="nav-links">
+            <a href="index.html">Acasă</a>
+            <a href="magazin.html">Magazin</a>
+            <a href="despre-noi.html">Despre Noi</a>
+            <a href="contact.html">Contactează-ne</a>
+        </div>
+        <div class="nav-icons">
+            <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
+        </div>
+    </nav>
+
+    <div class="container" id="product-page-content">
+        </div>
+
+    <footer>
+        <div class="footer-col">
+            <h2>H-TIME</h2>
+            <p>Copyright © 2026 H-TIME FE.</p>
+        </div>
+        <div class="footer-col">
+            <h3>LINK-URI UTILE</h3>
+            <ul>
+                <li><a href="termeni.html">Termeni și condiții</a></li>
+                <li><a href="https://anpc.ro/">ANPC</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3>CONTACT</h3>
+            <p>h.time.business@gmail.com</p>
+            <p>Iași, România</p>
+        </div>
+    </footer>
+
+    <script src="produse.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const pid = parseInt(urlParams.get('id'));
+        const p = produse.find(item => item.id === pid);
+
+        if(p) {
+            document.getElementById('product-page-content').innerHTML = `
+                <div class="product-wrapper">
+                    <div class="gallery-container">
+                        <div class="main-img-view">
+                            <img src="${p.imagine}" id="main-display-img">
+                        </div>
+                        <div class="thumb-grid">
+                            <img src="${p.imagine}" class="active" onclick="changeImg(this)">
+                            ${p.galerie.map(img => `<img src="${img}" onclick="changeImg(this)">`).join('')}
+                        </div>
+                    </div>
+
+                    <div class="details-container">
+                        <p class="product-cat">Bijuterii / ${p.categorie}</p>
+                        <h1 class="product-title sync-font">${p.nume}</h1>
+                        <p class="price-tag">€${p.pret}</p>
+
+                        <div class="selection-box">
+                            <label>PURITATE METAL / VARIANTE</label>
+                            <select id="variant-select">
+                                ${p.materiale.map(m => `<option>${m}</option>`).join('')}
+                            </select>
+                        </div>
+
+                        <div class="desc-box">
+                            <h3>DESCRIERE PRODUS</h3>
+                            <p>${p.descriere}</p>
+                        </div>
+
+                        <button class="add-cart-large" onclick="addToCart('${p.nume}', ${p.pret})">ADĂUGAĂ ÎN COȘ</button>
+                    </div>
+                </div>
+            `;
+        } else {
+            document.getElementById('product-page-content').innerHTML = "<h2>Produsul nu a fost găsit.</h2>";
+        }
+
+        function changeImg(el) {
+            document.getElementById('main-display-img').src = el.src;
+            document.querySelectorAll('.thumb-grid img').forEach(i => i.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function addToCart(name, price) {
+            let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+            cart.push({ name: name, price: price });
+            localStorage.setItem('htimeCart', JSON.stringify(cart));
+            updateCartCounter();
+            alert("Produsul a fost adăugat în coș!");
+        }
+
+        function updateCartCounter() {
+            let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+            document.getElementById('cart-nav-btn').innerText = `Cart (${cart.length})`;
+        }
+        updateCartCounter();
+    </script>
+</body>
+</html>
