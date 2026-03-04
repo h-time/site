@@ -17,15 +17,13 @@
         body { font-family: 'Space Mono', monospace; background-color: var(--light-bg); color: black; padding-top: 80px; display: flex; flex-direction: column; min-height: 100vh; }
         h1, h2, h3, .sync-font { font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
         a { text-decoration: none; color: inherit; }
-        ul { list-style: none; }
 
-        /* --- Navigația (Standardizată) --- */
+        /* --- Navigație --- */
         nav { background-color: var(--dark-header); color: white; display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: fixed; width: 100%; top: 0; z-index: 1000; }
-        .logo { font-size: 24px; font-weight: bold; color: #d4af37; font-family: 'Syncopate', sans-serif;}
+        .logo img { height: 75px; width: auto; object-fit: contain; margin-top: 3px; }
         .nav-links { display: flex; gap: 20px; }
         .nav-links a:hover { text-decoration: underline; color: var(--peach-bg); }
         
-        /* Zona din dreapta: Login, Social, Cart */
         .nav-icons { display: flex; align-items: center; gap: 25px; }
         .nav-icons a { font-family: 'Space Mono', monospace; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; color: white; }
         .nav-icons a:hover { color: var(--peach-bg); }
@@ -37,9 +35,12 @@
         .shop-container { display: flex; width: 100%; max-width: 1400px; margin: 40px auto; padding: 0 20px; flex-grow: 1; }
         
         .sidebar { width: 220px; flex-shrink: 0; }
-        .sidebar h2 { font-size: 2.5rem; margin-bottom: 20px; }
-        .category-list li { margin-bottom: 15px; cursor: pointer; transition: 0.2s; }
-        .category-list li:hover, .category-list li.active { font-weight: bold; text-decoration: underline; }
+        .sidebar p { font-size: 0.8rem; color: #888; margin-bottom: 5px; }
+        .sidebar h2 { font-size: 1.8rem; margin-bottom: 25px; color: var(--dark-header); }
+        
+        .category-list { list-style: none; }
+        .category-list li { margin-bottom: 15px; cursor: pointer; transition: 0.2s; font-size: 0.9rem; text-transform: uppercase; }
+        .category-list li:hover, .category-list li.active { font-weight: bold; color: var(--peach-bg); }
 
         .products-grid {
             display: grid; 
@@ -48,54 +49,54 @@
             flex-grow: 1; 
             padding-left: 40px; 
             margin-bottom: 60px;
-            width: 100%;
         }
 
-        .product-card { position: relative; text-align: center; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .product-card { position: relative; text-align: center; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; border-bottom: 3px solid transparent; }
+        .product-card:hover { transform: translateY(-5px); border-bottom-color: var(--peach-bg); }
         .product-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 5px; margin-bottom: 15px; }
-        .product-card h3 { font-size: 0.9rem; margin-bottom: 10px; min-height: 40px; }
-        .product-card p { font-size: 1rem; margin-bottom: 15px; }
+        .product-card h3 { font-size: 0.85rem; margin-bottom: 10px; min-height: 45px; line-height: 1.4; }
         
-        /* Design pentru sectiunea de SALE */
-        .sale-badge { position: absolute; top: 15px; left: 15px; background: var(--peach-bg); color: black; padding: 5px 10px; font-size: 0.8rem; font-weight: bold; }
-        .old-price { text-decoration: line-through; color: #888; font-size: 0.9rem; margin-right: 10px; }
-        .new-price { color: black; font-weight: bold; font-size: 1.1rem; }
-        .regular-price { font-weight: bold; color: black; }
+        .sale-badge { position: absolute; top: 15px; left: 15px; background: var(--peach-bg); color: black; padding: 4px 10px; font-size: 0.75rem; font-weight: bold; border-radius: 3px; z-index: 1; }
+        .old-price { text-decoration: line-through; color: #888; font-size: 0.85rem; margin-right: 8px; }
+        .new-price { color: #e44d26; font-weight: bold; font-size: 1.1rem; }
+        .regular-price { font-weight: bold; color: black; font-size: 1.1rem; }
 
         .add-to-cart-btn {
-            background-color: black; color: white; border: none; padding: 10px 0; width: 100%; border-radius: 25px; cursor: pointer; font-family: 'Space Mono'; transition: 0.3s;
+            background-color: black; color: white; border: none; padding: 12px 0; width: 100%; border-radius: 25px; cursor: pointer; font-family: 'Space Mono'; transition: 0.3s; margin-top: 10px; text-transform: uppercase; font-size: 0.8rem;
         }
         .add-to-cart-btn:hover { background-color: var(--peach-bg); color: black; }
 
-        /* --- Footer --- */
-        footer {
-            background-color: #eaddd7;
-            padding: 50px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; border-top: 1px solid #ddd;
+        /* --- FOOTER CORECTAT --- */
+        footer { 
+            background-color: #efe8e4; 
+            padding: 60px 50px; 
+            display: flex; 
+            justify-content: space-between; 
+            flex-wrap: wrap; 
+            gap: 30px; 
+            margin-top: auto;
         }
         .footer-col { flex: 1; min-width: 200px; }
-        .footer-col h2, .footer-col h3 { font-family: 'Syncopate', sans-serif; text-transform: uppercase; margin-bottom: 20px; font-size: 1.2rem; }
-        .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
-        .footer-col a:hover { text-decoration: underline; }
-        
-        @media (max-width: 1024px) {
-            .products-grid { grid-template-columns: repeat(3, 1fr); }
-        }
+        .footer-col h2, .footer-col h3 { font-family: 'Syncopate', sans-serif; text-transform: uppercase; margin-bottom: 25px; font-size: 1.1rem; font-weight: 700; color: #000; }
+        .footer-col p, .footer-col ul { font-family: 'Space Mono', monospace; font-size: 0.9rem; line-height: 1.8; color: #000; }
+        .footer-col ul { list-style: none !important; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+        .footer-col ul li { list-style-type: none !important; }
+        .footer-col a { text-decoration: none; color: inherit; transition: 0.3s; }
+        .footer-col a:hover { color: var(--peach-bg); text-decoration: underline; }
+
+        @media (max-width: 1024px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
         @media (max-width: 768px) {
             .shop-container { flex-direction: column; }
             .sidebar { width: 100%; margin-bottom: 30px; }
             .products-grid { padding-left: 0; grid-template-columns: repeat(2, 1fr); }
         }
-        @media (max-width: 480px) {
-            .products-grid { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 480px) { .products-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="index.html" class="logo">
-            <img src="logo.png" alt="Logo H-Time" style="height: 75px; width: auto; object-fit: contain; margin-top: 3px;">
-        </a>
+        <a href="index.html" class="logo"><img src="logo.png" alt="Logo H-Time"></a>
         <div class="nav-links">
             <a href="index.html">Acasă</a>
             <a href="magazin.html">Magazin</a>
@@ -122,11 +123,11 @@
             <p>Alege /</p>
             <h2 id="category-title">TOATE</h2>
             <ul class="category-list">
-                <li class="active" onclick="filterCategory('all')">Toate</li>
-                <li onclick="filterCategory('ceasuri')">Ceasuri</li>
-                <li onclick="filterCategory('inele')">Inele</li>
-                <li onclick="filterCategory('cercei')">Cercei</li>
-                <li onclick="filterCategory('bratari')">Brățări</li>
+                <li class="active" onclick="filterCategory('all', event)">Toate</li>
+                <li onclick="filterCategory('ceasuri', event)">Ceasuri</li>
+                <li onclick="filterCategory('inele', event)">Inele</li>
+                <li onclick="filterCategory('cercei', event)">Cercei</li>
+                <li onclick="filterCategory('bratari', event)">Brățări</li>
             </ul>
         </div>
 
@@ -136,7 +137,7 @@
     <footer>
         <div class="footer-col">
             <h2>H-TIME</h2>
-            <p style="margin-top: 10px;">Copyright © 2026 H-TIME FE.</p>
+            <p>Copyright © 2026 H-TIME FE.</p>
         </div>
         <div class="footer-col">
             <h3>LINK-URI UTILE</h3>
@@ -144,7 +145,7 @@
                 <li><a href="termeni.html">Termeni și condiții</a></li>
                 <li><a href="confidentialitate.html">Politica de confidențialitate</a></li>
                 <li><a href="https://anpc.ro/" target="_blank">ANPC</a></li>
-                <li><a href="https://ec.europa.eu/consumers/odr" target="_blank">SOL (Soluționarea Litigiilor)</a></li>
+                <li><a href="https://ec.europa.eu/consumers/odr" target="_blank">ANPC-SAL</a></li>
             </ul>
         </div>
         <div class="footer-col">
@@ -160,61 +161,70 @@
     <script src="produse.js"></script>
     
     <script>
-        // Genereaza produsele automat din produse.js
         const container = document.getElementById('products-container');
         
-        produse.forEach(p => {
-            let priceHTML = p.isSale 
-                ? `<p><span class="old-price">€${p.pretVechi.toFixed(2)}</span> <span class="new-price">€${p.pret.toFixed(2)}</span></p>`
-                : `<p><span class="regular-price">€${p.pret.toFixed(2)}</span></p>`;
-            
-            let badgeHTML = p.isSale ? `<div class="sale-badge">SALE</div>` : ``;
+        // Funcția care afișează produsele
+        function renderProducts(lista) {
+            container.innerHTML = "";
+            lista.forEach(p => {
+                let priceHTML = p.isSale 
+                    ? `<p><span class="old-price">€${p.pretVechi}</span> <span class="new-price">€${p.pret}</span></p>`
+                    : `<p><span class="regular-price">€${p.pret}</span></p>`;
+                
+                let badgeHTML = p.isSale ? `<div class="sale-badge">SALE</div>` : ``;
 
-            container.innerHTML += `
-                <div class="product-card" data-category="${p.categorie}">
-                    ${badgeHTML}
-                    <img src="${p.imagine}" alt="${p.nume}">
-                    <h3 class="sync-font">${p.nume}</h3>
-                    ${priceHTML}
-                    <button class="add-to-cart-btn" onclick="addToCart('${p.nume}', ${p.pret}, event)">Adaugă în coș</button>
-                </div>
-            `;
-        });
-
-        // Functia de filtrare din sidebar
-        function filterCategory(category) {
-            const productCards = document.querySelectorAll('.product-card');
-            const title = document.getElementById('category-title');
-            title.innerText = category.toUpperCase();
-            
-            document.querySelectorAll('.category-list li').forEach(li => li.classList.remove('active'));
-            event.target.classList.add('active');
-
-            productCards.forEach(card => {
-                if(category === 'all' || card.getAttribute('data-category') === category) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
+                container.innerHTML += `
+                    <div class="product-card" data-category="${p.categorie}">
+                        ${badgeHTML}
+                        <img src="${p.imagine}" alt="${p.nume}">
+                        <h3 class="sync-font">${p.nume}</h3>
+                        ${priceHTML}
+                        <button class="add-to-cart-btn" onclick="addToCart('${p.nume}', ${p.pret}, event)">Adaugă în coș</button>
+                    </div>
+                `;
             });
         }
 
-        // Functiile pentru Cosul de Cumparaturi
+        // Inițializare: afișăm toate produsele la încărcare
+        renderProducts(produse);
+
+        // Funcția de filtrare din sidebar (îmbunătățită)
+        function filterCategory(category, event) {
+            const title = document.getElementById('category-title');
+            title.innerText = category.toUpperCase();
+            
+            // Schimbăm clasa active pe butoane
+            document.querySelectorAll('.category-list li').forEach(li => li.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (category === 'all') {
+                renderProducts(produse);
+            } else {
+                const filtrate = produse.filter(p => p.categorie === category);
+                renderProducts(filtrate);
+            }
+        }
+
+        // Funcția pentru Adăugare în Coș
         function addToCart(name, price, event) {
             let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
             cart.push({ name: name, price: price });
             localStorage.setItem('htimeCart', JSON.stringify(cart));
+            
             updateCartCounter();
             
+            // Feedback vizual pe buton
             const btn = event.target;
             const originalText = btn.innerText;
             btn.innerText = "Adăugat! ✔";
             btn.style.backgroundColor = "#4caf50";
-            btn.style.color = "white";
-            setTimeout(() => { btn.innerText = originalText; btn.style.backgroundColor = "black"; }, 1500);
+            
+            setTimeout(() => { 
+                btn.innerText = originalText; 
+                btn.style.backgroundColor = "black"; 
+            }, 1000);
         }
 
-        // Actualizeaza meniul din navigație
         function updateCartCounter() {
             let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
             const cartBtn = document.getElementById('cart-nav-btn');
