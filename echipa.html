@@ -74,7 +74,54 @@
         .team-role { color: var(--peach-bg); font-weight: bold; font-size: 0.9rem; margin-bottom: 15px; text-transform: uppercase; }
         .team-desc { font-size: 0.85rem; color: #666; line-height: 1.6; }
 
-        footer { background-color: #eaddd7; padding: 50px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; border-top: 1px solid #ddd; margin-top: auto; }
+        /* --- FOOTER CORECTAT --- */
+        footer { 
+            background-color: #efe8e4; 
+            padding: 60px 50px; 
+            display: flex; 
+            justify-content: space-between; 
+            flex-wrap: wrap; 
+            gap: 30px; 
+            margin-top: auto; 
+            border-top: none; 
+        }
+        .footer-col { flex: 1; min-width: 200px; }
+        .footer-col h2, .footer-col h3 { 
+            font-family: 'Syncopate', sans-serif; 
+            text-transform: uppercase; 
+            margin-bottom: 25px; 
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            color: #000;
+        }
+        .footer-col p, .footer-col ul { 
+            font-family: 'Space Mono', monospace; 
+            font-size: 0.9rem; 
+            line-height: 1.8; 
+            color: #000; 
+        }
+        .footer-col ul { 
+            list-style: none !important; 
+            padding: 0; 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+        }
+        .footer-col ul li { 
+            list-style-type: none !important; 
+            margin: 0; 
+            padding: 0; 
+        }
+        .footer-col a { 
+            text-decoration: none; 
+            color: inherit; 
+            transition: 0.3s; 
+        }
+        .footer-col a:hover { 
+            color: var(--peach-bg); 
+            text-decoration: underline; 
+        }
     </style>
 </head>
 <body>
