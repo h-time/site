@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>H-TIME | Luxury Experience</title>
+    <!-- Adaugam iconita pentru tab (favicon) -->
+    <link rel="icon" href="logo.png" type="image/png">
     <!-- Adaugam fonturile premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,19 +39,23 @@
 
         /* --- 2. BARA DE NAVIGARE (MENIUL) --- */
         nav {
-            position: absolute; /* Sta peste imaginea de la Hero */
+            position: fixed; /* Fixează bara pe ecran (lock pe pagină) */
             top: 0;
             left: 0;
             width: 100%;
-            padding: 20px 50px;
+            padding: 15px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 100;
+            z-index: 1000; /* Asigură-te că stă peste toate celelalte elemente */
+            background-color: rgba(0, 0, 0, 0.6); /* Fundal negru semi-transparent */
+            backdrop-filter: blur(10px); /* Efect de sticlă (sablare) pentru un aspect premium */
+            -webkit-backdrop-filter: blur(10px); /* Suport pentru Safari */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* O linie fină pentru delimitare */
         }
 
         .logo img {
-            height: 40px;
+            height: 75px;
             filter: brightness(0) invert(1); /* Face logoul alb ca sa se vada pe fundal */
         }
 
@@ -69,7 +75,11 @@
         }
 
         .nav-links a:hover {
-            color: var(--peach);
+            background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGradientMove 3s linear infinite;
         }
 
         .nav-icons {
@@ -83,11 +93,35 @@
             text-decoration: none;
             font-size: 0.9rem;
             text-transform: uppercase;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .nav-icons a:hover {
-            color: var(--peach);
+            background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGradientMove 3s linear infinite;
+        }
+
+        /* --- CLASE NOI PENTRU GRADIENTUL ANIMAT --- */
+        .gradient-underline {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .gradient-underline::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
+            background-size: 200% auto;
+            animation: textGradientMove 4s linear infinite;
+            border-radius: 2px;
         }
 
         /* --- 3. HERO SECTION (Stilul Squarespace) --- */
@@ -143,7 +177,10 @@
             left: 0;
             right: 0;
             height: 1.1em;
-            background-color: var(--peach);
+            /* Aplicăm gradientul animat cu Roz, Peach și Alb */
+            background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
+            background-size: 200% auto;
+            animation: textGradientMove 4s linear infinite;
             z-index: -1;
             transform: translateY(-50%) rotate(-1deg);
             border-radius: 3px;
@@ -193,7 +230,12 @@
             border: none; cursor: pointer; font-family: 'Space Mono', monospace; 
             text-transform: uppercase; font-size: 0.9rem; transition: 0.3s; margin-top: 20px;
         }
-        .btn-descopera:hover { background: var(--peach); color: black; }
+        .btn-descopera:hover { 
+            background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
+            background-size: 200% auto;
+            animation: textGradientMove 4s linear infinite;
+            color: black; 
+        }
 
         /* --- 5. SECȚIUNE OFERTE (MARQUEE) --- */
         .sale-marquee-section {
@@ -212,11 +254,18 @@
             font-weight: 700; /* Îngroșat la maximum (Bold) */
             margin-bottom: 50px; 
             letter-spacing: 4px;
-            /* Combinăm culorile firmei: Roz, Peach și Alb pe fundalul Negru */
-            background: linear-gradient(45deg, var(--pink) 0%, var(--peach) 50%, #ffffff 100%);
+            /* Combinăm culorile firmei: Roz, Peach și Alb pe fundalul Negru, cu animatie */
+            background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0px 4px 15px rgba(255, 182, 193, 0.2); /* O strălucire fină roz/albă */
+            text-shadow: 0px 4px 15px rgba(255, 182, 193, 0.2); /* O strălucire fină roz */
+            animation: textGradientMove 4s linear infinite;
+        }
+
+        @keyframes textGradientMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
         }
 
         .sale-track {
@@ -243,7 +292,13 @@
 
         .sale-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(255,255,255,0.1); }
         .sale-card img { width: 100%; height: 250px; object-fit: cover; margin-bottom: 20px; background: #000; }
-        .sale-badge { position: absolute; top: 15px; left: 15px; background: var(--peach); color: black; padding: 5px 10px; font-weight: bold; font-family: 'Space Mono', monospace; font-size: 0.8rem; z-index: 5; }
+        .sale-badge { 
+            position: absolute; top: 15px; left: 15px; 
+            background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
+            background-size: 200% auto;
+            animation: textGradientMove 4s linear infinite;
+            color: black; padding: 5px 10px; font-weight: bold; font-family: 'Space Mono', monospace; font-size: 0.8rem; z-index: 5; 
+        }
         
         .sale-card h3 { 
             color: #000; 
@@ -311,11 +366,22 @@
         @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* --- 8. CONTACT TEASER & ZIGZAG --- */
-        .contact-teaser { background: var(--peach); padding: 80px 20px; text-align: center; color: black; }
+        .contact-teaser { 
+            background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
+            background-size: 200% auto;
+            animation: textGradientMove 4s linear infinite;
+            padding: 80px 20px; text-align: center; color: black; 
+        }
         .contact-teaser h2 { font-size: 3rem; margin-bottom: 20px; font-family: 'Syncopate', sans-serif;}
         .contact-teaser p { font-size: 1.1rem; max-width: 600px; margin: 0 auto; line-height: 1.6;}
 
-        .zigzag-separator { display: block; width: 100%; height: 40px; background: var(--peach); margin-bottom: -1px;}
+        .zigzag-separator { 
+            display: block; width: 100%; height: 40px; 
+            background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
+            background-size: 200% auto;
+            animation: textGradientMove 4s linear infinite;
+            margin-bottom: -1px;
+        }
 
         /* --- 9. FAQ SECTION --- */
         .faq-section { background: var(--dark); padding: 80px 20px 100px; color: white; }
@@ -326,6 +392,14 @@
             width: 100%; padding: 25px 0; display: flex; justify-content: space-between; align-items: center;
             background: none; border: none; color: white; cursor: pointer; 
             font-family: 'Syncopate', sans-serif; font-size: 1.2rem; text-align: left;
+            transition: all 0.3s ease;
+        }
+        .faq-question:hover {
+            background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGradientMove 4s linear infinite;
         }
         .faq-icon { font-size: 2rem; color: var(--peach); font-family: 'Space Mono', monospace; font-weight: normal;}
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; color: #ccc; font-size: 0.95rem; line-height: 1.6; }
@@ -357,13 +431,19 @@
         }
         .footer-col ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px; }
         .footer-col a { text-decoration: none; color: inherit; transition: 0.3s; }
-        .footer-col a:hover { color: var(--peach); }
+        .footer-col a:hover { 
+            background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGradientMove 4s linear infinite;
+        }
         .anpc-img { max-width: 200px; width: 100%; height: auto; display: block; margin-top: 10px; transition: opacity 0.3s ease; }
         .anpc-img:hover { opacity: 0.7; }
 
         /* REGLAJE PENTRU ECRANE MICI (Telefoane) */
         @media (max-width: 768px) {
-            nav { flex-direction: column; gap: 15px; padding: 15px; background: rgba(0,0,0,0.5); }
+            nav { flex-direction: column; gap: 15px; padding: 15px; background: rgba(0,0,0,0.8); }
             .nav-links { flex-wrap: wrap; justify-content: center; gap: 15px; }
             .hero h1 { font-size: 20vw; }
             .categories-section h2, .objectives-header h2 { font-size: 1.8rem; }
@@ -375,8 +455,7 @@
 
     <nav>
         <a href="index.html" class="logo">
-            <!-- Am pus un text ca fallback in caz ca imaginea 'logo.png' lipseste local -->
-            <span style="color: white; font-family: 'Syncopate', sans-serif; font-size: 1.5rem; font-weight: bold;">H-TIME</span>
+            <img src="logo.png" alt="H-TIME Logo">
         </a>
         <div class="nav-links">
             <a href="index.html">Acasă</a>
@@ -411,7 +490,7 @@
     </header>
 
     <section class="categories-section">
-        <h2>CE PRODUSE OFERIM</h2>
+        <h2 class="gradient-underline">CE PRODUSE OFERIM</h2>
         <div class="circles-container">
             <div class="circle-item" onclick="window.location.href='magazin.html'">
                 <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80&w=400" alt="Ceasuri" class="circle-img">
@@ -441,7 +520,7 @@
     
     <section class="objectives-section">
         <div class="objectives-header">
-            <h2>OBIECTIVELE NOASTRE</h2>
+            <h2 class="gradient-underline">OBIECTIVELE NOASTRE</h2>
         </div>
         <div class="objectives-grid">
             <div class="obj-col">
@@ -486,7 +565,9 @@
 
     <section class="faq-section">
         <div class="faq-container">
-            <h2>FAQS</h2>
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h2 class="gradient-underline" style="margin-bottom: 0;">FAQS</h2>
+            </div>
             
             <div class="faq-item">
                 <button class="faq-question">CE NE FACE UNICI? <span class="faq-icon">+</span></button>
