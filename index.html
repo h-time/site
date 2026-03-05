@@ -75,27 +75,58 @@
         .sale-marquee-section {
             background: var(--dark); padding: 60px 0; overflow: hidden; white-space: nowrap; margin-bottom: 50px;
         }
-        .sale-track {
-            display: inline-flex; gap: 30px;
-            /* Animatia merge spre dreapta */
-            animation: scroll-right 30s linear infinite;
-            padding-left: 30px;
-        }
-        @keyframes scroll-right {
-            0% { transform: translateX(-50%); }
-            100% { transform: translateX(0); }
-        }
-        
-        .sale-card {
-            width: 320px; background: white; padding: 20px; position: relative;
-            display: flex; flex-direction: column; align-items: center; text-align: center;
-        }
-        .sale-card img { width: 100%; height: 250px; object-fit: cover; margin-bottom: 15px; }
-        .sale-badge { position: absolute; top: 15px; left: 15px; background: var(--peach); color: black; padding: 5px 10px; font-size: 0.8rem; font-weight: bold; }
-        .sale-card h3 { font-size: 0.9rem; font-family: 'Space Mono', monospace; text-transform: none; margin-bottom: 10px; white-space: normal; line-height: 1.3; min-height: 40px;}
-        .old-price { text-decoration: line-through; color: #888; font-size: 0.9rem; margin-right: 10px; }
-        .new-price { color: black; font-weight: bold; font-size: 1.1rem; }
+        /* Fundalul mare negru */
+.sale-marquee-section {
+    background: #0a0a0a !important; /* Negru intens */
+    padding: 80px 0; /* Spațiu sus și jos în interiorul benzii negre */
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 40px 0; /* Spațiu față de restul site-ului */
+    display: flex;
+    align-items: center;
+}
 
+/* Containerul care se mișcă */
+.sale-track {
+    display: inline-flex;
+    gap: 30px;
+    animation: scroll-right 30s linear infinite;
+}
+
+/* Cardul de produs - să arate bine pe fundal negru */
+.sale-card {
+    width: 300px;
+    background: #1a1a1a; /* Un gri foarte închis ca să se distingă pe negru */
+    padding: 15px;
+    border: 1px solid #333; /* Bordură discretă */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.sale-card:hover {
+    transform: translateY(-10px); /* Efect de ridicare la hover */
+    border-color: var(--peach);
+}
+
+/* Textul din interiorul cardului pe fundal închis */
+.sale-card h3 {
+    color: white !important;
+    font-size: 0.9rem;
+    margin: 15px 0;
+}
+
+.new-price {
+    color: var(--peach) !important; /* Prețul nou să fie portocaliu/piersică */
+    font-weight: bold;
+}
+
+.old-price {
+    color: #888;
+    text-decoration: line-through;
+}
         /* --- Obiectivele Noastre --- */
         .objectives-section { max-width: 1200px; margin: 80px auto; padding: 0 20px; text-align: center; }
         .objectives-header {
@@ -292,13 +323,14 @@
         <button class="btn-descopera" onclick="window.location.href='magazin.html'">Descoperă mai multe</button>
     </section>
 
-    <section class="sale-title">
-        <h2 class="sync-font">Oferte Exclusive</h2>
-    </section>
-    
     <section class="sale-marquee-section">
-        <div class="sale-track" id="sale-track-container"></div>
-    </section>
+    <div style="width: 100%;">
+        <h2 style="color: var(--peach); text-align: center; font-family: 'Syncopate'; margin-bottom: 40px;">OFERTE EXCLUSIVE</h2>
+        
+        <div class="sale-track" id="sale-track-container">
+            </div>
+    </div>
+</section>
     
     <section class="objectives-section">
         <div class="objectives-header">
@@ -428,15 +460,18 @@
         
         let carduriHTML = '';
         produseSale.forEach(p => {
-            carduriHTML += `
-                <div class="sale-card">
-                    <div class="sale-badge">SALE</div>
-                    <img src="${p.imagine}" alt="${p.nume}">
-                    <h3 style="font-family: 'Space Mono', monospace; text-transform: none; margin-bottom: 10px; white-space: normal; line-height: 1.3; min-height: 40px;">${p.nume}</h3>
-                    <p><span class="old-price">€${p.pretVechi.toFixed(2)}</span> <span class="new-price">€${p.pret.toFixed(2)}</span></p>
-                </div>
-            `;
-        });
+            // În bucla forEach din scriptul tău, asigură-te că structura e aceasta:
+carduriHTML += `
+    <div class="sale-card">
+        <div class="sale-badge">SALE</div>
+        <img src="${p.imagine}" alt="${p.nume}" style="width:100%; height:200px; object-fit:cover;">
+        <h3>${p.nume}</h3>
+        <p>
+            <span class="old-price">€${p.pretVechi}</span> 
+            <span class="new-price">€${p.pret}</span>
+        </p>
+    </div>
+`;
 
         // Punem cardurile de 2 ori ca animatia sa mearga in bucla infinit
         trackContainer.innerHTML = carduriHTML + carduriHTML;
