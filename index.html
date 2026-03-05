@@ -77,12 +77,12 @@
         }
         /* Fundalul mare negru */
 .sale-marquee-section {
-    background: #0a0a0a !important; /* Negru intens */
-    padding: 80px 0; /* Spațiu sus și jos în interiorul benzii negre */
+    background: #000 !important; /* Negru total pentru evidențiere */
+    padding: 100px 0; /* Spațiu mare sus/jos în interiorul benzii negre */
+    margin: 0; 
     overflow: hidden;
-    white-space: nowrap;
-    margin: 40px 0; /* Spațiu față de restul site-ului */
     display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
@@ -96,14 +96,13 @@
 /* Cardul de produs - să arate bine pe fundal negru */
 .sale-card {
     width: 300px;
-    background: #1a1a1a; /* Un gri foarte închis ca să se distingă pe negru */
-    padding: 15px;
-    border: 1px solid #333; /* Bordură discretă */
+    background: #111; /* Card închis ca să nu "sară" din banda neagră */
+    padding: 20px;
+    border: 1px solid #222;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    transition: transform 0.3s;
 }
 
 .sale-card:hover {
