@@ -1,904 +1,165 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ro">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>H-TIME | Luxury Experience</title>
-  <link rel="icon" href="logo.png" type="image/png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --peach: #fcbf88;
-      --pink: #ffb6c1;
-      --dark: #111111;
-      --light-bg: #f8f5f2;
+    :root{
+      --accent:#d4af37;
+      --bg:#0b0b0b;
+      --muted:#bdbdbd;
     }
-
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 300;
-      background-color: var(--light-bg);
-      color: var(--dark);
-      overflow-x: hidden;
+    html,body{height:100%;margin:0;background:var(--bg);color:#fff;font-family:'Montserrat',sans-serif;}
+    nav{
+      position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;
+      background-color:rgba(0,0,0,0.55);backdrop-filter:blur(8px);z-index:50;border-bottom:1px solid rgba(255,255,255,0.03);
     }
-    h1,h2,h3,h4 { font-weight: normal; }
-
-    nav {
-      position: fixed;
-      top:0; left:0; width:100%;
-      padding:15px 50px;
-      display:flex; justify-content:space-between; align-items:center;
-      z-index:1000;
-      background-color: rgba(0,0,0,0.6);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+    .nav-left{display:flex;align-items:center;gap:18px;}
+    .logo{font-family:'DM Serif Display',serif;font-size:1.4rem;color:#fff;text-decoration:none;}
+    .nav-links a{color:#fff;text-decoration:none;margin-right:14px;font-weight:500;}
+    .nav-icons{display:flex;align-items:center;gap:12px;}
+    .cart-btn{color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,0.12);padding:6px 12px;border-radius:20px;}
+    .lang-select{
+      background:#fff;color:#000;border:1px solid rgba(0,0,0,0.12);padding:6px 10px;border-radius:20px;cursor:pointer;font-weight:600;
+      font-size:0.85rem;text-transform:uppercase;
     }
-
-    .logo img { height:75px; }
-
-    .nav-links { display:flex; gap:30px; }
-    .nav-links a {
-      color:white; text-decoration:none; font-weight:500; font-size:0.9rem;
-      text-transform:uppercase; letter-spacing:1px; transition: color .3s;
-    }
-    .nav-links a:hover { color: var(--peach); }
-
-    .nav-icons { display:flex; align-items:center; gap:20px; }
-    .nav-icons a { color:white; text-decoration:none; font-size:0.9rem; text-transform:uppercase; transition: all .3s; }
-    .nav-icons a:hover { color: var(--peach); }
-
-    .cart-btn {
-      border:1px solid white; padding:8px 18px; border-radius:30px;
-      display:inline-flex; align-items:center; justify-content:center; transition: all .3s;
-    }
-    .cart-btn:hover { border-color: var(--peach); }
-
-    .gradient-underline { position:relative; display:inline-block; padding-bottom:15px; }
-    .gradient-underline::after {
-      content:''; position:absolute; left:0; bottom:0; width:100%; height:4px;
-      background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
-      background-size:200% auto; animation:textGradientMove 4s linear infinite; border-radius:2px;
-    }
-
-    .hero {
-      height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center;
-      text-align:center; background-color:var(--dark); color:white; position:relative;
-      background-size:cover; background-position:center; background-repeat:no-repeat; padding-bottom:50px;
-    }
-    .hero h1 {
-      font-family:'DM Serif Display', serif; font-size:clamp(5rem,16vw,18rem); font-weight:400;
-      letter-spacing:2px; margin-bottom:20px; line-height:1; z-index:10;
-      text-shadow: 0px 10px 30px rgba(0,0,0,0.5);
-    }
-    .hero h4 { font-family:'Playfair Display', serif; font-size:clamp(1.2rem,3vw,2.5rem); font-weight:400; margin:0; z-index:10; }
-
-    .text-highlight { position:relative; display:inline-block; color:#000; z-index:1; padding:0 15px; font-style:italic; font-weight:600; }
-    .text-highlight::before {
-      content:''; position:absolute; top:50%; left:0; right:0; height:1.1em;
-      background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
-      background-size:200% auto; animation:textGradientMove 4s linear infinite; z-index:-1;
-      transform: translateY(-50%) rotate(-1deg); border-radius:3px;
-    }
-
-    .hero-divider-bottom { position:absolute; bottom:-1px; left:0; width:100%; overflow:hidden; line-height:0; z-index:2; }
-    .hero-divider-bottom svg { display:block; width:calc(100% + 1.3px); height:6vw; }
-    .hero-divider-bottom .shape-fill { fill: var(--light-bg); }
-
-    .categories-section { text-align:center; padding:80px 20px 80px; }
-    .categories-section h2 { margin-bottom:50px; font-size:2.5rem; font-weight:700; letter-spacing:2px; }
-    .circles-container { display:flex; justify-content:center; gap:60px; flex-wrap:wrap; margin-bottom:40px; }
-    .circle-item { text-align:center; cursor:pointer; }
-    .circle-img { width:250px; height:250px; border-radius:50%; object-fit:cover; margin-bottom:20px; transition: transform .4s, box-shadow .4s; }
-    .circle-item:hover .circle-img { transform:scale(1.05); box-shadow:0 15px 30px rgba(0,0,0,0.15); }
-    .circle-item h3 { font-size:1.2rem; margin-bottom:10px; font-weight:600; letter-spacing:1px; }
-    .circle-item p { font-size:0.85rem; color:#555; }
-
-    .btn-descopera {
-      background:black; color:white; padding:15px 35px; border-radius:30px; border:none; cursor:pointer;
-      font-weight:600; text-transform:uppercase; font-size:0.9rem; transition:.3s; margin-top:20px;
-    }
-    .btn-descopera:hover {
-      background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
-      background-size:200% auto; animation:textGradientMove 4s linear infinite; color:black;
-    }
-
-    .sale-marquee-section { background:#000; padding:80px 0; overflow:hidden; margin:0; width:100%; position:relative; }
-    .sale-marquee-section h2 {
-      text-align:center; font-family:'Montserrat',sans-serif; font-size:clamp(3rem,7vw,5.5rem); font-weight:700; margin-bottom:50px; letter-spacing:4px;
-      background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
-      background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-      text-shadow:0px 4px 15px rgba(255,182,193,0.2); animation:textGradientMove 4s linear infinite;
-    }
-
-    @keyframes textGradientMove { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
-
-    .sale-track { display:flex; width:max-content; gap:30px; animation:scroll-left-marquee 20s ease-in-out infinite; padding:0 15px; }
-    .sale-card { width:280px; background:#fff; padding:15px; display:flex; flex-direction:column; align-items:center; text-align:center; transition:transform .3s; position:relative; }
-    .sale-card:hover { transform:translateY(-5px); box-shadow:0 10px 20px rgba(255,255,255,0.1); }
-    .sale-card img { width:100%; height:250px; object-fit:cover; margin-bottom:20px; background:#000; }
-    .sale-badge { position:absolute; top:15px; left:15px; background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink)); background-size:200% auto; animation:textGradientMove 4s linear infinite; color:black; padding:5px 10px; font-weight:700; font-size:0.8rem; z-index:5; }
-    .sale-card h3 { color:#000; font-size:0.95rem; margin:0 0 15px 0; font-weight:600; min-height:40px; }
-    .price-container { margin-top:auto; display:flex; align-items:center; justify-content:center; gap:15px; }
-    .new-price { color:#000; font-weight:bold; font-size:1.1rem; }
-    .old-price { color:#999; text-decoration:line-through; font-size:0.9rem; }
-
-    @keyframes scroll-left-marquee {
-      0%,20% { transform:translateX(0); }
-      25%,45% { transform:translateX(calc(-16.66% - 5px)); }
-      50%,70% { transform:translateX(calc(-33.33% - 10px)); }
-      75%,95% { transform:translateX(calc(-50% - 15px)); }
-      100% { transform:translateX(calc(-50% - 15px)); }
-    }
-
-    .objectives-section { max-width:1200px; margin:80px auto; padding:0 20px; text-align:center; }
-    .objectives-header { display:flex; align-items:center; justify-content:center; margin-bottom:60px; }
-    .objectives-header::before, .objectives-header::after { content:""; flex:1; border-bottom:2px solid black; margin:0 20px; }
-    .objectives-header h2 { font-size:2.5rem; letter-spacing:2px; font-weight:700; }
-    .objectives-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap:40px; text-align:left; }
-    .obj-col h3 { font-size:1.2rem; border-bottom:2px solid black; padding-bottom:10px; margin-bottom:20px; font-weight:600; }
-    .obj-col p { font-size:0.95rem; line-height:1.8; color:#333; }
-
-    .quotes-section { padding:80px 0; background:#000; overflow:hidden; display:flex; flex-direction:column; gap:40px; width:100%; }
-    .quote-track { display:flex; width:max-content; white-space:nowrap; gap:80px; font-family:'Playfair Display',serif; font-style:italic; font-size:1.8rem; color:#fff; }
-    .quote-item span { color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:500; font-style:normal; font-size:1rem; margin-left:20px; }
-    .scroll-right-fast { animation:scroll-right 40s linear infinite; }
-    .scroll-left-fast { animation:scroll-left 40s linear infinite; }
-    @keyframes scroll-right { 0%{transform:translateX(calc(-50% - 40px));} 100%{transform:translateX(0);} }
-    @keyframes scroll-left { 0%{transform:translateX(0);} 100%{transform:translateX(calc(-50% - 40px));} }
-
-    .contact-teaser { background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink)); background-size:200% auto; animation:textGradientMove 4s linear infinite; padding:80px 20px; text-align:center; color:black; }
-    .contact-teaser h2 { font-size:3rem; margin-bottom:20px; font-weight:700; }
-    .contact-teaser p { font-size:1.1rem; max-width:600px; margin:0 auto; line-height:1.6; }
-
-    .zigzag-separator { display:block; width:100%; height:40px; background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink)); background-size:200% auto; animation:textGradientMove 4s linear infinite; margin-bottom:-1px; }
-
-    .faq-section { background:var(--dark); padding:80px 20px 100px; color:white; }
-    .faq-container { max-width:900px; margin:0 auto; }
-    .faq-container h2 { font-size:3.5rem; margin-bottom:50px; color:var(--peach); font-weight:700; }
-    .faq-item { border-bottom:1px solid #333; }
-    .faq-question {
-      width:100%; padding:25px 0; display:flex; justify-content:space-between; align-items:center;
-      background:none; border:none; color:white; cursor:pointer; font-weight:600; font-size:1.2rem; text-align:left; transition:all .3s;
-    }
-    .faq-question:hover {
-      background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
-      background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:textGradientMove 4s linear infinite;
-    }
-    .faq-icon { font-size:2rem; color:var(--peach); font-weight:normal; }
-    .faq-answer { max-height:0; overflow:hidden; transition:max-height .4s ease-out; color:#ccc; font-size:0.95rem; line-height:1.6; }
-    .faq-answer-content { padding-bottom:25px; padding-right:40px; }
-
-    .features-section { background-color:var(--light-bg); padding:60px 20px; display:flex; justify-content:center; align-items:flex-start; text-align:center; gap:40px; flex-wrap:wrap; position:relative; z-index:10; }
-    .feature-item { flex:1; min-width:250px; max-width:320px; }
-    .feature-icon { display:flex; justify-content:center; margin-bottom:20px; color:var(--dark); }
-    .feature-icon svg { transition: stroke .3s, transform .3s; }
-    .feature-item:hover .feature-icon svg { stroke:var(--peach); transform:translateY(-5px); }
-    .feature-item h3 { font-weight:700; font-size:1.1rem; text-transform:uppercase; margin-bottom:10px; letter-spacing:1px; }
-    .feature-item p { font-size:0.9rem; color:#666; line-height:1.5; }
-
-    footer { background-color:#0b0b0b; padding:80px 50px 30px; display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:40px; color:#fff; border-top:1px solid #222; }
-    .footer-col h2 { font-family:'DM Serif Display',serif; color:var(--peach); font-size:2.2rem; margin-bottom:20px; }
-    .footer-col h3 { font-size:1rem; font-weight:700; margin-bottom:30px; letter-spacing:1px; text-transform:uppercase; color:#fff; }
-    .footer-desc { font-size:0.9rem; color:#999; line-height:1.8; margin-bottom:30px; }
-    .social-links { display:flex; gap:15px; }
-    .social-icon-circle { width:40px; height:40px; background:#222; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; text-decoration:none; transition:.3s; }
-    .social-icon-circle:hover { background: linear-gradient(to right, var(--pink), var(--peach)); color:black; transform:translateY(-3px); }
-    .footer-col ul { list-style:none; padding:0; display:flex; flex-direction:column; gap:15px; }
-    .footer-col ul a { text-decoration:none; color:#999; font-size:0.9rem; transition:.3s; display:inline-block; }
-    .footer-col ul a:hover { color:var(--peach); transform:translateX(5px); }
-    .footer-bottom { grid-column:1 / -1; text-align:center; padding-top:40px; border-top:1px solid #222; color:#555; font-size:0.8rem; margin-top:20px; }
-    .anpc-img { max-width:180px; width:100%; height:auto; display:block; margin-bottom:15px; transition:opacity .3s; }
-    .anpc-img:hover { opacity:0.7; }
-
-    @media (max-width:768px) {
-      nav { flex-direction:column; gap:15px; padding:15px; background:rgba(0,0,0,0.8); }
-      .nav-links { flex-wrap:wrap; justify-content:center; gap:15px; }
-      .hero h1 { font-size:20vw; }
-      .categories-section h2, .objectives-header h2 { font-size:1.8rem; }
-      footer { padding:40px 20px; display:flex; flex-direction:column; }
+    .lang-select option{color:#000;}
+    .hero{height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 20px;background-image:url('img/hero-default.jpg');background-size:cover;background-position:center;position:relative;}
+    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.45),rgba(0,0,0,0.65));}
+    .hero-inner{position:relative;z-index:2;color:#fff;max-width:1100px;}
+    .hero h1{font-family:'DM Serif Display',serif;font-size:4rem;margin:0;}
+    .hero h4{margin:18px 0;color:var(--muted);font-weight:300;}
+    .sale-section{padding:48px 20px;background:#070707;}
+    .sale-title{color:var(--accent);font-weight:700;margin-bottom:18px;}
+    .sale-row{display:flex;gap:18px;overflow:auto;padding-bottom:8px;}
+    .sale-card{min-width:260px;background:#111;border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.04);cursor:pointer;flex:0 0 auto;}
+    .sale-card img{width:100%;height:160px;object-fit:cover;border-radius:8px;}
+    .sale-card h3{margin:10px 0 6px;font-size:1.05rem;}
+    .sale-card p{margin:0;color:var(--muted);font-size:0.9rem;}
+    footer{padding:36px 20px;background:#050505;color:var(--muted);margin-top:40px;}
+    @media (max-width:720px){
+      .hero h1{font-size:2.6rem;}
+      .sale-card{min-width:200px;}
     }
   </style>
 </head>
 <body>
 
   <nav>
-    <a href="index.html" class="logo"><img src="logo.png" alt="H-TIME Logo"></a>
-
-    <div class="nav-links">
-      <a href="index.html" data-i18n="nav_home">Acasă</a>
-      <a href="magazin.html" data-i18n="nav_shop">Magazin</a>
-      <a href="despre-noi.html" data-i18n="nav_about">Despre Noi</a>
-      <a href="echipa.html" data-i18n="nav_team">Echipa H-Time</a>
-      <a href="contact.html" data-i18n="nav_contact">Contactează-ne</a>
+    <div class="nav-left">
+      <a class="logo" href="index.html" data-translate="nav_brand">H-TIME</a>
+      <div class="nav-links">
+        <a href="index.html" data-translate="nav_home">Acasă</a>
+        <a href="magazin.html" data-translate="nav_shop">Magazin</a>
+        <a href="despre-noi.html" data-translate="nav_about">Despre Noi</a>
+        <a href="echipa.html" data-translate="nav_team">Echipa H-Time</a>
+        <a href="contact.html" data-translate="nav_contact">Contactează-ne</a>
+      </div>
     </div>
 
     <div class="nav-icons">
-      <select id="languageSwitcher" aria-label="Selectează limba" style="background:transparent;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase;">
+      <select id="language-selector" class="lang-select" aria-label="Selectează limba">
         <option value="ro">RO</option>
         <option value="en">EN</option>
-        <option value="fr">FR</option>
-        <option value="de">DE</option>
-        <option value="es">ES</option>
-        <option value="it">IT</option>
       </select>
+
       <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
     </div>
   </nav>
 
-  <header class="hero" id="hero-section" style="background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('https://images.squarespace-cdn.com/content/v1/67a62d98ae27d6276a9f2db9/7e45fd3e-142e-4ac7-8a13-a699d78b6d75/m.jpg');">
-    <h1>H-TIME</h1>
-    <h4><span class="text-highlight" data-i18n="hero_subtitle">”Emoții sculptate în eleganță”</span></h4>
-
-    <div class="hero-divider-bottom">
-      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-        <path d="M0,120 L0,0 Q600,120 1200,0 L1200,120 Z" class="shape-fill"></path>
-      </svg>
-    </div>
-  </header>
-
-  <section class="features-section">
-    <div class="feature-item">
-      <span class="feature-icon">
-        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="1" y="3" width="15" height="13"></rect>
-          <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
-          <circle cx="5.5" cy="18.5" r="2.5"></circle>
-          <circle cx="18.5" cy="18.5" r="2.5"></circle>
-        </svg>
-      </span>
-      <h3 data-i18n="feat1_title">LIVRARE GRATUITĂ</h3>
-      <p data-i18n="feat1_text">Pentru toate comenzile de peste 500 RON, direct la tine la uşă.</p>
-    </div>
-
-    <div class="feature-item">
-      <span class="feature-icon">
-        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-          <path d="M9 12l2 2 4-4"></path>
-        </svg>
-      </span>
-      <h3 data-i18n="feat2_title">GARANȚIE 24 LUNI</h3>
-      <p data-i18n="feat2_text">Toate piesele noastre vin cu certificat de autenticitate şi garanţie.</p>
-    </div>
-
-    <div class="feature-item">
-      <span class="feature-icon">
-        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
-          <path d="M3 3v5h5"></path>
-        </svg>
-      </span>
-      <h3 data-i18n="feat3_title">RETUR SIMPLIFICAT</h3>
-      <p data-i18n="feat3_text">Ai la dispoziție 14 zile calendaristice pentru a schimba produsul.</p>
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+      <h1 data-translate="hero_title">H-TIME</h1>
+      <h4><span class="text-highlight" data-translate="hero_subtitle">Emoții sculptate în eleganță</span></h4>
     </div>
   </section>
 
-  <section class="categories-section">
-    <h2 class="gradient-underline" data-i18n="cat_title">CE PRODUSE OFERIM</h2>
-    <div class="circles-container">
-      <div class="circle-item" onclick="window.location.href='magazin.html'">
-        <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80&w=400" alt="Ceasuri" class="circle-img">
-        <h3 data-i18n="cat1_title">CEASURI</h3>
-        <p data-i18n="cat1_price">Prețuri începând de la 100 €</p>
-      </div>
-      <div class="circle-item" onclick="window.location.href='magazin.html'">
-        <img src="inel1.jpg" alt="Inele" class="circle-img">
-        <h3 data-i18n="cat2_title">INELE</h3>
-        <p data-i18n="cat2_price">Prețuri începând de la 100 €</p>
-      </div>
-      <div class="circle-item" onclick="window.location.href='magazin.html'">
-        <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=400" alt="Cercei" class="circle-img">
-        <h3 data-i18n="cat3_title">CERCEI</h3>
-        <p data-i18n="cat3_price">Prețuri începând de la 100 €</p>
-      </div>
-    </div>
-    <button class="btn-descopera" data-i18n="cat_btn" onclick="window.location.href='magazin.html'">Descoperă mai multe</button>
-  </section>
-
-  <section class="sale-marquee-section">
-    <h2 data-i18n="sale_title">OFERTE EXCLUSIVE</h2>
-    <div class="sale-track" id="sale-track-container"><!-- produse generate JS --></div>
-  </section>
-
-  <!-- OBJECTIVES / ESENȚA H-TIME (expanded) -->
-  <section class="objectives-section">
-    <div class="objectives-header">
-      <h2 class="gradient-underline" data-i18n="obj_title">ESENȚA H-TIME</h2>
-    </div>
-    <div class="objectives-grid">
-      <div class="obj-col">
-        <h3 data-i18n="obj1_title">ENERGIE ȘI EMOȚIE</h3>
-        <p data-i18n="obj1_text">Fiecare piatră spirituală pe care o alegem cu grijă poartă o vibrație și un destin. Ne dorim ca bijuteriile noastre să devină talismane personale, conectând frumusețea formelor cu energia ta interioară, pentru a aduce protecție, iubire și echilibru în viața de zi cu zi.</p>
-        <p data-i18n="obj1_extra">Lucrăm manual, cu atenție la detalii, combinând tehnici tradiționale cu finisaje contemporane. Rezultatul este o colecție care vorbește despre autenticitate, intenție și emoție — piese care se poartă cu sens, nu doar cu stil.</p>
-      </div>
-
-      <div class="obj-col">
-        <h3 data-i18n="obj2_title">MIT ȘI RAFINAMENT</h3>
-        <p data-i18n="obj2_text">Inspirate din legende străvechi și mitologii fascinante, creațiile noastre împletesc misterul trecutului cu eleganța pură a prezentului. Modelăm metalele și pietrele prețioase în adevărate poezii vizuale, menite să trezească la viață grația și latura divină din fiecare persoană.</p>
-        <p data-i18n="obj2_extra">Fiecare colecție pornește de la o poveste: simboluri, proporții și detalii care dau sens. Astfel, bijuteriile devin punți între generații, între amintiri și momente noi, purtând cu ele o estetică atemporală.</p>
-      </div>
-
-      <div class="obj-col">
-        <h3 data-i18n="obj3_title">O MOȘTENIRE ETERNĂ</h3>
-        <p data-i18n="obj3_text">Dincolo de strălucirea efemeră, scopul nostru este să făurim amintiri care sfidează timpul. Fiecare piesă este creată pentru a deveni o comoară de suflet, menită să fie purtată cu pasiune și transmisă din generație în generație, păstrând mereu vie o poveste nemuritoare.</p>
-        <p data-i18n="obj3_extra">Ne asumăm responsabilitatea calității: materiale atent selecționate, finisaje durabile și servicii care susțin longevitatea pieselor. H‑TIME nu vinde doar obiecte — cultivăm o moștenire.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="quotes-section">
-    <div class="quote-track scroll-right-fast">
-      <div class="quote-item" data-i18n="quote1">"Bijuteriile sunt cele care fac femeia să se simtă unică" <span>- Coco Chanel</span></div>
-      <div class="quote-item" data-i18n="quote2">"Stilul este o modalitate de a spune cine ești fără să vorbești" <span>- Rachel Zoe</span></div>
-      <div class="quote-item" data-i18n="quote1">"Bijuteriile sunt cele care fac femeia să se simtă unică" <span>- Coco Chanel</span></div>
-      <div class="quote-item" data-i18n="quote2">"Stilul este o modalitate de a spune cine ești fără să vorbești" <span>- Rachel Zoe</span></div>
-    </div>
-
-    <div class="quote-track scroll-left-fast">
-      <div class="quote-item" data-i18n="quote3">"Diamantele sunt cele mai bune prietene ale unei fete" <span>- Marilyn Monroe</span></div>
-      <div class="quote-item" data-i18n="quote4">"Fiecare bijuterie spune o poveste fără a folosi niciun cuvânt" <span>- H-TIME</span></div>
-      <div class="quote-item" data-i18n="quote3">"Diamantele sunt cele mai bune prietene ale unei fete" <span>- Marilyn Monroe</span></div>
-      <div class="quote-item" data-i18n="quote4">"Fiecare bijuterie spune o poveste fără a folosi niciun cuvânt" <span>- H-TIME</span></div>
-    </div>
-  </section>
-
-  <section class="contact-teaser">
-    <h2 data-i18n="contact_title">CONTACTEAZĂ-NE</h2>
-    <p data-i18n="contact_text">Ai vrea să ne sugerezi o idee sau să colaborezi cu noi? Scrie-ne, abia așteptăm să auzim!</p>
-  </section>
-
-  <svg class="zigzag-separator" viewBox="0 0 100 10" preserveAspectRatio="none">
-    <polygon points="0,0 5,10 10,0 15,10 20,0 25,10 30,0 35,10 40,0 45,10 50,0 55,10 60,0 65,10 70,0 75,10 80,0 85,10 90,0 95,10 100,0 100,10 0,10" fill="#111111"></polygon>
-  </svg>
-
-  <!-- FAQ (expanded) -->
-  <section class="faq-section">
-    <div class="faq-container">
-      <div style="text-align:center; margin-bottom:50px;">
-        <h2 class="gradient-underline" style="margin-bottom:0;" data-i18n="faq_title">FAQS</h2>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" data-i18n="faq1_q">CE NE FACE UNICI? <span class="faq-icon">+</span></button>
-        <div class="faq-answer">
-          <div class="faq-answer-content" data-i18n="faq1_a">Bijuteriile H-Time sunt o operă de artă, nu doar un simplu accesoriu, ce exprimă rafinament, dedicare și calitate excepțională. Ne diferențiem prin atenția la detalii și experiența premium oferită fiecărui client.</div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" data-i18n="faq4_q">CUM SE ÎNTREȚIN BIJUTERII? <span class="faq-icon">+</span></button>
-        <div class="faq-answer">
-          <div class="faq-answer-content" data-i18n="faq4_a">Oferim recomandări personalizate pentru fiecare tip de metal și piatră: curățare delicată, depozitare uscată și verificări periodice. Pentru piese cu pietre prețioase recomandăm curățare profesională anuală.</div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" data-i18n="faq2_q">CE REPREZINTĂ SIGLA NOASTRĂ? <span class="faq-icon">+</span></button>
-        <div class="faq-answer">
-          <div class="faq-answer-content" data-i18n="faq2_a">Sigla noastră îmbină elemente clasice cu accente moderne. Diamantul simbolizează eternitatea și rezistența în timp, în timp ce literele H și T conturează identitatea brandului.</div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" data-i18n="faq5_q">CUM FUNCȚIONEAZĂ GARANȚIA? <span class="faq-icon">+</span></button>
-        <div class="faq-answer">
-          <div class="faq-answer-content" data-i18n="faq5_a">Toate piesele vin cu garanție de 24 luni pentru defecte de fabricație. Garanția nu acoperă uzura normală sau deteriorarea cauzată de utilizare necorespunzătoare. Pentru detalii, consultați politica noastră de garanție.</div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" data-i18n="faq3_q">DE CE ACEST SLOGAN? <span class="faq-icon">+</span></button>
-        <div class="faq-answer">
-          <div class="faq-answer-content" data-i18n="faq3_a">„Emoții sculptate în eleganță” reflectă credința noastră profundă că bijuteriile nu sunt doar obiecte materiale, ci purtătoare de amintiri și sentimente ce dăinuie generații întregi.</div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" data-i18n="faq6_q">POT PERSONALIZA O COMANDĂ? <span class="faq-icon">+</span></button>
-        <div class="faq-answer">
-          <div class="faq-answer-content" data-i18n="faq6_a">Da — oferim servicii de personalizare și comenzi la cerere. Contactează echipa noastră pentru consultanță, estimare de preț și timp de execuție. Colaborăm îndeaproape pentru a transforma ideile tale în piese unice.</div>
-        </div>
-      </div>
-
-    </div>
+  <section class="sale-section">
+    <h2 class="sale-title" data-translate="sale_title">Oferte Exclusive</h2>
+    <div id="sale-row" class="sale-row" aria-live="polite"></div>
   </section>
 
   <footer>
-    <div class="footer-col">
-      <h2>H-TIME</h2>
-      <p class="footer-desc" data-i18n="footer_desc">Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.</p>
-      <div class="social-links">
-        <a href="#" class="social-icon-circle" title="Facebook">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-        </a>
-        <a href="#" class="social-icon-circle" title="Instagram">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-        </a>
-        <a href="#" class="social-icon-circle" title="TikTok">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
-        </a>
-      </div>
+    <div>
+      <strong data-translate="footer_about_title">Despre H-TIME</strong>
+      <p data-translate="footer_about_text">Bijuterii și ceasuri premium, create cu atenție la detaliu.</p>
     </div>
-
-    <div class="footer-col">
-      <h3 data-i18n="footer_nav">NAVIGARE RAPIDĂ</h3>
-      <ul>
-        <li><a href="index.html" data-i18n="footer_home">Acasă - Pagina principală</a></li>
-        <li><a href="magazin.html" data-i18n="footer_shop">Magazin - Toate Colecțiile</a></li>
-        <li><a href="despre-noi.html" data-i18n="footer_about">Povestea Noastră</a></li>
-        <li><a href="contact.html" data-i18n="footer_contact">Contact & Suport</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h3 data-i18n="footer_info">INFORMAȚII & POLITICI</h3>
-      <ul>
-        <li><a href="#" data-i18n="footer_terms">Termeni și Condiții</a></li>
-        <li><a href="#" data-i18n="footer_privacy">Politică de Confidențialitate</a></li>
-        <li><a href="#" data-i18n="footer_delivery">Politică de Livrare</a></li>
-        <li><a href="#" data-i18n="footer_return">Politică de Retur (14 zile)</a></li>
-        <li><a href="#" data-i18n="footer_care">Îngrijirea Bijuteriilor</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h3 data-i18n="footer_consumer">PROTECȚIA CONSUMATORULUI</h3>
-      <div>
-        <a href="https://anpc.ro/ce-este-sal/" target="_blank">
-          <img src="https://ro.pandora.net/mobify/bundle/1108/static/img/SAL-PICTOGRAMA.png?app=pdp" alt="ANPC SAL" class="anpc-img">
-        </a>
-        <a href="https://ec.europa.eu/consumers/odr" target="_blank">
-          <img src="https://ro.pandora.net/mobify/bundle/1108/static/img/pictogramaSOL.png?app=pdp" alt="ANPC SOL" class="anpc-img">
-        </a>
-      </div>
-    </div>
-
-    <div class="footer-bottom">© 2024 - 2026 H-TIME Luxury Experience. Toate drepturile sunt rezervate.</div>
   </footer>
 
-  <!-- produse.js (external) -->
   <script src="produse.js"></script>
 
-  <!-- Main JS: hero image, sale generation, FAQ accordion, cart count -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Hero random image
-      const heroSection = document.getElementById('hero-section');
-      const heroImages = [
-        "https://images.squarespace-cdn.com/content/v1/67a62d98ae27d6276a9f2db9/7e45fd3e-142e-4ac7-8a13-a699d78b6d75/m.jpg",
-        "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1920",
-        "https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?q=80&w=1920",
-        "https://images.unsplash.com/photo-1606293926075-69a00dbfde81?q=80&w=1920",
-        "https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d?q=80&w=1920"
-      ];
-      const randomImgUrl = heroImages[Math.floor(Math.random()*heroImages.length)];
-      if (heroSection) heroSection.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('${randomImgUrl}')`;
-
-      // Sale generation
-      const trackContainer = document.getElementById('sale-track-container');
-      let produseSale = [];
-      if (typeof produse !== 'undefined') {
-        produseSale = produse.filter(p => p.isSale === true || p.oferta === true);
-      }
-      if (produseSale.length === 0) {
-        produseSale = [
-          { nume: "Ceas Rolex Oyster", pretVechi: "1200", pret: "950", imagine: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=400" },
-          { nume: "Ceas TISSOT Heritage", pretVechi: "900", pret: "750", imagine: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?q=80&w=400" },
-          { nume: "Inel Argint Moonlight", pretVechi: "120", pret: "95", imagine: "https://images.unsplash.com/photo-1605100804763-247f66126e28?q=80&w=400" },
-          { nume: "Inel Eternity Gold", pretVechi: "185", pret: "140", imagine: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=400" },
-          { nume: "Cercei Diamond Drops", pretVechi: "310", pret: "240", imagine: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=400" },
-          { nume: "Brățară Cuff Gold", pretVechi: "130", pret: "99", imagine: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=400" }
-        ];
-      }
-      let carduriHTML = '';
-      produseSale.forEach(p => {
-        carduriHTML += `
-          <div class="sale-card" onclick="window.location.href='produs.html?nume=${encodeURIComponent(p.nume)}'" style="cursor:pointer;">
-            <div class="sale-badge">SALE</div>
-            <img src="${p.imagine}" alt="${p.nume}">
-            <h3>${p.nume}</h3>
-            <div class="price-container">
-              <span class="old-price">€${p.pretVechi}</span>
-              <span class="new-price">€${p.pret}</span>
-            </div>
-          </div>
-        `;
+  <script type="module">
+    async function applyTranslations(dict){
+      document.querySelectorAll("[data-translate]").forEach(el=>{
+        const key = el.getAttribute("data-translate");
+        if(!key) return;
+        if(dict && dict[key]) el.textContent = dict[key];
       });
-      if (trackContainer) trackContainer.innerHTML = carduriHTML + carduriHTML;
-
-      // FAQ accordion
-      document.querySelectorAll('.faq-question').forEach(button => {
-        button.addEventListener('click', () => {
-          const item = button.parentElement;
-          const answer = item.querySelector('.faq-answer');
-          const icon = item.querySelector('.faq-icon');
-          if (item.classList.contains('active')) {
-            item.classList.remove('active');
-            answer.style.maxHeight = null;
-            if (icon) icon.innerText = '+';
-          } else {
-            document.querySelectorAll('.faq-item.active').forEach(activeItem => {
-              activeItem.classList.remove('active');
-              activeItem.querySelector('.faq-answer').style.maxHeight = null;
-              const ai = activeItem.querySelector('.faq-icon');
-              if (ai) ai.innerText = '+';
-            });
-            item.classList.add('active');
-            answer.style.maxHeight = answer.scrollHeight + "px";
-            if (icon) icon.innerText = '-';
-          }
-        });
-      });
-
-      // Cart count
-      let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
-      const cartBtn = document.getElementById('cart-nav-btn');
-      if (cartBtn) cartBtn.innerText = `Cart (${cart.length})`;
-    });
-  </script>
-
-  <!-- Translations and language switcher logic (RO, EN, FR, DE, ES, IT) -->
-  <script>
-    const translations = {
-      ro: {
-        title: "H-TIME | Luxury Experience",
-        nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne",
-        hero_subtitle: "Emoții sculptate în eleganță",
-        feat1_title: "LIVRARE GRATUITĂ", feat1_text: "Pentru toate comenzile de peste 500 RON, direct la tine la uşă.",
-        feat2_title: "GARANȚIE 24 LUNI", feat2_text: "Toate piesele noastre vin cu certificat de autenticitate şi garanţie.",
-        feat3_title: "RETUR SIMPLIFICAT", feat3_text: "Ai la dispoziție 14 zile calendaristice pentru a schimba produsul.",
-        cat_title: "CE PRODUSE OFERIM", cat1_title: "CEASURI", cat1_price: "Prețuri începând de la 100 €",
-        cat2_title: "INELE", cat2_price: "Prețuri începând de la 100 €", cat3_title: "CERCEI", cat3_price: "Prețuri începând de la 100 €",
-        cat_btn: "Descoperă mai multe", sale_title: "OFERTE EXCLUSIVE",
-        obj_title: "ESENȚA H-TIME",
-        obj1_title: "ENERGIE ȘI EMOȚIE", obj1_text: "Fiecare piatră spirituală pe care o alegem cu grijă poartă o vibrație și un destin. Ne dorim ca bijuteriile noastre să devină talismane personale, conectând frumusețea formelor cu energia ta interioară, pentru a aduce protecție, iubire și echilibru în viața de zi cu zi.",
-        obj1_extra: "Lucrăm manual, cu atenție la detalii, combinând tehnici tradiționale cu finisaje contemporane. Rezultatul este o colecție care vorbește despre autenticitate, intenție și emoție — piese care se poartă cu sens, nu doar cu stil.",
-        obj2_title: "MIT ȘI RAFINAMENT", obj2_text: "Inspirate din legende străvechi și mitologii fascinante, creațiile noastre împletesc misterul trecutului cu eleganța pură a prezentului.",
-        obj2_extra: "Fiecare colecție pornește de la o poveste: simboluri, proporții și detalii care dau sens. Astfel, bijuteriile devin punți între generații, între amintiri și momente noi, purtând cu ele o estetică atemporală.",
-        obj3_title: "O MOȘTENIRE ETERNĂ", obj3_text: "Dincolo de strălucirea efemeră, scopul nostru este să făurim amintiri care sfidează timpul.",
-        obj3_extra: "Ne asumăm responsabilitatea calității: materiale atent selecționate, finisaje durabile și servicii care susțin longevitatea pieselor. H-TIME nu vinde doar obiecte — cultivăm o moștenire.",
-        quote1: "\"Bijuteriile sunt cele care fac femeia să se simtă unică\" <span>- Coco Chanel</span>",
-        quote2: "\"Stilul este o modalitate de a spune cine ești fără să vorbești\" <span>- Rachel Zoe</span>",
-        quote3: "\"Diamantele sunt cele mai bune prietene ale unei fete\" <span>- Marilyn Monroe</span>",
-        quote4: "\"Fiecare bijuterie spune o poveste fără a folosi niciun cuvânt\" <span>- H-TIME</span>",
-        contact_title: "CONTACTEAZĂ-NE", contact_text: "Ai vrea să ne sugerezi o idee sau să colaborezi cu noi? Scrie-ne, abia așteptăm să auzim!",
-        faq_title: "FAQS",
-        faq1_q: "CE NE FACE UNICI?", faq1_a: "Bijuteriile H-Time sunt o operă de artă, nu doar un simplu accesoriu, ce exprimă rafinament, dedicare și calitate excepțională.",
-        faq2_q: "CE REPREZINTĂ SIGLA NOASTRĂ?", faq2_a: "Sigla noastră îmbină elemente clasice cu accente moderne. Diamantul simbolizează eternitatea și rezistența în timp.",
-        faq3_q: "DE CE ACEST SLOGAN?", faq3_a: "„Emoții sculptate în eleganță” reflectă credința noastră profundă că bijuteriile nu sunt doar obiecte materiale.",
-        faq4_q: "CUM SE ÎNTREȚIN BIJUTERII?", faq4_a: "Oferim recomandări personalizate pentru fiecare tip de metal și piatră: curățare delicată, depozitare uscată și verificări periodice.",
-        faq5_q: "CUM FUNCȚIONEAZĂ GARANȚIA?", faq5_a: "Toate piesele vin cu garanție de 24 luni pentru defecte de fabricație. Garanția nu acoperă uzura normală sau deteriorarea cauzată de utilizare necorespunzătoare.",
-        faq6_q: "POT PERSONALIZA O COMANDĂ?", faq6_a: "Da — oferim servicii de personalizare și comenzi la cerere. Contactează echipa noastră pentru consultanță și estimare.",
-        footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul.",
-        footer_nav: "NAVIGARE RAPIDĂ", footer_home: "Acasă - Pagina principală", footer_shop: "Magazin - Toate Colecțiile",
-        footer_about: "Povestea Noastră", footer_contact: "Contact & Suport", footer_info: "INFORMAȚII & POLITICI",
-        footer_terms: "Termeni și Condiții", footer_privacy: "Politică de Confidențialitate", footer_delivery: "Politică de Livrare",
-        footer_return: "Politică de Retur (14 zile)", footer_care: "Îngrijirea Bijuteriilor", footer_consumer: "PROTECȚIA CONSUMATORULUI"
-      },
-
-      en: {
-        title: "H-TIME | Luxury Experience",
-        nav_home: "Home", nav_shop: "Shop", nav_about: "About Us", nav_team: "H-Time Team", nav_contact: "Contact Us",
-        hero_subtitle: "Emotions sculpted in elegance",
-        feat1_title: "FREE SHIPPING", feat1_text: "For all orders over 500 RON, delivered straight to your door.",
-        feat2_title: "24-MONTH WARRANTY", feat2_text: "All our pieces come with an authenticity certificate and warranty.",
-        feat3_title: "EASY RETURNS", feat3_text: "You have 14 calendar days available to exchange your product.",
-        cat_title: "WHAT WE OFFER", cat1_title: "WATCHES", cat1_price: "Prices starting from €100",
-        cat2_title: "RINGS", cat2_price: "Prices starting from €100", cat3_title: "EARRINGS", cat3_price: "Prices starting from €100",
-        cat_btn: "Discover more", sale_title: "EXCLUSIVE OFFERS",
-        obj_title: "THE ESSENCE OF H-TIME",
-        obj1_title: "ENERGY & EMOTION", obj1_text: "Each spiritual stone we carefully choose carries a vibration and a destiny. We want our jewelry to become personal talismans, connecting the beauty of shapes with your inner energy to bring protection, love and balance into everyday life.",
-        obj1_extra: "We craft by hand with meticulous attention to detail, blending traditional techniques with contemporary finishes. The result is a collection that speaks of authenticity, intention and emotion — pieces worn with meaning, not just style.",
-        obj2_title: "MYTH & REFINEMENT", obj2_text: "Inspired by ancient legends and fascinating mythologies, our creations weave the mystery of the past with the pure elegance of the present.",
-        obj2_extra: "Each collection starts from a story: symbols, proportions and details that give meaning. Jewelry becomes a bridge between generations, between memories and new moments, carrying an ageless aesthetic.",
-        obj3_title: "AN ETERNAL LEGACY", obj3_text: "Beyond the ephemeral shine, our purpose is to forge memories that defy time. Each piece is created to become a treasure of the soul, meant to be worn with passion and passed down through generations.",
-        obj3_extra: "We commit to quality: carefully selected materials, durable finishes and services that support the longevity of the pieces. H-TIME does not just sell objects — we cultivate a legacy.",
-        quote1: "\"Jewelry is what makes a woman feel unique\" <span>- Coco Chanel</span>",
-        quote2: "\"Style is a way to say who you are without having to speak\" <span>- Rachel Zoe</span>",
-        quote3: "\"Diamonds are a girl's best friend\" <span>- Marilyn Monroe</span>",
-        quote4: "\"Every piece of jewelry tells a story without using any words\" <span>- H-TIME</span>",
-        contact_title: "CONTACT US", contact_text: "Would you like to suggest an idea or collaborate with us? Write to us, we can't wait to hear from you!",
-        faq_title: "FAQS",
-        faq1_q: "WHAT MAKES US UNIQUE?", faq1_a: "H-Time jewelry is a work of art, not just a simple accessory, expressing refinement, dedication and exceptional quality.",
-        faq2_q: "WHAT DOES OUR LOGO REPRESENT?", faq2_a: "Our logo blends classic elements with modern accents. The diamond symbolizes eternity and resilience over time.",
-        faq3_q: "WHY THIS SLOGAN?", faq3_a: "\"Emotions sculpted in elegance\" reflects our deep belief that jewelry is not just material objects but carriers of memories and feelings.",
-        faq4_q: "HOW DO I CARE FOR MY JEWELRY?", faq4_a: "We provide tailored care recommendations for each metal and gemstone: gentle cleaning, dry storage and periodic checks. Professional cleaning is recommended annually for precious stones.",
-        faq5_q: "HOW DOES THE WARRANTY WORK?", faq5_a: "All pieces come with a 24‑month warranty for manufacturing defects. The warranty does not cover normal wear or damage caused by improper use.",
-        faq6_q: "CAN I CUSTOMIZE AN ORDER?", faq6_a: "Yes — we offer customization and bespoke commissions. Contact our team for consultation, pricing and lead times.",
-        footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement.",
-        footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections",
-        footer_about: "Our Story", footer_contact: "Contact & Support", footer_info: "INFORMATION & POLICIES",
-        footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_delivery: "Delivery Policy",
-        footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care", footer_consumer: "CONSUMER PROTECTION"
-      },
-
-      fr: {
-        title: "H-TIME | Expérience de Luxe",
-        nav_home: "Accueil", nav_shop: "Boutique", nav_about: "À propos", nav_team: "Équipe H-Time", nav_contact: "Contactez-nous",
-        hero_subtitle: "Émotions sculptées dans l'élégance",
-        feat1_title: "LIVRAISON GRATUITE", feat1_text: "Pour toutes les commandes supérieures à 500 RON, livrées à votre porte.",
-        feat2_title: "GARANTIE 24 MOIS", feat2_text: "Toutes nos pièces sont accompagnées d'un certificat d'authenticité et d'une garantie.",
-        feat3_title: "RETOUR FACILE", feat3_text: "Vous disposez de 14 jours calendaires pour échanger votre produit.",
-        cat_title: "CE QUE NOUS OFFRONS", cat1_title: "MONTRES", cat1_price: "Prix à partir de 100 €",
-        cat2_title: "BAGUES", cat2_price: "Prix à partir de 100 €", cat3_title: "BOUCLES D'OREILLES", cat3_price: "Prix à partir de 100 €",
-        cat_btn: "Découvrir mai ier", cat_btn: "Découvrir plus",
-        sale_title: "OFFRES EXCLUSIVES",
-        obj_title: "L'ESSENCE DE H-TIME",
-        obj1_title: "ÉNERGIE & ÉMOTION",
-        obj1_text: "Chaque pierre spirituelle que nous choisissons avec soin porte une vibration et un destin. Nous voulons que nos bijoux deviennent des talismans personnels, reliant la beauté des formes à votre énergie intérieure.",
-        obj1_extra: "Nous travaillons à la main avec une attention méticuleuse aux détails, mêlant techniques traditionnelles et finitions contemporaines.",
-        obj2_title: "MYTHE & RAFFINEMENT",
-        obj2_text: "Inspirées par des légendes anciennes, nos créations tissent le mystère du passé avec l'élégance du présent.",
-        obj2_extra: "Chaque collection naît d'une histoire : symboles, proportions et détails qui donnent du sens.",
-        obj3_title: "UN HÉRITAGE ÉTERNEL",
-        obj3_text: "Au‑delà de l'éclat éphémère, notre but est de forger des souvenirs qui défient le temps.",
-        obj3_extra: "Nous nous engageons pour la qualité : matériaux sélectionnés, finitions durables et services pour la longévité des pièces.",
-        quote1: "\"Les bijoux rendent une femme unique\" <span>- Coco Chanel</span>",
-        quote2: "\"Le style est une façon de dire qui vous êtes sans parler\" <span>- Rachel Zoe</span>",
-        quote3: "\"Les diamants sont les meilleurs amis d'une fille\" <span>- Marilyn Monroe</span>",
-        quote4: "\"Chaque bijou raconte une histoire sans mots\" <span>- H-TIME</span>",
-        contact_title: "CONTACTEZ-NOUS",
-        contact_text: "Souhaitez-vous proposer une idée ou collaborer ? Écrivez‑nous, nous avons hâte de vous lire !",
-        faq_title: "FAQS",
-        faq1_q: "QU'EST-CE QUI NOUS REND UNIQUES ?",
-        faq1_a: "Les bijoux H-Time sont une œuvre d'art, exprimant raffinement, dévouement et qualité exceptionnelle.",
-        faq2_q: "QUE REPRÉSENTE NOTRE LOGO ?",
-        faq2_a: "Notre logo mêle éléments classiques et accents modernes. Le diamant symbolise l'éternité.",
-        faq3_q: "POURQUOI CE SLOGAN ?",
-        faq3_a: "\"Émotions sculptées dans l'élégance\" reflète notre conviction que les bijoux portent des souvenirs.",
-        faq4_q: "COMMENT ENTRETENIR VOS BIJOUX ?",
-        faq4_a: "Nous fournissons des recommandations personnalisées : nettoyage doux, stockage au sec et contrôles périodiques.",
-        faq5_q: "COMMENT FONCTIONNE LA GARANTIE ?",
-        faq5_a: "Toutes les pièces bénéficient d'une garantie de 24 mois pour les défauts de fabrication.",
-        faq6_q: "PUIS-JE PERSONNALISER UNE COMMANDE ?",
-        faq6_a: "Oui — nous proposons des services de personnalisation et des commandes sur mesure.",
-        footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe dédiée à ceux qui apprécient le raffinement.",
-        footer_nav: "NAVIGATION RAPIDE",
-        footer_home: "Accueil - Page principale",
-        footer_shop: "Boutique - Toutes les collections",
-        footer_about: "Notre histoire",
-        footer_contact: "Contact & Support",
-        footer_info: "INFORMATIONS & POLITIQUES",
-        footer_terms: "Conditions générales",
-        footer_privacy: "Politique de confidentialité",
-        footer_delivery: "Politique de livraison",
-        footer_return: "Politique de retour (14 jours)",
-        footer_care: "Entretien des bijoux",
-        footer_consumer: "PROTECTION DU CONSOMMATEUR"
-      },
-
-      de: {
-        title: "H-TIME | Luxus Erlebnis",
-        nav_home: "Startseite",
-        nav_shop: "Shop",
-        nav_about: "Über uns",
-        nav_team: "H-Time Team",
-        nav_contact: "Kontakt",
-        hero_subtitle: "Emotionen in Eleganz gemeißelt",
-        feat1_title: "KOSTENLOSER VERSAND",
-        feat1_text: "Für alle Bestellungen über 500 RON, direkt zu Ihnen nach Hause.",
-        feat2_title: "24 MONATE GARANTIE",
-        feat2_text: "Alle unsere Stücke werden mit Echtheitszertifikat und Garantie geliefert.",
-        feat3_title: "EINFACHE RÜCKGABE",
-        feat3_text: "Sie haben 14 Kalendertage Zeit, um Ihr Produkt umzutauschen.",
-        cat_title: "WAS WIR BIETEN",
-        cat1_title: "UHREN",
-        cat1_price: "Preise ab 100 €",
-        cat2_title: "RINGE",
-        cat2_price: "Preise ab 100 €",
-        cat3_title: "OHRSCHMUCK",
-        cat3_price: "Preise ab 100 €",
-        cat_btn: "Mehr entdecken",
-        sale_title: "EXKLUSIVE ANGEBOTE",
-        obj_title: "DIE ESSENZ VON H-TIME",
-        obj1_title: "ENERGIE & EMOTION",
-        obj1_text: "Jeder spirituelle Stein, den wir sorgfältig auswählen, trägt eine Schwingung und ein Schicksal. Unsere Schmuckstücke sollen persönliche Talismane werden.",
-        obj1_extra: "Wir fertigen von Hand mit großer Liebe zum Detail und verbinden traditionelle Techniken mit modernen Oberflächen.",
-        obj2_title: "MYTHOS & RAFFINESSE",
-        obj2_text: "Inspiriert von alten Legenden verweben unsere Kreationen das Geheimnis der Vergangenheit mit der Eleganz der Gegenwart.",
-        obj2_extra: "Jede Kollektion beginnt mit einer Geschichte: Symbole, Proportionen und Details, die Bedeutung verleihen.",
-        obj3_title: "EIN EWIGES ERBE",
-        obj3_text: "Über den flüchtigen Glanz hinaus ist es unser Ziel, Erinnerungen zu schaffen, die der Zeit trotzen.",
-        obj3_extra: "Wir verpflichten uns zur Qualität: sorgfältig ausgewählte Materialien, langlebige Oberflächen und Service für die Langlebigkeit.",
-        quote1: "\"Schmuck macht eine Frau einzigartig\" <span>- Coco Chanel</span>",
-        quote2: "\"Stil ist eine Art zu sagen, wer du bist, ohne zu sprechen\" <span>- Rachel Zoe</span>",
-        quote3: "\"Diamanten sind die besten Freunde eines Mädchens\" <span>- Marilyn Monroe</span>",
-        quote4: "\"Jedes Schmuckstück erzählt eine Geschichte ohne Worte\" <span>- H-TIME</span>",
-        contact_title: "KONTAKTIEREN SIE UNS",
-        contact_text: "Möchten Sie eine Idee vorschlagen oder mit uns zusammenarbeiten? Schreiben Sie uns, wir freuen uns!",
-        faq_title: "FAQS",
-        faq1_q: "WAS MACHT UNS EINZIGARTIG?",
-        faq1_a: "H-Time Schmuck ist ein Kunstwerk, das Raffinesse, Hingabe und außergewöhnliche Qualität ausdrückt.",
-        faq2_q: "WOFÜR STEHT UNSER LOGO?",
-        faq2_a: "Unser Logo verbindet klassische Elemente mit modernen Akzenten. Der Diamant symbolisiert Ewigkeit.",
-        faq3_q: "WARUM DIESER SLOGAN?",
-        faq3_a: "\"Emotionen in Eleganz gemeißelt\" spiegelt unseren Glauben wider, dass Schmuck Erinnerungen trägt.",
-        faq4_q: "WIE PFLEGE ICH MEINEN SCHMUCK?",
-        faq4_a: "Wir geben individuelle Pflegeempfehlungen: sanfte Reinigung, trocken lagern und regelmäßige Kontrollen.",
-        faq5_q: "WIE FUNKTIONIERT DIE GARANTIE?",
-        faq5_a: "Alle Stücke haben eine 24-monatige Garantie auf Herstellungsfehler.",
-        faq6_q: "KANN ICH EINE BESTELLUNG PERSONALISIEREN?",
-        faq6_a: "Ja — wir bieten Personalisierungen und Sonderanfertigungen an.",
-        footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique für Liebhaber von Raffinesse.",
-        footer_nav: "SCHNELLNAVIGATION",
-        footer_home: "Startseite - Hauptseite",
-        footer_shop: "Shop - Alle Kollektionen",
-        footer_about: "Unsere Geschichte",
-        footer_contact: "Kontakt & Support",
-        footer_info: "INFORMATIONEN & RICHTLINIEN",
-        footer_terms: "Allgemeine Geschäftsbedingungen",
-        footer_privacy: "Datenschutzrichtlinie",
-        footer_delivery: "Lieferbedingungen",
-        footer_return: "Rückgaberecht (14 Tage)",
-        footer_care: "Schmuckpflege",
-        footer_consumer: "VERBRAUCHERSCHUTZ"
-      },
-
-      es: {
-        title: "H-TIME | Experiencia de Lujo",
-        nav_home: "Inicio",
-        nav_shop: "Tienda",
-        nav_about: "Sobre Nosotros",
-        nav_team: "Equipo H-Time",
-        nav_contact: "Contáctanos",
-        hero_subtitle: "Emociones esculpidas en elegancia",
-        feat1_title: "ENVÍO GRATUITO",
-        feat1_text: "Para todos los pedidos superiores a 500 RON, entregados en su puerta.",
-        feat2_title: "GARANTÍA 24 MESES",
-        feat2_text: "Todas nuestras piezas vienen con certificado de autenticidad y garantía.",
-        feat3_title: "DEVOLUCIONES FÁCILES",
-        feat3_text: "Tienes 14 días naturales para cambiar tu producto.",
-        cat_title: "LO QUE OFRECEMOS",
-        cat1_title: "RELOJES",
-        cat1_price: "Precios desde 100 €",
-        cat2_title: "ANILLOS",
-        cat2_price: "Precios desde 100 €",
-        cat3_title: "PENDIENTES",
-        cat3_price: "Precios desde 100 €",
-        cat_btn: "Descubrir más",
-        sale_title: "OFERTAS EXCLUSIVAS",
-        obj_title: "LA ESENCIA DE H-TIME",
-        obj1_title: "ENERGÍA Y EMOCIÓN",
-        obj1_text: "Cada piedra espiritual que elegimos cuidadosamente lleva una vibración y un destino. Queremos que nuestras joyas sean talismanes personales.",
-        obj1_extra: "Trabajamos a mano con atención al detalle, combinando técnicas tradicionales con acabados contemporáneos.",
-        obj2_title: "MITO Y REFINAMIENTO",
-        obj2_text: "Inspiradas en leyendas antiguas, nuestras creaciones entrelazan el misterio del pasado con la elegancia del presente.",
-        obj2_extra: "Cada colección nace de una historia: símbolos, proporciones y detalles que dan sentido.",
-        obj3_title: "UN LEGADO ETERNO",
-        obj3_text: "Más allá del brillo efímero, nuestro propósito es forjar recuerdos que desafíen el tiempo.",
-        obj3_extra: "Nos comprometemos con la calidad: materiales seleccionados, acabados duraderos y servicios que apoyan la longevidad.",
-        quote1: "\"La joyería hace que una mujer se sienta única\" <span>- Coco Chanel</span>",
-        quote2: "\"El estilo es una forma de decir quién eres sin hablar\" <span>- Rachel Zoe</span>",
-        quote3: "\"Los diamantes son los mejores amigos de una chica\" <span>- Marilyn Monroe</span>",
-        quote4: "\"Cada joya cuenta una historia sin palabras\" <span>- H-TIME</span>",
-        contact_title: "CONTÁCTANOS",
-        contact_text: "¿Quieres sugerir una idea o colaborar con nosotros? Escríbenos, ¡esperamos saber de ti!",
-        faq_title: "FAQS",
-        faq1_q: "¿QUÉ NOS HACE ÚNICOS?",
-        faq1_a: "La joyería H-Time es una obra de arte que expresa refinamiento, dedicación y calidad excepcional.",
-        faq2_q: "¿QUÉ REPRESENTA NUESTRO LOGO?",
-        faq2_a: "Nuestro logo combina elementos clásicos con acentos modernos. El diamante simboliza la eternidad.",
-        faq3_q: "¿POR QUÉ ESTE ESLOGAN?",
-        faq3_a: "\"Emociones esculpidas en elegancia\" refleja nuestra creencia de que las joyas son portadoras de recuerdos.",
-        faq4_q: "¿CÓMO CUIDAR MIS JOYAS?",
-        faq4_a: "Ofrecemos recomendaciones personalizadas: limpieza suave, almacenamiento en seco y revisiones periódicas.",
-        faq5_q: "¿CÓMO FUNCIONA LA GARANTÍA?",
-        faq5_a: "Todas las piezas tienen una garantía de 24 meses por defectos de fabricación.",
-        faq6_q: "¿PUEDO PERSONALIZAR UN PEDIDO?",
-        faq6_a: "Sí — ofrecemos servicios de personalización y encargos a medida.",
-        footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo dedicada a quienes aprecian el refinamiento.",
-        footer_nav: "NAVEGACIÓN RÁPIDA",
-        footer_home: "Inicio - Página principal",
-        footer_shop: "Tienda - Todas las colecciones",
-        footer_about: "Nuestra historia",
-        footer_contact: "Contacto & Soporte",
-        footer_info: "INFORMACIÓN & POLÍTICAS",
-        footer_terms: "Términos y condiciones",
-        footer_privacy: "Política de privacidad",
-        footer_delivery: "Política de entrega",
-        footer_return: "Política de devolución (14 días)",
-        footer_care: "Cuidado de las joyas",
-        footer_consumer: "PROTECCIÓN AL CONSUMIDOR"
-      },
-
-      it: {
-        title: "H-TIME | Esperienza di Lusso",
-        nav_home: "Home",
-        nav_shop: "Negozio",
-        nav_about: "Chi Siamo",
-        nav_team: "Team H-Time",
-        nav_contact: "Contattaci",
-        hero_subtitle: "Emozioni scolpite nell'eleganza",
-        feat1_title: "SPEDIZIONE GRATUITA",
-        feat1_text: "Per tutti gli ordini superiori a 500 RON, consegnati direttamente a casa.",
-        feat2_title: "GARANZIA 24 MESI",
-        feat2_text: "Tutti i nostri pezzi sono accompagnati da certificato di autenticità e garanzia.",
-        feat3_title: "RESI SEMPLICI",
-        feat3_text: "Hai 14 giorni di calendario per cambiare il prodotto.",
-        cat_title: "COSA OFFRIAMO",
-        cat1_title: "OROLOGI",
-        cat1_price: "Prezzi a partire da 100 €",
-        cat2_title: "ANELLI",
-        cat2_price: "Prezzi a partire da 100 €",
-        cat3_title: "ORECCHINI",
-        cat3_price: "Prezzi a partire da 100 €",
-        cat_btn: "Scopri di più",
-        sale_title: "OFFERTE ESCLUSIVE",
-        obj_title: "L'ESSENZA DI H-TIME",
-        obj1_title: "ENERGIA & EMOZIONE",
-        obj1_text: "Ogni pietra spirituale che scegliamo con cura porta una vibrazione e un destino. Vogliamo che i nostri gioielli diventino talismani personali.",
-        obj1_extra: "Lavoriamo a mano con attenzione ai dettagli, combinando tecniche tradizionali con finiture contemporanee.",
-        obj2_title: "MITO & RAFFINATEZZA",
-        obj2_text: "Ispirate a leggende antiche, le nostre creazioni intrecciano il mistero del passato con l'eleganza del presente.",
-        obj2_extra: "Ogni collezione nasce da una storia: simboli, proporzioni e dettagli che danno significato.",
-        obj3_title: "UN LASCITO ETERNO",
-        obj3_text: "Oltre allo splendore effimero, il nostro scopo è forgiare ricordi che sfidano il tempo.",
-        obj3_extra: "Ci impegniamo per la qualità: materiali selezionati, finiture durature e servizi che supportano la longevità.",
-        quote1: "\"I gioielli rendono una donna unica\" <span>- Coco Chanel</span>",
-        quote2: "\"Lo stile è un modo per dire chi sei senza parlare\" <span>- Rachel Zoe</span>",
-        quote3: "\"I diamanti sono i migliori amici di una ragazza\" <span>- Marilyn Monroe</span>",
-        quote4: "\"Ogni gioiello racconta una storia senza parole\" <span>- H-TIME</span>",
-        contact_title: "CONTATTACI",
-        contact_text: "Vuoi suggerire un'idea o collaborare con noi? Scrivici, non vediamo l'ora di sentirti!",
-        faq_title: "FAQS",
-        faq1_q: "COSA CI RENDE UNICI?",
-        faq1_a: "I gioielli H-Time sono un'opera d'arte che esprime raffinatezza, dedizione e qualità eccezionale.",
-        faq2_q: "COSA RAPPRESENTA IL NOSTRO LOGO?",
-        faq2_a: "Il nostro logo fonde elementi classici con accenti moderni. Il diamante simboleggia l'eternità.",
-        faq3_q: "PERCHÉ QUESTO SLOGAN?",
-        faq3_a: "\"Emozioni scolpite nell'eleganza\" riflette la nostra convinzione che i gioielli portino ricordi.",
-        faq4_q: "COME CURARE I GIOIELLI?",
-        faq4_a: "Forniamo raccomandazioni personalizzate: pulizia delicata, conservazione asciutta e controlli periodici.",
-        faq5_q: "COME FUNZIONA LA GARANZIA?",
-        faq5_a: "Tutti i pezzi hanno una garanzia di 24 mesi per difetti di fabbricazione.",
-        faq6_q: "POSSO PERSONALIZZARE UN ORDINE?",
-        faq6_a: "Sì — offriamo servizi di personalizzazione e commissioni su misura.",
-        footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso dedicata a chi apprezza la raffinatezza.",
-        footer_nav: "NAVIGAZIONE RAPIDA",
-        footer_home: "Home - Pagina principale",
-        footer_shop: "Negozio - Tutte le collezioni",
-        footer_about: "La nostra storia",
-        footer_contact: "Contatto & Supporto",
-        footer_info: "INFORMAZIONI & POLITICHE",
-        footer_terms: "Termini e condizioni",
-        footer_privacy: "Informativa sulla privacy",
-        footer_delivery: "Politica di consegna",
-        footer_return: "Politica di reso (14 giorni)",
-        footer_care: "Cura dei gioielli",
-        footer_consumer: "PROTEZIONE DEL CONSUMATORE"
-      }
-    };
-
-    function applyTranslations(lang) {
-      const dict = translations[lang] || translations.ro;
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (!key) return;
-        if (dict[key]) el.innerHTML = dict[key];
-      });
-      if (dict.title) document.title = dict.title;
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const switcher = document.getElementById('languageSwitcher');
-      const saved = localStorage.getItem('htime_lang') || 'ro';
-      if (switcher) {
-        // set switcher options if needed
-        switcher.value = saved;
+    async function loadLanguage(lang){
+      try{
+        const file = lang === "en" ? "./engleza.js" : "./romana.js";
+        const mod = await import(file);
+        if(mod && mod.translations) applyTranslations(mod.translations);
+        localStorage.setItem("site_language", lang);
+      }catch(err){
+        console.warn("Nu am putut încărca fișierul de limbă:", err);
       }
-      applyTranslations(saved);
-      if (switcher) {
-        switcher.addEventListener('change', () => {
-          const lang = switcher.value;
-          localStorage.setItem('htime_lang', lang);
-          applyTranslations(lang);
-        });
+    }
+
+    const langSelect = document.getElementById("language-selector");
+    const savedLang = localStorage.getItem("site_language") || "ro";
+    langSelect.value = savedLang;
+    loadLanguage(savedLang);
+
+    langSelect.addEventListener("change", (e)=>{
+      loadLanguage(e.target.value);
+    });
+
+    function createSaleCard(p){
+      const identifier = p.id ? `id=${encodeURIComponent(p.id)}` : `nume=${encodeURIComponent(p.nume)}`;
+      const card = document.createElement("div");
+      card.className = "sale-card";
+      card.setAttribute("role","button");
+      card.setAttribute("tabindex","0");
+      card.innerHTML = `
+        <img src="${p.imagine || 'img/placeholder.jpg'}" alt="${p.nume}">
+        <h3>${p.nume}</h3>
+        <p>${p.pret ? p.pret + ' €' : ''}</p>
+      `;
+      card.addEventListener("click", ()=> {
+        window.location.href = `produs.html?${identifier}`;
+      });
+      card.addEventListener("keypress", (ev)=>{
+        if(ev.key === "Enter" || ev.key === " ") window.location.href = `produs.html?${identifier}`;
+      });
+      return card;
+    }
+
+    function populateSaleRow(){
+      const row = document.getElementById("sale-row");
+      row.innerHTML = "";
+      if(typeof produse === "undefined" || !Array.isArray(produse) || !produse.length){
+        const demo = [
+          {id:"demo-rolex",nume:"Rolex Submariner",pret:12000,imagine:"img/rolex-submariner.jpg"},
+          {id:"demo-tissot",nume:"Tissot PRX",pret:650,imagine:"img/tissot-prx.jpg"},
+          {id:"demo-ring",nume:"Inel Aur 18K",pret:450,imagine:"img/inel-aur.jpg"}
+        ];
+        demo.forEach(d=>row.appendChild(createSaleCard(d)));
+        return;
       }
+      const saleItems = produse.filter(p => p.onSale).slice(0,8);
+      const itemsToShow = saleItems.length ? saleItems : produse.slice(0,8);
+      itemsToShow.forEach(p => row.appendChild(createSaleCard(p)));
+    }
+
+    document.addEventListener("DOMContentLoaded", ()=> {
+      populateSaleRow();
     });
   </script>
 </body>
