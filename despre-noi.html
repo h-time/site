@@ -1,232 +1,471 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Despre Noi | H-TIME</title>
-    <link rel="icon" type="image/png" href="logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Echipa | H-TIME</title>
+  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --peach: #fcbf88;
+      --pink: #ffb6c1;
+      --dark: #111111;
+      --light-bg: #f8f5f2;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      background-color: var(--light-bg);
+      color: var(--dark);
+      overflow-x: hidden;
+      display: flex; 
+      flex-direction: column; 
+      min-height: 100vh;
+      padding-top: 100px; /* Spatiu pentru meniul fixed */
+    }
+    h1,h2,h3,h4 { font-weight: normal; }
+
+    /* ================= NAVIGAȚIE ================= */
+    nav {
+      position: fixed;
+      top:0; left:0; width:100%;
+      padding:15px 50px;
+      display:flex; justify-content:space-between; align-items:center;
+      z-index:1000;
+      background-color: var(--dark); /* Folosim culoarea inchisa din tema pentru contrast pe pagina de continut */
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .logo img { height:75px; }
+    .nav-links { display:flex; gap:30px; }
+    .nav-links a {
+      color:white; text-decoration:none; font-weight:500; font-size:0.9rem;
+      text-transform:uppercase; letter-spacing:1px; transition: color .3s;
+    }
+    .nav-links a:hover { color: var(--peach); }
+
+    .nav-icons { display:flex; align-items:center; gap:20px; }
+    .nav-icons a { color:white; text-decoration:none; font-size:0.9rem; text-transform:uppercase; transition: all .3s; }
+    .nav-icons a:hover { color: var(--peach); }
+    .cart-btn {
+      border:1px solid white; padding:8px 18px; border-radius:30px;
+      display:inline-flex; align-items:center; justify-content:center; transition: all .3s;
+    }
+    .cart-btn:hover { border-color: var(--peach); }
+
+    /* ================= SECȚIUNE ECHIPĂ ================= */
+    .page-header { text-align: center; padding: 40px 20px 20px; }
+    .page-header h1 { 
+      font-family: 'DM Serif Display', serif; 
+      font-size: clamp(2.5rem, 5vw, 4rem); 
+      color: var(--dark); 
+      margin-bottom: 15px;
+    }
+    .page-header p { 
+      color: #555; 
+      max-width: 600px; 
+      margin: 0 auto; 
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .team-grid { 
+      display: flex; 
+      flex-wrap: wrap; 
+      justify-content: center; 
+      gap: 40px; 
+      max-width: 1200px; 
+      margin: 40px auto 80px; 
+      padding: 0 20px; 
+      flex: 1;
+    }
     
-    <style>
-        :root {
-            --dark-header: #4a4541;
-            --light-bg: #f5f5f5;
-            --peach-bg: #fcbf88;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Space Mono', monospace; background-color: var(--light-bg); color: black; padding-top: 80px; display: flex; flex-direction: column; min-height: 100vh; }
-        h1, h2, h3, .sync-font { font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
-        a { text-decoration: none; color: inherit; }
-        ul { list-style: none; }
+    .team-card { 
+      background: white; 
+      padding: 40px 25px; 
+      border-radius: 15px; 
+      text-align: center; 
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+      transition: 0.4s; 
+      border-bottom: 5px solid var(--peach); 
+      width: 340px; 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .team-card:hover { 
+      transform: translateY(-10px); 
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1); 
+    }
+    
+    .team-img { 
+      width: 180px; 
+      height: 180px; 
+      border-radius: 50%; 
+      object-fit: cover; 
+      margin-bottom: 20px; 
+      border: 4px solid #fcf2e8; 
+      transition: transform 0.4s;
+    }
 
-        /* --- Navigația (Uniformizată) --- */
-        nav {
-            background-color: var(--dark-header); color: white; display: flex;
-            justify-content: space-between; align-items: center; padding: 15px 50px;
-            position: fixed; width: 100%; top: 0; z-index: 1000;
-        }
-        .logo { font-size: 24px; font-weight: bold; color: #d4af37; font-family: 'Syncopate', sans-serif;}
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a:hover { text-decoration: underline; color: var(--peach-bg); }
-        
-        /* Zona din dreapta: Login, Social, Cart */
-        .nav-icons { display: flex; align-items: center; gap: 25px; }
-        .nav-icons a { font-family: 'Space Mono', monospace; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; color: white;}
-        .nav-icons a:hover { color: var(--peach-bg); }
-        .social-icon { display: flex; align-items: center; }
-        .cart-btn { border: 1px solid white; padding: 8px 20px; border-radius: 30px; display: inline-block;}
-        .cart-btn:hover { background-color: white; color: var(--dark-header); border-color: white; }
+    .team-card:hover .team-img {
+        transform: scale(1.05);
+    }
 
-        /* --- Secțiunea Hero (Despre Noi) --- */
-        .about-hero {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            max-width: 1200px;
-            margin: 80px auto;
-            padding: 0 40px;
-            gap: 60px;
-        }
-        .about-text { flex: 1; }
-        .about-text h1 { font-size: 3rem; margin-bottom: 30px; line-height: 1.2; }
-        .about-text p { font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; text-align: justify; }
-        
-        .about-image { flex: 1; position: relative; }
-        .about-image img { 
-            width: 100%; 
-            border-radius: 10px; 
-            box-shadow: -15px 15px 0px var(--peach-bg); /* Un efect vizual de umbră portocalie */
-            object-fit: cover;
-        }
+    .team-name { 
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.6rem; 
+      margin-bottom: 5px; 
+      color: var(--dark);
+    }
+    
+    .team-role { 
+      color: var(--peach); 
+      font-weight: 600; 
+      font-size: 0.9rem; 
+      margin-bottom: 15px; 
+      text-transform: uppercase; 
+      letter-spacing: 1px;
+    }
+    
+    .team-desc { 
+      font-size: 0.9rem; 
+      color: #666; 
+      line-height: 1.6; 
+    }
 
-        /* --- Secțiunea Video --- */
-        .video-section {
-            background-color: var(--dark-header);
-            color: white;
-            padding: 80px 40px;
-            text-align: center;
-        }
-        .video-section h2 { font-size: 2.5rem; margin-bottom: 20px; color: var(--peach-bg); }
-        .video-section p { font-size: 1.1rem; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
-        
-        .video-container {
-            max-width: 900px;
-            margin: 0 auto;
-            border: 4px solid var(--peach-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-            background: black;
-        }
-        .video-container video {
-            width: 100%;
-            display: block;
-            outline: none;
-        }
+    /* ================= FOOTER ================= */
+    footer { 
+      background-color:#0b0b0b; 
+      padding:80px 50px 30px; 
+      display:grid; 
+      grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); 
+      gap:40px; 
+      color:#fff; 
+      border-top:1px solid #222; 
+    }
+    .footer-col h2 { font-family:'DM Serif Display',serif; color:var(--peach); font-size:2.2rem; margin-bottom:20px; }
+    .footer-col h3 { font-size:1rem; font-weight:700; margin-bottom:30px; letter-spacing:1px; text-transform:uppercase; color:#fff; }
+    .footer-desc { font-size:0.9rem; color:#999; line-height:1.8; margin-bottom:30px; }
+    .social-links { display:flex; gap:15px; }
+    .social-icon-circle { width:40px; height:40px; background:#222; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; text-decoration:none; transition:.3s; }
+    .social-icon-circle:hover { background: linear-gradient(to right, var(--pink), var(--peach)); color:black; transform:translateY(-3px); }
+    .footer-col ul { list-style:none; padding:0; display:flex; flex-direction:column; gap:15px; }
+    .footer-col ul a { text-decoration:none; color:#999; font-size:0.9rem; transition:.3s; display:inline-block; }
+    .footer-col ul a:hover { color:var(--peach); transform:translateX(5px); }
+    .footer-bottom { grid-column:1 / -1; text-align:center; padding-top:40px; border-top:1px solid #222; color:#555; font-size:0.8rem; margin-top:20px; }
+    .anpc-img { max-width:180px; width:100%; height:auto; display:block; margin-bottom:15px; transition:opacity .3s; }
+    .anpc-img:hover { opacity:0.7; }
 
-        /* --- FOOTER CORECTAT --- */
-        footer { 
-            background-color: #efe8e4; 
-            padding: 60px 50px; 
-            display: flex; 
-            justify-content: space-between; 
-            flex-wrap: wrap; 
-            gap: 30px; 
-            margin-top: auto; 
-            border-top: none; 
-        }
-        .footer-col { flex: 1; min-width: 200px; }
-        .footer-col h2, .footer-col h3 { 
-            font-family: 'Syncopate', sans-serif; 
-            text-transform: uppercase; 
-            margin-bottom: 25px; 
-            font-size: 1.1rem; 
-            font-weight: 700; 
-            color: #000;
-        }
-        .footer-col p, .footer-col ul { 
-            font-family: 'Space Mono', monospace; 
-            font-size: 0.9rem; 
-            line-height: 1.8; 
-            color: #000; 
-        }
-        .footer-col ul { 
-            list-style: none !important; 
-            padding: 0; 
-            margin: 0; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 12px; 
-        }
-        .footer-col ul li { 
-            list-style-type: none !important; 
-            margin: 0; 
-            padding: 0; 
-        }
-        .footer-col a { 
-            text-decoration: none; 
-            color: inherit; 
-            transition: 0.3s; 
-        }
-        .footer-col a:hover { 
-            color: var(--peach-bg); 
-            text-decoration: underline; 
-        }
-
-        /* --- Responsive --- */
-        @media (max-width: 900px) {
-            .about-hero { flex-direction: column; text-align: center; gap: 40px; margin: 40px auto; }
-            .about-text p { text-align: center; }
-            .about-image img { box-shadow: 0px 10px 20px rgba(0,0,0,0.1); }
-        }
-    </style>
+    @media (max-width:768px) {
+      nav { flex-direction:column; gap:15px; padding:15px; background:rgba(0,0,0,0.8); }
+      .nav-links { flex-wrap:wrap; justify-content:center; gap:15px; }
+      footer { padding:40px 20px; display:flex; flex-direction:column; }
+      body { padding-top: 130px; }
+    }
+  </style>
 </head>
 <body>
 
-    <nav>
-        <a href="index.html" class="logo">
-            <img src="logo.png" alt="Logo H-Time" style="height: 75px; width: auto; object-fit: contain; margin-top: 3px;">
+  <!-- NAVBAR IDENTIC -->
+  <nav>
+    <a href="index.html" class="logo"><img src="logo.png" alt="H-TIME Logo"></a>
+
+    <div class="nav-links">
+      <a href="index.html" data-i18n="nav_home">Acasă</a>
+      <a href="magazin.html" data-i18n="nav_shop">Magazin</a>
+      <a href="despre-noi.html" data-i18n="nav_about">Despre Noi</a>
+      <a href="echipa.html" data-i18n="nav_team">Echipa H-Time</a>
+      <a href="contact.html" data-i18n="nav_contact">Contactează-ne</a>
+    </div>
+
+    <div class="nav-icons">
+      <select id="languageSwitcher" aria-label="Selectează limba" style="background:black;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase;">
+        <option value="ro">RO</option>
+        <option value="en">EN</option>
+        <option value="fr">FR</option>
+        <option value="de">DE</option>
+        <option value="es">ES</option>
+        <option value="it">IT</option>
+      </select>
+      <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
+    </div>
+  </nav>
+
+  <!-- CONTINUT ECHIPĂ -->
+  <div class="page-header">
+    <h1 data-i18n="team_page_title">Oamenii din spatele timpului</h1>
+    <p data-i18n="team_page_desc">Faceți cunoștință cu mințile creative și pasionate care au dat viață brandului H-TIME.</p>
+  </div>
+
+  <div class="team-grid">
+    <div class="team-card">
+      <img src="valeria.png" alt="Mija Valeria" class="team-img">
+      <h2 class="team-name">Mija Valeria</h2>
+      <div class="team-role" data-i18n="role_ceo">Director General / CEO</div>
+      <p class="team-desc" data-i18n="desc_valeria">Viziunea din spatele H-TIME. Coordonează întreaga activitate a firmei de exercițiu și se asigură că estetica noastră premium prinde viață.</p>
+    </div>
+
+    <div class="team-card">
+      <img src="alexandru.png" alt="Bujor Alexandru Emanuel" class="team-img">
+      <h2 class="team-name">Bujor Alexandru</h2>
+      <div class="team-role" data-i18n="role_hr">Departament Financiar și HR</div>
+      <p class="team-desc" data-i18n="desc_alex">Inima echipei noastre și omul cifrelor. Gestionează bugetele firmei și se asigură de menținerea unui mediu de lucru excelent.</p>
+    </div>
+
+    <div class="team-card">
+      <img src="andreea.png" alt="Ifrim Andreea Claudia" class="team-img">
+      <h2 class="team-name">Ifrim Andreea</h2>
+      <div class="team-role" data-i18n="role_logistics">Dep. Achiziții și Logistică</div>
+      <p class="team-desc" data-i18n="desc_andreea">Responsabilă cu detaliile care fac diferența. Gestionează resursele pentru ca stocurile și calitatea să fie mereu la standarde înalte.</p>
+    </div>
+
+    <div class="team-card">
+      <img src="iustina.png" alt="Agavriloaie Iustina" class="team-img">
+      <h2 class="team-name">Agavriloaie Iustina</h2>
+      <div class="team-role" data-i18n="role_sales">Dep. Vânzări & Relații Clienți</div>
+      <p class="team-desc" data-i18n="desc_iustina">Ghidul tău în lumea bijuteriilor H-TIME. Se asigură că fiecare client are parte de o experiență de cumpărare impecabilă și comunicare eficientă.</p>
+    </div>
+
+    <div class="team-card">
+      <img src="denisa.png" alt="Farțade Șerban Denisa" class="team-img">
+      <h2 class="team-name">Farțade Denisa</h2>
+      <div class="team-role" data-i18n="role_pr">Departament Marketing și PR</div>
+      <p class="team-desc" data-i18n="desc_denisa">Cea care dă voce brandului. Construiește campaniile, identitatea vizuală și imaginea publică a H-TIME pentru a captiva publicul.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER IDENTIC -->
+  <footer>
+    <div class="footer-col">
+      <h2>H-TIME</h2>
+      <p class="footer-desc" data-i18n="footer_desc">Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.</p>
+      <div class="social-links">
+        <a href="#" class="social-icon-circle" title="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
         </a>
-        <div class="nav-links">
-            <a href="index.html">Acasă</a>
-            <a href="magazin.html">Magazin</a>
-            <a href="despre-noi.html">Despre Noi</a>
-            <a href="echipa.html">Echipa H-Time</a>
-            <a href="contact.html">Contactează-ne</a>
-        </div>
+        <a href="#" class="social-icon-circle" title="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="#" class="social-icon-circle" title="TikTok">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h3 data-i18n="footer_nav">NAVIGARE RAPIDĂ</h3>
+      <ul>
+        <li><a href="index.html" data-i18n="footer_home">Acasă - Pagina principală</a></li>
+        <li><a href="magazin.html" data-i18n="footer_shop">Magazin - Toate Colecțiile</a></li>
+        <li><a href="despre-noi.html" data-i18n="footer_about">Povestea Noastră</a></li>
+        <li><a href="contact.html" data-i18n="footer_contact">Contact & Suport</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h3 data-i18n="footer_info">INFORMAȚII & POLITICI</h3>
+      <ul>
+        <li><a href="#" data-i18n="footer_terms">Termeni și Condiții</a></li>
+        <li><a href="#" data-i18n="footer_privacy">Politică de Confidențialitate</a></li>
+        <li><a href="#" data-i18n="footer_delivery">Politică de Livrare</a></li>
+        <li><a href="#" data-i18n="footer_return">Politică de Retur (14 zile)</a></li>
+        <li><a href="#" data-i18n="footer_care">Îngrijirea Bijuteriilor</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h3 data-i18n="footer_consumer">PROTECȚIA CONSUMATORULUI</h3>
+      <div>
+        <a href="https://anpc.ro/ce-este-sal/" target="_blank">
+          <img src="https://ro.pandora.net/mobify/bundle/1108/static/img/SAL-PICTOGRAMA.png?app=pdp" alt="ANPC SAL" class="anpc-img">
+        </a>
+        <a href="https://ec.europa.eu/consumers/odr" target="_blank">
+          <img src="https://ro.pandora.net/mobify/bundle/1108/static/img/pictogramaSOL.png?app=pdp" alt="ANPC SOL" class="anpc-img">
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">© 2024 - 2026 H-TIME Luxury Experience. Toate drepturile sunt rezervate.</div>
+  </footer>
+
+  <!-- SCRIPTURI: Traduceri, Switcher Limbă & Actualizare Coș -->
+  <script>
+    function updateCartCount() {
+      let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+      const cartBtn = document.getElementById('cart-nav-btn');
+      if (cartBtn) {
+        cartBtn.innerText = `Cart (${cart.length})`;
+      }
+    }
+
+    const translations = {
+      ro: {
+        title: "Echipa | H-TIME",
+        nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne",
         
-        <div class="nav-icons">
-            <a href="#">Login</a>
-            <a href="#" class="social-icon" title="Instagram">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                </svg>
-            </a>
-            <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
-        </div>
-    </nav>
+        team_page_title: "Oamenii din spatele timpului",
+        team_page_desc: "Faceți cunoștință cu mințile creative și pasionate care au dat viață brandului H-TIME.",
+        role_ceo: "Director General / CEO",
+        desc_valeria: "Viziunea din spatele H-TIME. Coordonează întreaga activitate a firmei de exercițiu și se asigură că estetica noastră premium prinde viață.",
+        role_hr: "Departament Financiar și HR",
+        desc_alex: "Inima echipei noastre și omul cifrelor. Gestionează bugetele firmei și se asigură de menținerea unui mediu de lucru excelent.",
+        role_logistics: "Dep. Achiziții și Logistică",
+        desc_andreea: "Responsabilă cu detaliile care fac diferența. Gestionează resursele pentru ca stocurile și calitatea să fie mereu la standarde înalte.",
+        role_sales: "Dep. Vânzări & Relații Clienți",
+        desc_iustina: "Ghidul tău în lumea bijuteriilor H-TIME. Se asigură că fiecare client are parte de o experiență de cumpărare impecabilă și comunicare eficientă.",
+        role_pr: "Departament Marketing și PR",
+        desc_denisa: "Cea care dă voce brandului. Construiește campaniile, identitatea vizuală și imaginea publică a H-TIME pentru a captiva publicul.",
 
-    <section class="about-hero">
-        <div class="about-text">
-            <h1>Cine<br>Suntem<br>Noi?</h1>
-            <p>Firma de exercițiu <strong>H-TIME</strong> a luat naștere din pasiunea pentru frumos și dorința de a capta esența timpului.</p>
-            <p>Cu o viziune ce îmbină mitologia greacă cu estetica modernă, H-TIME își propune să îmbogățească lumea accesoriilor cu un strop de rafinament mitologic și să reamintească oricărui client că momentul merită celebrat și prețuit.</p>
-        </div>
-        <div class="about-image">
-            <img src="echipa.png" alt="Bijuterie H-TIME">
-        </div>
-    </section>
-
-    <section class="video-section">
-        <h2>Descoperă Povestea Noastră</h2>
-        <p>Apasă play și intră în universul H-TIME, unde fiecare secundă capătă valoare prin eleganță și rafinament.</p>
+        footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul.",
+        footer_nav: "NAVIGARE RAPIDĂ", footer_home: "Acasă - Pagina principală", footer_shop: "Magazin - Toate Colecțiile",
+        footer_about: "Povestea Noastră", footer_contact: "Contact & Suport", footer_info: "INFORMAȚII & POLITICI",
+        footer_terms: "Termeni și Condiții", footer_privacy: "Politică de Confidențialitate", footer_delivery: "Politică de Livrare",
+        footer_return: "Politică de Retur (14 zile)", footer_care: "Îngrijirea Bijuteriilor", footer_consumer: "PROTECȚIA CONSUMATORULUI"
+      },
+      en: {
+        title: "Team | H-TIME",
+        nav_home: "Home", nav_shop: "Shop", nav_about: "About Us", nav_team: "H-Time Team", nav_contact: "Contact Us",
         
-        <div class="video-container">
-            <video controls poster="logo.png">
-                <source src="video.mp4" type="video/mp4">
-                Browserul tău nu suportă redarea videoclipurilor.
-            </video>
-        </div>
-    </section>
+        team_page_title: "The people behind the time",
+        team_page_desc: "Meet the creative and passionate minds that brought the H-TIME brand to life.",
+        role_ceo: "General Manager / CEO",
+        desc_valeria: "The vision behind H-TIME. She coordinates the entire activity of the practice firm and ensures our premium aesthetic comes to life.",
+        role_hr: "Finance & HR Department",
+        desc_alex: "The heart of our team and the numbers guy. Manages the firm's budgets and ensures an excellent working environment.",
+        role_logistics: "Purchasing & Logistics",
+        desc_andreea: "Responsible for the details that make a difference. Manages resources so that stock and quality are always at high standards.",
+        role_sales: "Sales & Customer Relations",
+        desc_iustina: "Your guide in the world of H-TIME jewelry. Ensures every customer enjoys a flawless shopping experience and effective communication.",
+        role_pr: "Marketing & PR Department",
+        desc_denisa: "The voice of the brand. Builds campaigns, visual identity, and H-TIME's public image to captivate the audience.",
 
-     <footer>
-        <div class="footer-col">
-            <h2>H-TIME</h2>
-            <p style="margin-top: 10px;">Copyright © 2026 H-TIME FE.</p>
-        </div>
-        <div class="footer-col">
-            <h3>LINK-URI UTILE</h3>
-            <ul>
-                <li><a href="termeni.html">Termeni și condiții</a></li>
-                <li><a href="confidentialitate.html">Politica de confidențialitate</a></li>
-                <li><a href="https://anpc.ro/" target="_blank">ANPC</a></li>
-                <li><a href="https://ec.europa.eu/consumers/odr" target="_blank">ANPC-SAL</a></li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h3>LOCATION</h3>
-            <p>Strada Milcov 18A, Iași<br>700259</p>
-        </div>
-        <div class="footer-col">
-            <h3>CONTACT</h3>
-            <p>h.time.business@gmail.com</p>
-        </div>
-    </footer>
+        footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement.",
+        footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections",
+        footer_about: "Our Story", footer_contact: "Contact & Support", footer_info: "INFORMATION & POLICIES",
+        footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_delivery: "Delivery Policy",
+        footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care", footer_consumer: "CONSUMER PROTECTION"
+      },
+      fr: {
+        title: "Équipe | H-TIME",
+        nav_home: "Accueil", nav_shop: "Boutique", nav_about: "À propos", nav_team: "Équipe H-Time", nav_contact: "Contactez-nous",
+        team_page_title: "Les personnes derrière le temps",
+        team_page_desc: "Rencontrez les esprits créatifs et passionnés qui ont donné vie à la marque H-TIME.",
+        role_ceo: "Directeur Général / PDG",
+        desc_valeria: "La vision derrière H-TIME. Elle coordonne toute l'activité et veille à ce que notre esthétique premium prenne vie.",
+        role_hr: "Département Finances et RH",
+        desc_alex: "Le cœur de notre équipe et l'homme des chiffres. Gère les budgets de l'entreprise et assure un excellent environnement de travail.",
+        role_logistics: "Achats et Logistique",
+        desc_andreea: "Responsable des détails qui font la différence. Gère les ressources pour que la qualité soit toujours au rendez-vous.",
+        role_sales: "Ventes et Relations Clients",
+        desc_iustina: "Votre guide dans le monde H-TIME. S'assure que chaque client bénéficie d'une expérience d'achat impeccable.",
+        role_pr: "Département Marketing et RP",
+        desc_denisa: "Celle qui donne voix à la marque. Construit les campagnes, l'identité visuelle et l'image publique de H-TIME.",
+        footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe dédiée à ceux qui apprécient le raffinement.",
+        footer_nav: "NAVIGATION RAPIDE", footer_home: "Accueil - Page principale", footer_shop: "Boutique - Toutes les collections",
+        footer_about: "Notre histoire", footer_contact: "Contact & Support", footer_info: "INFORMATIONS & POLITIQUES",
+        footer_terms: "Conditions générales", footer_privacy: "Politique de confidentialité", footer_delivery: "Politique de livraison",
+        footer_return: "Politique de retour (14 jours)", footer_care: "Entretien des bijoux", footer_consumer: "PROTECTION DU CONSUMATEUR"
+      },
+      de: {
+        title: "Team | H-TIME",
+        nav_home: "Startseite", nav_shop: "Shop", nav_about: "Über uns", nav_team: "H-Time Team", nav_contact: "Kontakt",
+        team_page_title: "Die Menschen hinter der Zeit",
+        team_page_desc: "Lernen Sie die kreativen und leidenschaftlichen Köpfe kennen, die H-TIME zum Leben erweckt haben.",
+        role_ceo: "Geschäftsführer / CEO",
+        desc_valeria: "Die Vision hinter H-TIME. Sie koordiniert die gesamte Aktivität und sorgt dafür, dass unsere Premium-Ästhetik lebendig wird.",
+        role_hr: "Finanzen & HR-Abteilung",
+        desc_alex: "Das Herz unseres Teams und der Zahlenmensch. Verwaltet die Budgets und sorgt für ein hervorragendes Arbeitsumfeld.",
+        role_logistics: "Einkauf & Logistik",
+        desc_andreea: "Verantwortlich für die Details. Verwaltet Ressourcen, damit Qualität und Bestand immer auf hohem Niveau sind.",
+        role_sales: "Verkauf & Kundenbeziehungen",
+        desc_iustina: "Ihr Guide in der H-TIME Welt. Sorgt dafür, dass jeder Kunde ein makelloses Einkaufserlebnis hat.",
+        role_pr: "Marketing & PR-Abteilung",
+        desc_denisa: "Die Stimme der Marke. Entwickelt Kampagnen, visuelle Identität und das öffentliche Image von H-TIME.",
+        footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique für Liebhaber von Raffinesse.",
+        footer_nav: "SCHNELLNAVIGATION", footer_home: "Startseite - Hauptseite", footer_shop: "Shop - Alle Kollektionen",
+        footer_about: "Unsere Geschichte", footer_contact: "Kontakt & Support", footer_info: "INFORMATIONEN & RICHTLINIEN",
+        footer_terms: "Allgemeine Geschäftsbedingungen", footer_privacy: "Datenschutzrichtlinie", footer_delivery: "Lieferbedingungen",
+        footer_return: "Rückgaberecht (14 Tage)", footer_care: "Schmuckpflege", footer_consumer: "VERBRAUCHERSCHUTZ"
+      },
+      es: {
+        title: "Equipo | H-TIME",
+        nav_home: "Inicio", nav_shop: "Tienda", nav_about: "Sobre Nosotros", nav_team: "Equipo H-Time", nav_contact: "Contáctanos",
+        team_page_title: "Las personas detrás del tiempo",
+        team_page_desc: "Conoce a las mentes creativas y apasionadas que dieron vida a la marca H-TIME.",
+        role_ceo: "Director General / CEO",
+        desc_valeria: "La visión detrás de H-TIME. Coordina toda la actividad y asegura que nuestra estética premium cobre vida.",
+        role_hr: "Departamento de Finanzas y RRHH",
+        desc_alex: "El corazón de nuestro equipo y el hombre de los números. Gestiona los presupuestos y garantiza un excelente ambiente.",
+        role_logistics: "Compras y Logística",
+        desc_andreea: "Responsable de los detalles que marcan la diferencia. Gestiona los recursos para asegurar altos estándares.",
+        role_sales: "Ventas y Relaciones con Clientes",
+        desc_iustina: "Tu guía en el mundo de H-TIME. Se asegura de que cada cliente tenga una experiencia de compra impecable.",
+        role_pr: "Departamento de Marketing y RR.PP.",
+        desc_denisa: "La voz de la marca. Construye campañas, identidad visual y la imagen pública de H-TIME.",
+        footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo dedicada a quienes aprecian el refinamiento.",
+        footer_nav: "NAVEGACIÓN RÁPIDA", footer_home: "Inicio - Página principal", footer_shop: "Tienda - Todas las colecciones",
+        footer_about: "Nuestra historia", footer_contact: "Contacto & Soporte", footer_info: "INFORMACIÓN & POLÍTICAS",
+        footer_terms: "Términos y condiciones", footer_privacy: "Política de privacidad", footer_delivery: "Política de entrega",
+        footer_return: "Política de devolución (14 días)", footer_care: "Cuidado de las joyas", footer_consumer: "PROTECCIÓN AL CONSUMIDOR"
+      },
+      it: {
+        title: "Team | H-TIME",
+        nav_home: "Home", nav_shop: "Negozio", nav_about: "Chi Siamo", nav_team: "Team H-Time", nav_contact: "Contattaci",
+        team_page_title: "Le persone dietro il tempo",
+        team_page_desc: "Incontra le menti creative e appassionate che hanno dato vita al marchio H-TIME.",
+        role_ceo: "Direttore Generale / CEO",
+        desc_valeria: "La visione dietro H-TIME. Coordina l'intera attività e fa in modo che la nostra estetica premium prenda vita.",
+        role_hr: "Dipartimento Finanze e HR",
+        desc_alex: "Il cuore del nostro team e l'uomo dei numeri. Gestisce i budget e garantisce un ambiente di lavoro eccellente.",
+        role_logistics: "Acquisti e Logistica",
+        desc_andreea: "Responsabile dei dettagli che fanno la differenza. Gestisce le risorse affinché la qualità sia sempre al top.",
+        role_sales: "Vendite e Relazioni con i Clienti",
+        desc_iustina: "La tua guida nel mondo H-TIME. Assicura che ogni cliente abbia un'esperienza di acquisto impeccabile.",
+        role_pr: "Dipartimento Marketing e PR",
+        desc_denisa: "La voce del marchio. Costruisce campagne, identità visiva e l'immagine pubblica di H-TIME.",
+        footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso dedicata a chi apprezza la raffinatezza.",
+        footer_nav: "NAVIGAZIONE RAPIDA", footer_home: "Home - Pagina principale", footer_shop: "Negozio - Tutte le collezioni",
+        footer_about: "La nostra storia", footer_contact: "Contatto & Supporto", footer_info: "INFORMAZIONI & POLITICHE",
+        footer_terms: "Termini e condizioni", footer_privacy: "Informativa sulla privacy", footer_delivery: "Politica di consegna",
+        footer_return: "Politica di reso (14 giorni)", footer_care: "Cura dei gioielli", footer_consumer: "PROTEZIONE DEL CONSUMATORE"
+      }
+    };
 
-    <script>
-        // SCRIPT PENTRU CITIREA COȘULUI DIN MEMORIE (Standardizat)
-        function updateCartCount() {
-            let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
-            const cartBtn = document.getElementById('cart-nav-btn');
-            if (cartBtn) {
-                cartBtn.innerText = `Cart (${cart.length})`;
-            }
-        }
+    function applyTranslations(lang) {
+      const dict = translations[lang] || translations.ro;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (!key) return;
+        if (dict[key]) el.innerHTML = dict[key];
+      });
+      if (dict.title) document.title = dict.title;
+    }
 
-        // Rulăm funcția imediat cum se încarcă pagina
-        document.addEventListener('DOMContentLoaded', updateCartCount);
-    </script>
+    document.addEventListener('DOMContentLoaded', () => {
+      updateCartCount();
+      
+      const switcher = document.getElementById('languageSwitcher');
+      const saved = localStorage.getItem('htime_lang') || 'ro';
+      if (switcher) {
+        switcher.value = saved;
+      }
+      applyTranslations(saved);
+      
+      if (switcher) {
+        switcher.addEventListener('change', () => {
+          const lang = switcher.value;
+          localStorage.setItem('htime_lang', lang);
+          applyTranslations(lang);
+        });
+      }
+    });
+  </script>
 </body>
 </html>
