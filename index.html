@@ -71,7 +71,7 @@
       background-size:cover; background-position:center; background-repeat:no-repeat; padding-bottom:50px;
     }
     
-    /* ===== ANIMAȚII TITLU H-TIME ===== */
+   /* ===== ANIMAȚII TITLU H-TIME FARA GLIDE ===== */
     .hero-title-container {
       position: relative;
       display: inline-block;
@@ -86,43 +86,11 @@
 
     .hero-text-base {
       position: relative;
-      z-index: 2; /* Trebuie sa fie peste border */
+      z-index: 2; /* Textul sta deasupra border-ului */
       text-shadow: 0px 10px 30px rgba(0,0,0,0.5);
     }
 
-    /* Straturile de Glide (Dreapta -> Stanga la -45deg) - Ruleaza doar o data */
-    .hero-title-container::before,
-    .hero-title-container::after {
-      content: attr(data-text);
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      z-index: 3;
-      pointer-events: none;
-      background-size: 300% 100%;
-      opacity: 0; 
-    }
-
-    /* 1. Glide Peach */
-    .hero-title-container::before {
-      background-image: linear-gradient(-45deg, transparent 40%, var(--peach) 50%, transparent 60%);
-      animation: glideRightToLeft 1.5s ease-in-out forwards;
-    }
-
-    /* 2. Glide Pink (urmeaza imediat dupa cel peach) */
-    .hero-title-container::after {
-      background-image: linear-gradient(-45deg, transparent 40%, var(--pink) 50%, transparent 60%);
-      animation: glideRightToLeft 1.5s ease-in-out 1s forwards;
-    }
-
-    @keyframes glideRightToLeft {
-      0% { background-position: 200% center; opacity: 1; }
-      80% { opacity: 1; }
-      100% { background-position: -100% center; opacity: 0; }
-    }
-
-    /* 3. Border Gradient - Apare si dispare o singura data, in spatele textului */
+    /* Border Gradient care apare și dispare o singură dată (fara fade) */
     .hero-title-stroke {
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -133,15 +101,14 @@
       background-size: 200% auto;
       -webkit-background-clip: text;
       opacity: 0;
-      /* Ruleaza DOAR O DATA dupa ce se termina ambele glide-uri */
-      animation: fadeStrokeOnce 3.5s ease-in-out 2.5s forwards;
+      animation: textGradientMove 4s linear infinite, fadeStrokeOnce 3.5s ease-in-out 0.5s forwards;
       pointer-events: none;
     }
 
     @keyframes fadeStrokeOnce {
-      0% { opacity: 0; background-position: 0% 50%; }
-      50% { opacity: 1; background-position: 100% 50%; }
-      100% { opacity: 0; background-position: 200% 50%; }
+      0% { opacity: 0; }
+      50% { opacity: 1; }
+      100% { opacity: 0; } /* Ramane invizibil la final */
     }
     /* ================================= */
 
