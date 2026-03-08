@@ -359,6 +359,28 @@
   </footer>
 
   <!-- SCRIPTURI: Traduceri, Switcher Limbă, Actualizare Coș & Animații -->
+  <script src="script.js"></script>
+  <script>
+    // --- Logică Animații Scroll ---
+    // --- Logică Coș ---
+    function updateCartCount() {
+      // Prioritizeaza functia globala pentru consistenta
+      if (typeof actualizeazaNumarCos === 'function') {
+        actualizeazaNumarCos();
+      } else {
+        let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+        // Numaram cantitatea (qty), nu doar lungimea array-ului
+        let count = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+        const cartBtn = document.getElementById('cart-nav-btn');
+        if (cartBtn) {
+          cartBtn.innerText = `Cart (${count})`;
+        }
+      }
+    }
+
+
+  
+  <!-- SCRIPTURI: Traduceri, Switcher Limbă, Actualizare Coș & Animații -->
   <script>
     // --- Logică Animații Scroll ---
     document.addEventListener("DOMContentLoaded", function() {
@@ -381,15 +403,6 @@
         observer.observe(el);
       });
     });
-
-    // --- Logică Coș ---
-    function updateCartCount() {
-      let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
-      const cartBtn = document.getElementById('cart-nav-btn');
-      if (cartBtn) {
-        cartBtn.innerText = `Cart (${cart.length})`;
-      }
-    }
 
     // --- Dicționar Traduceri ---
     const translations = {
