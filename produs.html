@@ -71,6 +71,7 @@
       font-family: 'Space Grotesk', sans-serif;
     }
 
+    /* FIX: Fortare crop 4:3 pentru imagini si functionalitate carusel */
     .product-image-col {
       flex: 1;
       border-radius: 16px;
@@ -78,13 +79,75 @@
       background: white;
       box-shadow: 0 10px 30px rgba(0,0,0,0.05);
       position: relative;
+      aspect-ratio: 4 / 3; /* Crop automat la 4:3 */
     }
-    .product-image-col img {
+
+    .slider-wrapper {
       width: 100%;
-      height: auto;
-      object-fit: cover;
-      display: block;
+      height: 100%;
+      position: relative;
     }
+    .slider-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Asigura umplerea crop-ului fara a distorsiona */
+      display: none;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .slider-img.active {
+      display: block;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Butoane carusel */
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.7);
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      z-index: 10;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .slider-btn:hover { background: white; color: var(--peach); transform: translateY(-50%) scale(1.1); }
+    .slider-btn.prev { left: 15px; }
+    .slider-btn.next { right: 15px; }
+
+    /* Puncte carusel */
+    .slider-dots {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 3px rgba(0,0,0,0.3);
+    }
+    .dot.active { background: white; transform: scale(1.2); }
 
     .product-info-col {
       flex: 1;
@@ -219,7 +282,7 @@
     </div>
   </nav>
 
-  <!-- SECTIUNE PRODUS (Incarcat dinamic din JS) -->
+  <!-- SECTIUNE PRODUS -->
   <main class="product-container" id="product-details">
     <div style="width: 100%; text-align: center; padding: 50px;">
         <p>Se încarcă detaliile produsului...</p>
@@ -269,7 +332,10 @@
   <script src="produse.js"></script>
   <script src="script.js"></script>
   <script>
-    // Configuratie valutara
+    // Variabile globale pentru slider
+    window.currentImageIndex = 0;
+    window.totalImages = 0;
+
     const currencyConfig = {
       ro: { symbol: 'Lei', rate: 4.97, position: 'right' },
       en: { symbol: '$', rate: 1.08, position: 'left' },
@@ -312,6 +378,30 @@
       }); 
     }
 
+    // Functii pentru Caruselul de imagini
+    window.goToImage = function(index) {
+        const imgs = document.querySelectorAll('.slider-img');
+        const dots = document.querySelectorAll('.dot');
+        
+        if (imgs.length === 0) return;
+
+        imgs[window.currentImageIndex].classList.remove('active');
+        if(dots.length) dots[window.currentImageIndex].classList.remove('active');
+        
+        window.currentImageIndex = index;
+        
+        imgs[window.currentImageIndex].classList.add('active');
+        if(dots.length) dots[window.currentImageIndex].classList.add('active');
+    };
+
+    window.prevImage = function() {
+        goToImage((window.currentImageIndex - 1 + window.totalImages) % window.totalImages);
+    };
+
+    window.nextImage = function() {
+        goToImage((window.currentImageIndex + 1) % window.totalImages);
+    };
+
     function renderProduct() {
       const currentLang = localStorage.getItem('htime_lang') || 'ro';
       const urlParams = new URLSearchParams(window.location.search);
@@ -332,9 +422,36 @@
             ? `<span class="old-price">${pretVechi}</span> <span>${pretNou}</span>`
             : `<span>${pretNou}</span>`;
 
+      // Logica generare slider imagini
+      let imaginiSursa = [];
+      if (product.imagini && product.imagini.length > 0) {
+          imaginiSursa = product.imagini;
+      } else {
+          imaginiSursa = [product.imagine]; // Fallback daca exista doar poza principala
+      }
+      
+      window.totalImages = imaginiSursa.length;
+      window.currentImageIndex = 0;
+
+      let sliderHTML = `<div class="slider-wrapper">`;
+      imaginiSursa.forEach((src, idx) => {
+          sliderHTML += `<img src="${src}" class="slider-img ${idx === 0 ? 'active' : ''}" alt="${product.nume} - poza ${idx+1}">`;
+      });
+
+      if (imaginiSursa.length > 1) {
+          sliderHTML += `
+              <button onclick="prevImage()" class="slider-btn prev">❮</button>
+              <button onclick="nextImage()" class="slider-btn next">❯</button>
+              <div class="slider-dots">
+                  ${imaginiSursa.map((_, idx) => `<span class="dot ${idx === 0 ? 'active' : ''}" onclick="goToImage(${idx})"></span>`).join('')}
+              </div>
+          `;
+      }
+      sliderHTML += `</div>`;
+
       container.innerHTML = `
         <div class="product-image-col">
-            <img src="${product.imagine}" alt="${product.nume}">
+            ${sliderHTML}
         </div>
         <div class="product-info-col">
             <a href="magazin.html" class="back-link" data-i18n="btn_back">← Înapoi la Magazin</a>
@@ -347,7 +464,6 @@
         </div>
       `;
 
-      // Re-aplicam traducerile pentru elementele statice generate acum (butonul inapoi, adauga)
       applyTranslations(currentLang);
     }
 
@@ -358,7 +474,7 @@
           switcher.addEventListener('change', () => { 
               localStorage.setItem('htime_lang', switcher.value); 
               applyTranslations(switcher.value); 
-              renderProduct(); // Randam din nou produsul pentru a schimba pretul/numele
+              renderProduct(); 
           }); 
       }
       
