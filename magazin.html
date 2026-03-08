@@ -466,6 +466,7 @@
   </footer>
 
   <script src="produse.js"></script>
+  <script src="script.js"></script>
   <script>
     let state = {
       category: 'all',
@@ -628,9 +629,16 @@
     }
 
     function updateCartCounter() {
-      let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
-      const cartBtn = document.getElementById('cart-nav-btn');
-      if(cartBtn) cartBtn.innerText = `Cart (${cart.length})`;
+      // Prioritizeaza functia globala pentru consistenta
+      if (typeof actualizeazaNumarCos === 'function') {
+        actualizeazaNumarCos();
+      } else {
+        let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+        // Calculam cantitatea totala in loc sa numaram liniile array-ului
+        let count = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+        const cartBtn = document.getElementById('cart-nav-btn');
+        if(cartBtn) cartBtn.innerText = `Cart (${count})`;
+      }
     }
 
     const translations = {
