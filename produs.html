@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Detalii Produs | H-TIME</title>
+  <title>Produs | H-TIME</title>
   <link rel="icon" href="logo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,7 @@
 
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       font-weight: 300;
       background-color: var(--light-bg);
       color: var(--dark);
@@ -29,11 +29,7 @@
       min-height: 100vh;
       padding-top: 100px;
     }
-
-    @keyframes textGradientMove { 
-      0% { background-position: 0% 50%; } 
-      100% { background-position: 200% 50%; } 
-    }
+    h1,h2,h3,h4 { font-weight: normal; }
 
     /* ================= NAVIGAȚIE ================= */
     nav {
@@ -44,7 +40,6 @@
       z-index:1000;
       background-color: var(--dark);
       border-bottom: 1px solid rgba(255,255,255,0.1);
-      font-family: 'Montserrat', sans-serif;
     }
     .logo img { height:75px; }
     .nav-links { display:flex; gap:30px; }
@@ -60,142 +55,142 @@
     .cart-btn {
       border:1px solid white; padding:8px 18px; border-radius:30px;
       display:inline-flex; align-items:center; justify-content:center; transition: all .3s;
+      color: white; text-decoration: none; cursor: pointer;
     }
-    .cart-btn:hover { border-color: var(--peach); }
+    .cart-btn:hover { border-color: var(--peach); color: var(--peach); }
 
     /* ================= DETALII PRODUS ================= */
-    .product-wrapper {
-      display: flex;
+    .product-container {
       max-width: 1200px;
-      margin: 60px auto 100px;
+      margin: 40px auto 80px;
       padding: 0 40px;
+      display: flex;
       gap: 60px;
-      flex-grow: 1;
-      align-items: flex-start;
+      flex: 1;
+      width: 100%;
+      font-family: 'Space Grotesk', sans-serif;
     }
 
-    .product-gallery {
+    .product-image-col {
       flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    
-    .main-image-container {
-      width: 100%;
-      aspect-ratio: 1/1;
-      border-radius: 12px;
+      border-radius: 16px;
       overflow: hidden;
       background: white;
       box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      position: relative;
     }
-
-    .main-image-container img {
+    .product-image-col img {
       width: 100%;
-      height: 100%;
+      height: auto;
       object-fit: cover;
-      transition: transform 0.5s ease;
+      display: block;
     }
 
-    .thumbnail-list { display: flex; gap: 15px; }
-    .thumb-item {
-      width: 80px; height: 80px;
-      border-radius: 8px; overflow: hidden;
-      cursor: pointer; border: 2px solid transparent; transition: 0.3s;
+    .product-info-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
-    .thumb-item.active { border-color: var(--dark); }
-    .thumb-item img { width: 100%; height: 100%; object-fit: cover; }
 
-    .product-info { flex: 1; display: flex; flex-direction: column; }
-
-    .breadcrumb {
-      font-size: 0.85rem; color: #888;
-      margin-bottom: 20px; text-transform: uppercase;
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #777;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 0.8rem;
       letter-spacing: 1px;
+      font-weight: 600;
+      transition: 0.3s;
     }
-    .breadcrumb a { color: #888; text-decoration: none; }
-    .breadcrumb a:hover { color: var(--dark); }
+    .back-link:hover { color: var(--dark); }
 
     .product-title {
       font-family: 'Syncopate', sans-serif;
+      font-size: 2.2rem;
       font-weight: 700;
-      font-size: clamp(1.8rem, 4vw, 2.5rem);
       color: var(--dark);
-      line-height: 1.2;
       margin-bottom: 15px;
+      line-height: 1.2;
+      text-transform: uppercase;
     }
 
-    .product-price-box {
-      display: flex; align-items: center;
-      gap: 15px; margin-bottom: 30px;
+    .product-price {
+      font-size: 1.5rem;
       font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
     }
-    .price-current { font-size: 1.8rem; color: var(--dark); }
-    .price-old { font-size: 1.2rem; color: #aaa; text-decoration: line-through; }
+    .old-price {
+      text-decoration: line-through;
+      color: #aaa;
+      font-size: 1.2rem;
+      font-weight: 400;
+    }
 
-    .sale-badge {
+    .product-desc {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 40px;
+    }
+
+    .btn-add-cart {
+      background: var(--dark);
+      color: white;
+      border: none;
+      padding: 18px 30px;
+      border-radius: 40px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: 0.3s;
+      width: 100%;
+      max-width: 300px;
+      text-align: center;
+    }
+    .btn-add-cart:hover {
       background: linear-gradient(to right, var(--pink), var(--peach));
-      color: black; padding: 5px 12px; border-radius: 4px;
-      font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+      color: black;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
-
-    .product-description {
-      font-size: 1.05rem; line-height: 1.8;
-      color: #444; margin-bottom: 40px;
-      padding-top: 30px; border-top: 1px solid #ddd;
-    }
-
-    .add-to-cart-big-btn {
-      background: var(--dark); color: white; border: none;
-      padding: 18px 40px; font-family: 'Space Grotesk', sans-serif;
-      font-size: 1rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 2px; border-radius: 40px; cursor: pointer;
-      transition: all 0.3s; display: inline-flex; align-items: center;
-      justify-content: center; gap: 10px; max-width: 350px;
-    }
-    .add-to-cart-big-btn:hover {
-      background: linear-gradient(to right, var(--pink), var(--peach));
-      color: black; transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
-
-    .benefits-list { margin-top: 40px; list-style: none; }
-    .benefits-list li {
-      display: flex; align-items: center; gap: 10px;
-      font-size: 0.95rem; font-weight: 500; color: #666; margin-bottom: 12px;
-    }
-    .benefits-list svg { color: var(--peach); }
-
-    /* TOAST */
-    .toast-notification {
-      position: fixed; bottom: -100px; left: 50%;
-      transform: translateX(-50%); background: var(--dark);
-      color: white; padding: 15px 30px; border-radius: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      z-index: 9999; display: flex; align-items: center; gap: 10px;
-    }
-    .toast-notification.show { bottom: 40px; }
 
     /* ================= FOOTER ================= */
     footer { 
-      background-color:#0b0b0b; padding:80px 50px 30px;
-      display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-      gap:40px; color:#fff; border-top:1px solid #222;
-      font-family: 'Montserrat', sans-serif;
+      background-color:#0b0b0b; 
+      padding:80px 50px 30px; 
+      display:grid; 
+      grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); 
+      gap:40px; 
+      color:#fff; 
+      border-top:1px solid #222; 
     }
     .footer-col h2 { font-family:'DM Serif Display',serif; color:var(--peach); font-size:2.2rem; margin-bottom:20px; }
     .footer-col h3 { font-size:1rem; font-weight:700; margin-bottom:30px; letter-spacing:1px; text-transform:uppercase; color:#fff; }
+    .footer-desc { font-size:0.9rem; color:#999; line-height:1.8; margin-bottom:30px; }
+    .social-links { display:flex; gap:15px; }
+    .social-icon-circle { width:40px; height:40px; background:#222; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; text-decoration:none; transition:.3s; }
+    .social-icon-circle:hover { background: linear-gradient(to right, var(--pink), var(--peach)); color:black; transform:translateY(-3px); }
+    .footer-col ul { list-style:none; padding:0; display:flex; flex-direction:column; gap:15px; }
+    .footer-col ul a { text-decoration:none; color:#999; font-size:0.9rem; transition:.3s; display:inline-block; }
+    .footer-col ul a:hover { color:var(--peach); transform:translateX(5px); }
     .footer-bottom { grid-column:1 / -1; text-align:center; padding-top:40px; border-top:1px solid #222; color:#555; font-size:0.8rem; margin-top:20px; }
     .anpc-img { max-width:180px; width:100%; height:auto; display:block; margin-bottom:15px; transition:opacity .3s; }
     .anpc-img:hover { opacity:0.7; }
 
-    @media (max-width: 992px) { .product-wrapper { flex-direction: column; } }
-    @media (max-width:768px) {
+    @media (max-width:900px) { 
+      .product-container { flex-direction: column; padding: 0 20px; gap: 30px; }
       nav { flex-direction:column; gap:15px; padding:15px; background:rgba(0,0,0,0.8); }
-      .nav-links { flex-wrap:wrap; justify-content:center; gap:15px; }
-      footer { padding:40px 20px; display:flex; flex-direction:column; }
       body { padding-top: 130px; }
+      footer { padding: 40px 20px; }
+      .btn-add-cart { max-width: 100%; }
     }
   </style>
 </head>
@@ -212,7 +207,7 @@
       <a href="contact.html" data-i18n="nav_contact">Contactează-ne</a>
     </div>
     <div class="nav-icons">
-      <select id="languageSwitcher" style="background:black;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase; font-family: 'Montserrat', sans-serif;">
+      <select id="languageSwitcher" style="background:black;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase; font-family:'Montserrat';">
         <option value="ro">RO</option>
         <option value="en">EN</option>
         <option value="fr">FR</option>
@@ -220,28 +215,61 @@
         <option value="es">ES</option>
         <option value="it">IT</option>
       </select>
-      <a href="checkout.html" id="cart-nav-btn" class="cart-btn" style="font-family: 'Montserrat', sans-serif;">Cart (0)</a>
+      <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
     </div>
   </nav>
 
-  <div class="product-wrapper" id="product-container"></div>
+  <!-- SECTIUNE PRODUS (Incarcat dinamic din JS) -->
+  <main class="product-container" id="product-details">
+    <div style="width: 100%; text-align: center; padding: 50px;">
+        <p>Se încarcă detaliile produsului...</p>
+    </div>
+  </main>
 
-  <div id="toast" class="toast-notification">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--peach)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-    <span id="toast-message">Produs adăugat!</span>
-  </div>
-
+  <!-- FOOTER COMPLET -->
   <footer>
     <div class="footer-col">
       <h2>H-TIME</h2>
-      <p class="footer-desc" data-i18n="footer_desc">Lux și rafinament prin intermediul bijuteriilor și ceasurilor unice.</p>
+      <p class="footer-desc" data-i18n="footer_desc">Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.</p>
+      <div class="social-links">
+        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+      </div>
     </div>
-    <div class="footer-bottom">© 2024 - 2026 H-TIME Luxury Experience. Toate drepturile rezervate.</div>
+    <div class="footer-col">
+      <h3 data-i18n="footer_nav">NAVIGARE RAPIDĂ</h3>
+      <ul>
+        <li><a href="index.html" data-i18n="footer_home">Acasă - Pagina principală</a></li>
+        <li><a href="magazin.html" data-i18n="footer_shop">Magazin - Toate Colecțiile</a></li>
+        <li><a href="despre-noi.html" data-i18n="footer_about">Povestea Noastră</a></li>
+        <li><a href="contact.html" data-i18n="footer_contact">Contact & Suport</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3 data-i18n="footer_info">INFORMAȚII & POLITICI</h3>
+      <ul>
+        <li><a href="termeni.html" data-i18n="footer_terms">Termeni și Condiții</a></li>
+        <li><a href="confidentialitate.html" data-i18n="footer_privacy">Politică de Confidențialitate</a></li>
+        <li><a href="livrare.html" data-i18n="footer_delivery">Politică de Livrare</a></li>
+        <li><a href="retur.html" data-i18n="footer_return">Politică de Retur (14 zile)</a></li>
+        <li><a href="ingrijire.html" data-i18n="footer_care">Îngrijirea Bijuteriilor</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3 data-i18n="footer_consumer">PROTECȚIA CONSUMATORULUI</h3>
+      <div>
+        <a href="https://anpc.ro/ce-este-sal/" target="_blank"><img src="https://ro.pandora.net/mobify/bundle/1108/static/img/SAL-PICTOGRAMA.png?app=pdp" alt="ANPC SAL" class="anpc-img"></a>
+        <a href="https://ec.europa.eu/consumers/odr" target="_blank"><img src="https://ro.pandora.net/mobify/bundle/1108/static/img/pictogramaSOL.png?app=pdp" alt="ANPC SOL" class="anpc-img"></a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2024 - 2026 H-TIME Luxury Experience. Toate drepturile sunt rezervate.</div>
   </footer>
 
   <script src="produse.js"></script>
+  <script src="script.js"></script>
   <script>
-    let currentProduct = null;
+    // Configuratie valutara
     const currencyConfig = {
       ro: { symbol: 'Lei', rate: 4.97, position: 'right' },
       en: { symbol: '$', rate: 1.08, position: 'left' },
@@ -252,118 +280,93 @@
     };
 
     function formatPrice(priceEur, lang) {
-      if (!priceEur) return "";
       const config = currencyConfig[lang] || currencyConfig.ro;
-      const converted = Math.round(parseFloat(priceEur) * config.rate);
+      const converted = Math.round(priceEur * config.rate);
       return config.position === 'left' ? `${config.symbol}${converted}` : `${converted} ${config.symbol}`;
     }
 
-    // --- FUNCTIA CARE PREIA TEXTUL TRADUS ---
-    function getLocalizedField(product, field, lang) {
-      const key = lang === 'ro' ? field : `${field}_${lang}`;
-      // Cautăm în obiectul produsului cheia tradusă (ex: descriere_fr)
-      // Dacă nu există, facem fallback la versiunea RO (câmpul de bază)
-      return product[key] || product[field] || "";
+    function getLocalizedProductName(product, lang) {
+      if (lang === 'ro') return product.nume;
+      return product[`nume_${lang}`] || product.nume;
+    }
+
+    function getLocalizedDesc(product, lang) {
+        if(lang === 'ro') return product.descriere || "Descrierea nu este disponibilă.";
+        return product[`descriere_${lang}`] || product.descriere || "Description not available.";
+    }
+
+    const translations = {
+      ro: { nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne", footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul.", footer_nav: "NAVIGARE RAPIDĂ", footer_home: "Acasă - Pagina principală", footer_shop: "Magazin - Toate Colecțiile", footer_about: "Povestea Noastră", footer_contact: "Contact & Suport", footer_info: "INFORMAȚII & POLITICI", footer_terms: "Termeni și Condiții", footer_privacy: "Politică de Confidențialitate", footer_delivery: "Politică de Livrare", footer_return: "Politică de Retur (14 zile)", footer_care: "Îngrijirea Bijuteriilor", footer_consumer: "PROTECȚIA CONSUMATORULUI", btn_back: "← Înapoi la Magazin", btn_add: "Adaugă în coș" },
+      en: { nav_home: "Home", nav_shop: "Shop", nav_about: "About Us", nav_team: "H-Time Team", nav_contact: "Contact Us", footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement.", footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections", footer_about: "Our Story", footer_contact: "Contact & Support", footer_info: "INFORMATION & POLICIES", footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_delivery: "Delivery Policy", footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care", footer_consumer: "CONSUMER PROTECTION", btn_back: "← Back to Shop", btn_add: "Add to Cart" },
+      fr: { nav_home: "Accueil", nav_shop: "Boutique", nav_about: "À propos", nav_team: "Équipe H-Time", nav_contact: "Contactez-nous", footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe.", footer_nav: "NAVIGATION RAPIDE", footer_home: "Accueil - Page principale", footer_shop: "Boutique - Collections", footer_about: "Notre histoire", footer_contact: "Contact & Support", footer_info: "INFORMATIONS & POLITIQUES", footer_terms: "Conditions générales", footer_privacy: "Politique de confidentialité", footer_delivery: "Politique de livraison", footer_return: "Politique de retour", footer_care: "Entretien des bijoux", footer_consumer: "PROTECTION", btn_back: "← Retour à la boutique", btn_add: "Ajouter au panier" },
+      de: { nav_home: "Startseite", nav_shop: "Shop", nav_about: "Über uns", nav_team: "H-Time Team", nav_contact: "Kontakt", footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique.", footer_nav: "SCHNELLNAVIGATION", footer_home: "Startseite - Hauptseite", footer_shop: "Shop - Kollektionen", footer_about: "Unsere Geschichte", footer_contact: "Kontakt & Support", footer_info: "INFORMATIONEN", footer_terms: "AGB", footer_privacy: "Datenschutz", footer_delivery: "Lieferung", footer_return: "Rückgabe", footer_care: "Schmuckpflege", footer_consumer: "VERBRAUCHERSCHUTZ", btn_back: "← Zurück zum Shop", btn_add: "In den Warenkorb" },
+      es: { nav_home: "Inicio", nav_shop: "Tienda", nav_about: "Sobre Nosotros", nav_team: "Equipo H-Time", nav_contact: "Contáctanos", footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo.", footer_nav: "NAVEGACIÓN RÁPIDA", footer_home: "Inicio - Página principal", footer_shop: "Tienda - Colecciones", footer_about: "Nuestra historia", footer_contact: "Contacto", footer_info: "INFORMACIÓN", footer_terms: "Términos y condiciones", footer_privacy: "Política de privacidad", footer_delivery: "Política de entrega", footer_return: "Política de devolución", footer_care: "Cuidado de joyas", footer_consumer: "PROTECCIÓN", btn_back: "← Volver a la tienda", btn_add: "Añadir al carrito" },
+      it: { nav_home: "Home", nav_shop: "Negozio", nav_about: "Chi Siamo", nav_team: "Team H-Time", nav_contact: "Contattaci", footer_desc: "Emozioni scolpite nell'eleganza.", footer_nav: "NAVIGAZIONE RAPIDA", footer_home: "Home - Pagina principale", footer_shop: "Negozio - Collezioni", footer_about: "La nostra storia", footer_contact: "Contatto", footer_info: "INFORMAZIONI", footer_terms: "Termini e condizioni", footer_privacy: "Privacy", footer_delivery: "Consegna", footer_return: "Reso", footer_care: "Cura dei gioielli", footer_consumer: "PROTEZIONE", btn_back: "← Torna al negozio", btn_add: "Aggiungi al carrello" }
+    };
+
+    function applyTranslations(lang) { 
+      const dict = translations[lang] || translations.ro; 
+      document.querySelectorAll('[data-i18n]').forEach(el => { 
+          const key = el.getAttribute('data-i18n'); 
+          if (dict[key]) el.innerText = dict[key]; 
+      }); 
     }
 
     function renderProduct() {
       const currentLang = localStorage.getItem('htime_lang') || 'ro';
       const urlParams = new URLSearchParams(window.location.search);
-      const productId = urlParams.get('id');
+      const productId = parseInt(urlParams.get('id'));
 
-      let srcProduse = typeof produse !== 'undefined' ? produse : [];
-      currentProduct = srcProduse.find(p => p.id == productId);
+      const product = typeof produse !== 'undefined' ? produse.find(p => p.id === productId) : null;
+      const container = document.getElementById('product-details');
 
-      const container = document.getElementById('product-container');
-      if (!currentProduct) {
-        container.innerHTML = `<h2 style="text-align:center; width:100%; margin-top:50px;">Produsul nu a fost găsit.</h2>`;
-        return;
+      if (!product) {
+          container.innerHTML = `<div style="text-align:center; width:100%; padding:50px;"><h2>Produsul nu a fost găsit.</h2><a href="magazin.html" class="back-link" style="margin-top:20px;">Înapoi la magazin</a></div>`;
+          return;
       }
 
-      // Preluăm Numele și Descrierea în funcție de limba curentă
-      const nume = getLocalizedField(currentProduct, 'nume', currentLang);
-      const desc = getLocalizedField(currentProduct, 'descriere', currentLang);
+      const pretNou = formatPrice(product.pret, currentLang);
+      const pretVechi = product.pretVechi ? formatPrice(product.pretVechi, currentLang) : "";
       
-      const pretNou = formatPrice(currentProduct.pret, currentLang);
-      const pretVechi = currentProduct.pretVechi ? formatPrice(currentProduct.pretVechi, currentLang) : "";
-
-      let imagini = [currentProduct.imagine, ...(currentProduct.galerie || [])];
-      let thumbsHTML = imagini.length > 1 ? imagini.map((img, i) => `
-        <div class="thumb-item ${i === 0 ? 'active' : ''}" onclick="document.getElementById('main-image').src='${img}'; this.parentElement.querySelectorAll('.thumb-item').forEach(t=>t.classList.remove('active')); this.classList.add('active');">
-          <img src="${img}" onerror="this.src='https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=100'">
-        </div>`).join('') : "";
+      let priceHTML = product.isSale 
+            ? `<span class="old-price">${pretVechi}</span> <span>${pretNou}</span>`
+            : `<span>${pretNou}</span>`;
 
       container.innerHTML = `
-        <div class="product-gallery">
-          <div class="main-image-container"><img id="main-image" src="${imagini[0]}"></div>
-          <div class="thumbnail-list">${thumbsHTML}</div>
+        <div class="product-image-col">
+            <img src="${product.imagine}" alt="${product.nume}">
         </div>
-        <div class="product-info">
-          <div class="breadcrumb"><a href="magazin.html" data-i18n="nav_shop">Magazin</a> / ${currentProduct.categorie.toUpperCase()}</div>
-          <h1 class="product-title">${nume}</h1>
-          <div class="product-price-box">
-            <span class="price-current">${pretNou}</span>
-            ${pretVechi ? `<span class="price-old">${pretVechi}</span><span class="sale-badge">SALE</span>` : ""}
-          </div>
-          <p class="product-description">${desc}</p>
-          <button class="add-to-cart-big-btn" onclick="addToCart()">Adaugă în Coș</button>
-          
-          <ul class="benefits-list" style="margin-top: 30px;">
-             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg> <span data-i18n="prod_ben_1">Garanție premium inclusă</span></li>
-             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg> <span data-i18n="prod_ben_2">Livrare rapidă internațională</span></li>
-          </ul>
-        </div>`;
-      
-      applyInterfaceTranslations(currentLang);
+        <div class="product-info-col">
+            <a href="magazin.html" class="back-link" data-i18n="btn_back">← Înapoi la Magazin</a>
+            <h1 class="product-title">${getLocalizedProductName(product, currentLang)}</h1>
+            <div class="product-price">${priceHTML}</div>
+            <div class="product-desc">
+                ${getLocalizedDesc(product, currentLang)}
+            </div>
+            <button onclick="adaugaInCos(${product.id})" class="btn-add-cart" data-i18n="btn_add">Adaugă în coș</button>
+        </div>
+      `;
+
+      // Re-aplicam traducerile pentru elementele statice generate acum (butonul inapoi, adauga)
+      applyTranslations(currentLang);
     }
 
-    function addToCart() {
-      let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
-      cart.push(currentProduct);
-      localStorage.setItem('htimeCart', JSON.stringify(cart));
-      updateCartCounter();
-      const t = document.getElementById('toast');
-      t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 3000);
-    }
-
-    function updateCartCounter() {
-      const cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
-      const btn = document.getElementById('cart-nav-btn');
-      if(btn) btn.innerText = `Cart (${cart.length})`;
-    }
-
-    const interfaceTranslations = {
-      ro: { nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa", nav_contact: "Contact", add: "Adaugă în Coș", toast: "Produs adăugat!", prod_ben_1: "Garanție premium inclusă", prod_ben_2: "Livrare rapidă internațională" },
-      en: { nav_home: "Home", nav_shop: "Shop", nav_about: "About", nav_team: "Team", nav_contact: "Contact", add: "Add to Cart", toast: "Product added!", prod_ben_1: "Premium warranty included", prod_ben_2: "Fast international shipping" },
-      fr: { nav_home: "Accueil", nav_shop: "Boutique", nav_about: "À propos", nav_team: "Équipe", nav_contact: "Contact", add: "Ajouter au panier", toast: "Produit ajouté!", prod_ben_1: "Garantie premium incluse", prod_ben_2: "Livraison internationale rapide" },
-      de: { nav_home: "Startseite", nav_shop: "Shop", nav_about: "Über uns", nav_team: "Team", nav_contact: "Kontakt", add: "In den Warenkorb", toast: "Hinzugefügt!", prod_ben_1: "Premium-Garantie inklusive", prod_ben_2: "Schneller internationaler Versand" },
-      es: { nav_home: "Inicio", nav_shop: "Tienda", nav_about: "Nosotros", nav_team: "Equipo", nav_contact: "Contacto", add: "Añadir al Carrito", toast: "¡Producto añadido!", prod_ben_1: "Garantía premium incluida", prod_ben_2: "Envío internacional rápido" },
-      it: { nav_home: "Home", nav_shop: "Negozio", nav_about: "Chi Siamo", nav_team: "Team", nav_contact: "Contatti", add: "Aggiungi al Carrello", toast: "Prodotto aggiunto!", prod_ben_1: "Garanzia premium inclusa", prod_ben_2: "Spedizione internazionale veloce" }
-    };
-
-    function applyInterfaceTranslations(lang) {
-      const dict = interfaceTranslations[lang] || interfaceTranslations.ro;
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (dict[key]) el.innerHTML = dict[key];
-      });
-      const addBtn = document.querySelector('.add-to-cart-big-btn');
-      if(addBtn) addBtn.innerText = dict.add;
-      document.getElementById('toast-message').innerText = dict.toast;
-    }
-
-    window.onload = () => {
+    document.addEventListener('DOMContentLoaded', () => {
       const switcher = document.getElementById('languageSwitcher');
-      const saved = localStorage.getItem('htime_lang') || 'ro';
-      switcher.value = saved;
+      if(switcher) { 
+          switcher.value = localStorage.getItem('htime_lang') || 'ro'; 
+          switcher.addEventListener('change', () => { 
+              localStorage.setItem('htime_lang', switcher.value); 
+              applyTranslations(switcher.value); 
+              renderProduct(); // Randam din nou produsul pentru a schimba pretul/numele
+          }); 
+      }
+      
+      applyTranslations(localStorage.getItem('htime_lang') || 'ro');
       renderProduct();
-      updateCartCounter();
-      switcher.onchange = () => {
-        localStorage.setItem('htime_lang', switcher.value);
-        renderProduct();
-      };
-    };
+      
+      if (typeof actualizeazaNumarCos === 'function') actualizeazaNumarCos();
+    });
   </script>
 </body>
 </html>
