@@ -350,7 +350,6 @@
   <script src="produse.js"></script>
   <script src="script.js"></script>
   <script>
-    // Configurație valutară (Sincronizată cu magazin.html)
     const currencyConfig = {
       ro: { symbol: 'Lei', rate: 4.97, position: 'right' },
       en: { symbol: '$', rate: 1.08, position: 'left' },
@@ -367,26 +366,44 @@
     }
 
     /**
-     * FUNCTIA PRINCIPALA DE AFISARE A COSULUI
+     * MAIN UI UPDATE FUNCTION
+     * Groups duplicates if any and handles the rendering
      */
     function updateCartUI() {
       const currentLang = localStorage.getItem('htime_lang') || 'ro';
-      const cos = JSON.parse(localStorage.getItem('htimeCart')) || [];
+      const rawCart = JSON.parse(localStorage.getItem('htimeCart')) || [];
       const listContainer = document.getElementById('checkout-cart-list');
       
-      // Update nav counter
+      // Update nav counter via script.js global function
       if (typeof actualizeazaNumarCos === 'function') actualizeazaNumarCos();
 
       if (!listContainer) return;
 
-      if (cos.length === 0) {
+      if (rawCart.length === 0) {
         listContainer.innerHTML = `<p style="text-align:center; padding:40px; font-weight: 500;">Coșul tău este momentan gol.</p>`;
         document.getElementById('sum-subtotal').innerText = formatPrice(0, currentLang);
         document.getElementById('sum-total').innerText = formatPrice(0, currentLang);
         return;
       }
 
-      listContainer.innerHTML = cos.map((item, idx) => `
+      // GROUPING LOGIC: In case some items were added multiple times as separate entries
+      // This ensures they are displayed together
+      const groupedCart = rawCart.reduce((acc, item) => {
+        const existing = acc.find(i => i.id === item.id);
+        if (existing) {
+          existing.qty = (existing.qty || 1) + (item.qty || 1);
+        } else {
+          acc.push({ ...item });
+        }
+        return acc;
+      }, []);
+
+      // Update LocalStorage with grouped version if needed
+      if (groupedCart.length !== rawCart.length) {
+          localStorage.setItem('htimeCart', JSON.stringify(groupedCart));
+      }
+
+      listContainer.innerHTML = groupedCart.map((item, idx) => `
         <div class="cart-item">
           <div class="item-info">
             <img src="${item.imagine || 'ceas.jpg'}" alt="${item.nume}">
@@ -398,17 +415,17 @@
           <div class="item-actions">
             <span class="item-price">${formatPrice(item.pret * (item.qty || 1), currentLang)}</span>
             <div class="qty-controls">
-              <button class="qty-btn-small" onclick="schimbaCantitateLocal(${idx}, -1)">-</button>
+              <button class="qty-btn-small" onclick="schimbaCantitate(${idx}, -1)">-</button>
               <span>${item.qty || 1}</span>
-              <button class="qty-btn-small" onclick="schimbaCantitateLocal(${idx}, 1)">+</button>
+              <button class="qty-btn-small" onclick="schimbaCantitate(${idx}, 1)">+</button>
             </div>
-            <button onclick="eliminaDinCosLocal(${idx})" class="btn-remove">Șterge</button>
+            <button onclick="eliminaDinCos(${idx})" class="btn-remove">Șterge</button>
           </div>
         </div>
       `).join('');
 
-      // Calcul subtotal in Euro pentru baza, apoi conversie
-      const subtotalEur = cos.reduce((acc, item) => acc + (item.pret * (item.qty || 1)), 0);
+      // CALCULATIONS
+      const subtotalEur = groupedCart.reduce((acc, item) => acc + (item.pret * (item.qty || 1)), 0);
       const deliveryFeeLei = 5;
       const deliveryFeeEur = deliveryFeeLei / 4.97;
       
@@ -422,38 +439,12 @@
     }
 
     /**
-     * Functii locale pentru interactiune rapida
-     */
-    function schimbaCantitateLocal(idx, delta) {
-        if (typeof schimbaCantitate === 'function') {
-            schimbaCantitate(idx, delta);
-        } else {
-            let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
-            cart[idx].qty = (cart[idx].qty || 1) + delta;
-            if (cart[idx].qty <= 0) cart.splice(idx, 1);
-            localStorage.setItem('htimeCart', JSON.stringify(cart));
-            updateCartUI();
-        }
-    }
-
-    function eliminaDinCosLocal(idx) {
-        if (typeof eliminaDinCos === 'function') {
-            eliminaDinCos(idx);
-        } else {
-            let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
-            cart.splice(idx, 1);
-            localStorage.setItem('htimeCart', JSON.stringify(cart));
-            updateCartUI();
-        }
-    }
-
-    /**
-     * FINALIZARE COMANDA
+     * ORDER HANDLING
      */
     function handleOrder(e) {
       e.preventDefault();
-      const cos = JSON.parse(localStorage.getItem('htimeCart')) || [];
-      if(cos.length === 0) {
+      const cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+      if(cart.length === 0) {
           alert("Adaugă produse în coș înainte de a plasa comanda.");
           return;
       }
@@ -461,14 +452,14 @@
       const currentLang = localStorage.getItem('htime_lang') || 'ro';
       const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
 
-      // Umplem factura
+      // Fill Invoice Proforma
       document.getElementById('inv-name').innerText = document.getElementById('fname').value + " " + document.getElementById('lname').value;
       document.getElementById('inv-addr').innerText = document.getElementById('address').value;
       document.getElementById('inv-payment').innerText = paymentMethod;
       document.getElementById('inv-date').innerText = new Date().toLocaleDateString();
       document.getElementById('inv-total-val').innerText = document.getElementById('sum-total').innerText;
       
-      document.getElementById('inv-body').innerHTML = cos.map(i => `
+      document.getElementById('inv-body').innerHTML = cart.map(i => `
           <tr>
               <td style="padding:10px; border:1px solid #ddd;">${i.nume}</td>
               <td style="text-align:center; border:1px solid #ddd;">${i.qty || 1}</td>
@@ -476,16 +467,14 @@
           </tr>
       `).join('');
 
-      // Ascundem checkout, afisam factura pentru print
       document.getElementById('main-checkout').style.display = 'none';
       document.getElementById('invoice-container').style.display = 'block';
       setTimeout(() => {
           window.print();
-          // localStorage.removeItem('htimeCart'); // Debifeaza daca vrei sa pastrezi cosul
       }, 500);
     }
 
-    // Traducerile raman neschimbate
+    // MULTILANG DICTIONARY
     const translations = {
       ro: { nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne", checkout_cart_title: "Coșul de cumpărături", checkout_details_title: "Detalii Expediere", checkout_summary_title: "Sumar Comandă", summary_subtotal: "Subtotal", summary_shipping: "Livrare", summary_total: "Total", form_fname: "Nume", form_lname: "Prenume", form_address: "Adresă completă", form_phone: "Telefon", form_email: "Email", btn_place_order: "Plasează Comanda", footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul." },
       en: { nav_home: "Home", nav_shop: "Shop", nav_about: "About Us", nav_team: "H-Time Team", nav_contact: "Contact Us", checkout_cart_title: "Shopping Cart", checkout_details_title: "Shipping Details", checkout_summary_title: "Order Summary", summary_subtotal: "Subtotal", summary_shipping: "Shipping", summary_total: "Total", form_fname: "First Name", form_lname: "Last Name", form_address: "Full Address", form_phone: "Phone", form_email: "Email", btn_place_order: "Place Order", footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement." }
