@@ -1,203 +1,253 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | H-TIME</title>
-    <link rel="icon" type="image/png" href="logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root { --dark-header: #4a4541; --light-bg: #f5f5f5; --peach-bg: #fcbf88; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Space Mono', monospace; background-color: var(--light-bg); color: black; padding-top: 80px; display: flex; flex-direction: column; min-height: 100vh; }
-        h1, h2, h3, .sync-font { font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
-        a { text-decoration: none; color: inherit; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact | H-TIME</title>
+  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
 
-        /* --- Navigație --- */
-        nav { background-color: var(--dark-header); color: white; display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: fixed; width: 100%; top: 0; z-index: 1000; }
-        .logo img { height: 75px; width: auto; object-fit: contain; margin-top: 3px; }
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a:hover { text-decoration: underline; color: var(--peach-bg); }
-        
-        .nav-icons { display: flex; align-items: center; gap: 25px; }
-        .nav-icons a { font-family: 'Space Mono', monospace; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; color: white; }
-        .nav-icons a:hover { color: var(--peach-bg); }
-        .social-icon { display: flex; align-items: center; }
-        .cart-btn { border: 1px solid white; padding: 8px 20px; border-radius: 30px; display: inline-block; }
-        .cart-btn:hover { background-color: white; color: var(--dark-header); border-color: white; }
+  <style>
+    :root { --peach: #fcbf88; --pink: #ffb6c1; --dark: #111111; --light-bg: #f8f5f2; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Montserrat', sans-serif; font-weight: 300; background-color: var(--light-bg); color: var(--dark); overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; padding-top: 100px; }
+    
+    /* Navbar */
+    nav { position: fixed; top:0; left:0; width:100%; padding:15px 50px; display:flex; justify-content:space-between; align-items:center; z-index:1000; background-color: var(--dark); border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .logo img { height:75px; }
+    .nav-links { display:flex; gap:30px; }
+    .nav-links a { color:white; text-decoration:none; font-weight:500; font-size:0.9rem; text-transform:uppercase; letter-spacing:1px; transition: color .3s; }
+    .nav-links a:hover { color: var(--peach); }
+    .nav-icons { display:flex; align-items:center; gap:20px; }
+    .cart-btn { border:1px solid white; padding:8px 18px; border-radius:30px; display:inline-flex; align-items:center; justify-content:center; transition: all .3s; color: white; text-decoration: none; cursor: pointer; }
+    .cart-btn:hover { border-color: var(--peach); color: var(--peach); }
 
-        /* --- Secțiune Contact --- */
-        .contact-wrapper { display: flex; flex-wrap: wrap; max-width: 1200px; margin: 60px auto; gap: 40px; padding: 0 20px; width: 100%; }
-        
-        .contact-form-sec { flex: 2; min-width: 300px; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .contact-form-sec h1 { font-size: 2rem; margin-bottom: 20px; color: var(--dark-header); border-bottom: 2px solid var(--peach-bg); padding-bottom: 10px; }
-        
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: bold; font-size: 0.9rem; }
-        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-family: 'Space Mono', monospace; }
-        .form-group textarea { resize: vertical; min-height: 120px; }
-        
-        .submit-btn { background-color: black; color: white; border: none; padding: 15px 30px; border-radius: 30px; font-family: 'Space Mono'; font-weight: bold; cursor: pointer; transition: 0.3s; width: 100%; text-transform: uppercase; }
-        .submit-btn:hover { background-color: var(--peach-bg); color: black; }
+    /* Contact Layout */
+    .contact-container { max-width: 1200px; margin: 40px auto 80px; padding: 0 40px; display: flex; gap: 50px; font-family: 'Space Grotesk', sans-serif; flex: 1; width: 100%; }
+    
+    /* Gap-ul negru general pentru sectiuni (actioneaza ca border) */
+    .black-gap {
+      background-color: var(--dark);
+      padding: 8px; /* Grosimea border-ului negru */
+      border-radius: 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    }
 
-        .contact-info-sec { flex: 1; min-width: 300px; background: var(--dark-header); color: white; padding: 40px; border-radius: 15px; display: flex; flex-direction: column; gap: 30px; }
-        .contact-info-sec h2 { color: var(--peach-bg); font-size: 1.5rem; }
-        .info-item h3 { font-size: 1rem; margin-bottom: 5px; color: #ddd; }
-        .info-item p { line-height: 1.5; font-size: 0.95rem; }
-        
-        .map-container { width: 100%; height: 250px; border-radius: 10px; overflow: hidden; margin-top: auto; border: 2px solid var(--peach-bg); }
+    .white-card {
+      background-color: white;
+      padding: 40px;
+      border-radius: 12px;
+      flex: 1;
+    }
 
-        /* --- FOOTER CORECTAT --- */
-        footer { 
-            background-color: #efe8e4; 
-            padding: 60px 50px; 
-            display: flex; 
-            justify-content: space-between; 
-            flex-wrap: wrap; 
-            gap: 30px; 
-            margin-top: auto; 
-            border-top: none; 
-        }
-        .footer-col { flex: 1; min-width: 200px; }
-        .footer-col h2, .footer-col h3 { 
-            font-family: 'Syncopate', sans-serif; 
-            text-transform: uppercase; 
-            margin-bottom: 25px; 
-            font-size: 1.1rem; 
-            font-weight: 700; 
-            color: #000;
-        }
-        .footer-col p, .footer-col ul { 
-            font-family: 'Space Mono', monospace; 
-            font-size: 0.9rem; 
-            line-height: 1.8; 
-            color: #000; 
-        }
-        .footer-col ul { 
-            list-style: none !important; 
-            padding: 0; 
-            margin: 0; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 12px; 
-        }
-        .footer-col ul li { 
-            list-style-type: none !important; 
-            margin: 0; 
-            padding: 0; 
-        }
-        .footer-col a { 
-            text-decoration: none; 
-            color: inherit; 
-            transition: 0.3s; 
-        }
-        .footer-col a:hover { 
-            color: var(--peach-bg); 
-            text-decoration: underline; 
-        }
-    </style>
+    .section-title { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 1.6rem; margin-bottom: 25px; color: var(--dark); border-bottom: 2px solid var(--peach); padding-bottom: 10px; text-transform: uppercase; }
+    
+    /* Info Details */
+    .info-block { margin-bottom: 25px; }
+    .info-block h4 { font-weight: 700; color: var(--dark); margin-bottom: 5px; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; }
+    .info-block p { color: #555; font-size: 0.95rem; line-height: 1.6; }
+
+    /* Map cu Gradient Border si Gap Negru (Pastrat conform cerintei) */
+    .map-gradient-border {
+      background: linear-gradient(135deg, var(--pink), var(--peach));
+      padding: 4px;
+      border-radius: 16px;
+      margin-top: 30px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .map-black-gap {
+      background-color: var(--dark);
+      padding: 3px;
+      border-radius: 12px;
+      height: 300px;
+    }
+    .map-black-gap iframe {
+      width: 100%;
+      height: 100%;
+      border-radius: 9px;
+      border: none;
+      filter: grayscale(20%) contrast(110%);
+    }
+
+    /* Form Styles */
+    .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+    .form-group label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: #555; }
+    .form-group input, .form-group textarea { padding: 14px; border: 1px solid #ddd; border-radius: 10px; font-family: 'Space Grotesk'; outline: none; font-size: 0.95rem; }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--peach); box-shadow: 0 0 10px rgba(252, 191, 136, 0.1); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    
+    .btn-primary { width: 100%; background: var(--dark); color: white; border: none; padding: 18px; border-radius: 40px; font-family: 'Space Grotesk'; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.3s; }
+    .btn-primary:hover { background: linear-gradient(to right, var(--pink), var(--peach)); color: black; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+
+    /* Footer */
+    footer { background-color:#0b0b0b; padding:80px 50px 30px; display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:40px; color:#fff; border-top:1px solid #222; }
+    .footer-col h2 { font-family:'DM Serif Display',serif; color:var(--peach); font-size:2.2rem; margin-bottom:20px; }
+    .footer-col h3 { font-size:1rem; font-weight:700; margin-bottom:30px; letter-spacing:1px; text-transform:uppercase; color:#fff; }
+    .footer-desc { font-size:0.9rem; color:#999; line-height:1.8; margin-bottom:30px; }
+    .social-links { display:flex; gap:15px; }
+    .social-icon-circle { width:40px; height:40px; background:#222; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; text-decoration:none; transition:.3s; }
+    .social-icon-circle:hover { background: linear-gradient(to right, var(--pink), var(--peach)); color:black; transform:translateY(-3px); }
+    .footer-col ul { list-style:none; padding:0; display:flex; flex-direction:column; gap:15px; }
+    .footer-col ul a { text-decoration:none; color:#999; font-size:0.9rem; transition:.3s; display:inline-block; }
+    .footer-col ul a:hover { color:var(--peach); transform:translateX(5px); }
+    .footer-bottom { grid-column:1 / -1; text-align:center; padding-top:40px; border-top:1px solid #222; color:#555; font-size:0.8rem; margin-top:20px; }
+    .anpc-img { max-width:180px; width:100%; height:auto; display:block; margin-bottom:15px; transition:opacity .3s; }
+    .anpc-img:hover { opacity:0.7; }
+
+    @media (max-width:900px) { nav { flex-direction:column; gap:15px; padding:15px; } body { padding-top: 130px; } .contact-container { flex-direction: column; padding: 0 20px; } .white-card { padding: 25px; } footer { padding: 40px 20px; } }
+  </style>
 </head>
 <body>
-    <nav>
-        <a href="index.html" class="logo"><img src="logo.png" alt="Logo H-Time"></a>
-        <div class="nav-links">
-            <a href="index.html">Acasă</a> 
-            <a href="magazin.html">Magazin</a>
-            <a href="despre-noi.html">Despre Noi</a> 
-            <a href="echipa.html">Echipa H-Time</a>
-            <a href="contact.html">Contactează-ne</a>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="index.html" class="logo"><img src="logo.png" alt="H-TIME Logo"></a>
+    <div class="nav-links">
+      <a href="index.html" data-i18n="nav_home">Acasă</a>
+      <a href="magazin.html" data-i18n="nav_shop">Magazin</a>
+      <a href="despre-noi.html" data-i18n="nav_about">Despre Noi</a>
+      <a href="echipa.html" data-i18n="nav_team">Echipa H-Time</a>
+      <a href="contact.html" data-i18n="nav_contact">Contactează-ne</a>
+    </div>
+    <div class="nav-icons">
+      <select id="languageSwitcher" style="background:black;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase; font-family:'Montserrat';">
+        <option value="ro">RO</option>
+        <option value="en">EN</option>
+        <option value="fr">FR</option>
+        <option value="de">DE</option>
+        <option value="es">ES</option>
+        <option value="it">IT</option>
+      </select>
+      <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
+    </div>
+  </nav>
+
+  <main class="contact-container">
+    <!-- Contact Info & Map -->
+    <div class="black-gap">
+      <div class="contact-info white-card">
+        <h1 class="section-title" data-i18n="contact_title">Contactează-ne</h1>
+        <p style="color: #555; margin-bottom: 30px; line-height: 1.6;" data-i18n="contact_desc">Suntem aici pentru a vă oferi o experiență de neuitat. Echipa noastră de experți vă stă la dispoziție pentru orice întrebare sau consultanță privind colecțiile noastre.</p>
+        
+        <div class="info-block">
+          <h4 data-i18n="contact_address_title">Adresă</h4>
+          <p>Strada Milcov 18A, Iași 70025</p>
+        </div>
+
+        <div class="info-block">
+          <h4 data-i18n="contact_phone_title">Telefon</h4>
+          <p>+40 700 000 000</p>
         </div>
         
-        <div class="nav-icons">
-            <a href="#">Login</a>
-            <a href="#" class="social-icon" title="Instagram">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                </svg>
-            </a>
-            <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
-        </div>
-    </nav>
-
-    <div class="contact-wrapper">
-        <div class="contact-form-sec">
-            <h1 class="sync-font">Lasă-ne un mesaj</h1>
-            <p style="margin-bottom: 25px; color: #666;">Ai o întrebare despre o bijuterie sau despre comanda ta? Completează formularul și te vom contacta în cel mai scurt timp.</p>
-            
-            <form action="#" method="POST" onsubmit="alert('Mesajul a fost trimis! Echipa H-TIME te va contacta în curând.'); return false;">
-                <div class="form-group">
-                    <label>Numele tău complet</label>
-                    <input type="text" required placeholder="Ex: Popescu Ion">
-                </div>
-                <div class="form-group">
-                    <label>Adresa de Email</label>
-                    <input type="email" required placeholder="email@exemplu.com">
-                </div>
-                <div class="form-group">
-                    <label>Mesajul tău</label>
-                    <textarea required placeholder="Scrie aici..."></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Trimite Mesajul</button>
-            </form>
+        <div class="info-block">
+          <h4 data-i18n="contact_email_title">E-mail</h4>
+          <p>contact@h-time.ro</p>
         </div>
 
-        <div class="contact-info-sec">
-            <h2 class="sync-font">Date de Contact</h2>
-            <div class="info-item">
-                <h3 class="sync-font">Email</h3>
-                <p>h.time.business@gmail.com</p>
-            </div>
-            <div class="info-item">
-                <h3 class="sync-font">Telefon</h3>
-                <p>+40 7XX XXX XXX</p>
-                <p style="font-size: 0.8rem; color: #aaa;">Luni - Vineri: 09:00 - 17:00</p>
-            </div>
-            <div class="info-item">
-                <h3 class="sync-font">Adresă Sediu</h3>
-                <p>Strada Milcov 18A<br>Iași, 700259<br>România</p>
-            </div>
-            
-            <div class="map-container">
-                <iframe width="100%" height="100%" frameborder="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2712.146524385!2d27.585!3d47.165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDA5JzU0LjAiTiAyN8KwMzUnMDYuMCJF!5e0!3m2!1sro!2sro!4v1710000000000"></iframe>
-            </div>
+        <div class="info-block">
+          <h4 data-i18n="contact_program_title">Program</h4>
+          <p data-i18n="contact_program_val">Luni - Vineri: 10:00 - 18:00</p>
         </div>
+
+        <!-- Harta cu gradient si gap negru redus -->
+        <div class="map-gradient-border">
+          <div class="map-black-gap">
+            <iframe src="https://maps.google.com/maps?q=Strada%20Milcov%2018A,%20Ia%C8%99i%2070025&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <footer>
-        <div class="footer-col">
-            <h2>H-TIME</h2>
-            <p style="margin-top: 10px;">Copyright © 2026 H-TIME FE.</p>
-        </div>
-        <div class="footer-col">
-            <h3>LINK-URI UTILE</h3>
-            <ul>
-                <li><a href="termeni.html">Termeni și condiții</a></li>
-                <li><a href="confidentialitate.html">Politica de confidențialitate</a></li>
-                <li><a href="https://anpc.ro/" target="_blank">ANPC</a></li>
-                <li><a href="https://ec.europa.eu/consumers/odr" target="_blank">ANPC-SAL</a></li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h3>LOCATION</h3>
-            <p>Strada Milcov 18A, Iași<br>700259</p>
-        </div>
-        <div class="footer-col">
-            <h3>CONTACT</h3>
-            <p>h.time.business@gmail.com</p>
-        </div>
-    </footer>
+    <!-- Contact Form -->
+    <div class="black-gap">
+      <div class="contact-form-section white-card">
+        <h2 class="section-title" data-i18n="contact_form_title">Trimite un mesaj</h2>
+        <form onsubmit="event.preventDefault(); alert('Mesajul a fost trimis cu succes!');">
+          <div class="form-group">
+            <label data-i18n="form_name">Nume complet</label>
+            <input type="text" required data-i18n-placeholder="ph_fname" placeholder="Popescu Ion">
+          </div>
+          <div class="form-group">
+            <label data-i18n="form_email">Adresa de E-mail</label>
+            <input type="email" required data-i18n-placeholder="ph_email" placeholder="contact@exemplu.ro">
+          </div>
+          <div class="form-group">
+            <label data-i18n="form_message">Mesaj</label>
+            <textarea required data-i18n-placeholder="ph_message" placeholder="Scrieți mesajul aici..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary" data-i18n="btn_send">Trimite Mesajul</button>
+        </form>
+      </div>
+    </div>
+  </main>
 
-    <script>
-        function updateCartCount() {
-            let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
-            const cartBtn = document.getElementById('cart-nav-btn');
-            if (cartBtn) {
-                cartBtn.innerText = `Cart (${cart.length})`;
-            }
-        }
-        document.addEventListener('DOMContentLoaded', updateCartCount);
-    </script>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-col">
+      <h2>H-TIME</h2>
+      <p class="footer-desc" data-i18n="footer_desc">Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.</p>
+      <div class="social-links">
+        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h3 data-i18n="footer_nav">NAVIGARE RAPIDĂ</h3>
+      <ul>
+        <li><a href="index.html" data-i18n="footer_home">Acasă - Pagina principală</a></li>
+        <li><a href="magazin.html" data-i18n="footer_shop">Magazin - Toate Colecțiile</a></li>
+        <li><a href="despre-noi.html" data-i18n="footer_about">Povestea Noastră</a></li>
+        <li><a href="contact.html" data-i18n="footer_contact">Contact & Suport</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3 data-i18n="footer_info">INFORMAȚII & POLITICI</h3>
+      <ul>
+        <li><a href="termeni.html" data-i18n="footer_terms">Termeni și Condiții</a></li>
+        <li><a href="confidentialitate.html" data-i18n="footer_privacy">Politică de Confidențialitate</a></li>
+        <li><a href="livrare.html" data-i18n="footer_delivery">Politică de Livrare</a></li>
+        <li><a href="retur.html" data-i18n="footer_return">Politică de Retur (14 zile)</a></li>
+        <li><a href="ingrijire.html" data-i18n="footer_care">Îngrijirea Bijuteriilor</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3 data-i18n="footer_consumer">PROTECȚIA CONSUMATORULUI</h3>
+      <div>
+        <a href="https://anpc.ro/ce-este-sal/" target="_blank"><img src="https://ro.pandora.net/mobify/bundle/1108/static/img/SAL-PICTOGRAMA.png?app=pdp" alt="ANPC SAL" class="anpc-img"></a>
+        <a href="https://ec.europa.eu/consumers/odr" target="_blank"><img src="https://ro.pandora.net/mobify/bundle/1108/static/img/pictogramaSOL.png?app=pdp" alt="ANPC SOL" class="anpc-img"></a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2024 - 2026 H-TIME Luxury Experience. Toate drepturile sunt rezervate.</div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const translations = {
+      ro: { nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne", footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul.", footer_nav: "NAVIGARE RAPIDĂ", footer_home: "Acasă - Pagina principală", footer_shop: "Magazin - Toate Colecțiile", footer_about: "Povestea Noastră", footer_contact: "Contact & Suport", footer_info: "INFORMAȚII & POLITICI", footer_terms: "Termeni și Condiții", footer_privacy: "Politică de Confidențialitate", footer_delivery: "Politică de Livrare", footer_return: "Politică de Retur (14 zile)", footer_care: "Îngrijirea Bijuteriilor", footer_consumer: "PROTECȚIA CONSUMATORULUI", contact_title: "Contactează-ne", contact_desc: "Suntem aici pentru a vă oferi o experiență de neuitat. Echipa noastră de experți vă stă la dispoziție pentru orice întrebare sau consultanță privind colecțiile noastre.", contact_address_title: "Adresă", contact_phone_title: "Telefon", contact_email_title: "E-mail", contact_program_title: "Program", contact_program_val: "Luni - Vineri: 10:00 - 18:00", contact_form_title: "Trimite un mesaj", form_name: "Nume complet", form_email: "Adresa de E-mail", form_message: "Mesaj", btn_send: "Trimite Mesajul", ph_fname: "Popescu Ion", ph_email: "contact@exemplu.ro", ph_message: "Scrieți mesajul aici..." },
+      en: { nav_home: "Home", nav_shop: "Shop", nav_about: "About Us", nav_team: "H-Time Team", nav_contact: "Contact Us", footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement.", footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections", footer_about: "Our Story", footer_contact: "Contact & Support", footer_info: "INFORMATION & POLICIES", footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_delivery: "Delivery Policy", footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care", footer_consumer: "CONSUMER PROTECTION", contact_title: "Contact Us", contact_desc: "We are here to offer you an unforgettable experience. Our team of experts is at your disposal for any questions or advice regarding our collections.", contact_address_title: "Address", contact_phone_title: "Phone", contact_email_title: "E-mail", contact_program_title: "Schedule", contact_program_val: "Monday - Friday: 10:00 - 18:00", contact_form_title: "Send a message", form_name: "Full Name", form_email: "Email Address", form_message: "Message", btn_send: "Send Message", ph_fname: "John Doe", ph_email: "contact@example.com", ph_message: "Write your message here..." },
+      fr: { nav_home: "Accueil", nav_shop: "Boutique", nav_about: "À propos", nav_team: "Équipe H-Time", nav_contact: "Contactez-nous", footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe.", footer_nav: "NAVIGATION RAPIDE", footer_home: "Accueil - Page principale", footer_shop: "Boutique - Toutes les collections", footer_about: "Notre histoire", footer_contact: "Contact & Support", footer_info: "INFORMATIONS & POLITIQUES", footer_terms: "Conditions générales", footer_privacy: "Politique de confidentialité", footer_delivery: "Politique de livraison", footer_return: "Politique de retour (14 jours)", footer_care: "Entretien des bijoux", footer_consumer: "PROTECTION DU CONSOMMATEUR", contact_title: "Contactez-nous", contact_desc: "Notre équipe d'experts est à votre disposition.", contact_address_title: "Adresse", contact_phone_title: "Téléphone", contact_email_title: "E-mail", contact_program_title: "Horaires", contact_program_val: "Lundi - Vendredi: 10:00 - 18:00", contact_form_title: "Envoyer un message", form_name: "Nom complet", form_email: "Adresse Email", form_message: "Message", btn_send: "Envoyer", ph_fname: "Jean Dupont", ph_email: "contact@exemple.fr", ph_message: "Écrivez votre message ici..." },
+      de: { nav_home: "Startseite", nav_shop: "Shop", nav_about: "Über uns", nav_team: "H-Time Team", nav_contact: "Kontakt", footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique.", footer_nav: "SCHNELLNAVIGATION", footer_home: "Startseite - Hauptseite", footer_shop: "Shop - Alle Kollektionen", footer_about: "Unsere Geschichte", footer_contact: "Kontakt & Support", footer_info: "INFORMATIONEN & RICHTLINIEN", footer_terms: "Allgemeine Geschäftsbedingungen", footer_privacy: "Datenschutzrichtlinie", footer_delivery: "Lieferbedingungen", footer_return: "Rückgaberecht (14 Tage)", footer_care: "Schmuckpflege", footer_consumer: "VERBRAUCHERSCHUTZ", contact_title: "Kontaktiere uns", contact_desc: "Unser Expertenteam steht Ihnen zur Verfügung.", contact_address_title: "Adresse", contact_phone_title: "Telefon", contact_email_title: "E-Mail", contact_program_title: "Öffnungszeiten", contact_program_val: "Montag - Freitag: 10:00 - 18:00", contact_form_title: "Nachricht senden", form_name: "Vollständiger Name", form_email: "E-Mail Adresse", form_message: "Nachricht", btn_send: "Senden", ph_fname: "Hans Müller", ph_email: "kontakt@beispiel.de", ph_message: "Schreiben Sie hier Ihre Nachricht..." },
+      es: { nav_home: "Inicio", nav_shop: "Tienda", nav_about: "Sobre Nosotros", nav_team: "Equipo H-Time", nav_contact: "Contáctanos", footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo.", footer_nav: "NAVEGACIÓN RÁPIDA", footer_home: "Inicio - Página principal", footer_shop: "Tienda - Todas las colecciones", footer_about: "Nuestra historia", footer_contact: "Contacto & Soporte", footer_info: "INFORMACIÓN & POLÍTICAS", footer_terms: "Términos y condiciones", footer_privacy: "Política de privacidad", footer_delivery: "Política de entrega", footer_return: "Política de devolución (14 días)", footer_care: "Cuidado de las joyas", footer_consumer: "PROTECCIÓN AL CONSUMIDOR", contact_title: "Contáctanos", contact_desc: "Nuestro equipo de expertos está a su disposición.", contact_address_title: "Dirección", contact_phone_title: "Teléfono", contact_email_title: "Correo", contact_program_title: "Horario", contact_program_val: "Lunes - Viernes: 10:00 - 18:00", contact_form_title: "Enviar un mensaje", form_name: "Nombre completo", form_email: "Correo Electrónico", form_message: "Mensaje", btn_send: "Enviar Mensaje", ph_fname: "Carlos García", ph_email: "contacto@ejemplo.es", ph_message: "Escribe tu mensaje aquí..." },
+      it: { nav_home: "Home", nav_shop: "Negozio", nav_about: "Chi Siamo", nav_team: "Team H-Time", nav_contact: "Contattaci", footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso.", footer_nav: "NAVIGAZIONE RAPIDA", footer_home: "Home - Pagina principale", footer_shop: "Negozio - Tutte le collezioni", footer_about: "La nostra storia", footer_contact: "Contatto & Supporto", footer_info: "INFORMAZIONI & POLITICHE", footer_terms: "Termini e condizioni", footer_privacy: "Informativa sulla privacy", footer_delivery: "Politica di consegna", footer_return: "Politica di reso (14 giorni)", footer_care: "Cura dei gioielli", footer_consumer: "PROTEZIONE DEL CONSUMATORE", contact_title: "Contattaci", contact_desc: "Il nostro team di esperti è a tua disposizione.", contact_address_title: "Indirizzo", contact_phone_title: "Telefono", contact_email_title: "E-mail", contact_program_title: "Orari", contact_program_val: "Lunedì - Venerdì: 10:00 - 18:00", contact_form_title: "Invia un messaggio", form_name: "Nome completo", form_email: "Indirizzo Email", form_message: "Messaggio", btn_send: "Invia Messaggio", ph_fname: "Mario Rossi", ph_email: "contatto@esempio.it", ph_message: "Scrivi qui il tuo messaggio..." }
+    };
+    function applyTranslations(lang) { 
+      const dict = translations[lang] || translations.ro; 
+      document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.getAttribute('data-i18n'); if (dict[key]) el.innerText = dict[key]; }); 
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { const key = el.getAttribute('data-i18n-placeholder'); if (dict[key]) el.placeholder = dict[key]; });
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      const switcher = document.getElementById('languageSwitcher');
+      if(switcher) { switcher.value = localStorage.getItem('htime_lang') || 'ro'; switcher.addEventListener('change', () => { localStorage.setItem('htime_lang', switcher.value); applyTranslations(switcher.value); }); }
+      applyTranslations(localStorage.getItem('htime_lang') || 'ro');
+      // Sincronizare cos din script.js global
+      if (typeof actualizeazaNumarCos === 'function') actualizeazaNumarCos();
+    });
+  </script>
 </body>
 </html>
