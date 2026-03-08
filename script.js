@@ -1,75 +1,84 @@
 /**
- * Folosim cheia 'htimeCart' pentru a fi in sincron cu magazin.html 
- * si celelalte pagini care au scripturi interne.
+ * Cheia de memorie folosita de magazin.html si restul paginilor
  */
-const COS_KEY = 'htimeCart';
+const STORAGE_KEY = 'htimeCart';
 
 /**
- * Adauga un produs in cos.
- * Aceasta functie este apelata de butoanele din magazin.html.
+ * Adauga un produs in cos
  */
 function adaugaInCos(id) {
     const produsId = parseInt(id);
-    
-    if (typeof produse === 'undefined') {
-        console.error("Eroare: produse.js nu este incarcat.");
-        return;
-    }
+    if (typeof produse === 'undefined') return;
 
-    const produsGasit = produse.find(p => p.id === produsId);
-    
-    if (!produsGasit) {
-        console.error("Produsul cu ID-ul " + produsId + " nu a fost gasit.");
-        return;
-    }
+    const p = produse.find(item => item.id === produsId);
+    if (!p) return;
 
-    // Citim cosul actual
-    let cos = JSON.parse(localStorage.getItem(COS_KEY)) || [];
-    
-    // Verificam daca produsul exista deja
-    const indexExistent = cos.findIndex(p => p.id === produsId);
-    
-    if (indexExistent !== -1) {
-        // Daca exista, incrementam cantitatea (folosim campul 'qty' sau 'cantitate' - ramanem la qty pentru consistenta)
-        cos[indexExistent].qty = (cos[indexExistent].qty || 1) + 1;
+    let cart = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    const index = cart.findIndex(item => item.id === produsId);
+
+    if (index !== -1) {
+        cart[index].qty = (cart[index].qty || 1) + 1;
     } else {
-        // Salvam obiectul folosind aceleasi campuri ca in produse.js: nume, pret, imagine
-        cos.push({
-            id: produsGasit.id,
-            nume: produsGasit.nume,
-            pret: produsGasit.pret,
-            imagine: produsGasit.imagine,
+        cart.push({
+            id: p.id,
+            nume: p.nume,
+            pret: p.pret,
+            imagine: p.imagine,
             qty: 1
         });
     }
 
-    // Salvam inapoi in localStorage sub cheia folosita de magazin.html
-    localStorage.setItem(COS_KEY, JSON.stringify(cos));
-    
-    // Actualizam cifra din meniu
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
     actualizeazaNumarCos();
     
     // Notificare vizuala
-    afiseazaNotificare(`"${produsGasit.nume}" a fost adăugat în coș!`);
+    afiseazaNotificare(`"${p.nume}" a fost adăugat.`);
 }
 
 /**
- * Actualizeaza textul din butonul de Cart (X)
+ * Schimba cantitatea unui produs (+1 sau -1)
+ */
+function schimbaCantitate(index, delta) {
+    let cart = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    if (!cart[index]) return;
+
+    cart[index].qty = (cart[index].qty || 1) + delta;
+
+    if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+    }
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+    
+    // Fortam actualizarea interfetei
+    actualizeazaNumarCos();
+    if (typeof updateCartUI === 'function') updateCartUI();
+}
+
+/**
+ * Sterge complet un produs din cos
+ */
+function eliminaDinCos(index) {
+    let cart = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    cart.splice(index, 1);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+    
+    actualizeazaNumarCos();
+    if (typeof updateCartUI === 'function') updateCartUI();
+}
+
+/**
+ * Updateaza butonul "Cart (X)"
  */
 function actualizeazaNumarCos() {
-    const cos = JSON.parse(localStorage.getItem(COS_KEY)) || [];
-    // Pentru consistenta cu magazin.html, afisam numarul de intrari unice (cart.length)
-    // sau suma cantitatilor. Aici folosim cart.length pentru a se potrivi cu restul paginilor tale.
-    const total = cos.length;
-    
+    const cart = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    const total = cart.reduce((acc, item) => acc + (item.qty || 1), 0);
     const navBtn = document.getElementById('cart-nav-btn');
-    if (navBtn) {
-        navBtn.innerText = `Cart (${total})`;
-    }
+    if (navBtn) navBtn.innerText = `Cart (${total})`;
 }
 
 /**
- * Notificare eleganta folosind culorile tale
+ * Notificare
  */
 function afiseazaNotificare(mesaj) {
     const notif = document.createElement('div');
@@ -82,7 +91,6 @@ function afiseazaNotificare(mesaj) {
         animation: slideInNotif 0.3s ease-out;
     `;
     document.body.appendChild(notif);
-    
     setTimeout(() => {
         notif.style.opacity = '0';
         notif.style.transition = 'opacity 0.5s ease';
@@ -90,18 +98,12 @@ function afiseazaNotificare(mesaj) {
     }, 2500);
 }
 
-// Stiluri pentru animatia notificarii
-if (!document.getElementById('notif-styles')) {
-    const style = document.createElement('style');
-    style.id = 'notif-styles';
-    style.textContent = `
-        @keyframes slideInNotif {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-    `;
-    document.head.appendChild(style);
-}
+// Actualizare automata daca se schimba cosul in alt tab
+window.addEventListener('storage', (e) => {
+    if (e.key === STORAGE_KEY) {
+        actualizeazaNumarCos();
+        if (typeof updateCartUI === 'function') updateCartUI();
+    }
+});
 
-// Rulam actualizarea la incarcarea paginii
 document.addEventListener('DOMContentLoaded', actualizeazaNumarCos);
