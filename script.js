@@ -1,42 +1,42 @@
 /**
- * Cheia sub care salvam datele in memoria browserului.
- * Trebuie sa fie aceeasi si in checkout.html pentru ca paginile sa comunice intre ele.
+ * Cheia sub care salvăm datele în memoria browserului (localStorage).
+ * Trebuie să fie aceeași și în checkout.html pentru ca paginile să comunice între ele.
  */
 const COS_KEY = 'htime_cos';
 
 /**
- * Adauga un produs in cos pe baza ID-ului trecut in onclick din magazin.html
- * @param {number|string} id - ID-ul produsului
+ * Adaugă un produs în coș pe baza ID-ului primit din magazin.html
+ * @param {number|string} id - ID-ul unic al produsului
  */
 function adaugaInCos(id) {
     const produsId = parseInt(id);
     
-    // Verificam daca baza de date de produse este incarcata (din produse.js)
+    // Verificăm dacă baza de date de produse este încărcată (din produse.js)
     if (typeof produse === 'undefined') {
-        console.error("Fisierul produse.js nu a fost gasit sau incarcat.");
+        console.error("Fișierul produse.js nu a fost găsit sau încărcat.");
         return;
     }
 
-    // Cautam produsul in lista globala
+    // Căutăm produsul în lista globală
     const produsGasit = produse.find(p => p.id === produsId);
     
     if (!produsGasit) {
-        console.error("Produsul cu ID-ul " + produsId + " nu exista in baza de date.");
+        console.error("Produsul cu ID-ul " + produsId + " nu există în baza de date.");
         return;
     }
 
-    // Preluam cosul actual din memoria browserului
+    // Preluăm coșul actual din memoria browserului
     let cos = JSON.parse(localStorage.getItem(COS_KEY)) || [];
     
-    // Verificam daca produsul este deja in cos
+    // Verificăm dacă produsul este deja în coș
     const indexExistent = cos.findIndex(p => p.id === produsId);
     
     if (indexExistent !== -1) {
-        // Daca exista deja, ii crestem doar cantitatea
+        // Dacă există deja, îi creștem doar cantitatea
         cos[indexExistent].cantitate = (cos[indexExistent].cantitate || 1) + 1;
     } else {
-        // Daca este nou, il adaugam cu toate detaliile (nume, pret, imagine)
-        // pentru ca checkout.html sa le poata afisa direct.
+        // Dacă este nou, îl adăugăm cu toate detaliile necesare (nume, preț, imagine)
+        // pentru ca checkout.html să le poată afișa direct.
         cos.push({
             id: produsGasit.id,
             nume: produsGasit.nume,
@@ -46,19 +46,19 @@ function adaugaInCos(id) {
         });
     }
 
-    // Salvam lista actualizata
+    // Salvăm lista actualizată în localStorage
     localStorage.setItem(COS_KEY, JSON.stringify(cos));
     
-    // Actualizam numarul afisat in meniu (Cart (X))
+    // Actualizăm numărul afișat în meniu (ex: Cart (3))
     actualizeazaNumarCos();
     
-    // Notificare vizuala rapida
+    // Afișăm o notificare vizuală rapidă
     afiseazaNotificare(`"${produsGasit.nume}" a fost adăugat în coș!`);
 }
 
 /**
- * Gaseste butonul de cart din nav si ii updateaza textul conform numarului de produse.
- * Identificat prin id="cart-nav-btn" din magazin.html-ul tau.
+ * Găsește elementul de cart din navigare și îi actualizează textul.
+ * Folosește id-ul "cart-nav-btn" specificat în magazin.html.
  */
 function actualizeazaNumarCos() {
     const cos = JSON.parse(localStorage.getItem(COS_KEY)) || [];
@@ -71,7 +71,8 @@ function actualizeazaNumarCos() {
 }
 
 /**
- * Creeaza o notificare eleganta care dispare dupa 2 secunde.
+ * Creează o notificare stilizată care dispare automat.
+ * @param {string} mesaj - Textul de afișat
  */
 function afiseazaNotificare(mesaj) {
     const notif = document.createElement('div');
@@ -100,10 +101,10 @@ function afiseazaNotificare(mesaj) {
     }, 2000);
 }
 
-// Cand se incarca orice pagina (magazin, index, etc.), verificam numarul din cos
+// La încărcarea oricărei pagini, verificăm numărul curent de produse din coș
 document.addEventListener('DOMContentLoaded', actualizeazaNumarCos);
 
-// Adaugam animatia pentru notificare
+// Adăugăm animația CSS pentru notificare direct în document
 const styleSheet = document.createElement('style');
 styleSheet.textContent = `
     @keyframes slideIn {
