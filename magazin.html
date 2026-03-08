@@ -296,15 +296,15 @@
       background: linear-gradient(to right, var(--pink), var(--peach), var(--pink)); background-size: 200% auto; animation: textGradientMove 4s linear infinite;
       color: black !important; padding: 4px 10px; font-weight: 700; font-size: 0.75rem; border-radius: 4px;
       font-family: 'Space Grotesk', sans-serif;
-      cursor: default;
       transition: transform 0.3s ease;
     }
-    .sale-badge:hover {
+    
+    .product-card:hover .sale-badge {
       transform: scale(1.05);
     }
     .sale-badge .badge-hover { display: none; }
-    .sale-badge:hover .badge-default { display: none; }
-    .sale-badge:hover .badge-hover { display: inline; }
+    .product-card:hover .sale-badge .badge-default { display: none; }
+    .product-card:hover .sale-badge .badge-hover { display: inline; }
 
     .no-products-msg {
       grid-column: 1 / -1;
@@ -454,9 +454,9 @@
       <ul>
         <li><a href="termeni.html" data-i18n="footer_terms">Termeni și Condiții</a></li>
         <li><a href="confidentialitate.html" data-i18n="footer_privacy">Politică de Confidențialitate</a></li>
-        <li><a href="livrare.html" data-i18n="footer_delivery">Politică de Livrare</a></li>
-        <li><a href="retur.html" data-i18n="footer_return">Politică de Retur (14 zile)</a></li>
-        <li><a href="ingrijire.html" data-i18n="footer_care">Îngrijirea Bijuteriilor</a></li>
+        <li><a href="politica_livrare.html" data-i18n="footer_delivery">Politică de Livrare</a></li>
+        <li><a href="politici_retur.html" data-i18n="footer_return">Politică de Retur (14 zile)</a></li>
+        <li><a href="ingrijirea_bijuteriilor.html" data-i18n="footer_care">Îngrijirea Bijuteriilor</a></li>
       </ul>
     </div>
 
@@ -612,7 +612,6 @@
           let saleBadge = "";
           if (p.isSale) {
             let reducereText = "SALE";
-            // Calculam reducerea in procente
             if (p.pretVechi && p.pretVechi > p.pret) {
                 const procent = Math.round(((p.pretVechi - p.pret) / p.pretVechi) * 100);
                 reducereText = "-" + procent + "%";
