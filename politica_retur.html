@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Politica de Retur | H-TIME</title>
+  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root { --peach: #fcbf88; --pink: #ffb6c1; --dark: #111111; --light-bg: #f8f5f2; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Montserrat', sans-serif; font-weight: 300; background-color: var(--light-bg); color: var(--dark); overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; padding-top: 100px; }
+    
+    /* Navbar */
+    nav { position: fixed; top:0; left:0; width:100%; padding:15px 50px; display:flex; justify-content:space-between; align-items:center; z-index:1000; background-color: var(--dark); border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .logo img { height:75px; }
+    .nav-links { display:flex; gap:30px; }
+    .nav-links a { color:white; text-decoration:none; font-weight:500; font-size:0.9rem; text-transform:uppercase; letter-spacing:1px; transition: color .3s; }
+    .nav-links a:hover { color: var(--peach); }
+    .nav-icons { display:flex; align-items:center; gap:20px; }
+    .cart-btn { border:1px solid white; padding:8px 18px; border-radius:30px; display:inline-flex; align-items:center; justify-content:center; transition: all .3s; color: white; text-decoration: none; cursor: pointer; }
+    .cart-btn:hover { border-color: var(--peach); color: var(--peach); }
+
+    /* Content Layout */
+    .policy-container { max-width: 1000px; margin: 40px auto 80px; padding: 0 40px; font-family: 'Space Grotesk', sans-serif; flex: 1; width: 100%; }
+    
+    /* Gap-ul negru general pentru sectiuni (actioneaza ca border) */
+    .black-gap {
+      background-color: var(--dark);
+      padding: 8px; /* Grosimea border-ului negru */
+      border-radius: 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    }
+
+    .white-card {
+      background-color: white;
+      padding: 40px;
+      border-radius: 12px;
+      flex: 1;
+    }
+
+    .section-title { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 1.8rem; margin-bottom: 30px; color: var(--dark); border-bottom: 2px solid var(--peach); padding-bottom: 10px; text-transform: uppercase; }
+    
+    .policy-content h3 { font-weight: 700; margin: 25px 0 15px; font-size: 1.2rem; color: var(--dark); }
+    .policy-content p { line-height: 1.8; color: #555; margin-bottom: 15px; font-size: 0.95rem; }
+    .policy-content ul { margin-left: 20px; margin-bottom: 15px; color: #555; }
+    .policy-content li { margin-bottom: 8px; line-height: 1.6; font-size: 0.95rem; }
+
+    /* Footer */
+    footer { background-color:#0b0b0b; padding:80px 50px 30px; display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:40px; color:#fff; border-top:1px solid #222; }
+    .footer-col h2 { font-family:'DM Serif Display',serif; color:var(--peach); font-size:2.2rem; margin-bottom:20px; }
+    .footer-col h3 { font-size:1rem; font-weight:700; margin-bottom:30px; letter-spacing:1px; text-transform:uppercase; color:#fff; }
+    .footer-desc { font-size:0.9rem; color:#999; line-height:1.8; margin-bottom:30px; }
+    .social-links { display:flex; gap:15px; }
+    .social-icon-circle { width:40px; height:40px; background:#222; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; text-decoration:none; transition:.3s; }
+    .social-icon-circle:hover { background: linear-gradient(to right, var(--pink), var(--peach)); color:black; transform:translateY(-3px); }
+    .footer-col ul { list-style:none; padding:0; display:flex; flex-direction:column; gap:15px; }
+    .footer-col ul a { text-decoration:none; color:#999; font-size:0.9rem; transition:.3s; display:inline-block; }
+    .footer-col ul a:hover { color:var(--peach); transform:translateX(5px); }
+    .footer-bottom { grid-column:1 / -1; text-align:center; padding-top:40px; border-top:1px solid #222; color:#555; font-size:0.8rem; margin-top:20px; }
+    .anpc-img { max-width:180px; width:100%; height:auto; display:block; margin-bottom:15px; transition:opacity .3s; }
+    .anpc-img:hover { opacity:0.7; }
+
+    @media (max-width:900px) { nav { flex-direction:column; gap:15px; padding:15px; } body { padding-top: 130px; } .policy-container { padding: 0 20px; } .white-card { padding: 25px; } footer { padding: 40px 20px; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo"><img src="logo.png" alt="H-TIME Logo"></a>
+    <div class="nav-links">
+      <a href="index.html" data-i18n="nav_home">Acasă</a>
+      <a href="magazin.html" data-i18n="nav_shop">Magazin</a>
+      <a href="despre-noi.html" data-i18n="nav_about">Despre Noi</a>
+      <a href="echipa.html" data-i18n="nav_team">Echipa H-Time</a>
+      <a href="contact.html" data-i18n="nav_contact">Contactează-ne</a>
+    </div>
+    <div class="nav-icons">
+      <select id="languageSwitcher" style="background:black;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase; font-family:'Montserrat';">
+        <option value="ro">RO</option>
+        <option value="en">EN</option>
+        <option value="fr">FR</option>
+        <option value="de">DE</option>
+        <option value="es">ES</option>
+        <option value="it">IT</option>
+      </select>
+      <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
+    </div>
+  </nav>
+
+  <main class="policy-container">
+    <div class="black-gap">
+      <div class="white-card">
+        <h1 class="section-title" data-i18n="return_title">Politica de Retur</h1>
+        
+        <div class="policy-content">
+          <p data-i18n="return_p1">Satisfacția dumneavoastră este prioritatea noastră. Dacă produsul comandat nu se ridică la înălțimea așteptărilor, aveți dreptul de a-l returna în condiții sigure.</p>
+          
+          <h3 data-i18n="return_h1">1. Termenul de Retur</h3>
+          <p data-i18n="return_p2">Conform legislației în vigoare, aveți la dispoziție <strong>14 zile calendaristice</strong> de la primirea coletului pentru a returna produsele, fără a fi nevoit să justificați decizia.</p>
+
+          <h3 data-i18n="return_h2">2. Condiții de Retur</h3>
+          <p data-i18n="return_p3">Pentru a fi acceptat returul, produsele trebuie să îndeplinească următoarele condiții:</p>
+          <ul>
+            <li data-i18n="return_li1">Să fie în aceeași stare în care au fost livrate (fără urme de purtare, zgârieturi sau alte defecte).</li>
+            <li data-i18n="return_li2">Să aibă etichetele originale atașate și sigiliile intacte.</li>
+            <li data-i18n="return_li3">Să fie returnate în ambalajul original complet (cutie, săculeț, certificat de garanție).</li>
+          </ul>
+
+          <h3 data-i18n="return_h3">3. Pași pentru Returnare</h3>
+          <p data-i18n="return_p4">Pentru a iniția un retur, vă rugăm să ne contactați la adresa de e-mail sau la numărul de telefon afișat în pagina de Contact. După aprobarea solicitării, veți putea expedia produsul prin curier la adresa indicată de echipa noastră.</p>
+
+          <h3 data-i18n="return_h4">4. Rambursarea Contravalorii</h3>
+          <p data-i18n="return_p5">Rambursarea se va efectua în contul bancar specificat de dumneavoastră în termen de maxim <strong>7 zile lucrătoare</strong> de la recepționarea și verificarea produsului returnat. Taxele de livrare pentru retur sunt suportate de către client.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-col">
+      <h2>H-TIME</h2>
+      <p class="footer-desc" data-i18n="footer_desc">Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.</p>
+      <div class="social-links">
+        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h3 data-i18n="footer_nav">NAVIGARE RAPIDĂ</h3>
+      <ul>
+        <li><a href="index.html" data-i18n="footer_home">Acasă - Pagina principală</a></li>
+        <li><a href="magazin.html" data-i18n="footer_shop">Magazin - Toate Colecțiile</a></li>
+        <li><a href="despre-noi.html" data-i18n="footer_about">Povestea Noastră</a></li>
+        <li><a href="contact.html" data-i18n="footer_contact">Contact & Suport</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3 data-i18n="footer_info">INFORMAȚII & POLITICI</h3>
+      <ul>
+        <li><a href="termeni.html" data-i18n="footer_terms">Termeni și Condiții</a></li>
+        <li><a href="confidentialitate.html" data-i18n="footer_privacy">Politică de Confidențialitate</a></li>
+        <li><a href="livrare.html" data-i18n="footer_delivery">Politică de Livrare</a></li>
+        <li><a href="retur.html" data-i18n="footer_return">Politică de Retur (14 zile)</a></li>
+        <li><a href="ingrijire.html" data-i18n="footer_care">Îngrijirea Bijuteriilor</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3 data-i18n="footer_consumer">PROTECȚIA CONSUMATORULUI</h3>
+      <div>
+        <a href="https://anpc.ro/ce-este-sal/" target="_blank"><img src="https://ro.pandora.net/mobify/bundle/1108/static/img/SAL-PICTOGRAMA.png?app=pdp" alt="ANPC SAL" class="anpc-img"></a>
+        <a href="https://ec.europa.eu/consumers/odr" target="_blank"><img src="https://ro.pandora.net/mobify/bundle/1108/static/img/pictogramaSOL.png?app=pdp" alt="ANPC SOL" class="anpc-img"></a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2024 - 2026 H-TIME Luxury Experience. Toate drepturile sunt rezervate.</div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const translations = {
+      ro: { nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne", footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul.", footer_nav: "NAVIGARE RAPIDĂ", footer_home: "Acasă - Pagina principală", footer_shop: "Magazin - Toate Colecțiile", footer_about: "Povestea Noastră", footer_contact: "Contact & Suport", footer_info: "INFORMAȚII & POLITICI", footer_terms: "Termeni și Condiții", footer_privacy: "Politică de Confidențialitate", footer_delivery: "Politică de Livrare", footer_return: "Politică de Retur (14 zile)", footer_care: "Îngrijirea Bijuteriilor", footer_consumer: "PROTECȚIA CONSUMATORULUI",
+            return_title: "Politica de Retur", return_p1: "Satisfacția dumneavoastră este prioritatea noastră. Dacă produsul comandat nu se ridică la înălțimea așteptărilor, aveți dreptul de a-l returna în condiții sigure.", return_h1: "1. Termenul de Retur", return_p2: "Conform legislației în vigoare, aveți la dispoziție 14 zile calendaristice de la primirea coletului pentru a returna produsele, fără a fi nevoit să justificați decizia.", return_h2: "2. Condiții de Retur", return_p3: "Pentru a fi acceptat returul, produsele trebuie să îndeplinească următoarele condiții:", return_li1: "Să fie în aceeași stare în care au fost livrate (fără urme de purtare, zgârieturi sau alte defecte).", return_li2: "Să aibă etichetele originale atașate și sigiliile intacte.", return_li3: "Să fie returnate în ambalajul original complet (cutie, săculeț, certificat de garanție).", return_h3: "3. Pași pentru Returnare", return_p4: "Pentru a iniția un retur, vă rugăm să ne contactați la adresa de e-mail sau la numărul de telefon afișat în pagina de Contact. După aprobarea solicitării, veți putea expedia produsul prin curier la adresa indicată de echipa noastră.", return_h4: "4. Rambursarea Contravalorii", return_p5: "Rambursarea se va efectua în contul bancar specificat de dumneavoastră în termen de maxim 7 zile lucrătoare de la recepționarea și verificarea produsului returnat. Taxele de livrare pentru retur sunt suportate de către client." },
+      en: { nav_home: "Home", nav_shop: "Shop", nav_about: "About Us", nav_team: "H-Time Team", nav_contact: "Contact Us", footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement.", footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections", footer_about: "Our Story", footer_contact: "Contact & Support", footer_info: "INFORMATION & POLICIES", footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_delivery: "Delivery Policy", footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care", footer_consumer: "CONSUMER PROTECTION",
+            return_title: "Return Policy", return_p1: "Your satisfaction is our priority. If the ordered product does not meet your expectations, you have the right to return it safely.", return_h1: "1. Return Period", return_p2: "According to current legislation, you have 14 calendar days from receiving the package to return the products without having to justify the decision.", return_h2: "2. Return Conditions", return_p3: "For the return to be accepted, the products must meet the following conditions:", return_li1: "Be in the same condition they were delivered (no signs of wear, scratches, or other defects).", return_li2: "Have original tags attached and seals intact.", return_li3: "Be returned in complete original packaging (box, pouch, warranty certificate).", return_h3: "3. Steps for Return", return_p4: "To initiate a return, please contact us at the email address or phone number displayed on the Contact page. After approval, you can ship the product via courier to the address indicated by our team.", return_h4: "4. Refund", return_p5: "Refunds will be made to the bank account specified by you within a maximum of 7 working days from receiving and verifying the returned product. Return shipping fees are borne by the customer." },
+      fr: { nav_home: "Accueil", nav_shop: "Boutique", nav_about: "À propos", nav_team: "Équipe H-Time", nav_contact: "Contactez-nous", footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe dédiée à ceux qui apprécient le raffinement.", footer_nav: "NAVIGATION RAPIDE", footer_home: "Accueil - Page principale", footer_shop: "Boutique - Toutes les collections", footer_about: "Notre histoire", footer_contact: "Contact & Support", footer_info: "INFORMATIONS & POLITIQUES", footer_terms: "Conditions générales", footer_privacy: "Politique de confidentialité", footer_delivery: "Politique de livraison", footer_return: "Politique de retour (14 jours)", footer_care: "Entretien des bijoux", footer_consumer: "PROTECTION DU CONSOMMATEUR", return_title: "Politique de Retour", return_p1: "Vous avez le droit de retourner le produit.", return_h1: "1. Délai", return_p2: "Vous avez 14 jours pour retourner.", return_h2: "2. Conditions", return_p3: "Le produit doit :", return_li1: "Être en parfait état.", return_li2: "Avoir les étiquettes.", return_li3: "Avoir l'emballage original.", return_h3: "3. Étapes", return_p4: "Contactez-nous.", return_h4: "4. Remboursement", return_p5: "Remboursement en 7 jours." },
+      de: { nav_home: "Startseite", nav_shop: "Shop", nav_about: "Über uns", nav_team: "H-Time Team", nav_contact: "Kontakt", footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique für Liebhaber von Raffinesse.", footer_nav: "SCHNELLNAVIGATION", footer_home: "Startseite - Hauptseite", footer_shop: "Shop - Alle Kollektionen", footer_about: "Unsere Geschichte", footer_contact: "Kontakt & Support", footer_info: "INFORMATIONEN & RICHTLINIEN", footer_terms: "Allgemeine Geschäftsbedingungen", footer_privacy: "Datenschutzrichtlinie", footer_delivery: "Lieferbedingungen", footer_return: "Rückgaberecht (14 Tage)", footer_care: "Schmuckpflege", footer_consumer: "VERBRAUCHERSCHUTZ", return_title: "Rückgaberecht", return_p1: "Sie haben das Recht auf Rückgabe.", return_h1: "1. Frist", return_p2: "Sie haben 14 Tage Zeit.", return_h2: "2. Bedingungen", return_p3: "Bedingungen:", return_li1: "Originalzustand.", return_li2: "Mit Etiketten.", return_li3: "Originalverpackung.", return_h3: "3. Schritte", return_p4: "Kontaktieren Sie uns.", return_h4: "4. Erstattung", return_p5: "Erstattung innerhalb von 7 Tagen." },
+      es: { nav_home: "Inicio", nav_shop: "Tienda", nav_about: "Sobre Nosotros", nav_team: "Equipo H-Time", nav_contact: "Contáctanos", footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo dedicada a quienes aprecian el refinamiento.", footer_nav: "NAVEGACIÓN RÁPIDA", footer_home: "Inicio - Página principal", footer_shop: "Tienda - Todas las colecciones", footer_about: "Nuestra historia", footer_contact: "Contacto & Soporte", footer_info: "INFORMACIÓN & POLÍTICAS", footer_terms: "Términos y condiciones", footer_privacy: "Política de privacidad", footer_delivery: "Política de entrega", footer_return: "Política de devolución (14 días)", footer_care: "Cuidado de las joyas", footer_consumer: "PROTECCIÓN AL CONSUMIDOR", return_title: "Política de Devolución", return_p1: "Tiene derecho a devolver el producto.", return_h1: "1. Plazo", return_p2: "Tiene 14 días.", return_h2: "2. Condiciones", return_p3: "Las condiciones son:", return_li1: "Estado original.", return_li2: "Con etiquetas.", return_li3: "Embalaje original.", return_h3: "3. Pasos", return_p4: "Contáctenos.", return_h4: "4. Reembolso", return_p5: "Reembolso en 7 días." },
+      it: { nav_home: "Home", nav_shop: "Negozio", nav_about: "Chi Siamo", nav_team: "Team H-Time", nav_contact: "Contattaci", footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso dedicata a chi apprezza la raffinatezza.", footer_nav: "NAVIGAZIONE RAPIDA", footer_home: "Home - Pagina principale", footer_shop: "Negozio - Tutte le collezioni", footer_about: "La nostra storia", footer_contact: "Contatto & Supporto", footer_info: "INFORMAZIONI & POLITICHE", footer_terms: "Termini e condizioni", footer_privacy: "Informativa sulla privacy", footer_delivery: "Politica di consegna", footer_return: "Politica di reso (14 giorni)", footer_care: "Cura dei gioielli", footer_consumer: "PROTEZIONE DEL CONSUMATORE", return_title: "Politica di Reso", return_p1: "Hai il diritto di restituire il prodotto.", return_h1: "1. Periodo", return_p2: "Hai 14 giorni.", return_h2: "2. Condizioni", return_p3: "Condizioni:", return_li1: "Stato originale.", return_li2: "Con etichette.", return_li3: "Imballaggio originale.", return_h3: "3. Passaggi", return_p4: "Contattaci.", return_h4: "4. Rimborso", return_p5: "Rimborso in 7 giorni." }
+    };
+    function applyTranslations(lang) { const dict = translations[lang] || translations.ro; document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.getAttribute('data-i18n'); if (dict[key]) el.innerText = dict[key]; }); }
+    document.addEventListener('DOMContentLoaded', () => {
+      const switcher = document.getElementById('languageSwitcher');
+      if(switcher) { switcher.value = localStorage.getItem('htime_lang') || 'ro'; switcher.addEventListener('change', () => { localStorage.setItem('htime_lang', switcher.value); applyTranslations(switcher.value); }); }
+      applyTranslations(localStorage.getItem('htime_lang') || 'ro');
+      if (typeof actualizeazaNumarCos === 'function') actualizeazaNumarCos();
+    });
+  </script>
+</body>
+</html>
