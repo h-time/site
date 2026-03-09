@@ -126,34 +126,36 @@
     .hero-divider-bottom svg { display:block; width:calc(100% + 1.3px); height:6vw; }
     .hero-divider-bottom .shape-fill { fill: var(--light-bg); }
 
-    /* ================= CATEGORII (Compacte, un singur rand) ================= */
-    .categories-section { text-align:center; padding:80px 20px 80px; }
-    .categories-section h2 { margin-bottom:50px; font-size:2.5rem; font-weight:700; letter-spacing:2px; }
+    /* ================= CATEGORII ================= */
+    .categories-section { text-align:center; padding:80px 20px 80px; position: relative; z-index: 20; }
+    .categories-section h2 { margin-bottom:50px; font-size:2.5rem; font-weight:700; letter-spacing:2px; position: relative; z-index: 1; }
     
     .circles-container { 
       display:flex; 
       justify-content:center; 
-      gap: clamp(15px, 3vw, 40px); /* Spatiu scalabil intre cercuri */
-      flex-wrap: nowrap; /* Tine totul pe un singur rand */
+      gap: clamp(15px, 3vw, 40px); 
+      flex-wrap: nowrap; 
       margin-bottom:40px; 
       width: 100%;
       max-width: 1200px;
       margin-left: auto;
       margin-right: auto;
-      overflow-x: auto; /* Permite scroll pe mobil in loc sa le rupa pe mai multe randuri */
+      overflow-x: auto; 
       padding-bottom: 10px;
+      position: relative;
+      z-index: 10; /* Protejeaza cercurile pentru a sta PESTE sectiunea de titlu */
     }
     
     .circle-item { 
       text-align:center; 
       cursor:pointer; 
-      flex: 0 0 auto; /* Nu permite micsorarea fortata a latimii */
-      width: clamp(130px, 20vw, 250px); /* Dimensiuni perfecte automat */
+      flex: 0 0 auto; 
+      width: clamp(130px, 20vw, 250px); 
     }
     
     .circle-img { 
       width: 100%; 
-      aspect-ratio: 1/1; /* Mentine poza patrata perfect ca sa devina cerc */
+      aspect-ratio: 1/1; 
       height: auto;
       border-radius:50%; 
       object-fit:cover; 
@@ -163,6 +165,7 @@
     .circle-item:hover .circle-img { transform:scale(1.05); box-shadow:0 15px 30px rgba(0,0,0,0.15); }
     .circle-item h3 { font-size:clamp(0.9rem, 1.5vw, 1.2rem); margin-bottom:10px; font-weight:600; letter-spacing:1px; }
     .circle-item p { font-size:clamp(0.75rem, 1vw, 0.85rem); color:#555; }
+    .dynamic-price { font-weight: 600; color: var(--dark); }
 
     .btn-descopera {
       background:black; color:white; padding:15px 35px; border-radius:30px; border:none; cursor:pointer;
@@ -189,7 +192,6 @@
     .sale-card:hover { transform:translateY(-5px); box-shadow:0 10px 20px rgba(255,255,255,0.1); }
     .sale-card img { width:100%; height:250px; object-fit:cover; margin-bottom:20px; background:#000; border-radius: 6px; }
     
-    /* Eticheta design magazin */
     .sale-badge { 
       position:absolute; top:25px; left:25px; 
       background: linear-gradient(to right, var(--pink), var(--peach), var(--pink)); 
@@ -362,31 +364,31 @@
   <section class="categories-section">
     <h2 class="gradient-underline" data-i18n="cat_title">CE PRODUSE OFERIM</h2>
     
-    <!-- Modificat sa fie compact pe un rand cu bratari adaugate -->
     <div class="circles-container">
-      <div class="circle-item" onclick="window.location.href='magazin.html'">
+      <!-- Navigare si filtrare via funcția goToMagazin() -->
+      <div class="circle-item" onclick="goToMagazin('ceasuri')">
         <img src="produs2-2.png" alt="Ceasuri" class="circle-img">
         <h3 data-i18n="cat1_title">CEASURI</h3>
-        <p data-i18n="cat1_price">Prețuri începând de la 100 €</p>
+        <p><span data-i18n="cat_starts">Prețuri începând de la</span> <span class="dynamic-price" data-base="100">100 €</span></p>
       </div>
-      <div class="circle-item" onclick="window.location.href='magazin.html'">
+      <div class="circle-item" onclick="goToMagazin('inele')">
         <img src="produs7-1.png" alt="Inele" class="circle-img">
         <h3 data-i18n="cat2_title">INELE</h3>
-        <p data-i18n="cat2_price">Prețuri începând de la 100 €</p>
+        <p><span data-i18n="cat_starts">Prețuri începând de la</span> <span class="dynamic-price" data-base="100">100 €</span></p>
       </div>
-      <div class="circle-item" onclick="window.location.href='magazin.html'">
+      <div class="circle-item" onclick="goToMagazin('cercei')">
         <img src="produs15-2.png" alt="Cercei" class="circle-img">
         <h3 data-i18n="cat3_title">CERCEI</h3>
-        <p data-i18n="cat3_price">Prețuri începând de la 100 €</p>
+        <p><span data-i18n="cat_starts">Prețuri începând de la</span> <span class="dynamic-price" data-base="100">100 €</span></p>
       </div>
-      <div class="circle-item" onclick="window.location.href='magazin.html'">
+      <div class="circle-item" onclick="goToMagazin('bratari')">
         <img src="produs19-2.png" alt="Brățări" class="circle-img">
         <h3 data-i18n="cat4_title">BRĂȚĂRI</h3>
-        <p data-i18n="cat4_price">Prețuri începând de la 100 €</p>
+        <p><span data-i18n="cat_starts">Prețuri începând de la</span> <span class="dynamic-price" data-base="100">100 €</span></p>
       </div>
     </div>
     
-    <button class="btn-descopera" data-i18n="cat_btn" onclick="window.location.href='magazin.html'">Descoperă mai multe</button>
+    <button class="btn-descopera" data-i18n="cat_btn" onclick="goToMagazin('all')">Descoperă mai multe</button>
   </section>
 
   <section class="sale-marquee-section">
@@ -394,7 +396,7 @@
     <div class="sale-track" id="sale-track-container"><!-- produse generate JS --></div>
   </section>
 
-  <!-- OBJECTIVES / ESENȚA H-TIME (expanded) -->
+  <!-- OBJECTIVES / ESENȚA H-TIME -->
   <section class="objectives-section">
     <div class="objectives-header">
       <h2 class="gradient-underline" data-i18n="obj_title">ESENȚA H-TIME</h2>
@@ -445,7 +447,6 @@
     <polygon points="0,0 5,10 10,0 15,10 20,0 25,10 30,0 35,10 40,0 45,10 50,0 55,10 60,0 65,10 70,0 75,10 80,0 85,10 90,0 95,10 100,0 100,10 0,10" fill="#111111"></polygon>
   </svg>
 
-  <!-- FAQ (expanded) -->
   <section class="faq-section">
     <div class="faq-container">
       <div style="text-align:center; margin-bottom:50px;">
@@ -550,14 +551,10 @@
     <div class="footer-bottom">© 2024 - 2026 H-TIME Luxury Experience. Toate drepturile sunt rezervate.</div>
   </footer>
 
-  <!-- produse.js (external) pentru oferte -->
   <script src="produse.js"></script>
-  <!-- script.js pentru global variables / functions -->
   <script src="script.js"></script>
 
-  <!-- Main JS -->
   <script>
-    // Setare valute pt oferte
     const currencyConfig = {
       ro: { symbol: 'Lei', rate: 4.97, position: 'right' },
       en: { symbol: '$', rate: 1.08, position: 'left' },
@@ -578,20 +575,18 @@
       return product[`nume_${lang}`] || product.nume;
     }
 
+    // FUNCȚIA PENTRU NAVIGARE ȘI FILTRARE AUTOMATĂ MAGZIN
+    function goToMagazin(category) {
+      localStorage.setItem('htime_filter_cat', category);
+      window.location.href = 'magazin.html';
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
-      // Hero random image din pozele locale
       const heroSection = document.getElementById('hero-section');
-      const heroImages = [
-        "poza1.png",
-        "poza2.png",
-        "poza3.png",
-        "poza4.png",
-        "poza5.png"
-      ];
+      const heroImages = [ "poza1.png", "poza2.png", "poza3.png", "poza4.png", "poza5.png" ];
       const randomImgUrl = heroImages[Math.floor(Math.random()*heroImages.length)];
       if (heroSection) heroSection.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('${randomImgUrl}')`;
 
-      // Definire functiei pt randarea ofertelor in JS
       function renderOferte(lang) {
         const trackContainer = document.getElementById('sale-track-container');
         if (!trackContainer) return;
@@ -633,7 +628,6 @@
         trackContainer.innerHTML = carduriHTML + carduriHTML;
       }
 
-      // FAQ accordion
       document.querySelectorAll('.faq-question').forEach(button => {
         button.addEventListener('click', () => {
           const item = button.parentElement;
@@ -657,7 +651,6 @@
         });
       });
 
-      // Cart count se face global din script.js
       if(typeof actualizeazaNumarCos === 'function') {
         actualizeazaNumarCos();
       } else {
@@ -666,25 +659,23 @@
         if (cartBtn) cartBtn.innerText = `Cart (${cart.length})`;
       }
 
-      // Language switcher initializare
       const switcher = document.getElementById('languageSwitcher');
       const savedLang = localStorage.getItem('htime_lang') || 'ro';
       if (switcher) switcher.value = savedLang;
       applyTranslations(savedLang);
-      renderOferte(savedLang); // Renderizam ofertele la incarcare cu limba setata
+      renderOferte(savedLang); 
 
       if (switcher) {
         switcher.addEventListener('change', () => {
           const lang = switcher.value;
           localStorage.setItem('htime_lang', lang);
           applyTranslations(lang);
-          renderOferte(lang); // Re-renderizam ofertele la schimbarea limbii
+          renderOferte(lang); 
         });
       }
     });
   </script>
 
-  <!-- Translations logic (RO, EN, FR, DE, ES, IT) -->
   <script>
     const translations = {
       ro: {
@@ -694,9 +685,12 @@
         feat1_title: "LIVRARE GRATUITĂ", feat1_text: "Pentru toate comenzile de peste 500 RON, direct la tine la uşă.",
         feat2_title: "GARANȚIE 24 LUNI", feat2_text: "Toate piesele noastre vin cu certificat de autenticitate şi garanţie.",
         feat3_title: "RETUR SIMPLIFICAT", feat3_text: "Ai la dispoziție 14 zile calendaristice pentru a schimba produsul.",
-        cat_title: "CE PRODUSE OFERIM", cat1_title: "CEASURI", cat1_price: "Prețuri începând de la 100 €",
-        cat2_title: "INELE", cat2_price: "Prețuri începând de la 100 €", cat3_title: "CERCEI", cat3_price: "Prețuri începând de la 100 €",
-        cat4_title: "BRĂȚĂRI", cat4_price: "Prețuri începând de la 100 €",
+        cat_title: "CE PRODUSE OFERIM", 
+        cat1_title: "CEASURI", 
+        cat2_title: "INELE", 
+        cat3_title: "CERCEI", 
+        cat4_title: "BRĂȚĂRI", 
+        cat_starts: "Prețuri începând de la",
         cat_btn: "Descoperă mai multe", sale_title: "OFERTE EXCLUSIVE", badge_sale: "SALE",
         obj_title: "ESENȚA H-TIME",
         obj1_title: "ENERGIE ȘI EMOȚIE", obj1_text: "Fiecare piatră spirituală pe care o alegem cu grijă poartă o vibrație și un destin. Ne dorim ca bijuteriile noastre să devină talismane personale, conectând frumusețea formelor cu energia ta interioară, pentru a aduce protecție, iubire și echilibru în viața de zi cu zi.",
@@ -731,9 +725,12 @@
         feat1_title: "FREE SHIPPING", feat1_text: "For all orders over 500 RON, delivered straight to your door.",
         feat2_title: "24-MONTH WARRANTY", feat2_text: "All our pieces come with an authenticity certificate and warranty.",
         feat3_title: "EASY RETURNS", feat3_text: "You have 14 calendar days available to exchange your product.",
-        cat_title: "WHAT WE OFFER", cat1_title: "WATCHES", cat1_price: "Prices starting from €100",
-        cat2_title: "RINGS", cat2_price: "Prices starting from €100", cat3_title: "EARRINGS", cat3_price: "Prices starting from €100",
-        cat4_title: "BRACELETS", cat4_price: "Prices starting from €100",
+        cat_title: "WHAT WE OFFER", 
+        cat1_title: "WATCHES", 
+        cat2_title: "RINGS", 
+        cat3_title: "EARRINGS", 
+        cat4_title: "BRACELETS", 
+        cat_starts: "Prices starting from",
         cat_btn: "Discover more", sale_title: "EXCLUSIVE OFFERS", badge_sale: "SALE",
         obj_title: "THE ESSENCE OF H-TIME",
         obj1_title: "ENERGY & EMOTION", obj1_text: "Each spiritual stone we carefully choose carries a vibration and a destiny. We want our jewelry to become personal talismans, connecting the beauty of shapes with your inner energy to bring protection, love and balance into everyday life.",
@@ -768,9 +765,12 @@
         feat1_title: "LIVRAISON GRATUITE", feat1_text: "Pour toutes les commandes supérieures à 500 RON, livrées à votre porte.",
         feat2_title: "GARANTIE 24 MOIS", feat2_text: "Toutes nos pièces sont accompagnées d'un certificat d'authenticité et d'une garantie.",
         feat3_title: "RETOUR FACILE", feat3_text: "Vous disposez de 14 jours calendaires pour échanger votre produit.",
-        cat_title: "CE QUE NOUS OFFRONS", cat1_title: "MONTRES", cat1_price: "Prix à partir de 100 €",
-        cat2_title: "BAGUES", cat2_price: "Prix à partir de 100 €", cat3_title: "BOUCLES D'OREILLES", cat3_price: "Prix à partir de 100 €",
-        cat4_title: "BRACELETS", cat4_price: "Prix à partir de 100 €",
+        cat_title: "CE QUE NOUS OFFRONS", 
+        cat1_title: "MONTRES", 
+        cat2_title: "BAGUES", 
+        cat3_title: "BOUCLES D'OREILLES", 
+        cat4_title: "BRACELETS", 
+        cat_starts: "Prix à partir de",
         cat_btn: "Découvrir plus", sale_title: "OFFRES EXCLUSIVES", badge_sale: "SOLDES",
         obj_title: "L'ESSENCE DE H-TIME",
         obj1_title: "ÉNERGIE & ÉMOTION",
@@ -823,9 +823,12 @@
         feat1_title: "KOSTENLOSER VERSAND", feat1_text: "Für alle Bestellungen über 500 RON, direkt zu Ihnen nach Hause.",
         feat2_title: "24 MONATE GARANTIE", feat2_text: "Alle unsere Stücke werden mit Echtheitszertifikat und Garantie geliefert.",
         feat3_title: "EINFACHE RÜCKGABE", feat3_text: "Sie haben 14 Kalendertage Zeit, um Ihr Produkt umzutauschen.",
-        cat_title: "WAS WIR BIETEN", cat1_title: "UHREN", cat1_price: "Preise ab 100 €",
-        cat2_title: "RINGE", cat2_price: "Preise ab 100 €", cat3_title: "OHRSCHMUCK", cat3_price: "Preise ab 100 €",
-        cat4_title: "ARMBÄNDER", cat4_price: "Preise ab 100 €",
+        cat_title: "WAS WIR BIETEN", 
+        cat1_title: "UHREN", 
+        cat2_title: "RINGE", 
+        cat3_title: "OHRSCHMUCK", 
+        cat4_title: "ARMBÄNDER", 
+        cat_starts: "Preise ab",
         cat_btn: "Mehr entdecken", sale_title: "EXKLUSIVE ANGEBOTE", badge_sale: "ANGEBOT",
         obj_title: "DIE ESSENZ VON H-TIME",
         obj1_title: "ENERGIE & EMOTION",
@@ -878,9 +881,12 @@
         feat1_title: "ENVÍO GRATUITO", feat1_text: "Para todos los pedidos superiores a 500 RON, entregados en su puerta.",
         feat2_title: "GARANTÍA 24 MESES", feat2_text: "Todas nuestras piezas vienen con certificado de autenticidad y garantía.",
         feat3_title: "DEVOLUCIONES FÁCILES", feat3_text: "Tienes 14 días naturales para cambiar tu producto.",
-        cat_title: "LO QUE OFRECEMOS", cat1_title: "RELOJES", cat1_price: "Precios desde 100 €",
-        cat2_title: "ANILLOS", cat2_price: "Precios desde 100 €", cat3_title: "PENDIENTES", cat3_price: "Precios desde 100 €",
-        cat4_title: "PULSERAS", cat4_price: "Precios desde 100 €",
+        cat_title: "LO QUE OFRECEMOS", 
+        cat1_title: "RELOJES", 
+        cat2_title: "ANILLOS", 
+        cat3_title: "PENDIENTES", 
+        cat4_title: "PULSERAS", 
+        cat_starts: "Precios desde",
         cat_btn: "Descubrir más", sale_title: "OFERTAS EXCLUSIVAS", badge_sale: "REBAJA",
         obj_title: "LA ESENCIA DE H-TIME",
         obj1_title: "ENERGÍA Y EMOCIÓN",
@@ -933,9 +939,12 @@
         feat1_title: "SPEDIZIONE GRATUITA", feat1_text: "Per tutti gli ordini superiori a 500 RON, consegnati direttamente a casa.",
         feat2_title: "GARANZIA 24 MESI", feat2_text: "Tutti i nostri pezzi sono accompagnati da certificato di autenticità e garanzia.",
         feat3_title: "RESI SEMPLICI", feat3_text: "Hai 14 giorni di calendario per cambiare il prodotto.",
-        cat_title: "COSA OFFRIAMO", cat1_title: "OROLOGI", cat1_price: "Prezzi a partire da 100 €",
-        cat2_title: "ANELLI", cat2_price: "Prezzi a partire da 100 €", cat3_title: "ORECCHINI", cat3_price: "Prezzi a partire da 100 €",
-        cat4_title: "BRACCIALI", cat4_price: "Prezzi a partire da 100 €",
+        cat_title: "COSA OFFRIAMO", 
+        cat1_title: "OROLOGI", 
+        cat2_title: "ANELLI", 
+        cat3_title: "ORECCHINI", 
+        cat4_title: "BRACCIALI", 
+        cat_starts: "Prezzi a partire da",
         cat_btn: "Scopri di più", sale_title: "OFFERTE ESCLUSIVE", badge_sale: "SALDI",
         obj_title: "L'ESSENZA DI H-TIME",
         obj1_title: "ENERGIA & EMOZIONE",
@@ -990,6 +999,12 @@
         if (dict[key]) el.innerHTML = dict[key];
       });
       if (dict.title) document.title = dict.title;
+
+      // Aplică și prețurile dinamice de start!
+      document.querySelectorAll('.dynamic-price').forEach(el => {
+        const basePrice = parseFloat(el.getAttribute('data-base'));
+        el.innerText = formatPrice(basePrice, lang);
+      });
     }
   </script>
 </body>
