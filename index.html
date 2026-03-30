@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>H-TIME | Luxury Experience</title>
-  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="icon" href="logo.webp" type="image/webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -279,12 +279,46 @@
       .categories-section h2, .objectives-header h2 { font-size:1.8rem; }
       footer { padding:40px 20px; display:flex; flex-direction:column; }
     }
+
+    /* ========================================================= */
+    /* PACHET ADAUGAT PENTRU RESPONSIVITATE TELEFON SI TABLETA   */
+    /* Ne asiguram ca imaginile nu depasesc niciodata ecranul    */
+    img { max-width: 100%; height: auto; object-fit: cover; }
+    
+    @media screen and (max-width: 768px) {
+        /* Marim usor textul pentru o lectura mai usoara pe mobil */
+        body, p, a, li { font-size: 16px !important; }
+        
+        /* Fortam continutul sa ramana in limitele ecranului */
+        .container, section, main { 
+            width: 100% !important; 
+            padding-left: 15px !important; 
+            padding-right: 15px !important; 
+            box-sizing: border-box; 
+        }
+        
+        /* Elementele sa stea in coloana (una sub alta) */
+        .produse, .grid, .row, .rand { 
+            display: flex !important; 
+            flex-direction: column !important; 
+            align-items: center !important; 
+            gap: 20px; 
+        }
+        
+        /* Butoane mai lungi si groase pentru deget */
+        .btn-descopera { 
+            width: 100% !important; 
+            padding: 15px !important; 
+            margin-bottom: 10px; 
+        }
+    }
+    /* ========================================================= */
   </style>
 </head>
 <body>
 
   <nav>
-    <a href="index.html" class="logo"><img src="logo.png" alt="H-TIME Logo"></a>
+    <a href="index.html" class="logo"><img src="logo.webp" alt="H-TIME Logo"></a>
 
     <div class="nav-links">
       <a href="index.html" data-i18n="nav_home">Acasă</a>
@@ -307,7 +341,7 @@
     </div>
   </nav>
 
-  <header class="hero" id="hero-section" style="background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('poza1.png');">
+  <header class="hero" id="hero-section" style="background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('poza1.webp');">
     
     <!-- Animatia noua adaugata corect pe textul vechi -->
     <h1 class="hero-title-container" data-text="H-TIME">
@@ -367,22 +401,22 @@
     <div class="circles-container">
       <!-- Navigare si filtrare via funcția goToMagazin() -->
       <div class="circle-item" onclick="goToMagazin('ceasuri')">
-        <img src="produs2-2.png" alt="Ceasuri" class="circle-img">
+        <img src="produs2-2.webp" alt="Ceasuri" class="circle-img">
         <h3 data-i18n="cat1_title">CEASURI</h3>
         <p><span data-i18n="cat_starts">Prețuri începând de la</span> <span class="dynamic-price" data-base="100">100 €</span></p>
       </div>
       <div class="circle-item" onclick="goToMagazin('inele')">
-        <img src="produs7-1.png" alt="Inele" class="circle-img">
+        <img src="produs7-1.webp" alt="Inele" class="circle-img">
         <h3 data-i18n="cat2_title">INELE</h3>
         <p><span data-i18n="cat_starts">Prețuri începând de la</span> <span class="dynamic-price" data-base="100">100 €</span></p>
       </div>
       <div class="circle-item" onclick="goToMagazin('cercei')">
-        <img src="produs15-2.png" alt="Cercei" class="circle-img">
+        <img src="produs15-2.webp" alt="Cercei" class="circle-img">
         <h3 data-i18n="cat3_title">CERCEI</h3>
         <p><span data-i18n="cat_starts">Prețuri începând de la</span> <span class="dynamic-price" data-base="100">100 €</span></p>
       </div>
       <div class="circle-item" onclick="goToMagazin('bratari')">
-        <img src="produs19-2.png" alt="Brățări" class="circle-img">
+        <img src="produs19-2.webp" alt="Brățări" class="circle-img">
         <h3 data-i18n="cat4_title">BRĂȚĂRI</h3>
         <p><span data-i18n="cat_starts">Prețuri începând de la</span> <span class="dynamic-price" data-base="100">100 €</span></p>
       </div>
@@ -583,7 +617,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       const heroSection = document.getElementById('hero-section');
-      const heroImages = [ "poza1.png", "poza2.png", "poza3.png", "poza4.png", "poza5.png" ];
+      const heroImages = [ "poza1.webp", "poza2.webp", "poza3.webp", "poza4.webp", "poza5.webp" ];
       const randomImgUrl = heroImages[Math.floor(Math.random()*heroImages.length)];
       if (heroSection) heroSection.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('${randomImgUrl}')`;
 
@@ -771,7 +805,7 @@
         cat3_title: "BOUCLES D'OREILLES", 
         cat4_title: "BRACELETS", 
         cat_starts: "Prix à partir de",
-        cat_btn: "Découvrir plus", sale_title: "OFFRES EXCLUSIVES", badge_sale: "SOLDES",
+        cat_btn: "Découvrir plus", sale_title: "OFFRES EXCLUSIVAS", badge_sale: "SOLDES",
         obj_title: "L'ESSENCE DE H-TIME",
         obj1_title: "ÉNERGIE & ÉMOTION",
         obj1_text: "Chaque pierre spirituelle que nous choisissons avec soin porte une vibration et un destin. Nous voulons que nos bijoux deviennent des talismans personnels, reliant la beauté des formes à votre énergie intérieure.",
