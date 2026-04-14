@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Magazin | H-TIME</title>
-  <link rel="icon" href="logo.webp" type="image/webp">
+  <link rel="icon" href="logo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
@@ -349,8 +349,9 @@
 </head>
 <body>
 
+  <!-- NAVBAR -->
   <nav>
-    <a href="index.html" class="logo"><img src="logo.webp" alt="H-TIME Logo"></a>
+    <a href="index.html" class="logo"><img src="logo.png" alt="H-TIME Logo"></a>
 
     <div class="nav-links">
       <a href="index.html" data-i18n="nav_home">Acasă</a>
@@ -373,8 +374,10 @@
     </div>
   </nav>
 
+  <!-- SHOP LAYOUT -->
   <div class="shop-container">
     
+    <!-- SIDEBAR -->
     <div class="sidebar">
       <p class="filter-label" data-i18n="shop_filter">Filtrează /</p>
       <h2 id="category-title" data-i18n="shop_cat_all_title">TOATE</h2>
@@ -412,10 +415,13 @@
       </div>
     </div>
 
+    <!-- PRODUCTS GRID -->
     <div class="products-grid" id="products-container">
-      </div>
+      <!-- Injected via JS -->
+    </div>
   </div>
 
+  <!-- FOOTER -->
   <footer>
     <div class="footer-col">
       <h2>H-TIME</h2>
@@ -451,8 +457,8 @@
     <div class="footer-col">
       <h3 data-i18n="footer_consumer">PROTECȚIA CONSUMATORULUI</h3>
       <div>
-        <a href="https://anpc.ro/ce-este-sal/" target="_blank"><img src="https://ro.pandora.net/mobify/bundle/1108/static/img/SAL-PICTOGRAMA.webp?app=pdp" alt="ANPC SAL" class="anpc-img"></a>
-        <a href="https://ec.europa.eu/consumers/odr" target="_blank"><img src="https://ro.pandora.net/mobify/bundle/1108/static/img/pictogramaSOL.webp?app=pdp" alt="ANPC SOL" class="anpc-img"></a>
+        <a href="https://anpc.ro/ce-este-sal/" target="_blank"><img src="https://ro.pandora.net/mobify/bundle/1108/static/img/SAL-PICTOGRAMA.png?app=pdp" alt="ANPC SAL" class="anpc-img"></a>
+        <a href="https://ec.europa.eu/consumers/odr" target="_blank"><img src="https://ro.pandora.net/mobify/bundle/1108/static/img/pictogramaSOL.png?app=pdp" alt="ANPC SOL" class="anpc-img"></a>
       </div>
     </div>
 
@@ -607,8 +613,8 @@
               ${saleBadge}
               <a href="produs.html?id=${p.id}" style="display:block; flex-grow:1;">
                 <div class="img-container">
-                  <img src="${p.imagine}" class="main-img" onerror="this.src='poza1.webp'">
-                  <img src="${hoverImage}" class="hover-img" onerror="this.src='poza1.webp'">
+                  <img src="${p.imagine}" class="main-img" onerror="this.src='poza1.png'">
+                  <img src="${hoverImage}" class="hover-img" onerror="this.src='poza1.png'">
                 </div>
                 <h3 class="product-card-title">${numeProdus}</h3>
               </a>
