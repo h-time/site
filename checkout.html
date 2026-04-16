@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Checkout | H-TIME</title>
-  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="icon" href="logo.webp" type="image/webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -68,7 +68,6 @@
       gap: 50px;
       flex: 1;
       width: 100%;
-      font-family: 'Space Grotesk', sans-serif;
     }
 
     .checkout-main { flex: 2; }
@@ -83,7 +82,7 @@
     }
 
     .section-title {
-      font-family: 'Syncopate', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       font-size: 1.4rem;
       margin-bottom: 25px;
@@ -129,7 +128,7 @@
     .form-group.full { grid-column: span 2; }
     .form-group label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: #555; }
     .form-group input {
-      padding: 14px; border: 1px solid #ddd; border-radius: 10px; font-family: 'Space Grotesk'; outline: none;
+      padding: 14px; border: 1px solid #ddd; border-radius: 10px; font-family: 'Montserrat', sans-serif; outline: none;
     }
     .form-group input:focus { border-color: var(--peach); box-shadow: 0 0 10px rgba(252, 191, 136, 0.1); }
 
@@ -152,7 +151,7 @@
       border: none;
       padding: 18px;
       border-radius: 40px;
-      font-family: 'Space Grotesk';
+      font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -168,7 +167,7 @@
     }
 
     /* Factura (Hidden) */
-    #invoice-container { display: none; background: white; padding: 40px; border: 1px solid #ddd; max-width: 800px; margin: 40px auto; color: black; font-family: 'Space Grotesk', sans-serif; }
+    #invoice-container { display: none; background: white; padding: 40px; border: 1px solid #ddd; max-width: 800px; margin: 40px auto; color: black; font-family: 'Montserrat', sans-serif; }
 
     /* ================= FOOTER ================= */
     footer { 
@@ -205,7 +204,7 @@
 
   <!-- NAVBAR -->
   <nav>
-    <a href="index.html" class="logo"><img src="logo.png" alt="H-TIME Logo"></a>
+    <a href="index.html" class="logo"><img src="logo.webp" alt="H-TIME Logo"></a>
     <div class="nav-links">
       <a href="index.html" data-i18n="nav_home">Acasă</a>
       <a href="magazin.html" data-i18n="nav_shop">Magazin</a>
@@ -409,7 +408,7 @@
       listContainer.innerHTML = groupedCart.map((item, idx) => `
         <div class="cart-item">
           <div class="item-info">
-            <img src="${item.imagine || 'ceas.jpg'}" alt="${item.nume}">
+            <img src="${item.imagine || 'poza1.webp'}" alt="${item.nume}" onerror="this.src='poza1.webp'">
             <div>
               <h4>${item.nume}</h4>
               <p>${dict.unit_price} ${formatPrice(item.pret, currentLang)}</p>
@@ -430,7 +429,7 @@
       // CALCULATIONS
       const subtotalEur = groupedCart.reduce((acc, item) => acc + (item.pret * (item.qty || 1)), 0);
       
-      // Logica pentru transport: 25 Lei sub pragul de 500 Lei, 0 Lei peste prag
+      // Logica pentru transport: 25 Lei sub pragul de 1500 Lei, 0 Lei peste prag
       const subtotalRon = subtotalEur * 4.97;
       let deliveryFeeEur = 0;
       
@@ -605,6 +604,16 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      // Setam logica robusta pentru numarul cosului
+      if(typeof actualizeazaNumarCos === 'function') {
+        actualizeazaNumarCos();
+      } else {
+        let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+        let count = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+        const cartBtn = document.getElementById('cart-nav-btn');
+        if (cartBtn) cartBtn.innerText = `Cart (${count})`;
+      }
+
       const switcher = document.getElementById('languageSwitcher');
       const savedLang = localStorage.getItem('htime_lang') || 'ro';
       if(switcher) {
