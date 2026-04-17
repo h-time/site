@@ -7,7 +7,6 @@
   <link rel="icon" href="logo.webp" type="image/webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Am păstrat DM Serif Display, Playfair Display (pentru elemente animate/slogan) și Montserrat (pentru restul site-ului) -->
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
 
   <style>
@@ -20,7 +19,7 @@
 
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
-      font-family: 'Montserrat', sans-serif; /* Fontul global Montserrat */
+      font-family: 'Montserrat', sans-serif;
       font-weight: 300;
       background-color: var(--light-bg);
       color: var(--dark);
@@ -86,19 +85,22 @@
       transform: translate(-50%, -50%);
       width: clamp(140px, 20vw, 300px);
       z-index: 20;
-      pointer-events: none; /* Să nu blocheze hover-ul textului după ce dispare */
+      pointer-events: none;
+      /* Animația este pusă acum separat pentru a fi declanșată din JS */
+    }
+    .hero-logo-morph.start-anim {
       animation: morphLogo 4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
 
     @keyframes morphLogo {
       0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); filter: blur(10px); }
-      10% { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0) brightness(1); }
-      40% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); filter: blur(0) brightness(1.2); }
-      55% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); filter: blur(20px) brightness(3); visibility: hidden; }
+      10% { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0); }
+      40% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); filter: blur(0); }
+      55% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); filter: blur(20px); visibility: hidden; }
       100% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); filter: blur(20px); visibility: hidden; }
     }
 
-    /* Titlul Mare - DM Serif Display */
+    /* Titlul Mare */
     .hero-title-container {
       position: relative;
       display: inline-block;
@@ -109,8 +111,10 @@
       z-index: 10;
       cursor: pointer;
       transition: transform 0.3s ease;
-      /* Textul este invizibil la început și apare din blur */
       opacity: 0;
+      /* Animația este pusă acum separat pentru a fi declanșată din JS */
+    }
+    .hero-title-container.start-anim {
       animation: morphText 4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
     }
 
@@ -137,48 +141,32 @@
       -webkit-background-clip: text;
       opacity: 0;
       pointer-events: none;
-      /* Doar miscarea gradientului pe fundal ruland la infinit */
       animation: textGradientMove 4s linear infinite; 
     }
 
-    /* Clasa pentru animația inițială de la deschiderea paginii (pornește după morph) */
     .hero-title-stroke.play-initial {
       animation: textGradientMove 4s linear infinite, fadeStrokeOnce 3s ease-in-out 2.5s forwards;
     }
-
-    /* Clasa pentru animația de hover (controlată prin JS) */
     .hero-title-stroke.play-hover {
       animation: textGradientMove 4s linear infinite, fadeOnHover 1.8s ease-in-out forwards;
     }
 
-    @keyframes fadeStrokeOnce {
-      0% { opacity: 0; }
-      50% { opacity: 1; }
-      100% { opacity: 0; }
-    }
+    @keyframes fadeStrokeOnce { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes fadeOnHover { 0% { opacity: 0; } 30% { opacity: 1; } 100% { opacity: 0; } }
 
-    @keyframes fadeOnHover {
-      0% { opacity: 0; }
-      30% { opacity: 1; }
-      100% { opacity: 0; }
-    }
-
-    /* Sloganul (Subtitlul) - REVENIT LA Playfair Display */
     .hero h4 { 
       font-family: 'Playfair Display', serif; 
       font-size: clamp(1.2rem,3vw,2.5rem); 
       font-weight: 400; 
       margin: 0; 
       z-index: 10; 
-      /* Apare lin după terminarea morphing-ului */
       opacity: 0;
+    }
+    .hero h4.start-anim {
       animation: revealSubtitle 1.5s ease-out 3s forwards;
     }
 
-    @keyframes revealSubtitle {
-      0% { opacity: 0; transform: translateY(15px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes revealSubtitle { 0% { opacity: 0; transform: translateY(15px); } 100% { opacity: 1; transform: translateY(0); } }
 
     .text-highlight { position:relative; display:inline-block; color:#000; z-index:1; padding:0 15px; font-style:italic; font-weight:600; }
     .text-highlight::before {
@@ -202,44 +190,14 @@
       overflow-x: auto; padding: 25px 15px 40px; position: relative; z-index: 10;
     }
     
-    .circle-item { 
-      text-align:center; 
-      cursor:pointer; 
-      flex: 0 0 auto; 
-      width: clamp(130px, 20vw, 250px); 
-    }
-
-    /* REZOLVAREA PENTRU HOVER-UL TĂIAT (Masca rotundă) */
+    .circle-item { text-align:center; cursor:pointer; flex: 0 0 auto; width: clamp(130px, 20vw, 250px); }
     .circle-img-wrapper {
-      width: 100%;
-      aspect-ratio: 1/1;
-      border-radius: 50%;
-      overflow: hidden; /* Aceasta blochează ieșirea imaginii în afara cercului */
-      margin-bottom: 20px;
-      box-shadow: 0 0 0 transparent;
-      transition: box-shadow .4s, transform .4s;
-      transform: translateZ(0); /* Forțează Safari să respecte border-radius-ul */
+      width: 100%; aspect-ratio: 1/1; border-radius: 50%; overflow: hidden; margin-bottom: 20px;
+      box-shadow: 0 0 0 transparent; transition: box-shadow .4s, transform .4s; transform: translateZ(0);
     }
-
-    .circle-img { 
-      width: 100%; 
-      height: 100%; 
-      object-fit:cover; 
-      display: block;
-      transition: transform .4s; 
-    }
-
-    /* Mărim doar imaginea din interiorul măștii rotunde */
-    .circle-item:hover .circle-img { 
-      transform: scale(1.1); 
-    }
-    
-    /* Ridicăm puțin tot cercul și îi dăm umbră */
-    .circle-item:hover .circle-img-wrapper { 
-      box-shadow: 0 15px 30px rgba(0,0,0,0.15); 
-      transform: translateY(-5px); 
-    }
-
+    .circle-img { width: 100%; height: 100%; object-fit:cover; display: block; transition: transform .4s; }
+    .circle-item:hover .circle-img { transform: scale(1.1); }
+    .circle-item:hover .circle-img-wrapper { box-shadow: 0 15px 30px rgba(0,0,0,0.15); transform: translateY(-5px); }
     .circle-item h3 { font-size:clamp(0.9rem, 1.5vw, 1.2rem); margin-bottom:10px; font-weight:600; letter-spacing:1px; }
     .circle-item p { font-size:clamp(0.75rem, 1vw, 0.85rem); color:#555; }
     .dynamic-price { font-weight: 600; color: var(--dark); }
@@ -298,7 +256,43 @@
     .obj-col h3 { font-size:1.2rem; border-bottom:2px solid black; padding-bottom:10px; margin-bottom:20px; font-weight:600; }
     .obj-col p { font-size:0.95rem; line-height:1.8; color:#333; margin-bottom: 15px;}
 
-    /* QUOTES - Textul care se mișcă (Marquee) - Playfair Display */
+    /* ================= SECȚIUNE VIDEO ================= */
+    .video-section {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto 80px auto;
+      padding: 0 20px;
+    }
+    
+    /* Noua bordură animată elegantă */
+    .video-wrapper {
+      padding: 4px; /* Grosimea bordurii */
+      border-radius: 16px;
+      background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
+      background-size: 200% auto;
+      animation: textGradientMove 4s linear infinite;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+      position: relative;
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 16 / 9; /* Menține proporția pentru ecrane de toate dimensiunile */
+      background: #000;
+      /* Box shadow mutat pe wrapper pentru a nu dubla umbrele */
+    }
+    
+    .video-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* QUOTES - Textul care se mișcă (Marquee) */
     .quotes-section { padding:80px 0; background:#000; overflow:hidden; display:flex; flex-direction:column; gap:40px; width:100%; }
     .quote-track { display:flex; width:max-content; white-space:nowrap; gap:80px; font-family: 'Playfair Display', serif; font-style:italic; font-size:1.8rem; color:#fff; }
     .quote-item span { color:var(--peach); font-family: 'Montserrat', sans-serif; font-weight:500; font-style:normal; font-size:1rem; margin-left:20px; }
@@ -357,6 +351,52 @@
     .footer-bottom { grid-column:1 / -1; text-align:center; padding-top:40px; border-top:1px solid #222; color:#555; font-size:0.8rem; margin-top:20px; }
     .anpc-img { max-width:180px; width:100%; height:auto; display:block; margin-bottom:15px; transition:opacity .3s; }
     .anpc-img:hover { opacity:0.7; }
+    .company-info { margin-top: 25px; font-size: 0.85rem; color: #888; line-height: 1.6; }
+
+    /* COOKIE BANNER OVERLAY - REDESIGN */
+    .cookie-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px);
+      z-index: 1999; opacity: 0; visibility: hidden; transition: 0.5s ease;
+    }
+    .cookie-overlay.show { opacity: 1; visibility: visible; }
+
+    .cookie-banner {
+      position: fixed; bottom: -100%; left: 0; width: 100%;
+      background: rgba(17, 17, 17, 0.95); backdrop-filter: blur(15px); color: white;
+      padding: 30px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
+      z-index: 2000; box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
+      transition: bottom 0.6s cubic-bezier(0.4, 0, 0.2, 1); border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .cookie-banner.show { bottom: 0; }
+    .cookie-content { max-width: 800px; text-align: left; }
+    .cookie-content h3 { font-size: 1.3rem; margin-bottom: 15px; font-weight: 600; color: var(--peach); }
+    .cookie-content p { font-size: 0.9rem; line-height: 1.6; color: #ccc; }
+    .cookie-content a { color: var(--peach); text-decoration: underline; transition: color 0.3s; font-weight: 500; }
+    .cookie-content a:hover { color: var(--pink); }
+    
+    .cookie-actions { display: flex; flex-direction: column; gap: 12px; min-width: 280px; width: 100%; }
+    .cookie-buttons-row { display: flex; gap: 10px; width: 100%; }
+    .cookie-actions button {
+      flex: 1; padding: 12px 15px; border-radius: 30px; font-family: 'Montserrat', sans-serif;
+      font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.3s; text-transform: uppercase;
+    }
+    .btn-accept-c { background: linear-gradient(to right, var(--pink), var(--peach)); color: black; border: none; box-shadow: 0 4px 15px rgba(252, 191, 136, 0.2); }
+    .btn-accept-c:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(252, 191, 136, 0.4); }
+    .btn-reject-c { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.3); }
+    .btn-reject-c:hover { border-color: var(--peach); color: var(--peach); }
+    
+    .btn-manage-c { 
+      background: transparent !important; color: #999 !important; border: none !important; 
+      text-decoration: underline !important; text-transform: none !important; font-size: 0.85rem !important; 
+      padding: 5px !important; box-shadow: none !important;
+    }
+    .btn-manage-c:hover { color: white !important; transform: none !important;}
+
+    @media (min-width: 992px) {
+      .cookie-banner { flex-direction: row; justify-content: center; padding: 40px 50px; gap: 50px; }
+      .cookie-actions { width: auto; min-width: 350px; }
+    }
 
     @media (max-width:768px) {
       nav { flex-direction:column; gap:15px; padding:15px; background:rgba(0,0,0,0.8); }
@@ -364,6 +404,7 @@
       .hero-title-container { font-size: 20vw; }
       .categories-section h2, .objectives-header h2 { font-size:1.8rem; }
       footer { padding:40px 20px; display:flex; flex-direction:column; }
+      .cookie-buttons-row { flex-direction: column; }
     }
 
     img { max-width: 100%; height: auto; object-fit: cover; }
@@ -404,14 +445,14 @@
   <header class="hero" id="hero-section" style="background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('poza1.webp');">
     
     <div class="hero-morph-wrapper">
-      <img src="logo.webp" alt="H-TIME Logo" class="hero-logo-morph" onerror="this.src='logo.jpg'">
+      <img src="logo.webp" alt="H-TIME Logo" class="hero-logo-morph" id="hero-logo" onerror="this.src='logo.jpg'">
       <h1 class="hero-title-container" id="main-title" data-text="H-TIME">
         <span class="hero-text-base">H-TIME</span>
-        <span class="hero-title-stroke play-initial" id="main-title-stroke">H-TIME</span>
+        <span class="hero-title-stroke" id="main-title-stroke">H-TIME</span>
       </h1>
     </div>
     
-    <h4><span class="text-highlight" data-i18n="hero_subtitle">”Emoții sculptate în eleganță”</span></h4>
+    <h4 id="hero-subtitle"><span class="text-highlight" data-i18n="hero_subtitle">”Emoții sculptate în eleganță”</span></h4>
 
     <div class="hero-divider-bottom">
       <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -528,6 +569,17 @@
     </div>
   </section>
 
+  <!-- VIDEO SECTION -->
+  <section class="video-section">
+    <!-- Wrapper cu bordura animata gradient adaugat -->
+    <div class="video-wrapper">
+      <div class="video-container">
+        <!-- Se recomandă formatul clip.mp4 (H.264/AAC) pentru suport web universal -->
+        <video src="clip.mp4" autoplay loop muted playsinline poster="poza1.webp"></video>
+      </div>
+    </div>
+  </section>
+
   <section class="quotes-section">
     <div class="quote-track scroll-right-fast">
       <div class="quote-item" data-i18n="quote1">"Bijuteriile sunt cele care fac femeia să se simtă unică" <span>- Coco Chanel</span></div>
@@ -601,7 +653,7 @@
       </div>
 
       <div class="faq-item">
-        <button class="faq-question" data-i18n="faq5_q">DE CE AȚI ALES SLOGANUL „EMOȚII SCULPTATE ÎN ELEGANȚĂ”? <span class="faq-icon">+</span></button>
+        <button class="faq-question" data-i18n="faq5_q">CE SIMBOLIZEAZĂ SLOGANUL „EMOȚII SCULPTATE ÎN ELEGANȚĂ”? <span class="faq-icon">+</span></button>
         <div class="faq-answer">
           <div class="faq-answer-content" data-i18n="faq5_a">
             <p>Acest slogan încapsulează însăși filozofia brandului H-TIME. Pentru noi, o bijuterie nu este doar o bucată de metal prețios; este o promisiune, o amintire înghețată în timp, o dovadă a iubirii sau a unui succes remarcabil.</p>
@@ -628,6 +680,10 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
         </a>
       </div>
+      <div class="company-info">
+        <p><strong>CUI:</strong> 83241620</p>
+        <p><strong>Sediu:</strong> Strada Milcov 18A, Iași 70025</p>
+      </div>
     </div>
 
     <div class="footer-col">
@@ -645,6 +701,7 @@
       <ul>
         <li><a href="termeni.html" data-i18n="footer_terms">Termeni și Condiții</a></li>
         <li><a href="confidentialitate.html" data-i18n="footer_privacy">Politică de Confidențialitate</a></li>
+        <li><a href="politica_cookies.html" data-i18n="footer_cookies">Politică de Cookies</a></li>
         <li><a href="politica_livrare.html" data-i18n="footer_delivery">Politică de Livrare</a></li>
         <li><a href="politici_retur.html" data-i18n="footer_return">Politică de Retur (14 zile)</a></li>
         <li><a href="ingrijirea_bijuteriilor.html" data-i18n="footer_care">Îngrijirea Bijuteriilor</a></li>
@@ -665,6 +722,24 @@
 
     <div class="footer-bottom">© 2024 - 2026 H-TIME Luxury Experience. Toate drepturile sunt rezervate.</div>
   </footer>
+
+  <!-- COOKIE OVERLAY AND BANNER -->
+  <div id="cookie-overlay" class="cookie-overlay"></div>
+  <div id="cookie-banner" class="cookie-banner">
+    <div class="cookie-content">
+      <h3 data-i18n="cookie_title">Salut!</h3>
+      <p data-i18n="cookie_text_detailed">
+        Dorim să îți oferim o experiență cât mai plăcută. Folosim cookie-uri pentru a asigura funcționarea corectă a site-ului, a analiza performanța și a personaliza conținutul. Prin apăsarea butonului "Accept toate", ești de acord cu utilizarea acestora. Poți afla mai multe detalii citind <a href="politica_cookies.html">Politica de Cookies</a> și <a href="confidentialitate.html">Politica de Confidențialitate</a>.
+      </p>
+    </div>
+    <div class="cookie-actions">
+      <div class="cookie-buttons-row">
+        <button id="reject-cookies" class="btn-reject-c" data-i18n="cookie_reject">Refuză toate</button>
+        <button id="accept-cookies" class="btn-accept-c" data-i18n="cookie_accept">Accept toate</button>
+      </div>
+      <button id="manage-cookies" class="btn-manage-c" data-i18n="cookie_manage">Administrează preferințele</button>
+    </div>
+  </div>
 
   <script src="produse.js"></script>
   <script src="script.js"></script>
@@ -706,7 +781,6 @@
       const titleStroke = document.getElementById('main-title-stroke');
       
       if (mainTitle && titleStroke) {
-        // Curățăm clasele când o animație se termină
         titleStroke.addEventListener('animationend', (e) => {
           if (e.animationName === 'fadeStrokeOnce') {
             titleStroke.classList.remove('play-initial');
@@ -716,16 +790,76 @@
           }
         });
 
-        // Adăugăm animația nouă de 1.8 secunde la trecerea cursorului
         mainTitle.addEventListener('mouseenter', () => {
-          if (titleStroke.classList.contains('play-initial')) return; // Nu deranja animația de start
-          
+          if (titleStroke.classList.contains('play-initial')) return; 
           titleStroke.classList.remove('play-hover');
-          void titleStroke.offsetWidth; // Forțăm browserul să repornească animația dacă facem hover repetat
+          void titleStroke.offsetWidth; 
           titleStroke.classList.add('play-hover');
         });
       }
-      // ---------------------------------------------
+
+      // Funcție pentru a porni animațiile secțiunii Hero
+      function startHeroAnimations() {
+        const logoMorph = document.getElementById('hero-logo');
+        const titleContainer = document.getElementById('main-title');
+        const titleStroke = document.getElementById('main-title-stroke');
+        const subtitle = document.getElementById('hero-subtitle');
+
+        if (logoMorph) logoMorph.classList.add('start-anim');
+        if (titleContainer) titleContainer.classList.add('start-anim');
+        if (titleStroke) titleStroke.classList.add('play-initial');
+        if (subtitle) subtitle.classList.add('start-anim');
+      }
+
+      // --- LOGICA COOKIE BANNER OVERLAY ---
+      const cookieBanner = document.getElementById('cookie-banner');
+      const cookieOverlay = document.getElementById('cookie-overlay');
+      const acceptBtn = document.getElementById('accept-cookies');
+      const rejectBtn = document.getElementById('reject-cookies');
+      const manageBtn = document.getElementById('manage-cookies');
+
+      function hideCookies() {
+        if (cookieBanner) cookieBanner.classList.remove('show');
+        if (cookieOverlay) cookieOverlay.classList.remove('show');
+      }
+
+      // Verificăm dacă există deja decizia în localStorage (pe întregul site)
+      const isCookieHandled = localStorage.getItem('htime_cookies_accepted');
+
+      if (!isCookieHandled && cookieBanner) {
+        // Dacă e prima dată pe site, arată pop-up-ul
+        setTimeout(() => { 
+          cookieBanner.classList.add('show'); 
+          if(cookieOverlay) cookieOverlay.classList.add('show');
+        }, 800);
+      } else {
+        // Dacă decizia a fost luată deja, pornește animația instant
+        startHeroAnimations();
+      }
+      
+      // Buton Accept Toate
+      if (acceptBtn) {
+        acceptBtn.addEventListener('click', () => {
+          localStorage.setItem('htime_cookies_accepted', 'true');
+          hideCookies();
+          startHeroAnimations(); // Pornește animația abia acum
+        });
+      }
+      // Buton Refuză Toate
+      if (rejectBtn) {
+        rejectBtn.addEventListener('click', () => {
+          localStorage.setItem('htime_cookies_accepted', 'false');
+          hideCookies();
+          startHeroAnimations(); // Pornește animația abia acum
+        });
+      }
+      // Buton Administrează (Redirecționează către pagina de politică/preferințe)
+      if (manageBtn) {
+        manageBtn.addEventListener('click', () => {
+          window.location.href = 'politica_cookies.html';
+        });
+      }
+      // -----------------------------
 
       function renderOferte(lang) {
         const trackContainer = document.getElementById('sale-track-container');
@@ -829,12 +963,8 @@
         feat2_title: "GARANȚIE 24 LUNI", feat2_text: "Toate piesele noastre vin cu certificat de autenticitate şi garanţie.",
         feat3_title: "RETUR SIMPLIFICAT", feat3_text: "Ai la dispoziție 14 zile calendaristice pentru a schimba produsul.",
         cat_title: "CE PRODUSE OFERIM", 
-        cat1_title: "CEASURI", 
-        cat2_title: "INELE", 
-        cat3_title: "CERCEI", 
-        cat4_title: "BRĂȚĂRI", 
-        cat_starts: "Prețuri începând de la",
-        cat_btn: "Descoperă mai multe", sale_title: "OFERTE EXCLUSIVE", badge_sale: "SALE",
+        cat1_title: "CEASURI", cat2_title: "INELE", cat3_title: "CERCEI", cat4_title: "BRĂȚĂRI", 
+        cat_starts: "Prețuri începând de la", cat_btn: "Descoperă mai multe", sale_title: "OFERTE EXCLUSIVE", badge_sale: "SALE",
         obj_title: "ESENȚA H-TIME",
         obj1_title: "ENERGIE ȘI EMOȚIE", obj1_text: "Fiecare piatră spirituală pe care o alegem cu grijă poartă o vibrație și un destin. Ne dorim ca bijuteriile noastre să devină talismane personale, conectând frumusețea formelor cu energia ta interioară, pentru a aduce protecție, iubire și echilibru în viața de zi cu zi.",
         obj1_extra: "Lucrăm manual, cu atenție la detalii, combinând tehnici tradiționale cu finisaje contemporane. Rezultatul este o colecție care vorbește despre autenticitate, intenție și emoție — piese care se poartă cu sens, nu doar cu stil.",
@@ -852,12 +982,17 @@
         faq2_q: "CUM DECURGE PROCESUL DE CREARE A UNEI PIESE LA COMANDĂ?", faq2_a: "<p>Crearea unei bijuterii Bespoke este o călătorie intimă și creativă. Totul începe cu o consultație privată în care discutăm viziunea, emoția și povestea pe care dorești să o încapsulezi în piesa respectivă. Pe baza acestor discuții, designerii noștri realizează schițe detaliate.</p><p>Odată ce designul este aprobat, trecem la modelarea 3D și alegerea manuală a pietrelor. Vei fi implicat în fiecare pas major al deciziei, asigurându-ne că viitoarea bijuterie reflectă perfect personalitatea ta.</p><p>În final, maeștrii noștri bijutieri aduc piesa la viață prin tehnici tradiționale împletite cu inovație tehnologică, rezultând o capodoperă absolut unică, marcată cu semnătura H-TIME.</p>",
         faq3_q: "CARE ESTE SEMNIFICAȚIA SIMBOLURILOR DIN COLECȚIILE VOASTRE?", faq3_a: "<p>Colecțiile noastre sunt profund ancorate în mitologia greacă și în geometria sacră. Credem că simbolurile antice au o putere atemporală, iar reinterpretarea lor într-o estetică modernă și minimalistă le permite să vorbească generațiilor actuale.</p><p>De exemplu, utilizarea repetată a formelor circulare și a diamantelor centrale reprezintă infinitul, ciclicitatea vieții și nucleul indestructibil al sufletului uman. Fiecare colecție aduce un omagiu unei zeități sau unui mit, oferind astfel o aură de mister și grandoare.</p>",
         faq4_q: "CUM ASIGURAȚI AUTENTICITATEA ȘI CALITATEA PIESELOR?", faq4_a: "<p>Fiecare bijuterie care părăsește atelierul nostru trece printr-un proces riguros de control al calității în trei etape. Verificăm manual prinderea fiecărei pietre, finisajul metalului și integritatea structurală a piesei.</p><p>Mai mult, orice achiziție este însoțită de un Certificat de Autenticitate și Garanție cu serie unică. Acesta atestă puritatea aliajelor folosite, caratajul și claritatea pietrelor prețioase, garantând că investiția ta își va păstra valoarea de-a lungul deceniilor.</p>",
-        faq5_q: "DE CE AȚI ALES SLOGANUL „EMOȚII SCULPTATE ÎN ELEGANȚĂ”?", faq5_a: "<p>Acest slogan încapsulează însăși filozofia brandului H-TIME. Pentru noi, o bijuterie nu este doar o bucată de metal prețios; este o promisiune, o amintire înghețată în timp, o dovadă a iubirii sau a unui succes remarcabil.</p><p>Atunci când \"sculptăm\" materialele brute, de fapt modelăm emoțiile clientului, dându-le o formă tangibilă, elegantă și eternă. Vrem ca fiecare persoană care poartă o piesă H-TIME să simtă acea emoție de fiecare dată când o privește.</p>",
-        footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul.",
+        faq5_q: "CE SIMBOLIZEAZĂ SLOGANUL „EMOȚII SCULPTATE ÎN ELEGANȚĂ”?", faq5_a: "<p>Acest slogan încapsulează însăși filozofia brandului H-TIME. Pentru noi, o bijuterie nu este doar o bucată de metal prețios; este o promisiune, o amintire înghețată în timp, o dovadă a iubirii sau a unui succes remarcabil.</p><p>Atunci când \"sculptăm\" materialele brute, de fapt modelăm emoțiile clientului, dându-le o formă tangibilă, elegantă și eternă. Vrem ca fiecare persoană care poartă o piesă H-TIME să simtă acea emoție de fiecare dată când o privește.</p>",
+        footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.",
         footer_nav: "NAVIGARE RAPIDĂ", footer_home: "Acasă - Pagina principală", footer_shop: "Magazin - Toate Colecțiile",
         footer_about: "Povestea Noastră", footer_contact: "Contact & Suport", footer_info: "INFORMAȚII & POLITICI",
-        footer_terms: "Termeni și Condiții", footer_privacy: "Politică de Confidențialitate", footer_delivery: "Politică de Livrare",
-        footer_return: "Politică de Retur (14 zile)", footer_care: "Îngrijirea Bijuteriilor", footer_consumer: "PROTECȚIA CONSUMATORULUI"
+        footer_terms: "Termeni și Condiții", footer_privacy: "Politică de Confidențialitate", footer_cookies: "Politică de Cookies", footer_delivery: "Politică de Livrare",
+        footer_return: "Politică de Retur (14 zile)", footer_care: "Îngrijirea Bijuteriilor", footer_consumer: "PROTECȚIA CONSUMATORULUI",
+        cookie_title: "Salut!",
+        cookie_text_detailed: "Dorim să îți oferim o experiență cât mai plăcută. Folosim cookie-uri pentru a asigura funcționarea corectă a site-ului, a analiza performanța și a personaliza conținutul. Prin apăsarea butonului \"Accept toate\", ești de acord cu utilizarea acestora. Poți afla mai multe detalii citind <a href='politica_cookies.html'>Politica de Cookies</a> și <a href='confidentialitate.html'>Politica de Confidențialitate</a>.",
+        cookie_accept: "Accept toate",
+        cookie_reject: "Refuză toate",
+        cookie_manage: "Administrează preferințele"
       },
 
       en: {
@@ -868,12 +1003,8 @@
         feat2_title: "24-MONTH WARRANTY", feat2_text: "All our pieces come with an authenticity certificate and warranty.",
         feat3_title: "EASY RETURNS", feat3_text: "You have 14 calendar days available to exchange your product.",
         cat_title: "WHAT WE OFFER", 
-        cat1_title: "WATCHES", 
-        cat2_title: "RINGS", 
-        cat3_title: "EARRINGS", 
-        cat4_title: "BRACELETS", 
-        cat_starts: "Prices starting from",
-        cat_btn: "Discover more", sale_title: "EXCLUSIVE OFFERS", badge_sale: "SALE",
+        cat1_title: "WATCHES", cat2_title: "RINGS", cat3_title: "EARRINGS", cat4_title: "BRACELETS", 
+        cat_starts: "Prices starting from", cat_btn: "Discover more", sale_title: "EXCLUSIVE OFFERS", badge_sale: "SALE",
         obj_title: "THE ESSENCE OF H-TIME",
         obj1_title: "ENERGY & EMOTION", obj1_text: "Each spiritual stone we carefully choose carries a vibration and a destiny. We want our jewelry to become personal talismans, connecting the beauty of shapes with your inner energy to bring protection, love and balance into everyday life.",
         obj1_extra: "We craft by hand with meticulous attention to detail, blending traditional techniques with contemporary finishes. The result is a collection that speaks of authenticity, intention and emotion — pieces worn with meaning, not just style.",
@@ -891,12 +1022,17 @@
         faq2_q: "HOW DOES THE BESPOKE CREATION PROCESS WORK?", faq2_a: "<p>Creating a Bespoke piece of jewelry is an intimate and creative journey. It all begins with a private consultation where we discuss the vision, emotion, and story you want to encapsulate in the piece. Based on these discussions, our designers create detailed sketches.</p><p>Once the design is approved, we move on to 3D modeling and hand-picking the stones. You will be involved in every major step of the decision-making process, ensuring the future jewelry perfectly reflects your personality.</p><p>Finally, our master jewelers bring the piece to life through traditional techniques interwoven with technological innovation, resulting in an absolutely unique masterpiece bearing the H-TIME signature.</p>",
         faq3_q: "WHAT IS THE MEANING OF THE SYMBOLS IN YOUR COLLECTIONS?", faq3_a: "<p>Our collections are deeply anchored in Greek mythology and sacred geometry. We believe ancient symbols hold timeless power, and reinterpreting them in a modern, minimalist aesthetic allows them to speak to current generations.</p><p>For example, the repeated use of circular shapes and central diamonds represents infinity, the cyclical nature of life, and the indestructible core of the human soul. Each collection pays homage to a deity or myth, thus offering an aura of mystery and grandeur.</p>",
         faq4_q: "HOW DO YOU ENSURE AUTHENTICITY AND QUALITY?", faq4_a: "<p>Every piece of jewelry that leaves our workshop goes through a rigorous three-stage quality control process. We manually check the setting of each stone, the finish of the metal, and the structural integrity of the piece.</p><p>Furthermore, every purchase is accompanied by a Certificate of Authenticity and Warranty with a unique serial number. This attests to the purity of the alloys used, the carat weight, and the clarity of the precious stones, guaranteeing that your investment will retain its value over the decades.</p>",
-        faq5_q: "WHY DID YOU CHOOSE THE SLOGAN 'EMOTIONS SCULPTED IN ELEGANCE'?", faq5_a: "<p>This slogan encapsulates the very philosophy of the H-TIME brand. To us, a piece of jewelry is not just a piece of precious metal; it is a promise, a memory frozen in time, proof of love or remarkable success.</p><p>When we 'sculpt' raw materials, we are actually shaping the client's emotions, giving them a tangible, elegant, and eternal form. We want every person who wears an H-TIME piece to feel that emotion every time they look at it.</p>",
+        faq5_q: "WHAT DOES THE SLOGAN 'EMOTIONS SCULPTED IN ELEGANCE' SYMBOLIZE?", faq5_a: "<p>This slogan encapsulates the very philosophy of the H-TIME brand. To us, a piece of jewelry is not just a piece of precious metal; it is a promise, a memory frozen in time, proof of love or remarkable success.</p><p>When we 'sculpt' raw materials, we are actually shaping the client's emotions, giving them a tangible, elegant, and eternal form. We want every person who wears an H-TIME piece to feel that emotion every time they look at it.</p>",
         footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement.",
         footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections",
         footer_about: "Our Story", footer_contact: "Contact & Support", footer_info: "INFORMATION & POLICIES",
-        footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_delivery: "Delivery Policy",
-        footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care", footer_consumer: "CONSUMER PROTECTION"
+        footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_cookies: "Cookie Policy", footer_delivery: "Delivery Policy",
+        footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care", footer_consumer: "CONSUMER PROTECTION",
+        cookie_title: "Hello!",
+        cookie_text_detailed: "We want to offer you the best experience. We use cookies to ensure the correct functioning of the site, analyze performance, and personalize content. By clicking \"Accept all\", you agree to their use. You can find out more by reading our <a href='politica_cookies.html'>Cookie Policy</a> and <a href='confidentialitate.html'>Privacy Policy</a>.",
+        cookie_accept: "Accept all",
+        cookie_reject: "Reject all",
+        cookie_manage: "Manage preferences"
       },
 
       fr: {
@@ -907,47 +1043,36 @@
         feat2_title: "GARANTIE 24 MOIS", feat2_text: "Toutes nos pièces sont accompagnées d'un certificat d'authenticité et d'une garantie.",
         feat3_title: "RETOUR FACILE", feat3_text: "Vous disposez de 14 jours calendaires pour échanger votre produit.",
         cat_title: "CE QUE NOUS OFFRONS", 
-        cat1_title: "MONTRES", 
-        cat2_title: "BAGUES", 
-        cat3_title: "BOUCLES D'OREILLES", 
-        cat4_title: "BRACELETS", 
-        cat_starts: "Prix à partir de",
-        cat_btn: "Découvrir plus", sale_title: "OFFRES EXCLUSIVES", badge_sale: "SOLDES",
+        cat1_title: "MONTRES", cat2_title: "BAGUES", cat3_title: "BOUCLES D'OREILLES", cat4_title: "BRACELETS", 
+        cat_starts: "Prix à partir de", cat_btn: "Découvrir plus", sale_title: "OFFRES EXCLUSIVES", badge_sale: "SOLDES",
         obj_title: "L'ESSENCE DE H-TIME",
-        obj1_title: "ÉNERGIE & ÉMOTION",
-        obj1_text: "Chaque pierre spirituelle que nous choisissons avec soin porte une vibration et un destin. Nous voulons que nos bijoux deviennent des talismans personnels, reliant la beauté des formes à votre énergie intérieure.",
+        obj1_title: "ÉNERGIE & ÉMOTION", obj1_text: "Chaque pierre spirituelle que nous choisissons avec soin porte une vibration et un destin. Nous voulons que nos bijoux deviennent des talismans personnels, reliant la beauté des formes à votre énergie intérieure.",
         obj1_extra: "Nous travaillons à la main avec une attention méticuleuse aux détails, mêlant techniques traditionnelles et finitions contemporaines.",
-        obj2_title: "MYTHE & RAFFINEMENT",
-        obj2_text: "Inspirées par des légendes anciennes, nos créations tissent le mystère du passé avec l'élégance du présent.",
+        obj2_title: "MYTHE & RAFFINEMENT", obj2_text: "Inspirées par des légendes anciennes, nos créations tissent le mystère du passé avec l'élégance du présent.",
         obj2_extra: "Chaque collection naît d'une histoire : symboles, proportions et détails qui donnent du sens.",
-        obj3_title: "UN HÉRITAGE ÉTERNEL",
-        obj3_text: "Au‑delà de l'éclat éphémère, notre but est de forger des souvenirs qui défient le temps.",
+        obj3_title: "UN HÉRITAGE ÉTERNEL", obj3_text: "Au‑delà de l'éclat éphémère, notre but est de forger des souvenirs qui défient le temps.",
         obj3_extra: "Nous nous engageons pour la qualité : matériaux sélectionnés, finitions durables et services pour la longévité des pièces.",
         quote1: "\"Les bijoux rendent une femme unique\" <span>- Coco Chanel</span>",
         quote2: "\"Le style est une façon de dire qui vous êtes sans parler\" <span>- Rachel Zoe</span>",
         quote3: "\"Les diamants sont les meilleurs amis d'une fille\" <span>- Marilyn Monroe</span>",
         quote4: "\"Chaque bijou raconte une histoire sans mots\" <span>- H-TIME</span>",
-        contact_title: "CONTACTEZ-NOUS",
-        contact_text: "Souhaitez-vous proposer une idée ou collaborer ? Écrivez‑nous, nous avons hâte de vous lire !",
+        contact_title: "CONTACTEZ-NOUS", contact_text: "Souhaitez-vous proposer une idée ou collaborer ? Écrivez‑nous, nous avons hâte de vous lire !",
         faq_title: "FAQS",
         faq1_q: "QUELS MATÉRIAUX UTILISEZ-VOUS ?", faq1_a: "<p>Chez H-TIME, nous utilisons exclusivement des matériaux haut de gamme, d'origine éthique et durable. Nos métaux de base sont l'or 18 carats et le platine.</p><p>Les diamants et pierres précieuses sont soigneusement sélectionnés par nos gemmologues, dans le strict respect des réglementations internationales pour garantir l'absence de conflit.</p>",
         faq2_q: "COMMENT FONCTIONNE LE PROCESSUS DE CRÉATION SUR MESURE ?", faq2_a: "<p>La création d'un bijou Bespoke est un voyage intime. Tout commence par une consultation privée pour discuter de votre vision. Ensuite, nos designers créent des croquis détaillés.</p><p>Une fois le design approuvé, nous passons à la modélisation 3D et au choix des pierres. Vous serez impliqué à chaque étape majeure.</p><p>Enfin, nos maîtres joailliers donnent vie à la pièce, créant un chef-d'œuvre unique.</p>",
         faq3_q: "QUELLE EST LA SIGNIFICATION DE VOS SYMBOLES ?", faq3_a: "<p>Nos collections sont profondément ancrées dans la mythologie grecque et la géométrie sacrée. Les symboles antiques ont un pouvoir intemporel, réinterprétés dans une esthétique moderne.</p><p>L'utilisation de formes circulaires représente l'infini et le cycle de la vie. Chaque collection rend hommage à un mythe, offrant une aura de mystère.</p>",
-        faq4_q: "COMMENT GARANTISSEZ-VOUS L'AUTHENTICITÉ ?", faq4_a: "<p>Chaque bijou subit un contrôle de qualité rigoureux en trois étapes. Nous vérifions le sertissage, la finition et la structure.</p><p>De plus, chaque achat est accompagné d'un certificat d'authenticité garantissant la pureté des alliages et des pierres.</p>",
-        faq5_q: "POURQUOI CE SLOGAN « ÉMOTIONS SCULPTÉES DANS L'ÉLÉGANCE » ?", faq5_a: "<p>Ce slogan résume la philosophie de H-TIME. Un bijou est une promesse, un souvenir figé dans le temps.</p><p>En sculptant la matière, nous façonnons vos émotions pour leur donner une forme éternelle et élégante.</p>",
+        faq4_q: "COMMENT GARANTISSEZ-VOUS L'AUTHENTICITÀ ?", faq4_a: "<p>Chaque bijou subit un contrôle de qualité rigoureux en trois étapes. Nous vérifions le sertissage, la finition et la structure.</p><p>De plus, chaque achat est accompagné d'un certificat d'authenticité garantissant la pureté des alliages et des pierres.</p>",
+        faq5_q: "QUE SYMBOLISE LE SLOGAN « ÉMOTIONS SCULPTÉES DANS L'ÉLÉGANCE » ?", faq5_a: "<p>Ce slogan résume la philosophie de H-TIME. Un bijou est une promesse, un souvenir figé dans le temps.</p><p>En sculptant la matière, nous façonnons vos émotions pour leur donner une forme éternelle et élégante.</p>",
         footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe dédiée à ceux qui apprécient le raffinement.",
-        footer_nav: "NAVIGATION RAPIDE",
-        footer_home: "Accueil - Page principale",
-        footer_shop: "Boutique - Toutes les collections",
-        footer_about: "Notre histoire",
-        footer_contact: "Contact & Support",
-        footer_info: "INFORMATIONS & POLITIQUES",
-        footer_terms: "Conditions générales",
-        footer_privacy: "Politique de confidentialité",
-        footer_delivery: "Politique de livraison",
-        footer_return: "Politique de retour (14 jours)",
-        footer_care: "Entretien des bijoux",
-        footer_consumer: "PROTECTION DU CONSOMMATEUR"
+        footer_nav: "NAVIGATION RAPIDE", footer_home: "Accueil - Page principale", footer_shop: "Boutique - Toutes les collections",
+        footer_about: "Notre histoire", footer_contact: "Contact & Support", footer_info: "INFORMATIONS & POLITIQUES",
+        footer_terms: "Conditions générales", footer_privacy: "Politique de confidentialité", footer_cookies: "Politique de cookies", footer_delivery: "Politique de livraison",
+        footer_return: "Politique de retour (14 jours)", footer_care: "Entretien des bijoux", footer_consumer: "PROTECTION DU CONSOMMATEUR",
+        cookie_title: "Bonjour!",
+        cookie_text_detailed: "Nous souhaitons vous offrir la meilleure expérience. Nous utilisons des cookies pour assurer le bon fonctionnement du site, analyser les performances et personnaliser le contenu. En cliquant sur \"Tout accepter\", vous acceptez leur utilisation. Pour en savoir plus, consultez notre <a href='politica_cookies.html'>Politique relative aux cookies</a> et notre <a href='confidentialitate.html'>Politique de confidentialité</a>.",
+        cookie_accept: "Tout accepter",
+        cookie_reject: "Tout refuser",
+        cookie_manage: "Gérer les préférences"
       },
 
       de: {
@@ -958,47 +1083,36 @@
         feat2_title: "24 MONATE GARANTIE", feat2_text: "Alle unsere Stücke werden mit Echtheitszertifikat und Garantie geliefert.",
         feat3_title: "EINFACHE RÜCKGABE", feat3_text: "Sie haben 14 Kalendertage Zeit, um Ihr Produkt umzutauschen.",
         cat_title: "WAS WIR BIETEN", 
-        cat1_title: "UHREN", 
-        cat2_title: "RINGE", 
-        cat3_title: "OHRSCHMUCK", 
-        cat4_title: "ARMBÄNDER", 
-        cat_starts: "Preise ab",
-        cat_btn: "Mehr entdecken", sale_title: "EXKLUSIVE ANGEBOTE", badge_sale: "ANGEBOT",
+        cat1_title: "UHREN", cat2_title: "RINGE", cat3_title: "OHRSCHMUCK", cat4_title: "ARMBÄNDER", 
+        cat_starts: "Preise ab", cat_btn: "Mehr entdecken", sale_title: "EXKLUSIVE ANGEBOTE", badge_sale: "ANGEBOT",
         obj_title: "DIE ESSENZ VON H-TIME",
-        obj1_title: "ENERGIE & EMOTION",
-        obj1_text: "Jeder spirituelle Stein, den wir sorgfältig auswählen, trägt eine Schwingung und ein Schicksal. Unsere Schmuckstücke sollen persönliche Talismane werden.",
+        obj1_title: "ENERGIE & EMOTION", obj1_text: "Jeder spirituelle Stein, den wir sorgfältig auswählen, trägt eine Schwingung und ein Schicksal. Unsere Schmuckstücke sollen persönliche Talismane werden.",
         obj1_extra: "Wir fertigen von Hand mit großer Liebe zum Detail und verbinden traditionelle Techniken mit modernen Oberflächen.",
-        obj2_title: "MYTHOS & RAFFINESSE",
-        obj2_text: "Inspiriert von alten Legenden verweben unsere Kreationen das Geheimnis der Vergangenheit mit der Eleganz der Gegenwart.",
+        obj2_title: "MYTHOS & RAFFINESSE", obj2_text: "Inspiriert von alten Legenden verweben unsere Kreationen das Geheimnis der Vergangenheit mit der Eleganz der Gegenwart.",
         obj2_extra: "Jede Kollektion beginnt mit einer Geschichte: Symbole, Proportionen und Details, die Bedeutung verleihen.",
-        obj3_title: "EIN EWIGES ERBE",
-        obj3_text: "Über den flüchtigen Glanz hinaus ist es unser Ziel, Erinnerungen zu schaffen, die der Zeit trotzen.",
+        obj3_title: "EIN EWIGES ERBE", obj3_text: "Über den flüchtigen Glanz hinaus ist es unser Ziel, Erinnerungen zu schaffen, die der Zeit trotzen.",
         obj3_extra: "Wir verpflichten uns zur Qualität: sorgfältig ausgewählte Materialien, langlebige Oberflächen und Service für die Langlebigkeit.",
         quote1: "\"Schmuck macht eine Frau einzigartig\" <span>- Coco Chanel</span>",
         quote2: "\"Stil ist eine Art zu sagen, wer du bist, ohne zu sprechen\" <span>- Rachel Zoe</span>",
         quote3: "\"Diamanten sind die besten Freunde eines Mädchens\" <span>- Marilyn Monroe</span>",
         quote4: "\"Jedes Schmuckstück erzählt eine Geschichte ohne Worte\" <span>- H-TIME</span>",
-        contact_title: "KONTAKTIEREN SIE UNS",
-        contact_text: "Möchten Sie eine Idee vorschlagen oder mit uns zusammenarbeiten? Schreiben Sie uns, wir freuen uns!",
+        contact_title: "KONTAKTIEREN SIE UNS", contact_text: "Möchten Sie eine Idee vorschlagen oder mit uns zusammenarbeiten? Schreiben Sie uns, wir freuen uns!",
         faq_title: "FAQS",
         faq1_q: "WELCHE MATERIALIEN VERWENDEN SIE?", faq1_a: "<p>Bei H-TIME verwenden wir ausschließlich hochwertige, ethisch und nachhaltig gewonnene Materialien. Unsere unedlen Metalle sind 18 Karat Gold und Platin.</p><p>Diamanten und Edelsteine werden sorgfältig nach internationalen Vorschriften ausgewählt, um Konfliktfreiheit zu garantieren.</p>",
         faq2_q: "WIE FUNKTIONIERT DER MASSANFERTIGUNGSPROZESS?", faq2_a: "<p>Die Kreation eines Bespoke-Schmuckstücks beginnt mit einer privaten Beratung. Basierend darauf erstellen unsere Designer detaillierte Skizzen.</p><p>Nach der Freigabe folgen 3D-Modellierung und Steinauswahl. Sie sind in jeden wichtigen Schritt eingebunden.</p><p>Schließlich erwecken unsere Meisterjuweliere das Stück zum Leben und schaffen ein absolutes Unikat.</p>",
         faq3_q: "WAS BEDEUTEN DIE SYMBOLE IN IHREN KOLLEKTIONEN?", faq3_a: "<p>Unsere Kollektionen sind tief in der griechischen Mythologie und der heiligen Geometrie verwurzelt. Wir übersetzen antike Symbole in eine moderne Ästhetik.</p><p>Kreisformen repräsentieren die Unendlichkeit. Jede Kollektion ist eine Hommage an einen Mythos.</p>",
         faq4_q: "WIE GEWÄHRLEISTEN SIE AUTHENTIZITÄT?", faq4_a: "<p>Jedes Stück durchläuft eine dreistufige Qualitätskontrolle. Wir prüfen manuell die Fassung, das Finish und die Struktur.</p><p>Zudem wird jeder Kauf von einem Echtheitszertifikat begleitet, das die Reinheit garantiert.</p>",
-        faq5_q: "WARUM DER SLOGAN „EMOTIONEN IN ELEGANZ GEMEISSELT“?", faq5_a: "<p>Dieser Slogan fasst die Philosophie von H-TIME zusammen. Ein Schmuckstück ist ein in der Zeit eingefrorenes Versprechen.</p><p>Wenn wir Rohstoffe formen, gestalten wir eigentlich die Emotionen des Kunden zu einer ewigen Eleganz.</p>",
+        faq5_q: "WAS SYMBOLISIERT DER SLOGAN „EMOTIONEN IN ELEGANZ GEMEISSELT“?", faq5_a: "<p>Dieser Slogan fasst die Philosophie von H-TIME zusammen. Ein Schmuckstück ist ein in der Zeit eingefrorenes Versprechen.</p><p>Wenn wir Rohstoffe formen, gestalten wir eigentlich die Emotionen des Kunden zu einer ewigen Eleganz.</p>",
         footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique für Liebhaber von Raffinesse.",
-        footer_nav: "SCHNELLNAVIGATION",
-        footer_home: "Startseite - Hauptseite",
-        footer_shop: "Shop - Alle Kollektionen",
-        footer_about: "Unsere Geschichte",
-        footer_contact: "Kontakt & Support",
-        footer_info: "INFORMATIONEN & RICHTLINIEN",
-        footer_terms: "Allgemeine Geschäftsbedingungen",
-        footer_privacy: "Datenschutzrichtlinie",
-        footer_delivery: "Lieferbedingungen",
-        footer_return: "Rückgaberecht (14 Tage)",
-        footer_care: "Schmuckpflege",
-        footer_consumer: "VERBRAUCHERSCHUTZ"
+        footer_nav: "SCHNELLNAVIGATION", footer_home: "Startseite - Hauptseite", footer_shop: "Shop - Alle Kollektionen",
+        footer_about: "Unsere Geschichte", footer_contact: "Kontakt & Support", footer_info: "INFORMATIONEN & RICHTLINIEN",
+        footer_terms: "Allgemeine Geschäftsbedingungen", footer_privacy: "Datenschutzrichtlinie", footer_cookies: "Cookie-Richtlinie", footer_delivery: "Lieferbedingungen",
+        footer_return: "Rückgaberecht (14 Tage)", footer_care: "Schmuckpflege", footer_consumer: "VERBRAUCHERSCHUTZ",
+        cookie_title: "Hallo!",
+        cookie_text_detailed: "Wir möchten Ihnen das beste Erlebnis bieten. Wir verwenden Cookies, um das korrekte Funktionieren der Website sicherzustellen, die Leistung zu analysieren und Inhalte zu personalisieren. Wenn Sie auf \"Alle akzeptieren\" klicken, stimmen Sie der Verwendung zu. Weitere Informationen finden Sie in unserer <a href='politica_cookies.html'>Cookie-Richtlinie</a> und <a href='confidentialitate.html'>Datenschutzrichtlinie</a>.",
+        cookie_accept: "Alle akzeptieren",
+        cookie_reject: "Alle ablehnen",
+        cookie_manage: "Einstellungen verwalten"
       },
 
       es: {
@@ -1009,47 +1123,36 @@
         feat2_title: "GARANTÍA 24 MESES", feat2_text: "Todas nuestras piezas vienen con certificado de autenticidad y garantía.",
         feat3_title: "DEVOLUCIONES FÁCILES", feat3_text: "Tienes 14 días naturales para cambiar tu producto.",
         cat_title: "LO QUE OFRECEMOS", 
-        cat1_title: "RELOJES", 
-        cat2_title: "ANILLOS", 
-        cat3_title: "PENDIENTES", 
-        cat4_title: "PULSERAS", 
-        cat_starts: "Precios desde",
-        cat_btn: "Descubrir más", sale_title: "OFERTAS EXCLUSIVAS", badge_sale: "REBAJA",
+        cat1_title: "RELOJES", cat2_title: "ANILLOS", cat3_title: "PENDIENTES", cat4_title: "PULSERAS", 
+        cat_starts: "Precios desde", cat_btn: "Descubrir más", sale_title: "OFERTAS EXCLUSIVAS", badge_sale: "REBAJA",
         obj_title: "LA ESENCIA DE H-TIME",
-        obj1_title: "ENERGÍA Y EMOCIÓN",
-        obj1_text: "Cada piedra espiritual que elegimos cuidadosamente lleva una vibración y un destino. Queremos que nuestras joyas sean talismanes personales.",
+        obj1_title: "ENERGÍA Y EMOCIÓN", obj1_text: "Cada piedra espiritual que elegimos cuidadosamente lleva una vibración y un destino. Queremos que nuestras joyas sean talismanes personales.",
         obj1_extra: "Trabajamos a mano con atención al detalle, combinando técnicas tradicionales con acabados contemporáneos.",
-        obj2_title: "MITO Y REFINAMIENTO",
-        obj2_text: "Inspiradas en leyendas antiguas, nuestras creaciones entrelazan el mistero del pasado con la elegancia del presente.",
+        obj2_title: "MITO Y REFINAMIENTO", obj2_text: "Inspiradas en leyendas antiguas, nuestras creaciones entrelazan el mistero del pasado con la elegancia del presente.",
         obj2_extra: "Cada colección nace de una historia: símbolos, proporciones y detalles que dan sentido.",
-        obj3_title: "UN LEGADO ETERNO",
-        obj3_text: "Más allá del brillo efímero, nuestro propósito es forjar recuerdos que desafíen el tiempo.",
+        obj3_title: "UN LEGADO ETERNO", obj3_text: "Más allá del brillo efímero, nuestro propósito es forjar recuerdos que desafíen el tiempo.",
         obj3_extra: "Nos comprometemos con la calidad: materiales seleccionados, acabados duraderos y servicios que apoyan la longevidad.",
         quote1: "\"La joyería hace que una mujer se sienta única\" <span>- Coco Chanel</span>",
         quote2: "\"El estilo es una forma de decir quién eres sin hablar\" <span>- Rachel Zoe</span>",
         quote3: "\"Los diamantes son los mejores amigos de una chica\" <span>- Marilyn Monroe</span>",
         quote4: "\"Cada joya cuenta una historia sin palabras\" <span>- H-TIME</span>",
-        contact_title: "CONTÁCTANOS",
-        contact_text: "¿Quieres sugerir una idea o colaborar con nosotros? Escríbenos, ¡esperamos saber de ti!",
+        contact_title: "CONTÁCTANOS", contact_text: "¿Quieres sugerir una idea o colaborar con nosotros? Escríbenos, ¡esperamos saber de ti!",
         faq_title: "FAQS",
         faq1_q: "¿QUÉ MATERIALES UTILIZAN?", faq1_a: "<p>En H-TIME, utilizamos exclusivamente materiales de primera calidad de origen ético y sostenible. Nuestros metales base son el oro de 18k y el platino.</p><p>Los diamantes y piedras preciosas son cuidadosamente seleccionados, cumpliendo estrictamente con las regulaciones internacionales libres de conflictos.</p>",
         faq2_q: "¿CÓMO FUNCIONA EL PROCESO DE CREACIÓN A MEDIDA?", faq2_a: "<p>La creación de una joya Bespoke es un viaje íntimo. Todo comienza con una consulta privada para discutir su visión. Luego creamos bocetos detallados.</p><p>Tras la aprobación, pasamos al modelado 3D y la elección de piedras. Usted participará en cada paso importante.</p><p>Finalmente, nuestros maestros joyeros dan vida a una obra maestra única.</p>",
         faq3_q: "¿QUÉ SIGNIFICAN LOS SÍMBOLOS EN SUS COLECCIONES?", faq3_a: "<p>Nuestras colecciones están profundamente arraigadas en la mitología griega y la geometría sagrada. Reinterpretamos símbolos antiguos en una estética moderna.</p><p>Las formas circulares representan el infinito. Cada colección rinde homenaje a un mito, ofreciendo un aura de misterio.</p>",
         faq4_q: "¿CÓMO GARANTIZAN LA AUTENTICIDAD?", faq4_a: "<p>Cada joya pasa por un riguroso control de calidad de tres etapas. Verificamos el engaste, el acabado y la estructura.</p><p>Además, cada compra viene con un Certificado de Autenticidad que garantiza la pureza de la pieza.</p>",
-        faq5_q: "¿POR QUÉ EL ESLOGAN 'EMOCIONES ESCULPIDAS EN ELEGANCIA'?", faq5_a: "<p>Este eslogan resume la filosofía de H-TIME. Una joya es una promesa, un recuerdo congelado en el tiempo.</p><p>Al esculpir la materia, damos forma a sus emociones para crear algo elegante y eterno.</p>",
+        faq5_q: "¿QUÉ SIMBOLIZA EL ESLOGAN 'EMOCIONES ESCULPIDAS EN ELEGANCIA'?", faq5_a: "<p>Este eslogan resume la filosofía de H-TIME. Una joya es una promesa, un recuerdo congelado en el tiempo.</p><p>Al esculpir la materia, damos forma a sus emociones para crear algo elegante y eterno.</p>",
         footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo dedicada a quienes aprecian el refinamiento.",
-        footer_nav: "NAVEGACIÓN RÁPIDA",
-        footer_home: "Inicio - Página principal",
-        footer_shop: "Tienda - Todas las colecciones",
-        footer_about: "Nuestra historia",
-        footer_contact: "Contacto & Soporte",
-        footer_info: "INFORMACIÓN & POLÍTICAS",
-        footer_terms: "Términos y condiciones",
-        footer_privacy: "Política de privacidad",
-        footer_delivery: "Política de entrega",
-        footer_return: "Política de devolución (14 días)",
-        footer_care: "Cuidado de las joyas",
-        footer_consumer: "PROTECCIÓN AL CONSUMIDOR"
+        footer_nav: "NAVEGACIÓN RÁPIDA", footer_home: "Inicio - Página principal", footer_shop: "Tienda - Todas las colecciones",
+        footer_about: "Nuestra historia", footer_contact: "Contacto & Soporte", footer_info: "INFORMACIÓN & POLÍTICAS",
+        footer_terms: "Términos y condiciones", footer_privacy: "Política de privacidad", footer_cookies: "Política de Cookies", footer_delivery: "Política de entrega",
+        footer_return: "Política de devolución (14 días)", footer_care: "Cuidado de las joyas", footer_consumer: "PROTECCIÓN AL CONSUMIDOR",
+        cookie_title: "¡Hola!",
+        cookie_text_detailed: "Queremos ofrecerle la mejor experiencia. Utilizamos cookies para garantizar el correcto funcionamiento del sitio, analizar el rendimiento y personalizar el contenido. Al hacer clic en \"Aceptar todo\", acepta su uso. Puede obtener más información leyendo nuestra <a href='politica_cookies.html'>Política de Cookies</a> y <a href='confidentialitate.html'>Política de Privacidad</a>.",
+        cookie_accept: "Aceptar todo",
+        cookie_reject: "Rechazar todo",
+        cookie_manage: "Gestionar preferencias"
       },
 
       it: {
@@ -1060,47 +1163,36 @@
         feat2_title: "GARANZIA 24 MESI", feat2_text: "Tutti i nostri pezzi sono accompagnati da certificato di autenticità e garanzia.",
         feat3_title: "RESI SEMPLICI", feat3_text: "Hai 14 giorni di calendario per cambiare il prodotto.",
         cat_title: "COSA OFFRIAMO", 
-        cat1_title: "OROLOGI", 
-        cat2_title: "ANELLI", 
-        cat3_title: "ORECCHINI", 
-        cat4_title: "BRACCIALI", 
-        cat_starts: "Prezzi a partire da",
-        cat_btn: "Scopri di più", sale_title: "OFFERTE ESCLUSIVE", badge_sale: "SALDI",
+        cat1_title: "OROLOGI", cat2_title: "ANELLI", cat3_title: "ORECCHINI", cat4_title: "BRACCIALI", 
+        cat_starts: "Prezzi a partire da", cat_btn: "Scopri di più", sale_title: "OFFERTE ESCLUSIVE", badge_sale: "SALDI",
         obj_title: "L'ESSENZA DI H-TIME",
-        obj1_title: "ENERGIA & EMOZIONE",
-        obj1_text: "Ogni pietra spirituale che scegliamo con cura porta una vibrazione e un destino. Vogliamo che i nostri gioielli diventino talismani personali.",
+        obj1_title: "ENERGIA & EMOZIONE", obj1_text: "Ogni pietra spirituale che scegliamo con cura porta una vibrazione e un destino. Vogliamo che i nostri gioielli diventino talismani personali.",
         obj1_extra: "Lavoriamo a mano con attenzione ai dettagli, combinando tecniche tradizionali con finiture contemporanee.",
-        obj2_title: "MITO & RAFFINATEZZA",
-        obj2_text: "Ispirate a leggende antiche, le nostre creazioni intrecciano il mistero del passato con l'eleganza del presente.",
+        obj2_title: "MITO & RAFFINATEZZA", obj2_text: "Ispirate a leggende antiche, le nostre creazioni intrecciano il mistero del passato con l'eleganza del presente.",
         obj2_extra: "Ogni collezione nasce da una storia: simboli, proporzioni e dettagli che danno significato.",
-        obj3_title: "UN LASCITO ETERNO",
-        obj3_text: "Oltre allo splendore effimero, il nostro scopo è forgiare ricordi che sfidano il tempo.",
+        obj3_title: "UN LASCITO ETERNO", obj3_text: "Oltre allo splendore effimero, il nostro scopo è forgiare ricordi che sfidano il tempo.",
         obj3_extra: "Ci impegniamo per la qualità: materiali selezionati, finiture durature e servizi che supportano la longevità.",
         quote1: "\"I gioielli rendono una donna unica\" <span>- Coco Chanel</span>",
         quote2: "\"Lo stile è un modo per dire chi sei senza parlare\" <span>- Rachel Zoe</span>",
         quote3: "\"I diamanti sono i migliori amici di una ragazza\" <span>- Marilyn Monroe</span>",
         quote4: "\"Ogni gioiello racconta una storia senza parole\" <span>- H-TIME</span>",
-        contact_title: "CONTATTACI",
-        contact_text: "Vuoi suggerire un'idea o collaborare con noi? Scrivici, non vediamo l'ora di sentirti!",
+        contact_title: "CONTATTACI", contact_text: "Vuoi suggerire un'idea o collaborare con noi? Scrivici, non vediamo l'ora di sentirti!",
         faq_title: "FAQS",
         faq1_q: "QUALI MATERIALI UTILIZZATE?", faq1_a: "<p>In H-TIME utilizziamo esclusivamente materiali premium di provenienza etica e sostenibile. I nostri metalli di base sono oro 18 carati e platino.</p><p>I diamanti e le pietre preziose sono selezionati con cura per garantire che siano privi di conflitti, rispettando le norme internazionali.</p>",
         faq2_q: "COME FUNZIONA IL PROCESSO SU MISURA?", faq2_a: "<p>La creazione di un gioiello Bespoke è un viaggio intimo. Inizia con una consultazione privata, seguita da schizzi dettagliati dei nostri designer.</p><p>Dopo l'approvazione, passiamo alla modellazione 3D. Sarai coinvolto in ogni decisione importante.</p><p>Infine, i nostri maestri gioiellieri danno vita a un capolavoro unico.</p>",
         faq3_q: "QUAL È IL SIGNIFICATO DEI VOSTRI SIMBOLI?", faq3_a: "<p>Le nostre collezioni sono profondamente radicate nella mitologia greca e nella geometria sacra. Reinterpretiamo i simboli antichi in un'estetica moderna.</p><p>Le forme circolari rappresentano l'infinito. Ogni collezione rende omaggio a un mito, offrendo un'aura di mistero.</p>",
         faq4_q: "COME GARANTITE L'AUTENTICITÀ?", faq4_a: "<p>Ogni gioiello è sottoposto a un rigoroso controllo di qualità in tre fasi. Controlliamo l'incastonatura, la finitura e la struttura.</p><p>Inoltre, ogni acquisto è accompagnato da un Certificato di Autenticità che garantisce la purezza della lega e delle pietre.</p>",
-        faq5_q: "PERCHÉ LO SLOGAN 'EMOZIONI SCOLPITE NELL'ELEGANZA'?", faq5_a: "<p>Questo slogan racchiude la filosofia di H-TIME. Un gioiello è una promessa, un ricordo congelato nel tempo.</p><p>Scolpendo la materia, diamo forma alle tue emozioni in un'eleganza eterna.</p>",
+        faq5_q: "COSA SIMBOLEGGIA LO SLOGAN 'EMOZIONI SCOLPITE NELL'ELEGANZA'?", faq5_a: "<p>Questo slogan racchiude la filosofia di H-TIME. Un gioiello è una promessa, un ricordo congelato nel tempo.</p><p>Scolpendo la materia, diamo forma alle tue emozioni in un'eleganza eterna.</p>",
         footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso dedicata a chi apprezza la raffinatezza.",
-        footer_nav: "NAVIGAZIONE RAPIDA",
-        footer_home: "Home - Pagina principale",
-        footer_shop: "Negozio - Tutte le collezioni",
-        footer_about: "La nostra storia",
-        footer_contact: "Contatto & Supporto",
-        footer_info: "INFORMAZIONI & POLITICHE",
-        footer_terms: "Termini e condizioni",
-        footer_privacy: "Privacy",
-        footer_delivery: "Consegna",
-        footer_return: "Reso (14 giorni)",
-        footer_care: "Cura dei gioielli",
-        footer_consumer: "PROTEZIONE DEL CONSUMATORE"
+        footer_nav: "NAVIGAZIONE RAPIDA", footer_home: "Home - Pagina principale", footer_shop: "Negozio - Tutte le collezioni",
+        footer_about: "La nostra storia", footer_contact: "Contatto & Supporto", footer_info: "INFORMAZIONI & POLITICHE",
+        footer_terms: "Termini e condizioni", footer_privacy: "Privacy", footer_cookies: "Informativa sui cookie", footer_delivery: "Consegna",
+        footer_return: "Reso (14 giorni)", footer_care: "Cura dei gioielli", footer_consumer: "PROTEZIONE DEL CONSUMATORE",
+        cookie_title: "Ciao!",
+        cookie_text_detailed: "Vogliamo offrirti la migliore esperienza. Utilizziamo i cookie per garantire il corretto funzionamento del sito, analizzare le prestazioni e personalizzare i contenuti. Cliccando su \"Accetta tutto\", acconsenti al loro utilizzo. Puoi saperne di più leggendo la nostra <a href='politica_cookies.html'>Informativa sui cookie</a> e <a href='confidentialitate.html'>Informativa sulla privacy</a>.",
+        cookie_accept: "Accetta tutto",
+        cookie_reject: "Rifiuta tutto",
+        cookie_manage: "Gestisci preferenze"
       }
     };
 
