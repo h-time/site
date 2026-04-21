@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Politica de Cookies | H-TIME</title>
+  <link rel="icon" href="logo.webp" type="image/webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --peach: #fcbf88;
+      --pink: #ffb6c1;
+      --dark: #111111;
+      --light-bg: #f8f5f2;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      background-color: var(--light-bg);
+      color: var(--dark);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    h1,h2,h3,h4 { font-weight: normal; }
+    a { color: inherit; text-decoration: none; }
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top:0; left:0; width:100%;
+      padding:15px 50px;
+      display:flex; justify-content:space-between; align-items:center;
+      z-index:1000;
+      background-color: rgba(0,0,0,0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .logo img { height:75px; }
+    .nav-links { display:flex; gap:30px; }
+    .nav-links a {
+      color:white; font-weight:500; font-size:0.9rem;
+      text-transform:uppercase; letter-spacing:1px; transition: color .3s;
+    }
+    .nav-links a:hover { color: var(--peach); }
+    .nav-icons { display:flex; align-items:center; gap:20px; }
+    .nav-icons a { color:white; font-size:0.9rem; text-transform:uppercase; transition: all .3s; }
+    .nav-icons a:hover { color: var(--peach); }
+    .cart-btn {
+      border:1px solid white; padding:8px 18px; border-radius:30px;
+      display:inline-flex; align-items:center; justify-content:center; transition: all .3s;
+    }
+    .cart-btn:hover { border-color: var(--peach); }
+
+    /* PAGE HEADER */
+    .page-header {
+      background: var(--dark);
+      color: white;
+      padding: 180px 20px 80px;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 15px;
+      background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textGradientMove 4s linear infinite;
+    }
+    .page-header p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: #ccc;
+    }
+
+    @keyframes textGradientMove { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+
+    /* POLICY CONTENT */
+    .policy-container {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 20px;
+      background: white;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+      border-radius: 12px;
+      padding: 50px;
+    }
+    .policy-container h2 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      color: var(--dark);
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    .policy-container h2:first-child {
+      margin-top: 0;
+    }
+    .policy-container h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-top: 25px;
+      margin-bottom: 15px;
+      color: #444;
+    }
+    .policy-container p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 15px;
+    }
+    .policy-container ul {
+      margin-left: 20px;
+      margin-bottom: 20px;
+      color: #555;
+    }
+    .policy-container li {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+    .policy-container a {
+      color: #b77f52;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+    .policy-container a:hover {
+      color: var(--dark);
+    }
+    .update-date {
+      font-size: 0.9rem;
+      color: #888;
+      font-style: italic;
+      margin-bottom: 40px;
+      display: block;
+    }
+
+    /* FOOTER */
+    footer { background-color:#0b0b0b; padding:80px 50px 30px; display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:40px; color:#fff; border-top:1px solid #222; }
+    .footer-col h2 { color:var(--peach); font-size:2.2rem; margin-bottom:20px; font-weight:700; }
+    .footer-col h3 { font-size:1rem; font-weight:700; margin-bottom:30px; letter-spacing:1px; text-transform:uppercase; color:#fff; }
+    .footer-desc { font-size:0.9rem; color:#999; line-height:1.8; margin-bottom:30px; }
+    .social-links { display:flex; gap:15px; }
+    .social-icon-circle { width:40px; height:40px; background:#222; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; transition:.3s; }
+    .social-icon-circle:hover { background: linear-gradient(to right, var(--pink), var(--peach)); color:black; transform:translateY(-3px); }
+    .footer-col ul { list-style:none; display:flex; flex-direction:column; gap:15px; }
+    .footer-col ul a { color:#999; font-size:0.9rem; transition:.3s; display:inline-block; }
+    .footer-col ul a:hover { color:var(--peach); transform:translateX(5px); }
+    .footer-bottom { grid-column:1 / -1; text-align:center; padding-top:40px; border-top:1px solid #222; color:#555; font-size:0.8rem; margin-top:20px; }
+    .anpc-img { max-width:180px; width:100%; height:auto; display:block; margin-bottom:15px; transition:opacity .3s; }
+    .anpc-img:hover { opacity:0.7; }
+    .company-info { margin-top: 25px; font-size: 0.85rem; color: #888; line-height: 1.6; }
+
+    @media (max-width:768px) {
+      nav { flex-direction:column; gap:15px; padding:15px; }
+      .nav-links { flex-wrap:wrap; justify-content:center; gap:15px; }
+      .policy-container { margin: 30px 15px; padding: 25px 15px; }
+      footer { padding:40px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="index.html" class="logo"><img src="logo.webp" alt="H-TIME Logo" onerror="this.src='logo.jpg'"></a>
+    <div class="nav-links">
+      <a href="index.html" data-i18n="nav_home">Acasă</a>
+      <a href="magazin.html" data-i18n="nav_shop">Magazin</a>
+      <a href="despre-noi.html" data-i18n="nav_about">Despre Noi</a>
+      <a href="echipa.html" data-i18n="nav_team">Echipa H-Time</a>
+      <a href="contact.html" data-i18n="nav_contact">Contactează-ne</a>
+    </div>
+    <div class="nav-icons">
+      <select id="languageSwitcher" aria-label="Selectează limba" style="background:black;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase;font-family:'Montserrat', sans-serif;">
+        <option value="ro">RO</option>
+        <option value="en">EN</option>
+        <option value="fr">FR</option>
+        <option value="de">DE</option>
+        <option value="es">ES</option>
+        <option value="it">IT</option>
+      </select>
+      <a href="checkout.html" id="cart-nav-btn" class="cart-btn" style="font-family:'Montserrat', sans-serif;">Cart (0)</a>
+    </div>
+  </nav>
+
+  <!-- HEADER PAGINĂ -->
+  <header class="page-header">
+    <h1 data-i18n="cookie_page_title">Politica de Cookies</h1>
+    <p data-i18n="cookie_page_subtitle">Transparență și control pentru o experiență de lux.</p>
+  </header>
+
+  <!-- CONȚINUT POLITICĂ -->
+  <main class="policy-container">
+    <span class="update-date" data-i18n="cookie_updated">Ultima actualizare: Aprilie 2026</span>
+
+    <h2 data-i18n="cookie_h2_1">1. Introducere</h2>
+    <p data-i18n="cookie_p_1">Această Politică de Cookies explică modul în care <strong>H-TIME Luxury Experience</strong> utilizează modulele cookie și tehnologiile similare pentru a te recunoaște atunci când vizitezi website-ul nostru. Aceasta explică ce sunt aceste tehnologii și de ce le folosim, precum și drepturile tale de a controla utilizarea acestora de către noi.</p>
+
+    <h2 data-i18n="cookie_h2_2">2. Ce este un "cookie"?</h2>
+    <p data-i18n="cookie_p_2">Un "Internet Cookie" (termen cunoscut și ca "browser cookie" sau "HTTP cookie" ori pur și simplu "cookie") este un fișier de mici dimensiuni, format din litere și numere, care va fi stocat pe computerul, terminalul mobil sau alte echipamente ale unui utilizator de pe care se accesează Internetul.</p>
+    <p data-i18n="cookie_p_3">Cookie-ul este instalat prin solicitarea emisă de către un web-server unui browser și este complet "pasiv" (nu conține programe software, viruși sau spyware și nu poate accesa informațiile de pe hard drive-ul utilizatorului).</p>
+
+    <h2 data-i18n="cookie_h2_3">3. La ce sunt folosite Cookie-urile?</h2>
+    <p data-i18n="cookie_p_4">Aceste fișiere fac posibilă recunoașterea terminalului utilizatorului și prezentarea conținutului într-un mod relevant, adaptat preferințelor utilizatorului. Cookie-urile asigură utilizatorilor o experiență plăcută de navigare și susțin eforturile noastre pentru a oferi servicii confortabile.</p>
+    <p data-i18n="cookie_p_5">Mai exact, ele sunt folosite pentru:</p>
+    <ul>
+      <li data-i18n="cookie_li_1">Păstrarea produselor în coșul de cumpărături.</li>
+      <li data-i18n="cookie_li_2">Recunoașterea ta la o vizită viitoare (astfel încât să nu mai fii nevoit să selectezi din nou limba sau să accepți politicile).</li>
+      <li data-i18n="cookie_li_3">Analizarea traficului pe site pentru a înțelege cum vizitatorii interacționează cu paginile noastre (Google Analytics).</li>
+      <li data-i18n="cookie_li_4">Oferirea de reclame relevante pentru tine, măsurând în același timp eficiența campaniilor noastre de marketing.</li>
+    </ul>
+
+    <h2 data-i18n="cookie_h2_4">4. Ce tipuri de Cookie-uri folosim?</h2>
+    <p data-i18n="cookie_p_6">Folosim două tipuri principale de cookie-uri: <strong>de sesiune</strong> și <strong>persistente</strong>. Cookie-urile de sesiune sunt fișiere temporare ce rămân în terminalul utilizatorului până la terminarea sesiunii sau închiderea browser-ului. Cookie-urile persistente rămân pe terminalul utilizatorului pe o perioadă determinată de parametrii cookie-ului sau până sunt șterse manual de utilizator.</p>
+
+    <h3 data-i18n="cookie_h3_1">Categorii specifice:</h3>
+    <ul>
+      <li data-i18n="cookie_li_5"><strong>Cookie-uri Strict Necesare:</strong> Acestea sunt esențiale pentru a-ți permite să navighezi pe website și să folosești funcțiile sale (ex. navigarea prin categorii, adăugarea în coș, finalizarea comenzii). Fără aceste cookie-uri, serviciile pe care le-ai solicitat nu pot fi furnizate. Acestea nu pot fi dezactivate.</li>
+      <li data-i18n="cookie_li_6"><strong>Cookie-uri Analitice și de Performanță:</strong> Aceste cookie-uri colectează informații anonime despre modul în care folosești website-ul nostru (ex: ce pagini sunt vizitate cel mai des, dacă primești mesaje de eroare). Aceste date sunt folosite exclusiv pentru a îmbunătăți modul în care funcționează site-ul nostru.</li>
+      <li data-i18n="cookie_li_7"><strong>Cookie-uri de Marketing / Targetare:</strong> Aceste cookie-uri sunt utilizate pentru a-ți oferi reclame mai relevante pentru tine și interesele tale. De asemenea, sunt folosite pentru a limita numărul de afișări ale unei reclame și pentru a ajuta la măsurarea eficienței campaniilor publicitare.</li>
+    </ul>
+
+    <h2 data-i18n="cookie_h2_5">5. Cookie-uri plasate de Terțe Părți (Third-party)</h2>
+    <p data-i18n="cookie_p_7">Anumite secțiuni de conținut de pe site pot fi furnizate prin intermediul unor terțe părți / furnizori (ex: video-uri YouTube integrat, sistem de analiză Google, butoane de social media Facebook/Instagram). Acești terți pot plasa, de asemenea, cookie-uri prin intermediul site-ului și ele se numesc "third party cookies" pentru că nu sunt plasate de proprietarul website-ului respectiv.</p>
+
+    <h2 data-i18n="cookie_h2_6">6. Cum pot fi controlate / oprite cookie-urile?</h2>
+    <p data-i18n="cookie_p_8">Dezactivarea și refuzul de a primi cookie-uri pot face anumite site-uri impracticabile sau dificil de vizitat și folosit. Refuzul de a accepta cookie-uri nu înseamnă că nu veți mai primi/vedea publicitate online, ci doar că aceasta nu va mai putea ține cont de preferințele și interesele dvs.</p>
+    <p data-i18n="cookie_p_9">Puteți seta din browser-ul dumneavoastră ca aceste cookie-uri să nu mai fie acceptate sau puteți seta browser-ul să accepte cookie-uri de la un site anume. Toate browserele moderne oferă posibilitatea de a schimba setările cookie-urilor. Aceste setări se găsesc de regulă în "opțiuni" sau în meniul de "preferințe" al browser-ului tău.</p>
+
+    <h2 data-i18n="cookie_h2_7">7. Actualizări ale acestei politici</h2>
+    <p data-i18n="cookie_p_10">Este posibil să actualizăm această Politică de Cookies din când în când, din motive operaționale, legale sau de reglementare. Te rugăm să vizitezi regulat această pagină pentru a rămâne informat cu privire la utilizarea modulelor cookie și a tehnologiilor asociate.</p>
+
+    <h2 data-i18n="cookie_h2_8">8. Contact</h2>
+    <p data-i18n="cookie_p_11">Dacă aveți întrebări suplimentare despre modul în care utilizăm cookie-urile, vă rugăm să ne contactați la adresa de e-mail: <strong>contact@h-time.ro</strong> sau vizitând secțiunea noastră de <a href="contact.html">Contact</a>.</p>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-col">
+      <h2>H-TIME</h2>
+      <p class="footer-desc" data-i18n="footer_desc">Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.</p>
+      <div class="social-links">
+        <a href="#" class="social-icon-circle" title="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
+        <a href="https://www.instagram.com/bijuterii.h_time/" class="social-icon-circle" title="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="#" class="social-icon-circle" title="TikTok">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+        </a>
+      </div>
+      <div class="company-info">
+        <p><strong>CUI:</strong> 83241620</p>
+        <p><strong>Reg. Com.:</strong> J22/4620/2024</p>
+        <p><strong>Sediu:</strong> Strada Milcov 18A, Iași 70025</p>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h3 data-i18n="footer_nav">NAVIGARE RAPIDĂ</h3>
+      <ul>
+        <li><a href="index.html" data-i18n="footer_home">Acasă - Pagina principală</a></li>
+        <li><a href="magazin.html" data-i18n="footer_shop">Magazin - Toate Colecțiile</a></li>
+        <li><a href="despre-noi.html" data-i18n="footer_about">Povestea Noastră</a></li>
+        <li><a href="contact.html" data-i18n="footer_contact">Contact & Suport</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h3 data-i18n="footer_info">INFORMAȚII & POLITICI</h3>
+      <ul>
+        <li><a href="termeni.html" data-i18n="footer_terms">Termeni și Condiții</a></li>
+        <li><a href="confidentialitate.html" data-i18n="footer_privacy">Politică de Confidențialitate</a></li>
+        <li><a href="politica_cookies.html" style="color:var(--peach);" data-i18n="footer_cookies">Politică de Cookies</a></li>
+        <li><a href="politica_livrare.html" data-i18n="footer_delivery">Politică de Livrare</a></li>
+        <li><a href="politici_retur.html" data-i18n="footer_return">Politică de Retur (14 zile)</a></li>
+        <li><a href="ingrijirea_bijuteriilor.html" data-i18n="footer_care">Îngrijirea Bijuteriilor</a></li>
+        <li><a href="date_identificare.html" data-i18n="footer_id_data">Date de identificare ale societății</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h3 data-i18n="footer_consumer">PROTECȚIA CONSUMATORULUI</h3>
+      <div>
+        <a href="https://anpc.ro/ce-este-sal/" target="_blank">
+          <img src="https://ro.pandora.net/mobify/bundle/1108/static/img/SAL-PICTOGRAMA.png?app=pdp" alt="ANPC SAL" class="anpc-img">
+        </a>
+        <a href="https://ec.europa.eu/consumers/odr" target="_blank">
+          <img src="https://ro.pandora.net/mobify/bundle/1108/static/img/pictogramaSOL.png?app=pdp" alt="ANPC SOL" class="anpc-img">
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">© 2024 - 2026 H-TIME Luxury Experience. Toate drepturile sunt rezervate.</div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+      const cartBtn = document.getElementById('cart-nav-btn');
+      if (cartBtn) cartBtn.innerText = `Cart (${cart.length})`;
+
+      const switcher = document.getElementById('languageSwitcher');
+      const savedLang = localStorage.getItem('htime_lang') || 'ro';
+      if (switcher) switcher.value = savedLang;
+      applyTranslations(savedLang);
+
+      if (switcher) {
+        switcher.addEventListener('change', () => {
+          const lang = switcher.value;
+          localStorage.setItem('htime_lang', lang);
+          applyTranslations(lang);
+        });
+      }
+    });
+
+    const translations = {
+      ro: {
+        page_head_title: "Politica de Cookies | H-TIME",
+        nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne",
+        footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.",
+        footer_nav: "NAVIGARE RAPIDĂ", footer_home: "Acasă - Pagina principală", footer_shop: "Magazin - Toate Colecțiile",
+        footer_about: "Povestea Noastră", footer_contact: "Contact & Suport", footer_info: "INFORMAȚII & POLITICI",
+        footer_terms: "Termeni și Condiții", footer_privacy: "Politică de Confidențialitate", footer_cookies: "Politică de Cookies", footer_delivery: "Politică de Livrare",
+        footer_return: "Politică de Retur (14 zile)", footer_care: "Îngrijirea Bijuteriilor", footer_consumer: "PROTECȚIA CONSUMATORULUI",
+        footer_id_data: "Date de identificare ale societății",
+        
+        // Cookie Policy Specific
+        cookie_page_title: "Politica de Cookies",
+        cookie_page_subtitle: "Transparență și control pentru o experiență de lux.",
+        cookie_updated: "Ultima actualizare: Aprilie 2026",
+        cookie_h2_1: "1. Introducere",
+        cookie_p_1: "Această Politică de Cookies explică modul în care <strong>H-TIME Luxury Experience</strong> utilizează modulele cookie și tehnologiile similare pentru a te recunoaște atunci când vizitezi website-ul nostru. Aceasta explică ce sunt aceste tehnologii și de ce le folosim, precum și drepturile tale de a controla utilizarea acestora de către noi.",
+        cookie_h2_2: "2. Ce este un \"cookie\"?",
+        cookie_p_2: "Un \"Internet Cookie\" (termen cunoscut și ca \"browser cookie\" sau \"HTTP cookie\" ori pur și simplu \"cookie\") este un fișier de mici dimensiuni, format din litere și numere, care va fi stocat pe computerul, terminalul mobil sau alte echipamente ale unui utilizator de pe care se accesează Internetul.",
+        cookie_p_3: "Cookie-ul este instalat prin solicitarea emisă de către un web-server unui browser și este complet \"pasiv\" (nu conține programe software, viruși sau spyware și nu poate accesa informațiile de pe hard drive-ul utilizatorului).",
+        cookie_h2_3: "3. La ce sunt folosite Cookie-urile?",
+        cookie_p_4: "Aceste fișiere fac posibilă recunoașterea terminalului utilizatorului și prezentarea conținutului într-un mod relevant, adaptat preferințelor utilizatorului. Cookie-urile asigură utilizatorilor o experiență plăcută de navigare și susțin eforturile noastre pentru a oferi servicii confortabile.",
+        cookie_p_5: "Mai exact, ele sunt folosite pentru:",
+        cookie_li_1: "Păstrarea produselor în coșul de cumpărături.",
+        cookie_li_2: "Recunoașterea ta la o vizită viitoare (astfel încât să nu mai fii nevoit să selectezi din nou limba sau să accepți politicile).",
+        cookie_li_3: "Analizarea traficului pe site pentru a înțelege cum vizitatorii interacționează cu paginile noastre (Google Analytics).",
+        cookie_li_4: "Oferirea de reclame relevante pentru tine, măsurând în același timp eficiența campaniilor noastre de marketing.",
+        cookie_h2_4: "4. Ce tipuri de Cookie-uri folosim?",
+        cookie_p_6: "Folosim două tipuri principale de cookie-uri: <strong>de sesiune</strong> și <strong>persistente</strong>. Cookie-urile de sesiune sunt fișiere temporare ce rămân în terminalul utilizatorului până la terminarea sesiunii sau închiderea browser-ului. Cookie-urile persistente rămân pe terminalul utilizatorului pe o perioadă determinată de parametrii cookie-ului sau până sunt șterse manual de utilizator.",
+        cookie_h3_1: "Categorii specifice:",
+        cookie_li_5: "<strong>Cookie-uri Strict Necesare:</strong> Acestea sunt esențiale pentru a-ți permite să navighezi pe website și să folosești funcțiile sale (ex. navigarea prin categorii, adăugarea în coș, finalizarea comenzii). Fără aceste cookie-uri, serviciile pe care le-ai solicitat nu pot fi furnizate. Acestea nu pot fi dezactivate.",
+        cookie_li_6: "<strong>Cookie-uri Analitice și de Performanță:</strong> Aceste cookie-uri colectează informații anonime despre modul în care folosești website-ul nostru (ex: ce pagini sunt vizitate cel mai des, dacă primești mesaje de eroare). Aceste date sunt folosite exclusiv pentru a îmbunătăți modul în care funcționează site-ul nostru.",
+        cookie_li_7: "<strong>Cookie-uri de Marketing / Targetare:</strong> Aceste cookie-uri sunt utilizate pentru a-ți oferi reclame mai relevante pentru tine și interesele tale. De asemenea, sunt folosite pentru a limita numărul de afișări ale unei reclame și pentru a ajuta la măsurarea eficienței campaniilor publicitare.",
+        cookie_h2_5: "5. Cookie-uri plasate de Terțe Părți (Third-party)",
+        cookie_p_7: "Anumite secțiuni de conținut de pe site pot fi furnizate prin intermediul unor terțe părți / furnizori (ex: video-uri YouTube integrat, sistem de analiză Google, butoane de social media Facebook/Instagram). Acești terți pot plasa, de asemenea, cookie-uri prin intermediul site-ului și ele se numesc \"third party cookies\" pentru că nu sunt plasate de proprietarul website-ului respectiv.",
+        cookie_h2_6: "6. Cum pot fi controlate / oprite cookie-urile?",
+        cookie_p_8: "Dezactivarea și refuzul de a primi cookie-uri pot face anumite site-uri impracticabile sau dificil de vizitat și folosit. Refuzul de a accepta cookie-uri nu înseamnă că nu veți mai primi/vedea publicitate online, ci doar că aceasta nu va mai putea ține cont de preferințele și interesele dvs.",
+        cookie_p_9: "Puteți seta din browser-ul dumneavoastră ca aceste cookie-uri să nu mai fie acceptate sau puteți seta browser-ul să accepte cookie-uri de la un site anume. Toate browserele moderne oferă posibilitatea de a schimba setările cookie-urilor. Aceste setări se găsesc de regulă în \"opțiuni\" sau în meniul de \"preferințe\" al browser-ului tău.",
+        cookie_h2_7: "7. Actualizări ale acestei politici",
+        cookie_p_10: "Este posibil să actualizăm această Politică de Cookies din când în când, din motive operaționale, legale sau de reglementare. Te rugăm să vizitezi regulat această pagină pentru a rămâne informat cu privire la utilizarea modulelor cookie și a tehnologiilor asociate.",
+        cookie_h2_8: "8. Contact",
+        cookie_p_11: "Dacă aveți întrebări suplimentare despre modul în care utilizăm cookie-urile, vă rugăm să ne contactați la adresa de e-mail: <strong>contact@h-time.ro</strong> sau vizitând secțiunea noastră de <a href='contact.html'>Contact</a>."
+      },
+      en: {
+        page_head_title: "Cookie Policy | H-TIME",
+        nav_home: "Home", nav_shop: "Shop", nav_about: "About Us", nav_team: "H-Time Team", nav_contact: "Contact Us",
+        footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement, premium quality, and stories told through unique jewelry and watches.",
+        footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections",
+        footer_about: "Our Story", footer_contact: "Contact & Support", footer_info: "INFORMATION & POLICIES",
+        footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_cookies: "Cookie Policy", footer_delivery: "Delivery Policy",
+        footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care", footer_consumer: "CONSUMER PROTECTION",
+        footer_id_data: "Company Identification Data",
+        
+        cookie_page_title: "Cookie Policy",
+        cookie_page_subtitle: "Transparency and control for a luxury experience.",
+        cookie_updated: "Last updated: April 2026",
+        cookie_h2_1: "1. Introduction",
+        cookie_p_1: "This Cookie Policy explains how <strong>H-TIME Luxury Experience</strong> uses cookies and similar technologies to recognize you when you visit our website. It explains what these technologies are and why we use them, as well as your rights to control our use of them.",
+        cookie_h2_2: "2. What is a \"cookie\"?",
+        cookie_p_2: "An \"Internet Cookie\" (also known as a \"browser cookie\" or \"HTTP cookie\" or simply \"cookie\") is a small file consisting of letters and numbers that will be stored on a user's computer, mobile terminal, or other equipment from which the Internet is accessed.",
+        cookie_p_3: "The cookie is installed by the request issued by a web server to a browser and is completely \"passive\" (it does not contain software programs, viruses, or spyware and cannot access the information on the user's hard drive).",
+        cookie_h2_3: "3. What are Cookies used for?",
+        cookie_p_4: "These files make it possible to recognize the user's terminal and present the content in a relevant way, adapted to the user's preferences. Cookies provide users with a pleasant browsing experience and support our efforts to provide comfortable services.",
+        cookie_p_5: "Specifically, they are used for:",
+        cookie_li_1: "Keeping products in the shopping cart.",
+        cookie_li_2: "Recognizing you on a future visit (so you don't have to select the language or accept policies again).",
+        cookie_li_3: "Analyzing site traffic to understand how visitors interact with our pages (Google Analytics).",
+        cookie_li_4: "Delivering relevant advertisements to you, while measuring the effectiveness of our marketing campaigns.",
+        cookie_h2_4: "4. What types of Cookies do we use?",
+        cookie_p_6: "We use two main types of cookies: <strong>session</strong> and <strong>persistent</strong>. Session cookies are temporary files that remain in the user's terminal until the session ends or the browser is closed. Persistent cookies remain on the user's terminal for a period determined by the cookie's parameters or until they are manually deleted by the user.",
+        cookie_h3_1: "Specific categories:",
+        cookie_li_5: "<strong>Strictly Necessary Cookies:</strong> These are essential to allow you to navigate the website and use its features (e.g., navigating through categories, adding to cart, checkout). Without these cookies, the services you have asked for cannot be provided. These cannot be disabled.",
+        cookie_li_6: "<strong>Analytical and Performance Cookies:</strong> These cookies collect anonymous information about how you use our website (e.g., which pages are visited most often, if you receive error messages). This data is used exclusively to improve how our site works.",
+        cookie_li_7: "<strong>Marketing / Targeting Cookies:</strong> These cookies are used to deliver ads more relevant to you and your interests. They are also used to limit the number of times you see an advertisement and help measure the effectiveness of advertising campaigns.",
+        cookie_h2_5: "5. Cookies placed by Third Parties (Third-party)",
+        cookie_p_7: "Certain sections of content on the site may be provided through third parties / providers (e.g., embedded YouTube videos, Google analytics system, Facebook/Instagram social media buttons). These third parties may also place cookies through the site and they are called \"third-party cookies\" because they are not placed by the owner of the respective website.",
+        cookie_h2_6: "6. How can cookies be controlled / stopped?",
+        cookie_p_8: "Disabling and refusing to receive cookies can make certain sites impractical or difficult to visit and use. Refusing to accept cookies does not mean that you will no longer receive/see online advertising, but only that it will no longer be able to take into account your preferences and interests.",
+        cookie_p_9: "You can set your browser so that these cookies are no longer accepted or you can set the browser to accept cookies from a specific site. All modern browsers offer the possibility to change cookie settings. These settings are usually found in the \"options\" or \"preferences\" menu of your browser.",
+        cookie_h2_7: "7. Updates to this policy",
+        cookie_p_10: "We may update this Cookie Policy from time to time for operational, legal or regulatory reasons. Please visit this page regularly to stay informed about our use of cookies and related technologies.",
+        cookie_h2_8: "8. Contact",
+        cookie_p_11: "If you have any further questions about how we use cookies, please contact us at the e-mail address: <strong>contact@h-time.ro</strong> or by visiting our <a href='contact.html'>Contact</a> section."
+      },
+      fr: {
+        page_head_title: "Politique de cookies | H-TIME",
+        nav_home: "Accueil", nav_shop: "Boutique", nav_about: "À propos", nav_team: "Équipe H-Time", nav_contact: "Contactez-nous",
+        footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe dédiée aux personnes qui apprécient le raffinement, la qualité supérieure et les histoires racontées à travers des bijoux et des montres uniques.",
+        footer_nav: "NAVIGATION RAPIDE", footer_home: "Accueil - Page principale", footer_shop: "Boutique - Toutes les collections",
+        footer_about: "Notre histoire", footer_contact: "Contact & Support", footer_info: "INFORMATIONS & POLITIQUES",
+        footer_terms: "Conditions générales", footer_privacy: "Politique de confidentialité", footer_cookies: "Politique de cookies", footer_delivery: "Politique de livraison",
+        footer_return: "Politique de retour (14 jours)", footer_care: "Entretien des bijoux", footer_consumer: "PROTECTION DU CONSOMMATEUR",
+        footer_id_data: "Données d'identification de l'entreprise",
+        
+        cookie_page_title: "Politique de Cookies",
+        cookie_page_subtitle: "Transparence et contrôle pour une expérience de luxe.",
+        cookie_updated: "Dernière mise à jour : Avril 2026",
+        cookie_h2_1: "1. Introduction",
+        cookie_p_1: "Cette Politique de Cookies explique comment <strong>H-TIME Luxury Experience</strong> utilise les cookies et des technologies similaires pour vous reconnaître lorsque vous visitez notre site Web. Elle explique ce que sont ces technologies et pourquoi nous les utilisons, ainsi que vos droits pour contrôler notre utilisation de celles-ci.",
+        cookie_h2_2: "2. Qu'est-ce qu'un \"cookie\" ?",
+        cookie_p_2: "Un \"Internet Cookie\" (également connu sous le nom de \"cookie de navigateur\" ou \"cookie HTTP\" ou simplement \"cookie\") est un petit fichier composé de lettres et de chiffres qui sera stocké sur l'ordinateur, le terminal mobile ou d'autres équipements d'un utilisateur à partir desquels on accède à Internet.",
+        cookie_p_3: "Le cookie est installé par la requête émise par un serveur Web à un navigateur et est totalement \"passif\" (il ne contient pas de logiciels, virus ou logiciels espions et ne peut pas accéder aux informations du disque dur de l'utilisateur).",
+        cookie_h2_3: "3. À quoi servent les Cookies ?",
+        cookie_p_4: "Ces fichiers permettent de reconnaître le terminal de l'utilisateur et de présenter le contenu de manière pertinente, adaptée aux préférences de l'utilisateur. Les cookies offrent aux utilisateurs une expérience de navigation agréable et soutiennent nos efforts pour fournir des services confortables.",
+        cookie_p_5: "Plus précisément, ils sont utilisés pour :",
+        cookie_li_1: "Conserver les produits dans le panier d'achat.",
+        cookie_li_2: "Vous reconnaître lors d'une future visite (pour que vous n'ayez pas à sélectionner à nouveau la langue ou à accepter les politiques).",
+        cookie_li_3: "Analyser le trafic du site pour comprendre comment les visiteurs interagissent avec nos pages (Google Analytics).",
+        cookie_li_4: "Proposer des publicités pertinentes pour vous, tout en mesurant l'efficacité de nos campagnes de marketing.",
+        cookie_h2_4: "4. Quels types de Cookies utilisons-nous ?",
+        cookie_p_6: "Nous utilisons deux types principaux de cookies : <strong>de session</strong> et <strong>persistants</strong>. Les cookies de session sont des fichiers temporaires qui restent dans le terminal de l'utilisateur jusqu'à la fin de la session ou la fermeture du navigateur. Les cookies persistants restent sur le terminal de l'utilisateur pour une période déterminée par les paramètres du cookie ou jusqu'à ce qu'ils soient supprimés manuellement par l'utilisateur.",
+        cookie_h3_1: "Catégories spécifiques :",
+        cookie_li_5: "<strong>Cookies Strictement Nécessaires :</strong> Ceux-ci sont essentiels pour vous permettre de naviguer sur le site Web et d'utiliser ses fonctionnalités (ex. navigation dans les catégories, ajout au panier, finalisation de la commande). Sans ces cookies, les services que vous avez demandés ne peuvent pas être fournis. Ils ne peuvent pas être désactivés.",
+        cookie_li_6: "<strong>Cookies Analytiques et de Performance :</strong> Ces cookies collectent des informations anonymes sur la façon dont vous utilisez notre site Web (ex : quelles pages sont visitées le plus souvent, si vous recevez des messages d'erreur). Ces données sont utilisées exclusivement pour améliorer le fonctionnement de notre site.",
+        cookie_li_7: "<strong>Cookies de Marketing / Ciblage :</strong> Ces cookies sont utilisés pour vous proposer des publicités plus pertinentes pour vous et vos intérêts. Ils sont également utilisés pour limiter le nombre d'affichages d'une publicité et pour aider à mesurer l'efficacité des campagnes publicitaires.",
+        cookie_h2_5: "5. Cookies placés par des Tiers (Third-party)",
+        cookie_p_7: "Certaines sections de contenu sur le site peuvent être fournies par des tiers / fournisseurs (ex : vidéos YouTube intégrées, système d'analyse Google, boutons de réseaux sociaux Facebook/Instagram). Ces tiers peuvent également placer des cookies via le site et ils sont appelés \"cookies tiers\" car ils ne sont pas placés par le propriétaire du site Web respectif.",
+        cookie_h2_6: "6. Comment les cookies peuvent-ils être contrôlés / arrêtés ?",
+        cookie_p_8: "La désactivation et le refus de recevoir des cookies peuvent rendre certains sites impraticables ou difficiles à visiter et à utiliser. Le refus d'accepter les cookies ne signifie pas que vous ne recevrez/verrez plus de publicité en ligne, mais seulement que celle-ci ne pourra plus tenir compte de vos préférences et de vos intérêts.",
+        cookie_p_9: "Vous pouvez configurer votre navigateur pour que ces cookies ne soient plus acceptés ou vous pouvez configurer le navigateur pour qu'il accepte les cookies d'un site spécifique. Tous les navigateurs modernes offrent la possibilité de modifier les paramètres des cookies. Ces paramètres se trouvent généralement dans le menu \"options\" ou \"préférences\" de votre navigateur.",
+        cookie_h2_7: "7. Mises à jour de cette politique",
+        cookie_p_10: "Il est possible que nous mettions à jour cette Politique de Cookies de temps à autre, pour des raisons opérationnelles, légales ou réglementaires. Veuillez visiter cette page régulièrement pour rester informé de l'utilisation des cookies et des technologies associées.",
+        cookie_h2_8: "8. Contact",
+        cookie_p_11: "Si vous avez des questions supplémentaires sur la façon dont nous utilisons les cookies, veuillez nous contacter à l'adresse e-mail : <strong>contact@h-time.ro</strong> ou en visitant notre section <a href='contact.html'>Contact</a>."
+      },
+      de: {
+        page_head_title: "Cookie-Richtlinie | H-TIME",
+        nav_home: "Startseite", nav_shop: "Shop", nav_about: "Über uns", nav_team: "H-Time Team", nav_contact: "Kontakt",
+        footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique, die sich Personen widmet, die Raffinesse, erstklassige Qualität und Geschichten schätzen, die durch einzigartige Schmuckstücke und Uhren erzählt werden.",
+        footer_nav: "SCHNELLNAVIGATION", footer_home: "Startseite - Hauptseite", footer_shop: "Shop - Alle Kollektionen",
+        footer_about: "Unsere Geschichte", footer_contact: "Kontakt & Support", footer_info: "INFORMATIONEN & RICHTLINIEN",
+        footer_terms: "Allgemeine Geschäftsbedingungen", footer_privacy: "Datenschutzrichtlinie", footer_cookies: "Cookie-Richtlinie", footer_delivery: "Lieferbedingungen",
+        footer_return: "Rückgaberecht (14 Tage)", footer_care: "Schmuckpflege", footer_consumer: "VERBRAUCHERSCHUTZ",
+        footer_id_data: "Unternehmensidentifikationsdaten",
+
+        cookie_page_title: "Cookie-Richtlinie",
+        cookie_page_subtitle: "Transparenz und Kontrolle für ein Luxuserlebnis.",
+        cookie_updated: "Zuletzt aktualisiert: April 2026",
+        cookie_h2_1: "1. Einführung",
+        cookie_p_1: "Diese Cookie-Richtlinie erklärt, wie <strong>H-TIME Luxury Experience</strong> Cookies und ähnliche Technologien verwendet, um Sie zu erkennen, wenn Sie unsere Website besuchen. Sie erklärt, was diese Technologien sind und warum wir sie verwenden, sowie Ihre Rechte, unsere Nutzung dieser zu kontrollieren.",
+        cookie_h2_2: "2. Was ist ein \"Cookie\"?",
+        cookie_p_2: "Ein \"Internet-Cookie\" (auch bekannt als \"Browser-Cookie\" oder \"HTTP-Cookie\" oder einfach \"Cookie\") ist eine kleine Datei, die aus Buchstaben und Zahlen besteht und auf dem Computer, dem mobilen Endgerät oder anderen Geräten eines Benutzers gespeichert wird, von denen aus auf das Internet zugegriffen wird.",
+        cookie_p_3: "Das Cookie wird durch die von einem Webserver an einen Browser gesendete Anfrage installiert und ist vollständig \"passiv\" (es enthält keine Softwareprogramme, Viren oder Spyware und kann nicht auf die Informationen auf der Festplatte des Benutzers zugreifen).",
+        cookie_h2_3: "3. Wofür werden Cookies verwendet?",
+        cookie_p_4: "Diese Dateien ermöglichen es, das Endgerät des Benutzers zu erkennen und den Inhalt auf eine relevante Weise zu präsentieren, die an die Präferenzen des Benutzers angepasst ist. Cookies bieten den Benutzern ein angenehmes Surferlebnis und unterstützen unsere Bemühungen, komfortable Dienste bereitzustellen.",
+        cookie_p_5: "Konkret werden sie verwendet für:",
+        cookie_li_1: "Aufbewahrung von Produkten im Warenkorb.",
+        cookie_li_2: "Ihre Wiedererkennung bei einem zukünftigen Besuch (damit Sie die Sprache nicht erneut auswählen oder Richtlinien akzeptieren müssen).",
+        cookie_li_3: "Analyse des Website-Traffics, um zu verstehen, wie Besucher mit unseren Seiten interagieren (Google Analytics).",
+        cookie_li_4: "Bereitstellung relevanter Werbung für Sie, während gleichzeitig die Wirksamkeit unserer Marketingkampagnen gemessen wird.",
+        cookie_h2_4: "4. Welche Arten von Cookies verwenden wir?",
+        cookie_p_6: "Wir verwenden zwei Hauptarten von Cookies: <strong>Sitzungs-Cookies</strong> und <strong>permanente Cookies</strong>. Sitzungs-Cookies sind temporäre Dateien, die bis zum Ende der Sitzung oder bis zum Schließen des Browsers im Endgerät des Benutzers verbleiben. Permanente Cookies verbleiben auf dem Endgerät des Benutzers für einen Zeitraum, der durch die Parameter des Cookies bestimmt wird, oder bis sie vom Benutzer manuell gelöscht werden.",
+        cookie_h3_1: "Spezifische Kategorien:",
+        cookie_li_5: "<strong>Unbedingt erforderliche Cookies:</strong> Diese sind unerlässlich, damit Sie auf der Website navigieren und ihre Funktionen nutzen können (z. B. Navigieren durch Kategorien, Hinzufügen zum Warenkorb, Abschluss der Bestellung). Ohne diese Cookies können die von Ihnen angeforderten Dienste nicht bereitgestellt werden. Diese können nicht deaktiviert werden.",
+        cookie_li_6: "<strong>Analyse- und Leistungs-Cookies:</strong> Diese Cookies sammeln anonyme Informationen darüber, wie Sie unsere Website nutzen (z. B. welche Seiten am häufigsten besucht werden, ob Sie Fehlermeldungen erhalten). Diese Daten werden ausschließlich verwendet, um die Funktionsweise unserer Website zu verbessern.",
+        cookie_li_7: "<strong>Marketing- / Targeting-Cookies:</strong> Diese Cookies werden verwendet, um Ihnen Werbung zu liefern, die für Sie und Ihre Interessen relevanter ist. Sie werden auch verwendet, um die Häufigkeit der Anzeige einer Werbung zu begrenzen und die Wirksamkeit von Werbekampagnen zu messen.",
+        cookie_h2_5: "5. Cookies von Drittanbietern (Third-party)",
+        cookie_p_7: "Bestimmte Inhaltsbereiche auf der Website können über Dritte / Anbieter bereitgestellt werden (z. B. eingebettete YouTube-Videos, Google-Analysesystem, Social-Media-Buttons von Facebook/Instagram). Diese Dritten können ebenfalls Cookies über die Website platzieren, und sie werden \"Drittanbieter-Cookies\" genannt, da sie nicht vom Eigentümer der jeweiligen Website platziert werden.",
+        cookie_h2_6: "6. Wie können Cookies kontrolliert / gestoppt werden?",
+        cookie_p_8: "Das Deaktivieren und die Weigerung, Cookies zu empfangen, können bestimmte Websites unpraktisch oder schwer zu besuchen und zu nutzen machen. Die Weigerung, Cookies zu akzeptieren, bedeutet nicht, dass Sie keine Online-Werbung mehr erhalten/sehen, sondern nur, dass diese Ihre Vorlieben und Interessen nicht mehr berücksichtigen kann.",
+        cookie_p_9: "Sie können Ihren Browser so einstellen, dass diese Cookies nicht mehr akzeptiert werden, oder Sie können den Browser so einstellen, dass er Cookies von einer bestimmten Website akzeptiert. Alle modernen Browser bieten die Möglichkeit, Cookie-Einstellungen zu ändern. Diese Einstellungen finden Sie normalerweise im Menü \"Optionen\" oder \"Einstellungen\" Ihres Browsers.",
+        cookie_h2_7: "7. Aktualisierungen dieser Richtlinie",
+        cookie_p_10: "Wir können diese Cookie-Richtlinie von Zeit zu Zeit aus betrieblichen, rechtlichen oder regulatorischen Gründen aktualisieren. Bitte besuchen Sie diese Seite regelmäßig, um über unsere Verwendung von Cookies und verwandten Technologien auf dem Laufenden zu bleiben.",
+        cookie_h2_8: "8. Kontakt",
+        cookie_p_11: "Wenn Sie weitere Fragen dazu haben, wie wir Cookies verwenden, kontaktieren Sie uns bitte unter der E-Mail-Adresse: <strong>contact@h-time.ro</strong> oder besuchen Sie unseren <a href='contact.html'>Kontakt</a>-Bereich."
+      },
+      es: {
+        page_head_title: "Política de Cookies | H-TIME",
+        nav_home: "Inicio", nav_shop: "Tienda", nav_about: "Sobre Nosotros", nav_team: "Equipo H-Time", nav_contact: "Contáctanos",
+        footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo dedicada a personas que aprecian el refinamiento, la calidad superior y las historias contadas a través de joyas y relojes únicos.",
+        footer_nav: "NAVEGACIÓN RÁPIDA", footer_home: "Inicio - Página principal", footer_shop: "Tienda - Todas las colecciones",
+        footer_about: "Nuestra historia", footer_contact: "Contacto & Soporte", footer_info: "INFORMACIÓN & POLÍTICAS",
+        footer_terms: "Términos y condiciones", footer_privacy: "Política de privacidad", footer_cookies: "Política de Cookies", footer_delivery: "Política de entrega",
+        footer_return: "Política de devolución (14 días)", footer_care: "Cuidado de las joyas", footer_consumer: "PROTECCIÓN AL CONSUMIDOR",
+        footer_id_data: "Datos de identificación de la empresa",
+
+        cookie_page_title: "Política de Cookies",
+        cookie_page_subtitle: "Transparencia y control para una experiencia de lujo.",
+        cookie_updated: "Última actualización: Abril 2026",
+        cookie_h2_1: "1. Introducción",
+        cookie_p_1: "Esta Política de Cookies explica cómo <strong>H-TIME Luxury Experience</strong> utiliza cookies y tecnologías similares para reconocerle cuando visita nuestro sitio web. Explica qué son estas tecnologías y por qué las usamos, así como sus derechos para controlar nuestro uso de las mismas.",
+        cookie_h2_2: "2. ¿Qué es una \"cookie\"?",
+        cookie_p_2: "Una \"Cookie de Internet\" (también conocida como \"cookie de navegador\" o \"cookie HTTP\" o simplemente \"cookie\") es un pequeño archivo compuesto de letras y números que se almacenará en la computadora, terminal móvil u otro equipo de un usuario desde el cual se accede a Internet.",
+        cookie_p_3: "La cookie se instala a petición emitida por un servidor web a un navegador y es completamente \"pasiva\" (no contiene programas de software, virus ni software espía y no puede acceder a la información del disco duro del usuario).",
+        cookie_h2_3: "3. ¿Para qué se utilizan las Cookies?",
+        cookie_p_4: "Estos archivos permiten reconocer el terminal del usuario y presentar el contenido de una manera relevante, adaptada a las preferencias del usuario. Las cookies brindan a los usuarios una experiencia de navegación agradable y respaldan nuestros esfuerzos para brindar servicios cómodos.",
+        cookie_p_5: "Específicamente, se utilizan para:",
+        cookie_li_1: "Mantener los productos en el carrito de compras.",
+        cookie_li_2: "Reconocerle en una visita futura (para que no tenga que volver a seleccionar el idioma o aceptar las políticas).",
+        cookie_li_3: "Analizar el tráfico del sitio para comprender cómo los visitantes interactúan con nuestras páginas (Google Analytics).",
+        cookie_li_4: "Ofrecer anuncios relevantes para usted, midiendo al mismo tiempo la efectividad de nuestras campañas de marketing.",
+        cookie_h2_4: "4. ¿Qué tipos de Cookies utilizamos?",
+        cookie_p_6: "Utilizamos dos tipos principales de cookies: <strong>de sesión</strong> y <strong>persistentes</strong>. Las cookies de sesión son archivos temporales que permanecen en el terminal del usuario hasta el final de la sesión o hasta que se cierra el navegador. Las cookies persistentes permanecen en el terminal del usuario por un período determinado por los parámetros de la cookie o hasta que el usuario las borre manualmente.",
+        cookie_h3_1: "Categorías específicas:",
+        cookie_li_5: "<strong>Cookies Estrictamente Necesarias:</strong> Estas son esenciales para permitirle navegar por el sitio web y utilizar sus funciones (por ejemplo, navegar por categorías, agregar al carrito, finalizar la compra). Sin estas cookies, los servicios que ha solicitado no se pueden proporcionar. Estas no se pueden desactivar.",
+        cookie_li_6: "<strong>Cookies Analíticas y de Rendimiento:</strong> Estas cookies recopilan información anónima sobre cómo utiliza nuestro sitio web (por ejemplo, qué páginas se visitan con más frecuencia, si recibe mensajes de error). Estos datos se utilizan exclusivamente para mejorar el funcionamiento de nuestro sitio.",
+        cookie_li_7: "<strong>Cookies de Marketing / Orientación:</strong> Estas cookies se utilizan para ofrecerle anuncios más relevantes para usted y sus intereses. También se utilizan para limitar el número de veces que ve un anuncio y ayudar a medir la eficacia de las campañas publicitarias.",
+        cookie_h2_5: "5. Cookies de Terceros (Third-party)",
+        cookie_p_7: "Ciertas secciones de contenido en el sitio pueden proporcionarse a través de terceros / proveedores (por ejemplo, videos incrustados de YouTube, sistema de análisis de Google, botones de redes sociales de Facebook/Instagram). Estos terceros también pueden colocar cookies a través del sitio y se denominan \"cookies de terceros\" porque no las coloca el propietario del sitio web respectivo.",
+        cookie_h2_6: "6. ¿Cómo se pueden controlar / detener las cookies?",
+        cookie_p_8: "Desactivar y negarse a recibir cookies puede hacer que ciertos sitios sean impracticables o difíciles de visitar y usar. Negarse a aceptar cookies no significa que ya no recibirá/verá publicidad en línea, sino solo que ya no podrá tener en cuenta sus preferencias e intereses.",
+        cookie_p_9: "Puede configurar su navegador para que estas cookies ya no sean aceptadas o puede configurar el navegador para que acepte cookies de un sitio específico. Todos los navegadores modernos ofrecen la posibilidad de cambiar la configuración de las cookies. Estas configuraciones generalmente se encuentran en el menú de \"opciones\" o \"preferencias\" de su navegador.",
+        cookie_h2_7: "7. Actualizaciones de esta política",
+        cookie_p_10: "Podemos actualizar esta Política de Cookies de vez en cuando, por razones operativas, legales o reglamentarias. Visite esta página periódicamente para mantenerse informado sobre nuestro uso de cookies y tecnologías asociadas.",
+        cookie_h2_8: "8. Contacto",
+        cookie_p_11: "Si tiene más preguntas sobre cómo utilizamos las cookies, póngase en contacto con nosotros en la dirección de correo electrónico: <strong>contact@h-time.ro</strong> o visitando nuestra sección de <a href='contact.html'>Contacto</a>."
+      },
+      it: {
+        page_head_title: "Informativa sui cookie | H-TIME",
+        nav_home: "Home", nav_shop: "Negozio", nav_about: "Chi Siamo", nav_team: "Team H-Time", nav_contact: "Contattaci",
+        footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso dedicata alle persone che apprezzano la raffinatezza, la qualità superiore e le storie raccontate attraverso gioielli e orologi unici.",
+        footer_nav: "NAVIGAZIONE RAPIDA", footer_home: "Home - Pagina principale", footer_shop: "Negozio - Tutte le collezioni",
+        footer_about: "La nostra storia", footer_contact: "Contatto & Supporto", footer_info: "INFORMAZIONI & POLITICHE",
+        footer_terms: "Termini e condizioni", footer_privacy: "Privacy", footer_cookies: "Informativa sui cookie", footer_delivery: "Consegna",
+        footer_return: "Reso (14 giorni)", footer_care: "Cura dei gioielli", footer_consumer: "PROTEZIONE DEL CONSUMATORE",
+        footer_id_data: "Dati identificativi dell'azienda",
+
+        cookie_page_title: "Informativa sui Cookie",
+        cookie_page_subtitle: "Trasparenza e controllo per un'esperienza di lusso.",
+        cookie_updated: "Ultimo aggiornamento: Aprile 2026",
+        cookie_h2_1: "1. Introduzione",
+        cookie_p_1: "Questa Informativa sui Cookie spiega come <strong>H-TIME Luxury Experience</strong> utilizza i moduli cookie e tecnologie simili per riconoscerti quando visiti il nostro sito web. Spiega cosa sono queste tecnologie e perché le utilizziamo, nonché i tuoi diritti per controllare il nostro utilizzo di tali tecnologie.",
+        cookie_h2_2: "2. Cos'è un \"cookie\"?",
+        cookie_p_2: "Un \"Internet Cookie\" (noto anche come \"cookie del browser\" o \"cookie HTTP\" o semplicemente \"cookie\") è un file di piccole dimensioni, composto da lettere e numeri, che verrà memorizzato sul computer, terminale mobile o altre apparecchiature di un utente da cui si accede a Internet.",
+        cookie_p_3: "Il cookie viene installato tramite la richiesta inviata da un server web a un browser ed è completamente \"passivo\" (non contiene programmi software, virus o spyware e non può accedere alle informazioni sul disco rigido dell'utente).",
+        cookie_h2_3: "3. A cosa servono i Cookie?",
+        cookie_p_4: "Questi file consentono di riconoscere il terminale dell'utente e presentare i contenuti in modo pertinente, adattato alle preferenze dell'utente. I cookie offrono agli utenti una piacevole esperienza di navigazione e supportano i nostri sforzi per fornire servizi confortevoli.",
+        cookie_p_5: "In particolare, sono utilizzati per:",
+        cookie_li_1: "Mantenere i prodotti nel carrello della spesa.",
+        cookie_li_2: "Riconoscerti in una visita futura (in modo da non dover selezionare nuovamente la lingua o accettare le politiche).",
+        cookie_li_3: "Analizzare il traffico del sito per capire come i visitatori interagiscono con le nostre pagine (Google Analytics).",
+        cookie_li_4: "Fornirti annunci pertinenti per te, misurando al contempo l'efficacia delle nostre campagne di marketing.",
+        cookie_h2_4: "4. Quali tipi di Cookie utilizziamo?",
+        cookie_p_6: "Utilizziamo due tipi principali di cookie: <strong>di sessione</strong> e <strong>persistenti</strong>. I cookie di sessione sono file temporanei che rimangono nel terminale dell'utente fino alla fine della sessione o alla chiusura del browser. I cookie persistenti rimangono sul terminale dell'utente per un periodo determinato dai parametri del cookie o fino alla loro cancellazione manuale da parte dell'utente.",
+        cookie_h3_1: "Categorie specifiche:",
+        cookie_li_5: "<strong>Cookie Strettamente Necessari:</strong> Questi sono essenziali per consentirti di navigare sul sito web e utilizzarne le funzioni (es. navigazione per categorie, aggiunta al carrello, finalizzazione dell'ordine). Senza questi cookie, i servizi che hai richiesto non possono essere forniti. Questi non possono essere disattivati.",
+        cookie_li_6: "<strong>Cookie Analitici e di Prestazione:</strong> Questi cookie raccolgono informazioni anonime su come utilizzi il nostro sito web (es. quali pagine vengono visitate più spesso, se ricevi messaggi di errore). Questi dati vengono utilizzati esclusivamente per migliorare il funzionamento del nostro sito.",
+        cookie_li_7: "<strong>Cookie di Marketing / Targeting:</strong> Questi cookie vengono utilizzati per fornirti annunci pubblicitari più pertinenti per te e i tuoi interessi. Sono inoltre utilizzati per limitare il numero di visualizzazioni di un annuncio e per aiutare a misurare l'efficacia delle campagne pubblicitarie.",
+        cookie_h2_5: "5. Cookie di Terze Parti (Third-party)",
+        cookie_p_7: "Alcune sezioni di contenuto sul sito possono essere fornite tramite terze parti / fornitori (es. video di YouTube incorporati, sistema di analisi di Google, pulsanti dei social media Facebook/Instagram). Anche queste terze parti possono inserire cookie attraverso il sito e sono chiamati \"cookie di terze parti\" perché non sono inseriti dal proprietario del rispettivo sito web.",
+        cookie_h2_6: "6. Come possono essere controllati / bloccati i cookie?",
+        cookie_p_8: "La disattivazione e il rifiuto di ricevere cookie possono rendere determinati siti impraticabili o difficili da visitare e utilizzare. Il rifiuto di accettare i cookie non significa che non riceverai/vedrai più pubblicità online, ma solo che questa non potrà più tenere conto delle tue preferenze e dei tuoi interessi.",
+        cookie_p_9: "Puoi impostare il tuo browser affinché questi cookie non vengano più accettati o puoi impostare il browser per accettare i cookie da un sito specifico. Tutti i browser moderni offrono la possibilità di modificare le impostazioni dei cookie. Queste impostazioni si trovano solitamente nel menu \"opzioni\" o \"preferenze\" del tuo browser.",
+        cookie_h2_7: "7. Aggiornamenti di questa politica",
+        cookie_p_10: "Potremmo aggiornare questa Informativa sui cookie di tanto in tanto, per motivi operativi, legali o normativi. Ti preghiamo di visitare regolarmente questa pagina per rimanere informato sul nostro utilizzo dei cookie e delle tecnologie correlate.",
+        cookie_h2_8: "8. Contatto",
+        cookie_p_11: "In caso di ulteriori domande su come utilizziamo i cookie, ti preghiamo di contattarci all'indirizzo e-mail: <strong>contact@h-time.ro</strong> o visitando la nostra sezione <a href='contact.html'>Contattaci</a>."
+      }
+    };
+
+    function applyTranslations(lang) {
+      const dict = translations[lang] || translations.ro;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (!key) return;
+        if (dict[key]) el.innerHTML = dict[key];
+      });
+      // Actualizare titlu pagină în tab
+      if (dict.page_head_title) document.title = dict.page_head_title;
+    }
+  </script>
+</body>
+</html>
