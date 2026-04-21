@@ -4,65 +4,138 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Politică de Confidențialitate | H-TIME</title>
-  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="icon" href="logo.webp" type="image/webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
 
   <style>
-    :root { --peach: #fcbf88; --pink: #ffb6c1; --dark: #111111; --light-bg: #f8f5f2; }
+    :root {
+      --peach: #fcbf88;
+      --pink: #ffb6c1;
+      --dark: #111111;
+      --light-bg: #f8f5f2;
+    }
+
     * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family: 'Montserrat', sans-serif; font-weight: 300; background-color: var(--light-bg); color: var(--dark); overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; padding-top: 100px; }
-    
-    /* Navbar */
-    nav { position: fixed; top:0; left:0; width:100%; padding:15px 50px; display:flex; justify-content:space-between; align-items:center; z-index:1000; background-color: var(--dark); border-bottom: 1px solid rgba(255,255,255,0.1); }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      background-color: var(--light-bg);
+      color: var(--dark);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    h1,h2,h3,h4 { font-weight: normal; }
+    a { color: inherit; text-decoration: none; }
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top:0; left:0; width:100%;
+      padding:15px 50px;
+      display:flex; justify-content:space-between; align-items:center;
+      z-index:1000;
+      background-color: rgba(0,0,0,0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
     .logo img { height:75px; }
     .nav-links { display:flex; gap:30px; }
-    .nav-links a { color:white; text-decoration:none; font-weight:500; font-size:0.9rem; text-transform:uppercase; letter-spacing:1px; transition: color .3s; }
+    .nav-links a {
+      color:white; font-weight:500; font-size:0.9rem;
+      text-transform:uppercase; letter-spacing:1px; transition: color .3s;
+    }
     .nav-links a:hover { color: var(--peach); }
     .nav-icons { display:flex; align-items:center; gap:20px; }
-    .cart-btn { border:1px solid white; padding:8px 18px; border-radius:30px; display:inline-flex; align-items:center; justify-content:center; transition: all .3s; color: white; text-decoration: none; cursor: pointer; }
-    .cart-btn:hover { border-color: var(--peach); color: var(--peach); }
-
-    /* Content Layout */
-    .policy-container { max-width: 1200px; margin: 40px auto 80px; padding: 0 40px; font-family: 'Space Grotesk', sans-serif; flex: 1; width: 100%; }
-    .black-gap {
-      background-color: var(--dark);
-      padding: 8px; border-radius: 16px; flex: 1; display: flex; flex-direction: column;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    .nav-icons a { color:white; font-size:0.9rem; text-transform:uppercase; transition: all .3s; }
+    .nav-icons a:hover { color: var(--peach); }
+    .cart-btn {
+      border:1px solid white; padding:8px 18px; border-radius:30px;
+      display:inline-flex; align-items:center; justify-content:center; transition: all .3s;
     }
-    .white-card {
-      background-color: white; padding: 50px 60px; border-radius: 12px; flex: 1;
-    }
-    .section-title { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 1.8rem; margin-bottom: 30px; color: var(--dark); border-bottom: 2px solid var(--peach); padding-bottom: 10px; text-transform: uppercase; }
-    
-    .policy-content h3 { font-weight: 700; margin: 30px 0 15px; font-size: 1.2rem; color: var(--dark); text-transform: uppercase; letter-spacing: 1px; }
-    .policy-content p { line-height: 1.8; color: #444; margin-bottom: 15px; font-size: 1rem; text-align: justify; }
-    .policy-content ul { margin-left: 20px; margin-bottom: 15px; color: #444; }
-    .policy-content li { margin-bottom: 8px; line-height: 1.6; font-size: 1rem; text-align: justify; }
+    .cart-btn:hover { border-color: var(--peach); }
 
-    /* Footer */
+    /* PAGE HEADER */
+    .page-header {
+      background: var(--dark);
+      color: white;
+      padding: 180px 20px 80px;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 15px;
+      background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textGradientMove 4s linear infinite;
+    }
+    .page-header p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: #ccc;
+    }
+
+    @keyframes textGradientMove { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+
+    /* POLICY CONTAINER */
+    .policy-container {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 50px;
+      background: white;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+      border-radius: 12px;
+    }
+    .policy-container h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      color: var(--dark);
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    .policy-container h2:first-child { margin-top: 0; }
+    .policy-container p { font-size: 1rem; line-height: 1.8; color: #555; margin-bottom: 15px; text-align: justify; }
+    .policy-container ul { margin-left: 20px; margin-bottom: 20px; color: #555; }
+    .policy-container li { margin-bottom: 10px; line-height: 1.6; text-align: justify;}
+    .policy-container strong { color: var(--dark); font-weight: 600; }
+
+    /* FOOTER */
     footer { background-color:#0b0b0b; padding:80px 50px 30px; display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:40px; color:#fff; border-top:1px solid #222; }
-    .footer-col h2 { font-family:'DM Serif Display',serif; color:var(--peach); font-size:2.2rem; margin-bottom:20px; }
+    .footer-col h2 { color:var(--peach); font-size:2.2rem; margin-bottom:20px; font-weight:700; }
     .footer-col h3 { font-size:1rem; font-weight:700; margin-bottom:30px; letter-spacing:1px; text-transform:uppercase; color:#fff; }
     .footer-desc { font-size:0.9rem; color:#999; line-height:1.8; margin-bottom:30px; }
     .social-links { display:flex; gap:15px; }
-    .social-icon-circle { width:40px; height:40px; background:#222; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; text-decoration:none; transition:.3s; }
+    .social-icon-circle { width:40px; height:40px; background:#222; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; transition:.3s; }
     .social-icon-circle:hover { background: linear-gradient(to right, var(--pink), var(--peach)); color:black; transform:translateY(-3px); }
-    .footer-col ul { list-style:none; padding:0; display:flex; flex-direction:column; gap:15px; }
-    .footer-col ul a { text-decoration:none; color:#999; font-size:0.9rem; transition:.3s; display:inline-block; }
+    .footer-col ul { list-style:none; display:flex; flex-direction:column; gap:15px; padding:0; margin:0;}
+    .footer-col ul a { color:#999; font-size:0.9rem; transition:.3s; display:inline-block; }
     .footer-col ul a:hover { color:var(--peach); transform:translateX(5px); }
     .footer-bottom { grid-column:1 / -1; text-align:center; padding-top:40px; border-top:1px solid #222; color:#555; font-size:0.8rem; margin-top:20px; }
     .anpc-img { max-width:180px; width:100%; height:auto; display:block; margin-bottom:15px; transition:opacity .3s; }
     .anpc-img:hover { opacity:0.7; }
+    .company-info { margin-top: 25px; font-size: 0.85rem; color: #888; line-height: 1.6; }
 
-    @media (max-width:900px) { nav { flex-direction:column; gap:15px; padding:15px; } body { padding-top: 130px; } .policy-container { padding: 0 20px; } .white-card { padding: 30px 20px; } footer { padding: 40px 20px; } }
+    @media (max-width:768px) {
+      nav { flex-direction:column; gap:15px; padding:15px; }
+      .nav-links { flex-wrap:wrap; justify-content:center; gap:15px; }
+      .policy-container { margin: 30px 15px; padding: 25px 15px; }
+      footer { padding:40px 20px; }
+    }
   </style>
 </head>
 <body>
 
+  <!-- NAVBAR -->
   <nav>
-    <a href="index.html" class="logo"><img src="logo.png" alt="H-TIME Logo"></a>
+    <a href="index.html" class="logo"><img src="logo.webp" alt="H-TIME Logo" onerror="this.src='logo.png'"></a>
     <div class="nav-links">
       <a href="index.html" data-i18n="nav_home">Acasă</a>
       <a href="magazin.html" data-i18n="nav_shop">Magazin</a>
@@ -71,7 +144,7 @@
       <a href="contact.html" data-i18n="nav_contact">Contactează-ne</a>
     </div>
     <div class="nav-icons">
-      <select id="languageSwitcher" style="background:black;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase; font-family:'Montserrat';">
+      <select id="languageSwitcher" aria-label="Selectează limba" style="background:black;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase;font-family:'Montserrat', sans-serif;">
         <option value="ro">RO</option>
         <option value="en">EN</option>
         <option value="fr">FR</option>
@@ -79,63 +152,75 @@
         <option value="es">ES</option>
         <option value="it">IT</option>
       </select>
-      <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
+      <a href="checkout.html" id="cart-nav-btn" class="cart-btn" style="font-family:'Montserrat', sans-serif;">Cart (0)</a>
     </div>
   </nav>
 
+  <!-- HEADER PAGINĂ -->
+  <header class="page-header">
+    <h1 data-i18n="privacy_title">Politică de Confidențialitate</h1>
+    <p data-i18n="privacy_subtitle">Transparență și siguranță pentru datele tale.</p>
+  </header>
+
+  <!-- CONȚINUT POLITICĂ -->
   <main class="policy-container">
-    <div class="black-gap">
-      <div class="white-card">
-        <h1 class="section-title" data-i18n="privacy_title">Politică de Confidențialitate</h1>
-        
-        <div class="policy-content">
-          <p data-i18n="priv_intro">Confidențialitatea datelor dumneavoastră cu caracter personal este una dintre preocupările principale ale H-TIME Luxury Experience. Acest document are rolul de a vă informa cu privire la prelucrarea datelor dumneavoastră în contextul utilizării paginii noastre de internet, h-time.ro.</p>
+    <p data-i18n="priv_intro">Confidențialitatea datelor dumneavoastră cu caracter personal este una dintre preocupările principale ale H-TIME Luxury Experience. Acest document are rolul de a vă informa cu privire la prelucrarea datelor dumneavoastră în contextul utilizării paginii noastre de internet, h-time.ro.</p>
           
-          <h3 data-i18n="priv_h1">1. Ce date colectăm?</h3>
-          <p data-i18n="priv_p1">H-TIME colectează informații pe care ni le furnizați direct, cum ar fi: numele, prenumele, adresa de e-mail, numărul de telefon și adresa de livrare, în momentul în care plasați o comandă sau completați formularul de contact. De asemenea, colectăm automat anumite date tehnice de navigare prin intermediul modulelor cookie (adresa IP, tipul browserului, paginile vizitate).</p>
+    <h2 data-i18n="priv_h1">1. Ce date colectăm?</h2>
+    <p data-i18n="priv_p1">H-TIME colectează informații pe care ni le furnizați direct, cum ar fi: numele, prenumele, adresa de e-mail, numărul de telefon și adresa de livrare, în momentul în care plasați o comandă sau completați formularul de contact. De asemenea, colectăm automat anumite date tehnice de navigare prin intermediul modulelor cookie (adresa IP, tipul browserului, paginile vizitate).</p>
 
-          <h3 data-i18n="priv_h2">2. Scopul prelucrării datelor</h3>
-          <p data-i18n="priv_p2">Prelucrăm datele dumneavoastră personale în următoarele scopuri:</p>
-          <ul>
-            <li data-i18n="priv_li2_1">Pentru procesarea și onorarea comenzilor plasate pe site (inclusiv facturare și livrare).</li>
-            <li data-i18n="priv_li2_2">Pentru a vă răspunde la mesaje și a oferi suport clienți prin intermediul paginii de Contact.</li>
-            <li data-i18n="priv_li2_3">Pentru îmbunătățirea experienței de utilizare a site-ului, prin analize statistice ale traficului.</li>
-            <li data-i18n="priv_li2_4">Pentru a vă trimite oferte și noutăți (newsletter), exclusiv dacă v-ați exprimat acordul clar în acest sens.</li>
-          </ul>
+    <h2 data-i18n="priv_h2">2. Scopul prelucrării datelor</h2>
+    <p data-i18n="priv_p2">Prelucrăm datele dumneavoastră personale în următoarele scopuri:</p>
+    <ul>
+      <li data-i18n="priv_li2_1">Pentru procesarea și onorarea comenzilor plasate pe site (inclusiv facturare și livrare).</li>
+      <li data-i18n="priv_li2_2">Pentru a vă răspunde la mesaje și a oferi suport clienți prin intermediul paginii de Contact.</li>
+      <li data-i18n="priv_li2_3">Pentru îmbunătățirea experienței de utilizare a site-ului, prin analize statistice ale traficului.</li>
+      <li data-i18n="priv_li2_4">Pentru a vă trimite oferte și noutăți (newsletter), exclusiv dacă v-ați exprimat acordul clar în acest sens.</li>
+    </ul>
 
-          <h3 data-i18n="priv_h3">3. Cât timp păstrăm datele?</h3>
-          <p data-i18n="priv_p3">Datele cu caracter personal vor fi păstrate doar perioada necesară pentru îndeplinirea scopurilor menționate mai sus, sau pe durata obligatorie conform prevederilor legale aplicabile în materie financiar-contabilă.</p>
+    <h2 data-i18n="priv_h3">3. Cât timp păstrăm datele?</h2>
+    <p data-i18n="priv_p3">Datele cu caracter personal vor fi păstrate doar perioada necesară pentru îndeplinirea scopurilor menționate mai sus, sau pe durata obligatorie conform prevederilor legale aplicabile în materie financiar-contabilă.</p>
 
-          <h3 data-i18n="priv_h4">4. Divulgarea datelor către terți</h3>
-          <p data-i18n="priv_p4">H-TIME nu va vinde și nu va închiria niciodată datele dumneavoastră personale. Pentru a putea procesa și livra comenzile, informațiile strict necesare vor fi partajate doar cu partenerii noștri de încredere (firme de curierat și procesatori de plăți online), care sunt la rândul lor obligați să respecte confidențialitatea datelor.</p>
+    <h2 data-i18n="priv_h4">4. Divulgarea datelor către terți</h2>
+    <p data-i18n="priv_p4">H-TIME nu va vinde și nu va închiria niciodată datele dumneavoastră personale. Pentru a putea procesa și livra comenzile, informațiile strict necesare vor fi partajate doar cu partenerii noștri de încredere (firme de curierat și procesatori de plăți online), care sunt la rândul lor obligați să respecte confidențialitatea datelor.</p>
 
-          <h3 data-i18n="priv_h5">5. Securitatea datelor</h3>
-          <p data-i18n="priv_p5">Ne angajăm să protejăm datele dumneavoastră personale împotriva pierderii, utilizării incorecte, accesului neautorizat sau divulgării. Utilizăm măsuri de securitate tehnice și organizatorice adecvate, inclusiv conexiuni criptate (SSL), pentru a asigura integritatea informațiilor transmise online.</p>
+    <h2 data-i18n="priv_h5">5. Securitatea datelor</h2>
+    <p data-i18n="priv_p5">Ne angajăm să protejăm datele dumneavoastră personale împotriva pierderii, utilizării incorecte, accesului neautorizat sau divulgării. Utilizăm măsuri de securitate tehnice și organizatorice adecvate, inclusiv conexiuni criptate (SSL), pentru a asigura integritatea informațiilor transmise online.</p>
 
-          <h3 data-i18n="priv_h6">6. Drepturile Dumneavoastră</h3>
-          <p data-i18n="priv_p6_1">Conform legislației privind protecția datelor (GDPR), aveți următoarele drepturi:</p>
-          <ul>
-            <li data-i18n="priv_li6_1"><strong>Dreptul de acces:</strong> puteți solicita informații despre datele pe care le deținem despre dumneavoastră.</li>
-            <li data-i18n="priv_li6_2"><strong>Dreptul la rectificare:</strong> ne puteți cere să corectăm datele incorecte sau incomplete.</li>
-            <li data-i18n="priv_li6_3"><strong>Dreptul la ștergere (dreptul de a fi uitat):</strong> ne puteți solicita să ștergem datele dumneavoastră, în limitele legii.</li>
-            <li data-i18n="priv_li6_4"><strong>Dreptul la retragerea consimțământului:</strong> vă puteți dezabona oricând de la comunicările noastre de marketing.</li>
-          </ul>
-          <p data-i18n="priv_p6_2">Pentru exercitarea acestor drepturi, ne puteți contacta în orice moment la adresa de e-mail: <strong>contact@h-time.ro</strong>.</p>
-        </div>
-      </div>
-    </div>
+    <h2 data-i18n="priv_h6">6. Drepturile Dumneavoastră</h2>
+    <p data-i18n="priv_p6_1">Conform legislației privind protecția datelor (GDPR), aveți următoarele drepturi:</p>
+    <ul>
+      <li data-i18n="priv_li6_1"><strong>Dreptul de acces:</strong> puteți solicita informații despre datele pe care le deținem despre dumneavoastră.</li>
+      <li data-i18n="priv_li6_2"><strong>Dreptul la rectificare:</strong> ne puteți cere să corectăm datele incorecte sau incomplete.</li>
+      <li data-i18n="priv_li6_3"><strong>Dreptul la ștergere (dreptul de a fi uitat):</strong> ne puteți solicita să ștergem datele dumneavoastră, în limitele legii.</li>
+      <li data-i18n="priv_li6_4"><strong>Dreptul la retragerea consimțământului:</strong> vă puteți dezabona oricând de la comunicările noastre de marketing.</li>
+    </ul>
+    <p data-i18n="priv_p6_2">Pentru exercitarea acestor drepturi, ne puteți contacta în orice moment la adresa de e-mail: <strong>contact@h-time.ro</strong>.</p>
   </main>
 
+  <!-- FOOTER -->
   <footer>
     <div class="footer-col">
       <h2>H-TIME</h2>
       <p class="footer-desc" data-i18n="footer_desc">Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.</p>
       <div class="social-links">
-        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+        <a href="#" class="social-icon-circle" title="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
+        <a href="https://www.instagram.com/bijuterii.h_time/" class="social-icon-circle" title="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="#" class="social-icon-circle" title="TikTok">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+        </a>
+      </div>
+      <div class="company-info">
+        <p><strong>CUI:</strong> 83241620</p>
+        <p><strong>Reg. Com.:</strong> J22/4620/2024</p>
+        <p><strong>Sediu:</strong> Strada Milcov 18A, Iași 70025</p>
       </div>
     </div>
+
     <div class="footer-col">
       <h3 data-i18n="footer_nav">NAVIGARE RAPIDĂ</h3>
       <ul>
@@ -145,41 +230,72 @@
         <li><a href="contact.html" data-i18n="footer_contact">Contact & Suport</a></li>
       </ul>
     </div>
+
     <div class="footer-col">
       <h3 data-i18n="footer_info">INFORMAȚII & POLITICI</h3>
       <ul>
         <li><a href="termeni.html" data-i18n="footer_terms">Termeni și Condiții</a></li>
-        <li><a href="confidentialitate.html" data-i18n="footer_privacy">Politică de Confidențialitate</a></li>
+        <li><a href="confidentialitate.html" style="color:var(--peach);" data-i18n="footer_privacy">Politică de Confidențialitate</a></li>
+        <li><a href="politica_cookies.html" data-i18n="footer_cookies">Politică de Cookies</a></li>
         <li><a href="politica_livrare.html" data-i18n="footer_delivery">Politică de Livrare</a></li>
         <li><a href="politici_retur.html" data-i18n="footer_return">Politică de Retur (14 zile)</a></li>
         <li><a href="ingrijirea_bijuteriilor.html" data-i18n="footer_care">Îngrijirea Bijuteriilor</a></li>
+        <li><a href="date_identificare.html" data-i18n="footer_id_data">Date de identificare ale societății</a></li>
       </ul>
     </div>
+
     <div class="footer-col">
       <h3 data-i18n="footer_consumer">PROTECȚIA CONSUMATORULUI</h3>
       <div>
-        <a href="https://anpc.ro/ce-este-sal/" target="_blank"><img src="https://ro.pandora.net/mobify/bundle/1108/static/img/SAL-PICTOGRAMA.png?app=pdp" alt="ANPC SAL" class="anpc-img"></a>
-        <a href="https://ec.europa.eu/consumers/odr" target="_blank"><img src="https://ro.pandora.net/mobify/bundle/1108/static/img/pictogramaSOL.png?app=pdp" alt="ANPC SOL" class="anpc-img"></a>
+        <a href="https://anpc.ro/ce-este-sal/" target="_blank">
+          <img src="https://ro.pandora.net/mobify/bundle/1108/static/img/SAL-PICTOGRAMA.png?app=pdp" alt="ANPC SAL" class="anpc-img">
+        </a>
+        <a href="https://ec.europa.eu/consumers/odr" target="_blank">
+          <img src="https://ro.pandora.net/mobify/bundle/1108/static/img/pictogramaSOL.png?app=pdp" alt="ANPC SOL" class="anpc-img">
+        </a>
       </div>
     </div>
+
     <div class="footer-bottom">© 2024 - 2026 H-TIME Luxury Experience. Toate drepturile sunt rezervate.</div>
   </footer>
 
   <script src="script.js"></script>
   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+      const cartBtn = document.getElementById('cart-nav-btn');
+      if (cartBtn) cartBtn.innerText = `Cart (${cart.length})`;
+
+      const switcher = document.getElementById('languageSwitcher');
+      const savedLang = localStorage.getItem('htime_lang') || 'ro';
+      if (switcher) switcher.value = savedLang;
+      applyTranslations(savedLang);
+
+      if (switcher) {
+        switcher.addEventListener('change', () => {
+          const lang = switcher.value;
+          localStorage.setItem('htime_lang', lang);
+          applyTranslations(lang);
+        });
+      }
+    });
+
     const translations = {
       ro: { 
         title: "Politică de Confidențialitate | H-TIME",
         nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne", 
-        footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul.", 
+        footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.", 
         footer_nav: "NAVIGARE RAPIDĂ", footer_home: "Acasă - Pagina principală", footer_shop: "Magazin - Toate Colecțiile", 
         footer_about: "Povestea Noastră", footer_contact: "Contact & Suport", footer_info: "INFORMAȚII & POLITICI", 
-        footer_terms: "Termeni și Condiții", footer_privacy: "Politică de Confidențialitate", footer_delivery: "Politică de Livrare", 
+        footer_terms: "Termeni și Condiții", footer_privacy: "Politică de Confidențialitate", footer_cookies: "Politică de Cookies", footer_delivery: "Politica de Livrare", 
         footer_return: "Politică de Retur (14 zile)", footer_care: "Îngrijirea Bijuteriilor", footer_consumer: "PROTECȚIA CONSUMATORULUI", 
+        footer_id_data: "Date de identificare ale societății",
+        
         privacy_title: "Politică de Confidențialitate",
+        privacy_subtitle: "Transparență și siguranță pentru datele tale.",
         priv_intro: "Confidențialitatea datelor dumneavoastră cu caracter personal este una dintre preocupările principale ale H-TIME Luxury Experience. Acest document are rolul de a vă informa cu privire la prelucrarea datelor dumneavoastră în contextul utilizării paginii noastre de internet, h-time.ro.",
         priv_h1: "1. Ce date colectăm?",
-        priv_p1: "H-TIME colectează informații pe care ni le furnizați direct, cum ar fi: numele, prenumele, adresa de e-mail, numărul de telefon și adresa de livrare, în momentul în care plasați o comandă sau completați formularul de contact. De asemenea, colectăm automat anumite date tehnice de navigare prin intermediul modulelor cookie.",
+        priv_p1: "H-TIME colectează informații pe care ni le furnizați direct, cum ar fi: numele, prenumele, adresa de e-mail, numărul de telefon și adresa de livrare, în momentul în care plasați o comandă sau completați formularul de contact. De asemenea, colectăm automat anumite date tehnice de navigare prin intermediul modulelor cookie (adresa IP, tipul browserului, paginile vizitate).",
         priv_h2: "2. Scopul prelucrării datelor",
         priv_p2: "Prelucrăm datele dumneavoastră personale în următoarele scopuri:",
         priv_li2_1: "Pentru procesarea și onorarea comenzilor plasate pe site (inclusiv facturare și livrare).",
@@ -189,9 +305,9 @@
         priv_h3: "3. Cât timp păstrăm datele?",
         priv_p3: "Datele cu caracter personal vor fi păstrate doar perioada necesară pentru îndeplinirea scopurilor menționate mai sus, sau pe durata obligatorie conform prevederilor legale aplicabile în materie financiar-contabilă.",
         priv_h4: "4. Divulgarea datelor către terți",
-        priv_p4: "H-TIME nu va vinde și nu va închiria niciodată datele dumneavoastră personale. Pentru a putea procesa și livra comenzile, informațiile strict necesare vor fi partajate doar cu partenerii noștri de încredere (firme de curierat și procesatori de plăți online).",
+        priv_p4: "H-TIME nu va vinde și nu va închiria niciodată datele dumneavoastră personale. Pentru a putea procesa și livra comenzile, informațiile strict necesare vor fi partajate doar cu partenerii noștri de încredere (firme de curierat și procesatori de plăți online), care sunt la rândul lor obligați să respecte confidențialitatea datelor.",
         priv_h5: "5. Securitatea datelor",
-        priv_p5: "Ne angajăm să protejăm datele dumneavoastră personale împotriva pierderii, utilizării incorecte, accesului neautorizat sau divulgării. Utilizăm măsuri de securitate tehnice și organizatorice adecvate.",
+        priv_p5: "Ne angajăm să protejăm datele dumneavoastră personale împotriva pierderii, utilizării incorecte, accesului neautorizat sau divulgării. Utilizăm măsuri de securitate tehnice și organizatorice adecvate, inclusiv conexiuni criptate (SSL), pentru a asigura integritatea informațiilor transmise online.",
         priv_h6: "6. Drepturile Dumneavoastră",
         priv_p6_1: "Conform legislației privind protecția datelor (GDPR), aveți următoarele drepturi:",
         priv_li6_1: "<strong>Dreptul de acces:</strong> puteți solicita informații despre datele pe care le deținem despre dumneavoastră.",
@@ -203,15 +319,18 @@
       en: { 
         title: "Privacy Policy | H-TIME",
         nav_home: "Home", nav_shop: "Shop", nav_about: "About Us", nav_team: "H-Time Team", nav_contact: "Contact Us", 
-        footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement.", 
+        footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement, premium quality, and stories told through unique jewelry and watches.", 
         footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections", 
         footer_about: "Our Story", footer_contact: "Contact & Support", footer_info: "INFORMATION & POLICIES", 
-        footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_delivery: "Delivery Policy", 
+        footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_cookies: "Cookie Policy", footer_delivery: "Delivery Policy", 
         footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care", footer_consumer: "CONSUMER PROTECTION", 
+        footer_id_data: "Company Identification Data",
+        
         privacy_title: "Privacy Policy",
+        privacy_subtitle: "Transparency and security for your data.",
         priv_intro: "The privacy of your personal data is one of the main concerns of H-TIME Luxury Experience. This document is intended to inform you about the processing of your data in the context of using our website, h-time.ro.",
         priv_h1: "1. What data do we collect?",
-        priv_p1: "H-TIME collects information you provide directly, such as your name, email address, phone number, and delivery address when you place an order or fill out the contact form. We also automatically collect certain technical browsing data via cookies.",
+        priv_p1: "H-TIME collects information you provide directly to us, such as: name, surname, email address, phone number, and delivery address when you place an order or complete the contact form. We also automatically collect certain technical browsing data through cookies (IP address, browser type, visited pages).",
         priv_h2: "2. Purpose of data processing",
         priv_p2: "We process your personal data for the following purposes:",
         priv_li2_1: "To process and fulfill orders placed on the site (including billing and delivery).",
@@ -219,11 +338,11 @@
         priv_li2_3: "To improve the website user experience through statistical traffic analysis.",
         priv_li2_4: "To send you offers and news (newsletter), only if you have explicitly given your consent.",
         priv_h3: "3. How long do we keep the data?",
-        priv_p3: "Personal data will be kept only for the period necessary to fulfill the purposes mentioned above, or for the mandatory duration according to the applicable legal provisions.",
+        priv_p3: "Personal data will be kept only for the period necessary to fulfill the purposes mentioned above, or for the mandatory duration according to the applicable legal provisions in financial-accounting matters.",
         priv_h4: "4. Disclosure of data to third parties",
-        priv_p4: "H-TIME will never sell or rent your personal data. In order to process and deliver orders, strictly necessary information will be shared only with our trusted partners (courier companies and online payment processors).",
+        priv_p4: "H-TIME will never sell or rent your personal data. In order to process and deliver orders, strictly necessary information will be shared only with our trusted partners (courier companies and online payment processors), who are in turn obligated to respect data confidentiality.",
         priv_h5: "5. Data security",
-        priv_p5: "We are committed to protecting your personal data against loss, misuse, unauthorized access, or disclosure. We use appropriate technical and organizational security measures.",
+        priv_p5: "We are committed to protecting your personal data against loss, misuse, unauthorized access, or disclosure. We use appropriate technical and organizational security measures, including encrypted connections (SSL), to ensure the integrity of the information transmitted online.",
         priv_h6: "6. Your Rights",
         priv_p6_1: "According to data protection legislation (GDPR), you have the following rights:",
         priv_li6_1: "<strong>Right of access:</strong> you can request information about the data we hold about you.",
@@ -235,130 +354,142 @@
       fr: { 
         title: "Politique de Confidentialité | H-TIME",
         nav_home: "Accueil", nav_shop: "Boutique", nav_about: "À propos", nav_team: "Équipe H-Time", nav_contact: "Contactez-nous", 
-        footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe dédiée à ceux qui apprécient le raffinement.", 
+        footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe dédiée aux personnes qui apprécient le raffinement, la qualité supérieure et les histoires racontées à travers des bijoux et des montres uniques.", 
         footer_nav: "NAVIGATION RAPIDE", footer_home: "Accueil - Page principale", footer_shop: "Boutique - Toutes les collections", 
         footer_about: "Notre histoire", footer_contact: "Contact & Support", footer_info: "INFORMATIONS & POLITIQUES", 
-        footer_terms: "Conditions générales", footer_privacy: "Politique de confidentialité", footer_delivery: "Politique de livraison", 
+        footer_terms: "Conditions générales", footer_privacy: "Politique de confidentialité", footer_cookies: "Politique de cookies", footer_delivery: "Politique de livraison", 
         footer_return: "Politique de retour (14 jours)", footer_care: "Entretien des bijoux", footer_consumer: "PROTECTION DU CONSOMMATEUR", 
+        footer_id_data: "Données d'identification de l'entreprise",
+        
         privacy_title: "Politique de Confidentialité",
-        priv_intro: "La confidentialité de vos données personnelles est l'une des préoccupations principales de H-TIME. Ce document a pour but de vous informer sur le traitement de vos données.",
+        privacy_subtitle: "Transparence et sécurité pour vos données.",
+        priv_intro: "La confidentialité de vos données personnelles est l'une des principales préoccupations de H-TIME Luxury Experience. Ce document a pour but de vous informer sur le traitement de vos données dans le cadre de l'utilisation de notre site internet, h-time.ro.",
         priv_h1: "1. Quelles données collectons-nous ?",
-        priv_p1: "H-TIME collecte les informations que vous fournissez directement, telles que le nom, l'adresse e-mail, le numéro de téléphone lors d'une commande. Nous collectons également des données de navigation via des cookies.",
+        priv_p1: "H-TIME collecte les informations que vous nous fournissez directement, telles que : nom, prénom, adresse e-mail, numéro de téléphone et adresse de livraison, au moment où vous passez une commande ou remplissez le formulaire de contact. Nous collectons également automatiquement certaines données techniques de navigation via des cookies (adresse IP, type de navigateur, pages visitées).",
         priv_h2: "2. Finalité du traitement des données",
         priv_p2: "Nous traitons vos données personnelles aux fins suivantes :",
-        priv_li2_1: "Pour traiter et honorer les commandes (facturation et livraison).",
-        priv_li2_2: "Pour répondre aux messages et assurer le support client.",
-        priv_li2_3: "Pour améliorer l'expérience utilisateur par l'analyse du trafic.",
-        priv_li2_4: "Pour vous envoyer des offres (newsletter) avec votre consentement.",
+        priv_li2_1: "Pour traiter et honorer les commandes passées sur le site (y compris la facturation et la livraison).",
+        priv_li2_2: "Pour répondre à vos messages et assurer le support client via la page Contact.",
+        priv_li2_3: "Pour améliorer l'expérience d'utilisation du site, par des analyses statistiques du trafic.",
+        priv_li2_4: "Pour vous envoyer des offres et des actualités (newsletter), exclusivement si vous avez exprimé votre accord clair à cet effet.",
         priv_h3: "3. Combien de temps conservons-nous les données ?",
-        priv_p3: "Les données personnelles seront conservées uniquement le temps nécessaire pour atteindre les objectifs mentionnés ou selon la durée légale.",
-        priv_h4: "4. Divulgation à des tiers",
-        priv_p4: "H-TIME ne vendra jamais vos données personnelles. Les informations nécessaires sont partagées avec nos partenaires de livraison et de paiement.",
+        priv_p3: "Les données à caractère personnel ne seront conservées que le temps nécessaire à la réalisation des finalités mentionnées ci-dessus, ou pendant la durée obligatoire conformément aux dispositions légales applicables en matière financière et comptable.",
+        priv_h4: "4. Divulgation des données à des tiers",
+        priv_p4: "H-TIME ne vendra ni ne louera jamais vos données personnelles. Afin de pouvoir traiter et livrer les commandes, les informations strictement nécessaires seront partagées uniquement avec nos partenaires de confiance (sociétés de messagerie et processeurs de paiements en ligne), qui sont à leur tour obligés de respecter la confidentialité des données.",
         priv_h5: "5. Sécurité des données",
-        priv_p5: "Nous nous engageons à protéger vos données personnelles contre la perte, l'utilisation abusive ou l'accès non autorisé.",
+        priv_p5: "Nous nous engageons à protéger vos données personnelles contre la perte, l'utilisation abusive, l'accès non autorisé ou la divulgation. Nous utilisons des mesures de sécurité techniques et organisationnelles appropriées, y compris des connexions cryptées (SSL), pour assurer l'intégrité des informations transmises en ligne.",
         priv_h6: "6. Vos Droits",
         priv_p6_1: "Conformément à la législation sur la protection des données (RGPD), vous disposez des droits suivants :",
-        priv_li6_1: "<strong>Droit d'accès :</strong> vous pouvez demander des informations sur vos données.",
-        priv_li6_2: "<strong>Droit de rectification :</strong> vous pouvez nous demander de corriger des données.",
-        priv_li6_3: "<strong>Droit à l'effacement :</strong> vous pouvez nous demander de supprimer vos données.",
-        priv_li6_4: "<strong>Droit de retirer le consentement :</strong> vous pouvez vous désabonner à tout moment.",
-        priv_p6_2: "Pour exercer ces droits, contactez-nous à : <strong>contact@h-time.ro</strong>."
+        priv_li6_1: "<strong>Droit d'accès :</strong> vous pouvez demander des informations sur les données que nous détenons à votre sujet.",
+        priv_li6_2: "<strong>Droit de rectification :</strong> vous pouvez nous demander de corriger des données inexactes ou incomplètes.",
+        priv_li6_3: "<strong>Droit à l'effacement (droit à l'oubli) :</strong> vous pouvez nous demander de supprimer vos données, dans les limites de la loi.",
+        priv_li6_4: "<strong>Droit de retirer le consentement :</strong> vous pouvez vous désabonner à tout moment de nos communications marketing.",
+        priv_p6_2: "Pour exercer ces droits, vous pouvez nous contacter à tout moment à l'adresse e-mail : <strong>contact@h-time.ro</strong>."
       },
       de: { 
         title: "Datenschutzrichtlinie | H-TIME",
         nav_home: "Startseite", nav_shop: "Shop", nav_about: "Über uns", nav_team: "H-Time Team", nav_contact: "Kontakt", 
-        footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique für Liebhaber von Raffinesse.", 
+        footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique, die sich Personen widmet, die Raffinesse, erstklassige Qualität und Geschichten schätzen, die durch einzigartige Schmuckstücke und Uhren erzählt werden.", 
         footer_nav: "SCHNELLNAVIGATION", footer_home: "Startseite - Hauptseite", footer_shop: "Shop - Alle Kollektionen", 
         footer_about: "Unsere Geschichte", footer_contact: "Kontakt & Support", footer_info: "INFORMATIONEN & RICHTLINIEN", 
-        footer_terms: "Allgemeine Geschäftsbedingungen", footer_privacy: "Datenschutzrichtlinie", footer_delivery: "Lieferbedingungen", 
+        footer_terms: "Allgemeine Geschäftsbedingungen", footer_privacy: "Datenschutzrichtlinie", footer_cookies: "Cookie-Richtlinie", footer_delivery: "Lieferbedingungen", 
         footer_return: "Rückgaberecht (14 Tage)", footer_care: "Schmuckpflege", footer_consumer: "VERBRAUCHERSCHUTZ", 
+        footer_id_data: "Unternehmensidentifikationsdaten",
+        
         privacy_title: "Datenschutzrichtlinie",
-        priv_intro: "Der Schutz Ihrer personenbezogenen Daten ist eines der Hauptanliegen von H-TIME. Dieses Dokument informiert Sie über die Verarbeitung Ihrer Daten.",
+        privacy_subtitle: "Transparenz und Sicherheit für Ihre Daten.",
+        priv_intro: "Der Schutz Ihrer personenbezogenen Daten ist eines der Hauptanliegen von H-TIME Luxury Experience. Dieses Dokument soll Sie über die Verarbeitung Ihrer Daten im Zusammenhang mit der Nutzung unserer Website h-time.ro informieren.",
         priv_h1: "1. Welche Daten erheben wir?",
-        priv_p1: "H-TIME sammelt Informationen, die Sie direkt bereitstellen, wie Name, E-Mail und Adresse bei einer Bestellung. Wir sammeln auch Navigationsdaten über Cookies.",
+        priv_p1: "H-TIME sammelt Informationen, die Sie uns direkt zur Verfügung stellen, wie z. B.: Name, Vorname, E-Mail-Adresse, Telefonnummer und Lieferadresse, wenn Sie eine Bestellung aufgeben oder das Kontaktformular ausfüllen. Wir sammeln auch automatisch bestimmte technische Navigationsdaten durch Cookies (IP-Adresse, Browsertyp, besuchte Seiten).",
         priv_h2: "2. Zweck der Datenverarbeitung",
         priv_p2: "Wir verarbeiten Ihre personenbezogenen Daten zu folgenden Zwecken:",
-        priv_li2_1: "Zur Bearbeitung und Erfüllung von Bestellungen (Abrechnung und Lieferung).",
-        priv_li2_2: "Zur Beantwortung von Nachrichten und für den Kundensupport.",
-        priv_li2_3: "Zur Verbesserung der Benutzererfahrung durch Verkehrsanalysen.",
-        priv_li2_4: "Um Ihnen Angebote zu senden (Newsletter), nur mit Ihrer Zustimmung.",
-        priv_h3: "3. Wie lange bewahren wir Daten auf?",
-        priv_p3: "Personenbezogene Daten werden nur so lange aufbewahrt, wie es zur Erfüllung der genannten Zwecke erforderlich ist.",
+        priv_li2_1: "Zur Bearbeitung und Erfüllung von auf der Website aufgegebenen Bestellungen (einschließlich Rechnungsstellung und Lieferung).",
+        priv_li2_2: "Um auf Ihre Nachrichten zu antworten und Kundensupport über die Kontaktseite zu bieten.",
+        priv_li2_3: "Zur Verbesserung der Benutzererfahrung auf der Website durch statistische Verkehrsanalysen.",
+        priv_li2_4: "Um Ihnen Angebote und Neuigkeiten (Newsletter) zuzusenden, ausschließlich wenn Sie Ihre ausdrückliche Zustimmung dazu gegeben haben.",
+        priv_h3: "3. Wie lange bewahren wir die Daten auf?",
+        priv_p3: "Personenbezogene Daten werden nur für den Zeitraum aufbewahrt, der zur Erfüllung der oben genannten Zwecke erforderlich ist, oder für die gesetzlich vorgeschriebene Dauer gemäß den geltenden finanz- und buchhaltungsrechtlichen Bestimmungen.",
         priv_h4: "4. Weitergabe von Daten an Dritte",
-        priv_p4: "H-TIME wird Ihre persönlichen Daten niemals verkaufen. Notwendige Informationen werden nur an Liefer- und Zahlungspartner weitergegeben.",
+        priv_p4: "H-TIME wird Ihre persönlichen Daten niemals verkaufen oder vermieten. Um Bestellungen bearbeiten und liefern zu können, werden unbedingt erforderliche Informationen nur an unsere vertrauenswürdigen Partner (Kurierunternehmen und Online-Zahlungsabwickler) weitergegeben, die ihrerseits zur Einhaltung der Vertraulichkeit der Daten verpflichtet sind.",
         priv_h5: "5. Datensicherheit",
-        priv_p5: "Wir verpflichten uns, Ihre persönlichen Daten vor unbefugtem Zugriff zu schützen.",
+        priv_p5: "Wir verpflichten uns, Ihre persönlichen Daten vor Verlust, Missbrauch, unbefugtem Zugriff oder Offenlegung zu schützen. Wir verwenden angemessene technische und organisatorische Sicherheitsmaßnahmen, einschließlich verschlüsselter Verbindungen (SSL), um die Integrität der online übertragenen Informationen zu gewährleisten.",
         priv_h6: "6. Ihre Rechte",
-        priv_p6_1: "Nach der Datenschutz-Grundverordnung (DSGVO) haben Sie folgende Rechte:",
-        priv_li6_1: "<strong>Auskunftsrecht:</strong> Sie können Informationen über Ihre Daten anfordern.",
-        priv_li6_2: "<strong>Recht auf Berichtigung:</strong> Sie können falsche Daten korrigieren lassen.",
-        priv_li6_3: "<strong>Recht auf Löschung:</strong> Sie können verlangen, dass Ihre Daten gelöscht werden.",
-        priv_li6_4: "<strong>Recht auf Widerruf:</strong> Sie können sich jederzeit abmelden.",
-        priv_p6_2: "Um diese Rechte auszuüben, kontaktieren Sie uns unter: <strong>contact@h-time.ro</strong>."
+        priv_p6_1: "Gemäß der Datenschutzgesetzgebung (DSGVO) haben Sie folgende Rechte:",
+        priv_li6_1: "<strong>Auskunftsrecht:</strong> Sie können Informationen über die Daten anfordern, die wir über Sie gespeichert haben.",
+        priv_li6_2: "<strong>Recht auf Berichtigung:</strong> Sie können uns bitten, falsche oder unvollständige Daten zu korrigieren.",
+        priv_li6_3: "<strong>Recht auf Löschung (Recht auf Vergessenwerden):</strong> Sie können uns bitten, Ihre Daten im Rahmen der gesetzlichen Bestimmungen zu löschen.",
+        priv_li6_4: "<strong>Recht auf Widerruf der Einwilligung:</strong> Sie können sich jederzeit von unseren Marketingmitteilungen abmelden.",
+        priv_p6_2: "Um diese Rechte auszuüben, können Sie uns jederzeit unter der E-Mail-Adresse kontaktieren: <strong>contact@h-time.ro</strong>."
       },
       es: { 
         title: "Política de Privacidad | H-TIME",
         nav_home: "Inicio", nav_shop: "Tienda", nav_about: "Sobre Nosotros", nav_team: "Equipo H-Time", nav_contact: "Contáctanos", 
-        footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo dedicada a quienes aprecian el refinamiento.", 
+        footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo dedicada a personas que aprecian el refinamiento, la calidad superior y las historias contadas a través de joyas y relojes únicos.", 
         footer_nav: "NAVEGACIÓN RÁPIDA", footer_home: "Inicio - Página principal", footer_shop: "Tienda - Todas las colecciones", 
         footer_about: "Nuestra historia", footer_contact: "Contacto & Soporte", footer_info: "INFORMACIÓN & POLÍTICAS", 
-        footer_terms: "Términos y condiciones", footer_privacy: "Política de privacidad", footer_delivery: "Política de entrega", 
+        footer_terms: "Términos y condiciones", footer_privacy: "Política de privacidad", footer_cookies: "Política de Cookies", footer_delivery: "Política de entrega", 
         footer_return: "Política de devolución (14 días)", footer_care: "Cuidado de las joyas", footer_consumer: "PROTECCIÓN AL CONSUMIDOR", 
+        footer_id_data: "Datos de identificación de la empresa",
+        
         privacy_title: "Política de Privacidad",
-        priv_intro: "La privacidad de sus datos personales es una de las principales preocupaciones de H-TIME. Este documento le informa sobre el procesamiento de sus datos.",
+        privacy_subtitle: "Transparencia y seguridad para sus datos.",
+        priv_intro: "La privacidad de sus datos personales es una de las principales preocupaciones de H-TIME Luxury Experience. Este documento tiene como objetivo informarle sobre el procesamiento de sus datos en el contexto del uso de nuestro sitio web, h-time.ro.",
         priv_h1: "1. ¿Qué datos recopilamos?",
-        priv_p1: "H-TIME recopila la información que proporciona, como el nombre y la dirección al realizar un pedido. También recopilamos datos de navegación a través de cookies.",
-        priv_h2: "2. Propósito del procesamiento",
-        priv_p2: "Procesamos sus datos personales para los siguientes fines:",
-        priv_li2_1: "Para procesar y cumplir con los pedidos (facturación y entrega).",
-        priv_li2_2: "Para responder a mensajes y brindar atención al cliente.",
-        priv_li2_3: "Para mejorar la experiencia del usuario mediante análisis de tráfico.",
-        priv_li2_4: "Para enviarle ofertas (boletín), solo con su consentimiento.",
+        priv_p1: "H-TIME recopila la información que nos proporciona directamente, como: nombre, apellido, dirección de correo electrónico, número de teléfono y dirección de entrega, al momento de realizar un pedido o completar el formulario de contacto. También recopilamos automáticamente ciertos datos técnicos de navegación a través de cookies (dirección IP, tipo de navegador, páginas visitadas).",
+        priv_h2: "2. Propósito del procesamiento de datos",
+        priv_p2: "Procesamos sus datos personales para los siguientes propósitos:",
+        priv_li2_1: "Para procesar y cumplir con los pedidos realizados en el sitio (incluida la facturación y la entrega).",
+        priv_li2_2: "Para responder a sus mensajes y brindar atención al cliente a través de la página de Contacto.",
+        priv_li2_3: "Para mejorar la experiencia del usuario del sitio web, mediante análisis estadísticos de tráfico.",
+        priv_li2_4: "Para enviarle ofertas y noticias (boletín), exclusivamente si ha expresado su claro acuerdo en este sentido.",
         priv_h3: "3. ¿Cuánto tiempo conservamos los datos?",
-        priv_p3: "Los datos personales se conservarán solo durante el período necesario o según lo exija la ley.",
-        priv_h4: "4. Divulgación de datos",
-        priv_p4: "H-TIME nunca venderá sus datos. La información necesaria se comparte solo con socios de entrega y pago.",
+        priv_p3: "Los datos personales se conservarán solo durante el período necesario para cumplir con los fines mencionados anteriormente, o durante la duración obligatoria de acuerdo con las disposiciones legales aplicables en materia contable y financiera.",
+        priv_h4: "4. Divulgación de datos a terceros",
+        priv_p4: "H-TIME nunca venderá ni alquilará sus datos personales. Para poder procesar y entregar los pedidos, la información estrictamente necesaria se compartirá solo con nuestros socios de confianza (empresas de mensajería y procesadores de pagos en línea), quienes a su vez están obligados a respetar la confidencialidad de los datos.",
         priv_h5: "5. Seguridad de los datos",
-        priv_p5: "Nos comprometemos a proteger sus datos personales contra el acceso no autorizado.",
+        priv_p5: "Nos comprometemos a proteger sus datos personales contra pérdidas, mal uso, acceso no autorizado o divulgación. Utilizamos medidas de seguridad técnicas y organizativas adecuadas, incluidas conexiones encriptadas (SSL), para garantizar la integridad de la información transmitida en línea.",
         priv_h6: "6. Sus Derechos",
-        priv_p6_1: "Según la legislación (GDPR), usted tiene los siguientes derechos:",
-        priv_li6_1: "<strong>Derecho de acceso:</strong> puede solicitar información sobre sus datos.",
-        priv_li6_2: "<strong>Derecho de rectificación:</strong> puede solicitarnos que corrijamos los datos.",
-        priv_li6_3: "<strong>Derecho de supresión:</strong> puede solicitarnos que eliminemos sus datos.",
-        priv_li6_4: "<strong>Derecho a retirar el consentimiento:</strong> puede darse de baja en cualquier momento.",
-        priv_p6_2: "Para ejercer estos derechos, contáctenos en: <strong>contact@h-time.ro</strong>."
+        priv_p6_1: "De acuerdo con la legislación de protección de datos (GDPR), usted tiene los siguientes derechos:",
+        priv_li6_1: "<strong>Derecho de acceso:</strong> puede solicitar información sobre los datos que tenemos sobre usted.",
+        priv_li6_2: "<strong>Derecho de rectificación:</strong> puede solicitarnos que corrijamos datos incorrectos o incompletos.",
+        priv_li6_3: "<strong>Derecho de supresión (derecho al olvido):</strong> puede solicitarnos que eliminemos sus datos, dentro de los límites legales.",
+        priv_li6_4: "<strong>Derecho a retirar el consentimiento:</strong> puede darse de baja de nuestras comunicaciones de marketing en cualquier momento.",
+        priv_p6_2: "Para ejercer estos derechos, puede contactarnos en cualquier momento a la dirección de correo electrónico: <strong>contact@h-time.ro</strong>."
       },
       it: { 
         title: "Informativa sulla Privacy | H-TIME",
         nav_home: "Home", nav_shop: "Negozio", nav_about: "Chi Siamo", nav_team: "Team H-Time", nav_contact: "Contattaci", 
-        footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso dedicata a chi apprezza la raffinatezza.", 
+        footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso dedicata alle persone che apprezzano la raffinatezza, la qualità superiore e le storie raccontate attraverso gioielli e orologi unici.", 
         footer_nav: "NAVIGAZIONE RAPIDA", footer_home: "Home - Pagina principale", footer_shop: "Negozio - Tutte le collezioni", 
         footer_about: "La nostra storia", footer_contact: "Contatto & Supporto", footer_info: "INFORMAZIONI & POLITICHE", 
-        footer_terms: "Termini e condizioni", footer_privacy: "Informativa sulla privacy", footer_delivery: "Politica di consegna", 
+        footer_terms: "Termini e condizioni", footer_privacy: "Privacy", footer_cookies: "Informativa sui cookie", footer_delivery: "Politica di consegna", 
         footer_return: "Politica di reso (14 giorni)", footer_care: "Cura dei gioielli", footer_consumer: "PROTEZIONE DEL CONSUMATORE", 
+        footer_id_data: "Dati identificativi dell'azienda",
+        
         privacy_title: "Informativa sulla Privacy",
-        priv_intro: "La privacy dei tuoi dati personali è una delle principali preoccupazioni di H-TIME. Questo documento ti informa sul trattamento dei tuoi dati.",
+        privacy_subtitle: "Trasparenza e sicurezza per i tuoi dati.",
+        priv_intro: "La riservatezza dei tuoi dati personali è una delle principali preoccupazioni di H-TIME Luxury Experience. Questo documento ha lo scopo di informarti sul trattamento dei tuoi dati nel contesto dell'utilizzo del nostro sito web, h-time.ro.",
         priv_h1: "1. Quali dati raccogliamo?",
-        priv_p1: "H-TIME raccoglie le informazioni fornite, come nome e indirizzo, al momento dell'ordine. Raccogliamo anche dati di navigazione tramite i cookie.",
-        priv_h2: "2. Scopo del trattamento",
+        priv_p1: "H-TIME raccoglie le informazioni che ci fornisci direttamente, come: nome, cognome, indirizzo e-mail, numero di telefono e indirizzo di consegna, nel momento in cui effettui un ordine o compili il modulo di contatto. Raccogliamo inoltre automaticamente alcuni dati tecnici di navigazione tramite cookie (indirizzo IP, tipo di browser, pagine visitate).",
+        priv_h2: "2. Scopo del trattamento dei dati",
         priv_p2: "Trattiamo i tuoi dati personali per i seguenti scopi:",
-        priv_li2_1: "Per elaborare e completare gli ordini (fatturazione e consegna).",
-        priv_li2_2: "Per rispondere ai messaggi e fornire assistenza clienti.",
-        priv_li2_3: "Per migliorare l'esperienza dell'utente tramite analisi del traffico.",
-        priv_li2_4: "Per inviarti offerte (newsletter), solo con il tuo consenso.",
+        priv_li2_1: "Per elaborare ed evadere gli ordini effettuati sul sito (inclusa fatturazione e consegna).",
+        priv_li2_2: "Per rispondere ai tuoi messaggi e fornire assistenza clienti tramite la pagina dei Contatti.",
+        priv_li2_3: "Per migliorare l'esperienza utente del sito web, attraverso analisi statistiche del traffico.",
+        priv_li2_4: "Per inviarti offerte e novità (newsletter), esclusivamente se hai espresso il tuo chiaro consenso al riguardo.",
         priv_h3: "3. Per quanto tempo conserviamo i dati?",
-        priv_p3: "I dati personali saranno conservati solo per il periodo necessario o come richiesto dalla legge.",
+        priv_p3: "I dati personali saranno conservati solo per il periodo necessario al raggiungimento delle finalità sopra indicate, o per la durata obbligatoria secondo le disposizioni di legge applicabili in materia amministrativo-contabile.",
         priv_h4: "4. Divulgazione dei dati a terzi",
-        priv_p4: "H-TIME non venderà mai i tuoi dati. Le informazioni necessarie sono condivise solo con i partner di consegna e pagamento.",
+        priv_p4: "H-TIME non venderà né affitterà mai i tuoi dati personali. Per poter elaborare e consegnare gli ordini, le informazioni strettamente necessarie saranno condivise solo con i nostri partner di fiducia (corrieri e processori di pagamenti online), che a loro volta sono obbligati a rispettare la riservatezza dei dati.",
         priv_h5: "5. Sicurezza dei dati",
-        priv_p5: "Ci impegniamo a proteggere i tuoi dati personali da accessi non autorizzati.",
+        priv_p5: "Ci impegniamo a proteggere i tuoi dati personali da perdita, uso improprio, accesso non autorizzato o divulgazione. Utilizziamo adeguate misure di sicurezza tecniche e organizzative, comprese connessioni crittografate (SSL), per garantire l'integrità delle informazioni trasmesse online.",
         priv_h6: "6. I tuoi Diritti",
-        priv_p6_1: "Secondo la legislazione (GDPR), hai i seguenti diritti:",
-        priv_li6_1: "<strong>Diritto di accesso:</strong> puoi richiedere informazioni sui tuoi dati.",
-        priv_li6_2: "<strong>Diritto di rettifica:</strong> puoi chiederci di correggere i dati errati.",
-        priv_li6_3: "<strong>Diritto alla cancellazione:</strong> puoi chiederci di eliminare i tuoi dati.",
-        priv_li6_4: "<strong>Diritto di revocare il consenso:</strong> puoi annullare l'iscrizione in qualsiasi momento.",
-        priv_p6_2: "Per esercitare questi diritti, contattaci all'indirizzo: <strong>contact@h-time.ro</strong>."
+        priv_p6_1: "Secondo la normativa sulla protezione dei dati (GDPR), hai i seguenti diritti:",
+        priv_li6_1: "<strong>Diritto di accesso:</strong> puoi richiedere informazioni sui dati che conserviamo su di te.",
+        priv_li6_2: "<strong>Diritto di rettifica:</strong> puoi chiederci di correggere dati inesatti o incompleti.",
+        priv_li6_3: "<strong>Diritto alla cancellazione (diritto all'oblio):</strong> puoi chiederci di cancellare i tuoi dati, nei limiti di legge.",
+        priv_li6_4: "<strong>Diritto di revocare il consenso:</strong> puoi annullare l'iscrizione alle nostre comunicazioni di marketing in qualsiasi momento.",
+        priv_p6_2: "Per esercitare questi diritti, puoi contattarci in qualsiasi momento all'indirizzo e-mail: <strong>contact@h-time.ro</strong>."
       }
     };
     
@@ -366,7 +497,7 @@
       const dict = translations[lang] || translations.ro; 
       document.querySelectorAll('[data-i18n]').forEach(el => { 
         const key = el.getAttribute('data-i18n'); 
-        if (dict[key]) el.innerHTML = dict[key]; // Utilizăm innerHTML pentru a păstra tag-urile <strong>
+        if (dict[key]) el.innerHTML = dict[key]; 
       }); 
       if (dict.title) document.title = dict.title;
     }
@@ -381,7 +512,10 @@
         }); 
       }
       applyTranslations(localStorage.getItem('htime_lang') || 'ro');
-      if (typeof actualizeazaNumarCos === 'function') actualizeazaNumarCos();
+      
+      let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+      const cartBtn = document.getElementById('cart-nav-btn');
+      if (cartBtn) cartBtn.innerText = `Cart (${cart.length})`;
     });
   </script>
 </body>
