@@ -4,68 +4,135 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Termeni și Condiții | H-TIME</title>
-  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="icon" href="logo.webp" type="image/webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
 
   <style>
-    :root { --peach: #fcbf88; --pink: #ffb6c1; --dark: #111111; --light-bg: #f8f5f2; }
+    :root {
+      --peach: #fcbf88;
+      --pink: #ffb6c1;
+      --dark: #111111;
+      --light-bg: #f8f5f2;
+    }
+
     * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family: 'Montserrat', sans-serif; font-weight: 300; background-color: var(--light-bg); color: var(--dark); overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; padding-top: 100px; }
-    
-    /* Navbar */
-    nav { position: fixed; top:0; left:0; width:100%; padding:15px 50px; display:flex; justify-content:space-between; align-items:center; z-index:1000; background-color: var(--dark); border-bottom: 1px solid rgba(255,255,255,0.1); }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      background-color: var(--light-bg);
+      color: var(--dark);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    h1,h2,h3,h4 { font-weight: normal; }
+    a { color: inherit; text-decoration: none; }
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top:0; left:0; width:100%;
+      padding:15px 50px;
+      display:flex; justify-content:space-between; align-items:center;
+      z-index:1000;
+      background-color: rgba(0,0,0,0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
     .logo img { height:75px; }
     .nav-links { display:flex; gap:30px; }
-    .nav-links a { color:white; text-decoration:none; font-weight:500; font-size:0.9rem; text-transform:uppercase; letter-spacing:1px; transition: color .3s; }
+    .nav-links a {
+      color:white; font-weight:500; font-size:0.9rem;
+      text-transform:uppercase; letter-spacing:1px; transition: color .3s;
+    }
     .nav-links a:hover { color: var(--peach); }
     .nav-icons { display:flex; align-items:center; gap:20px; }
-    .cart-btn { border:1px solid white; padding:8px 18px; border-radius:30px; display:inline-flex; align-items:center; justify-content:center; transition: all .3s; color: white; text-decoration: none; cursor: pointer; }
-    .cart-btn:hover { border-color: var(--peach); color: var(--peach); }
-
-    /* Content Layout */
-    .policy-container { max-width: 1200px; margin: 40px auto 80px; padding: 0 40px; font-family: 'Space Grotesk', sans-serif; flex: 1; width: 100%; }
-    .black-gap {
-      background-color: var(--dark);
-      padding: 8px; 
-      border-radius: 16px;
-      flex: 1; display: flex; flex-direction: column;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    .nav-icons a { color:white; font-size:0.9rem; text-transform:uppercase; transition: all .3s; }
+    .nav-icons a:hover { color: var(--peach); }
+    .cart-btn {
+      border:1px solid white; padding:8px 18px; border-radius:30px;
+      display:inline-flex; align-items:center; justify-content:center; transition: all .3s;
     }
-    .white-card {
-      background-color: white; padding: 50px 60px; 
-      border-radius: 12px; flex: 1;
-    }
-    .section-title { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 1.8rem; margin-bottom: 30px; color: var(--dark); border-bottom: 2px solid var(--peach); padding-bottom: 10px; text-transform: uppercase; }
-    
-    .policy-content h3 { font-weight: 700; margin: 30px 0 15px; font-size: 1.2rem; color: var(--dark); text-transform: uppercase; letter-spacing: 1px; }
-    .policy-content p { line-height: 1.8; color: #444; margin-bottom: 15px; font-size: 1rem; text-align: justify; }
-    .policy-content ul { margin-left: 20px; margin-bottom: 15px; color: #444; }
-    .policy-content li { margin-bottom: 8px; line-height: 1.6; font-size: 1rem; text-align: justify; }
+    .cart-btn:hover { border-color: var(--peach); }
 
-    /* Footer */
+    /* PAGE HEADER */
+    .page-header {
+      background: var(--dark);
+      color: white;
+      padding: 180px 20px 80px;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 15px;
+      background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textGradientMove 4s linear infinite;
+    }
+    .page-header p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: #ccc;
+    }
+
+    @keyframes textGradientMove { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+
+    /* POLICY CONTAINER */
+    .policy-container {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 50px;
+      background: white;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+      border-radius: 12px;
+    }
+    .policy-container h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      color: var(--dark);
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    .policy-container h2:first-child { margin-top: 0; }
+    .policy-container p { font-size: 1rem; line-height: 1.8; color: #555; margin-bottom: 15px; text-align: justify; }
+
+    /* FOOTER */
     footer { background-color:#0b0b0b; padding:80px 50px 30px; display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:40px; color:#fff; border-top:1px solid #222; }
-    .footer-col h2 { font-family:'DM Serif Display',serif; color:var(--peach); font-size:2.2rem; margin-bottom:20px; }
+    .footer-col h2 { color:var(--peach); font-size:2.2rem; margin-bottom:20px; font-weight:700; }
     .footer-col h3 { font-size:1rem; font-weight:700; margin-bottom:30px; letter-spacing:1px; text-transform:uppercase; color:#fff; }
     .footer-desc { font-size:0.9rem; color:#999; line-height:1.8; margin-bottom:30px; }
     .social-links { display:flex; gap:15px; }
-    .social-icon-circle { width:40px; height:40px; background:#222; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; text-decoration:none; transition:.3s; }
+    .social-icon-circle { width:40px; height:40px; background:#222; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; transition:.3s; }
     .social-icon-circle:hover { background: linear-gradient(to right, var(--pink), var(--peach)); color:black; transform:translateY(-3px); }
-    .footer-col ul { list-style:none; padding:0; display:flex; flex-direction:column; gap:15px; }
-    .footer-col ul a { text-decoration:none; color:#999; font-size:0.9rem; transition:.3s; display:inline-block; }
+    .footer-col ul { list-style:none; display:flex; flex-direction:column; gap:15px; padding:0; margin:0;}
+    .footer-col ul a { color:#999; font-size:0.9rem; transition:.3s; display:inline-block; }
     .footer-col ul a:hover { color:var(--peach); transform:translateX(5px); }
     .footer-bottom { grid-column:1 / -1; text-align:center; padding-top:40px; border-top:1px solid #222; color:#555; font-size:0.8rem; margin-top:20px; }
     .anpc-img { max-width:180px; width:100%; height:auto; display:block; margin-bottom:15px; transition:opacity .3s; }
     .anpc-img:hover { opacity:0.7; }
+    .company-info { margin-top: 25px; font-size: 0.85rem; color: #888; line-height: 1.6; }
 
-    @media (max-width:900px) { nav { flex-direction:column; gap:15px; padding:15px; } body { padding-top: 130px; } .policy-container { padding: 0 20px; } .white-card { padding: 30px 20px; } footer { padding: 40px 20px; } }
+    @media (max-width:768px) {
+      nav { flex-direction:column; gap:15px; padding:15px; }
+      .nav-links { flex-wrap:wrap; justify-content:center; gap:15px; }
+      .policy-container { margin: 30px 15px; padding: 25px 15px; }
+      footer { padding:40px 20px; }
+    }
   </style>
 </head>
 <body>
 
+  <!-- NAVBAR -->
   <nav>
-    <a href="index.html" class="logo"><img src="logo.png" alt="H-TIME Logo"></a>
+    <a href="index.html" class="logo"><img src="logo.webp" alt="H-TIME Logo" onerror="this.src='logo.png'"></a>
     <div class="nav-links">
       <a href="index.html" data-i18n="nav_home">Acasă</a>
       <a href="magazin.html" data-i18n="nav_shop">Magazin</a>
@@ -74,7 +141,7 @@
       <a href="contact.html" data-i18n="nav_contact">Contactează-ne</a>
     </div>
     <div class="nav-icons">
-      <select id="languageSwitcher" style="background:black;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase; font-family:'Montserrat';">
+      <select id="languageSwitcher" aria-label="Selectează limba" style="background:black;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase;font-family:'Montserrat', sans-serif;">
         <option value="ro">RO</option>
         <option value="en">EN</option>
         <option value="fr">FR</option>
@@ -82,55 +149,67 @@
         <option value="es">ES</option>
         <option value="it">IT</option>
       </select>
-      <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
+      <a href="checkout.html" id="cart-nav-btn" class="cart-btn" style="font-family:'Montserrat', sans-serif;">Cart (0)</a>
     </div>
   </nav>
 
+  <!-- HEADER PAGINĂ -->
+  <header class="page-header">
+    <h1 data-i18n="terms_title">Termeni și Condiții</h1>
+    <p data-i18n="terms_subtitle">Reguli și responsabilități pentru o experiență sigură și transparentă.</p>
+  </header>
+
+  <!-- CONȚINUT POLITICĂ -->
   <main class="policy-container">
-    <div class="black-gap">
-      <div class="white-card">
-        <h1 class="section-title" data-i18n="terms_title">Termeni și Condiții</h1>
-        
-        <div class="policy-content">
-          <p data-i18n="terms_intro">Bine ați venit pe site-ul H-TIME Luxury Experience. Prin utilizarea acestui site, sunteți de acord cu acești Termeni și Condiții. Vă rugăm să îi citiți cu atenție. Acest document reglementează relația dintre dumneavoastră și H-TIME, o firmă de exercițiu dedicată comercializării de bijuterii și ceasuri de lux.</p>
+    <p data-i18n="terms_intro">Bine ați venit pe site-ul H-TIME Luxury Experience. Prin utilizarea acestui site, sunteți de acord cu acești Termeni și Condiții. Vă rugăm să îi citiți cu atenție. Acest document reglementează relația dintre dumneavoastră și H-TIME, o firmă de exercițiu dedicată comercializării de bijuterii și ceasuri de lux.</p>
           
-          <h3 data-i18n="terms_h1">1. Introducere și Acceptarea Termenilor</h3>
-          <p data-i18n="terms_p1">Accesul și utilizarea site-ului web h-time.ro (denumit în continuare "Site-ul"), precum și achiziționarea produselor prezentate pe acesta, implică acceptarea expresă și necondiționată a prezenților Termeni și Condiții. Ne rezervăm dreptul de a modifica aceste prevederi oricând, fără o notificare prealabilă, versiunea actualizată fiind permanent disponibilă pe această pagină.</p>
+    <h2 data-i18n="terms_h1">1. Introducere și Acceptarea Termenilor</h2>
+    <p data-i18n="terms_p1">Accesul și utilizarea site-ului web h-time.ro (denumit în continuare "Site-ul"), precum și achiziționarea produselor prezentate pe acesta, implică acceptarea expresă și necondiționată a prezenților Termeni și Condiții. Ne rezervăm dreptul de a modifica aceste prevederi oricând, fără o notificare prealabilă, versiunea actualizată fiind permanent disponibilă pe această pagină.</p>
 
-          <h3 data-i18n="terms_h2">2. Drepturi de Proprietate Intelectuală</h3>
-          <p data-i18n="terms_p2">Întregul conținut al acestui site, incluzând dar nelimitându-se la texte, imagini, elemente grafice, logo-uri, design, cod sursă și baze de date, reprezintă proprietatea intelectuală a firmei H-TIME Luxury Experience și este protejat de legile în vigoare privind drepturile de autor. Reproducerea, copierea, distribuirea sau utilizarea acestor materiale în alte scopuri decât cele strict personale este interzisă fără acordul nostru scris.</p>
+    <h2 data-i18n="terms_h2">2. Drepturi de Proprietate Intelectuală</h2>
+    <p data-i18n="terms_p2">Întregul conținut al acestui site, incluzând dar nelimitându-se la texte, imagini, elemente grafice, logo-uri, design, cod sursă și baze de date, reprezintă proprietatea intelectuală a firmei H-TIME Luxury Experience și este protejat de legile în vigoare privind drepturile de autor. Reproducerea, copierea, distribuirea sau utilizarea acestor materiale în alte scopuri decât cele strict personale este interzisă fără acordul nostru scris.</p>
 
-          <h3 data-i18n="terms_h3">3. Produse și Prețuri</h3>
-          <p data-i18n="terms_p3_1">Ne străduim să prezentăm produsele noastre cât mai exact posibil. Totuși, din cauza variațiilor setărilor de culoare ale ecranelor, este posibil ca nuanțele bijuteriilor și ceasurilor să difere ușor în realitate. Toate prețurile afișate pe site sunt exprimate în RON și includ TVA (cu excepția cazurilor în care se specifică altfel).</p>
-          <p data-i18n="terms_p3_2">Ne rezervăm dreptul de a modifica prețurile fără o notificare prealabilă. Cu toate acestea, comanda plasată va fi onorată la prețul afișat în momentul finalizării și confirmării acesteia.</p>
+    <h2 data-i18n="terms_h3">3. Produse și Prețuri</h2>
+    <p data-i18n="terms_p3_1">Ne străduim să prezentăm produsele noastre cât mai exact posibil. Totuși, din cauza variațiilor setărilor de culoare ale ecranelor, este posibil ca nuanțele bijuteriilor și ceasurilor să difere ușor în realitate. Toate prețurile afișate pe site sunt exprimate în RON și includ TVA (cu excepția cazurilor în care se specifică altfel).</p>
+    <p data-i18n="terms_p3_2">Ne rezervăm dreptul de a modifica prețurile fără o notificare prealabilă. Cu toate acestea, comanda plasată va fi onorată la prețul afișat în momentul finalizării și confirmării acesteia.</p>
 
-          <h3 data-i18n="terms_h4">4. Plasarea Comenzilor</h3>
-          <p data-i18n="terms_p4_1">Pentru a achiziționa produse, trebuie să adăugați articolele dorite în coșul de cumpărături și să parcurgeți pașii din pagina de Checkout. Completarea formularului de comandă necesită furnizarea de date reale, corecte și actualizate.</p>
-          <p data-i18n="terms_p4_2">Odată plasată, comanda reprezintă o ofertă de cumpărare. Contractul de vânzare-cumpărare se consideră încheiat în momentul în care H-TIME vă trimite un e-mail de confirmare a expedierii produselor.</p>
+    <h2 data-i18n="terms_h4">4. Plasarea Comenzilor</h2>
+    <p data-i18n="terms_p4_1">Pentru a achiziționa produse, trebuie să adăugați articolele dorite în coșul de cumpărături și să parcurgeți pașii din pagina de Checkout. Completarea formularului de comandă necesită furnizarea de date reale, corecte și actualizate.</p>
+    <p data-i18n="terms_p4_2">Odată plasată, comanda reprezintă o ofertă de cumpărare. Contractul de vânzare-cumpărare se consideră încheiat în momentul în care H-TIME vă trimite un e-mail de confirmare a expedierii produselor.</p>
 
-          <h3 data-i18n="terms_h5">5. Limitarea Răspunderii</h3>
-          <p data-i18n="terms_p5">H-TIME nu va fi trasă la răspundere pentru daune directe, indirecte sau incidentale care ar putea rezulta din utilizarea sau incapacitatea de a utiliza acest site, inclusiv dar fără a se limita la erori tehnice, întreruperi ale conexiunii la internet sau inexactități ale conținutului. Produsele noastre sunt garantate împotriva defectelor de fabricație conform legislației în vigoare și certificatelor de garanție incluse în pachet.</p>
+    <h2 data-i18n="terms_h5">5. Limitarea Răspunderii</h2>
+    <p data-i18n="terms_p5">H-TIME nu va fi trasă la răspundere pentru daune directe, indirecte sau incidentale care ar putea rezulta din utilizarea sau incapacitatea de a utiliza acest site, inclusiv dar fără a se limita la erori tehnice, întreruperi ale conexiunii la internet sau inexactități ale conținutului. Produsele noastre sunt garantate împotriva defectelor de fabricație conform legislației în vigoare și certificatelor de garanție incluse în pachet.</p>
 
-          <h3 data-i18n="terms_h6">6. Forța Majoră</h3>
-          <p data-i18n="terms_p6">Niciuna dintre părți nu va fi răspunzătoare pentru neexecutarea obligațiilor sale, dacă o astfel de neexecutare este cauzată de un eveniment de forță majoră, așa cum este definit de lege (ex: calamități naturale, greve, stări de urgență, restricții guvernamentale).</p>
+    <h2 data-i18n="terms_h6">6. Forța Majoră</h2>
+    <p data-i18n="terms_p6">Niciuna dintre părți nu va fi răspunzătoare pentru neexecutarea obligațiilor sale, dacă o astfel de neexecutare este cauzată de un eveniment de forță majoră, așa cum este definit de lege (ex: calamități naturale, greve, stări de urgență, restricții guvernamentale).</p>
 
-          <h3 data-i18n="terms_h7">7. Litigii și Legea Aplicabilă</h3>
-          <p data-i18n="terms_p7">Orice dispută apărută între clienți și H-TIME va fi soluționată pe cale amiabilă. În cazul în care acest lucru nu este posibil, litigiul va fi înaintat instanțelor judecătorești competente din România, aplicându-se legislația română în vigoare.</p>
-        </div>
-      </div>
-    </div>
+    <h2 data-i18n="terms_h7">7. Litigii și Legea Aplicabilă</h2>
+    <p data-i18n="terms_p7">Orice dispută apărută între clienți și H-TIME va fi soluționată pe cale amiabilă. În cazul în care acest lucru nu este posibil, litigiul va fi înaintat instanțelor judecătorești competente din România, aplicându-se legislația română în vigoare.</p>
   </main>
 
+  <!-- FOOTER -->
   <footer>
     <div class="footer-col">
       <h2>H-TIME</h2>
       <p class="footer-desc" data-i18n="footer_desc">Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.</p>
       <div class="social-links">
-        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+        <a href="#" class="social-icon-circle" title="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
+        <a href="https://www.instagram.com/bijuterii.h_time/" class="social-icon-circle" title="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="#" class="social-icon-circle" title="TikTok">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+        </a>
+      </div>
+      <div class="company-info">
+        <p><strong>CUI:</strong> 83241620</p>
+        <p><strong>Reg. Com.:</strong> J22/4620/2024</p>
+        <p><strong>Sediu:</strong> Strada Milcov 18A, Iași 70025</p>
       </div>
     </div>
+
     <div class="footer-col">
       <h3 data-i18n="footer_nav">NAVIGARE RAPIDĂ</h3>
       <ul>
@@ -140,65 +219,99 @@
         <li><a href="contact.html" data-i18n="footer_contact">Contact & Suport</a></li>
       </ul>
     </div>
+
     <div class="footer-col">
       <h3 data-i18n="footer_info">INFORMAȚII & POLITICI</h3>
       <ul>
-        <li><a href="termeni.html" data-i18n="footer_terms">Termeni și Condiții</a></li>
+        <li><a href="termeni.html" style="color:var(--peach);" data-i18n="footer_terms">Termeni și Condiții</a></li>
         <li><a href="confidentialitate.html" data-i18n="footer_privacy">Politică de Confidențialitate</a></li>
+        <li><a href="politica_cookies.html" data-i18n="footer_cookies">Politică de Cookies</a></li>
         <li><a href="politica_livrare.html" data-i18n="footer_delivery">Politică de Livrare</a></li>
         <li><a href="politici_retur.html" data-i18n="footer_return">Politică de Retur (14 zile)</a></li>
         <li><a href="ingrijirea_bijuteriilor.html" data-i18n="footer_care">Îngrijirea Bijuteriilor</a></li>
+        <li><a href="date_identificare.html" data-i18n="footer_id_data">Date de identificare ale societății</a></li>
       </ul>
     </div>
+
     <div class="footer-col">
       <h3 data-i18n="footer_consumer">PROTECȚIA CONSUMATORULUI</h3>
       <div>
-        <a href="https://anpc.ro/ce-este-sal/" target="_blank"><img src="https://ro.pandora.net/mobify/bundle/1108/static/img/SAL-PICTOGRAMA.png?app=pdp" alt="ANPC SAL" class="anpc-img"></a>
-        <a href="https://ec.europa.eu/consumers/odr" target="_blank"><img src="https://ro.pandora.net/mobify/bundle/1108/static/img/pictogramaSOL.png?app=pdp" alt="ANPC SOL" class="anpc-img"></a>
+        <a href="https://anpc.ro/ce-este-sal/" target="_blank">
+          <img src="https://ro.pandora.net/mobify/bundle/1108/static/img/SAL-PICTOGRAMA.png?app=pdp" alt="ANPC SAL" class="anpc-img">
+        </a>
+        <a href="https://ec.europa.eu/consumers/odr" target="_blank">
+          <img src="https://ro.pandora.net/mobify/bundle/1108/static/img/pictogramaSOL.png?app=pdp" alt="ANPC SOL" class="anpc-img">
+        </a>
       </div>
     </div>
+
     <div class="footer-bottom">© 2024 - 2026 H-TIME Luxury Experience. Toate drepturile sunt rezervate.</div>
   </footer>
 
   <script src="script.js"></script>
   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+      const cartBtn = document.getElementById('cart-nav-btn');
+      if (cartBtn) cartBtn.innerText = `Cart (${cart.length})`;
+
+      const switcher = document.getElementById('languageSwitcher');
+      const savedLang = localStorage.getItem('htime_lang') || 'ro';
+      if (switcher) switcher.value = savedLang;
+      applyTranslations(savedLang);
+
+      if (switcher) {
+        switcher.addEventListener('change', () => {
+          const lang = switcher.value;
+          localStorage.setItem('htime_lang', lang);
+          applyTranslations(lang);
+        });
+      }
+    });
+
     const translations = {
       ro: { 
         title: "Termeni și Condiții | H-TIME",
         nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne", 
-        footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul.", 
+        footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.", 
         footer_nav: "NAVIGARE RAPIDĂ", footer_home: "Acasă - Pagina principală", footer_shop: "Magazin - Toate Colecțiile", 
         footer_about: "Povestea Noastră", footer_contact: "Contact & Suport", footer_info: "INFORMAȚII & POLITICI", 
-        footer_terms: "Termeni și Condiții", footer_privacy: "Politică de Confidențialitate", footer_delivery: "Politică de Livrare", 
+        footer_terms: "Termeni și Condiții", footer_privacy: "Politică de Confidențialitate", footer_cookies: "Politică de Cookies", footer_delivery: "Politică de Livrare", 
         footer_return: "Politică de Retur (14 zile)", footer_care: "Îngrijirea Bijuteriilor", footer_consumer: "PROTECȚIA CONSUMATORULUI", 
+        footer_id_data: "Date de identificare ale societății",
+        
         terms_title: "Termeni și Condiții",
+        terms_subtitle: "Reguli și responsabilități pentru o experiență sigură și transparentă.",
         terms_intro: "Bine ați venit pe site-ul H-TIME Luxury Experience. Prin utilizarea acestui site, sunteți de acord cu acești Termeni și Condiții. Vă rugăm să îi citiți cu atenție. Acest document reglementează relația dintre dumneavoastră și H-TIME, o firmă de exercițiu dedicată comercializării de bijuterii și ceasuri de lux.",
         terms_h1: "1. Introducere și Acceptarea Termenilor",
-        terms_p1: "Accesul și utilizarea site-ului web h-time.ro (denumit în continuare \"Site-ul\"), precum și achiziționarea produselor prezentate pe acesta, implică acceptarea expresă și necondiționată a prezenților Termeni și Condiții. Ne rezervăm dreptul de a modifica aceste prevederi oricând, fără o notificare prealabilă.",
+        terms_p1: "Accesul și utilizarea site-ului web h-time.ro (denumit în continuare \"Site-ul\"), precum și achiziționarea produselor prezentate pe acesta, implică acceptarea expresă și necondiționată a prezenților Termeni și Condiții. Ne rezervăm dreptul de a modifica aceste prevederi oricând, fără o notificare prealabilă, versiunea actualizată fiind permanent disponibilă pe această pagină.",
         terms_h2: "2. Drepturi de Proprietate Intelectuală",
-        terms_p2: "Întregul conținut al acestui site, incluzând dar nelimitându-se la texte, imagini, elemente grafice, logo-uri, design, cod sursă și baze de date, reprezintă proprietatea intelectuală a firmei H-TIME Luxury Experience și este protejat de legile în vigoare privind drepturile de autor.",
+        terms_p2: "Întregul conținut al acestui site, incluzând dar nelimitându-se la texte, imagini, elemente grafice, logo-uri, design, cod sursă și baze de date, reprezintă proprietatea intelectuală a firmei H-TIME Luxury Experience și este protejat de legile în vigoare privind drepturile de autor. Reproducerea, copierea, distribuirea sau utilizarea acestor materiale în alte scopuri decât cele strict personale este interzisă fără acordul nostru scris.",
         terms_h3: "3. Produse și Prețuri",
-        terms_p3_1: "Ne străduim să prezentăm produsele noastre cât mai exact posibil. Totuși, din cauza variațiilor setărilor de culoare ale ecranelor, este posibil ca nuanțele bijuteriilor să difere ușor în realitate. Toate prețurile afișate pe site includ TVA.",
-        terms_p3_2: "Ne rezervăm dreptul de a modifica prețurile fără o notificare prealabilă. Cu toate acestea, comanda plasată va fi onorată la prețul afișat în momentul finalizării acesteia.",
+        terms_p3_1: "Ne străduim să prezentăm produsele noastre cât mai exact posibil. Totuși, din cauza variațiilor setărilor de culoare ale ecranelor, este posibil ca nuanțele bijuteriilor și ceasurilor să difere ușor în realitate. Toate prețurile afișate pe site sunt exprimate în RON și includ TVA (cu excepția cazurilor în care se specifică altfel).",
+        terms_p3_2: "Ne rezervăm dreptul de a modifica prețurile fără o notificare prealabilă. Cu toate acestea, comanda plasată va fi onorată la prețul afișat în momentul finalizării și confirmării acesteia.",
         terms_h4: "4. Plasarea Comenzilor",
-        terms_p4_1: "Pentru a achiziționa produse, trebuie să adăugați articolele dorite în coșul de cumpărături și să parcurgeți pașii din pagina de Checkout. Completarea formularului de comandă necesită date reale.",
-        terms_p4_2: "Odată plasată, comanda reprezintă o ofertă de cumpărare. Contractul de vânzare-cumpărare se consideră încheiat în momentul confirmării expedierii.",
+        terms_p4_1: "Pentru a achiziționa produse, trebuie să adăugați articolele dorite în coșul de cumpărături și să parcurgeți pașii din pagina de Checkout. Completarea formularului de comandă necesită furnizarea de date reale, corecte și actualizate.",
+        terms_p4_2: "Odată plasată, comanda reprezintă o ofertă de cumpărare. Contractul de vânzare-cumpărare se consideră încheiat în momentul în care H-TIME vă trimite un e-mail de confirmare a expedierii produselor.",
         terms_h5: "5. Limitarea Răspunderii",
-        terms_p5: "H-TIME nu va fi trasă la răspundere pentru daune directe, indirecte sau incidentale care ar putea rezulta din utilizarea sau incapacitatea de a utiliza acest site.",
+        terms_p5: "H-TIME nu va fi trasă la răspundere pentru daune directe, indirecte sau incidentale care ar putea rezulta din utilizarea sau incapacitatea de a utiliza acest site, inclusiv dar fără a se limita la erori tehnice, întreruperi ale conexiunii la internet sau inexactități ale conținutului. Produsele noastre sunt garantate împotriva defectelor de fabricație conform legislației în vigoare și certificatelor de garanție incluse în pachet.",
         terms_h6: "6. Forța Majoră",
-        terms_p6: "Niciuna dintre părți nu va fi răspunzătoare pentru neexecutarea obligațiilor sale, dacă aceasta este cauzată de un eveniment de forță majoră.",
+        terms_p6: "Niciuna dintre părți nu va fi răspunzătoare pentru neexecutarea obligațiilor sale, dacă o astfel de neexecutare este cauzată de un eveniment de forță majoră, așa cum este definit de lege (ex: calamități naturale, greve, stări de urgență, restricții guvernamentale).",
         terms_h7: "7. Litigii și Legea Aplicabilă",
-        terms_p7: "Orice dispută apărută între clienți și H-TIME va fi soluționată pe cale amiabilă. În caz contrar, litigiul va fi înaintat instanțelor competente din România."
+        terms_p7: "Orice dispută apărută între clienți și H-TIME va fi soluționată pe cale amiabilă. În cazul în care acest lucru nu este posibil, litigiul va fi înaintat instanțelor judecătorești competente din România, aplicându-se legislația română în vigoare."
       },
       en: { 
         title: "Terms and Conditions | H-TIME",
         nav_home: "Home", nav_shop: "Shop", nav_about: "About Us", nav_team: "H-Time Team", nav_contact: "Contact Us", 
-        footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement.", 
+        footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement, premium quality, and stories told through unique jewelry and watches.", 
         footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections", 
         footer_about: "Our Story", footer_contact: "Contact & Support", footer_info: "INFORMATION & POLICIES", 
-        footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_delivery: "Delivery Policy", 
+        footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_cookies: "Cookie Policy", footer_delivery: "Delivery Policy", 
         footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care", footer_consumer: "CONSUMER PROTECTION", 
+        footer_id_data: "Company Identification Data",
+        
         terms_title: "Terms and Conditions",
+        terms_subtitle: "Rules and responsibilities for a safe and transparent experience.",
         terms_intro: "Welcome to the H-TIME Luxury Experience website. By using this site, you agree to these Terms and Conditions. Please read them carefully. This document governs the relationship between you and H-TIME.",
         terms_h1: "1. Introduction and Acceptance of Terms",
         terms_p1: "Access and use of the website, as well as purchasing products presented on it, implies express and unconditional acceptance of these Terms and Conditions. We reserve the right to modify these provisions at any time without prior notice.",
@@ -220,12 +333,15 @@
       fr: { 
         title: "Conditions Générales | H-TIME",
         nav_home: "Accueil", nav_shop: "Boutique", nav_about: "À propos", nav_team: "Équipe H-Time", nav_contact: "Contactez-nous", 
-        footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe dédiée à ceux qui apprécient le raffinement.", 
+        footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe dédiée aux personnes qui apprécient le raffinement, la qualité supérieure et les histoires racontées à travers des bijoux et des montres uniques.", 
         footer_nav: "NAVIGATION RAPIDE", footer_home: "Accueil - Page principale", footer_shop: "Boutique - Toutes les collections", 
         footer_about: "Notre histoire", footer_contact: "Contact & Support", footer_info: "INFORMATIONS & POLITIQUES", 
-        footer_terms: "Conditions générales", footer_privacy: "Politique de confidentialité", footer_delivery: "Politique de livraison", 
+        footer_terms: "Conditions générales", footer_privacy: "Politique de confidentialité", footer_cookies: "Politique de cookies", footer_delivery: "Politique de livraison", 
         footer_return: "Politique de retour (14 jours)", footer_care: "Entretien des bijoux", footer_consumer: "PROTECTION DU CONSOMMATEUR", 
+        footer_id_data: "Données d'identification de l'entreprise",
+        
         terms_title: "Conditions Générales",
+        terms_subtitle: "Règles et responsabilités pour une expérience sûre et transparente.",
         terms_intro: "Bienvenue sur le site H-TIME Luxury Experience. En utilisant ce site, vous acceptez ces Conditions Générales. Veuillez les lire attentivement.",
         terms_h1: "1. Introduction et Acceptation des Conditions",
         terms_p1: "L'accès et l'utilisation du site impliquent l'acceptation expresse et inconditionnelle des présentes Conditions Générales. Nous nous réservons le droit de modifier ces dispositions à tout moment.",
@@ -247,12 +363,15 @@
       de: { 
         title: "Allgemeine Geschäftsbedingungen | H-TIME",
         nav_home: "Startseite", nav_shop: "Shop", nav_about: "Über uns", nav_team: "H-Time Team", nav_contact: "Kontakt", 
-        footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique für Liebhaber von Raffinesse.", 
+        footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique, die sich Personen widmet, die Raffinesse, erstklassige Qualität und Geschichten schätzen, die durch einzigartige Schmuckstücke und Uhren erzählt werden.", 
         footer_nav: "SCHNELLNAVIGATION", footer_home: "Startseite - Hauptseite", footer_shop: "Shop - Alle Kollektionen", 
         footer_about: "Unsere Geschichte", footer_contact: "Kontakt & Support", footer_info: "INFORMATIONEN & RICHTLINIEN", 
-        footer_terms: "Allgemeine Geschäftsbedingungen", footer_privacy: "Datenschutzrichtlinie", footer_delivery: "Lieferbedingungen", 
+        footer_terms: "Allgemeine Geschäftsbedingungen", footer_privacy: "Datenschutzrichtlinie", footer_cookies: "Cookie-Richtlinie", footer_delivery: "Lieferbedingungen", 
         footer_return: "Rückgaberecht (14 Tage)", footer_care: "Schmuckpflege", footer_consumer: "VERBRAUCHERSCHUTZ", 
+        footer_id_data: "Unternehmensidentifikationsdaten",
+        
         terms_title: "Allgemeine Geschäftsbedingungen",
+        terms_subtitle: "Regeln und Verantwortlichkeiten für ein sicheres Erlebnis.",
         terms_intro: "Willkommen auf der Website von H-TIME. Durch die Nutzung dieser Website stimmen Sie diesen Bedingungen zu.",
         terms_h1: "1. Einführung und Annahme",
         terms_p1: "Der Zugang und die Nutzung der Website bedeuten die ausdrückliche Annahme dieser Bedingungen. Wir behalten uns das Recht vor, diese Bestimmungen jederzeit zu ändern.",
@@ -274,12 +393,15 @@
       es: { 
         title: "Términos y Condiciones | H-TIME",
         nav_home: "Inicio", nav_shop: "Tienda", nav_about: "Sobre Nosotros", nav_team: "Equipo H-Time", nav_contact: "Contáctanos", 
-        footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo dedicada a quienes aprecian el refinamiento.", 
+        footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo dedicada a personas que aprecian el refinamiento, la calidad superior y las historias contadas a través de joyas y relojes únicos.", 
         footer_nav: "NAVEGACIÓN RÁPIDA", footer_home: "Inicio - Página principal", footer_shop: "Tienda - Todas las colecciones", 
         footer_about: "Nuestra historia", footer_contact: "Contacto & Soporte", footer_info: "INFORMACIÓN & POLÍTICAS", 
-        footer_terms: "Términos y condiciones", footer_privacy: "Política de privacidad", footer_delivery: "Política de entrega", 
+        footer_terms: "Términos y condiciones", footer_privacy: "Política de privacidad", footer_cookies: "Política de Cookies", footer_delivery: "Política de entrega", 
         footer_return: "Política de devolución (14 días)", footer_care: "Cuidado de las joyas", footer_consumer: "PROTECCIÓN AL CONSUMIDOR", 
+        footer_id_data: "Datos de identificación de la empresa",
+        
         terms_title: "Términos y Condiciones",
+        terms_subtitle: "Reglas y responsabilidades para una experiencia segura.",
         terms_intro: "Bienvenido al sitio web de H-TIME. Al utilizar este sitio, usted acepta estos Términos y Condiciones.",
         terms_h1: "1. Introducción y Aceptación",
         terms_p1: "El acceso y uso del sitio web implica la aceptación expresa e incondicional de estos Términos. Nos reservamos el derecho de modificarlos en cualquier momento.",
@@ -301,12 +423,15 @@
       it: { 
         title: "Termini e Condizioni | H-TIME",
         nav_home: "Home", nav_shop: "Negozio", nav_about: "Chi Siamo", nav_team: "Team H-Time", nav_contact: "Contattaci", 
-        footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso dedicata a chi apprezza la raffinatezza.", 
+        footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso dedicata alle persone che apprezzano la raffinatezza, la qualità superiore e le storie raccontate attraverso gioielli e orologi unici.", 
         footer_nav: "NAVIGAZIONE RAPIDA", footer_home: "Home - Pagina principale", footer_shop: "Negozio - Tutte le collezioni", 
         footer_about: "La nostra storia", footer_contact: "Contatto & Supporto", footer_info: "INFORMAZIONI & POLITICHE", 
-        footer_terms: "Termini e condizioni", footer_privacy: "Informativa sulla privacy", footer_delivery: "Politica di consegna", 
-        footer_return: "Politica di reso (14 giorni)", footer_care: "Cura dei gioielli", footer_consumer: "PROTEZIONE DEL CONSUMATORE", 
+        footer_terms: "Termini e condizioni", footer_privacy: "Privacy", footer_cookies: "Informativa sui cookie", footer_delivery: "Consegna", 
+        footer_return: "Reso (14 giorni)", footer_care: "Cura dei gioielli", footer_consumer: "PROTEZIONE DEL CONSUMATORE", 
+        footer_id_data: "Dati identificativi dell'azienda",
+        
         terms_title: "Termini e Condizioni",
+        terms_subtitle: "Regole e responsabilità per un'esperienza sicura e trasparente.",
         terms_intro: "Benvenuti sul sito H-TIME. Utilizzando questo sito, accetti questi Termini e Condizioni.",
         terms_h1: "1. Introduzione e Accettazione",
         terms_p1: "L'accesso e l'uso del sito implicano l'accettazione espressa di questi Termini. Ci riserviamo il diritto di modificarli in qualsiasi momento.",
@@ -331,7 +456,7 @@
       const dict = translations[lang] || translations.ro; 
       document.querySelectorAll('[data-i18n]').forEach(el => { 
         const key = el.getAttribute('data-i18n'); 
-        if (dict[key]) el.innerHTML = dict[key]; // Folosim innerHTML pentru etichete HTML (desi aici nu avem neaparat nevoie)
+        if (dict[key]) el.innerHTML = dict[key]; 
       }); 
       if (dict.title) document.title = dict.title;
     }
@@ -346,7 +471,10 @@
         }); 
       }
       applyTranslations(localStorage.getItem('htime_lang') || 'ro');
-      if (typeof actualizeazaNumarCos === 'function') actualizeazaNumarCos();
+      
+      let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+      const cartBtn = document.getElementById('cart-nav-btn');
+      if (cartBtn) cartBtn.innerText = `Cart (${cart.length})`;
     });
   </script>
 </body>

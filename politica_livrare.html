@@ -4,76 +4,138 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Politica de Livrare | H-TIME</title>
-  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="icon" href="logo.webp" type="image/webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
 
   <style>
-    :root { --peach: #fcbf88; --pink: #ffb6c1; --dark: #111111; --light-bg: #f8f5f2; }
+    :root {
+      --peach: #fcbf88;
+      --pink: #ffb6c1;
+      --dark: #111111;
+      --light-bg: #f8f5f2;
+    }
+
     * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family: 'Montserrat', sans-serif; font-weight: 300; background-color: var(--light-bg); color: var(--dark); overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; padding-top: 100px; }
-    
-    /* Navbar */
-    nav { position: fixed; top:0; left:0; width:100%; padding:15px 50px; display:flex; justify-content:space-between; align-items:center; z-index:1000; background-color: var(--dark); border-bottom: 1px solid rgba(255,255,255,0.1); }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      background-color: var(--light-bg);
+      color: var(--dark);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    h1,h2,h3,h4 { font-weight: normal; }
+    a { color: inherit; text-decoration: none; }
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top:0; left:0; width:100%;
+      padding:15px 50px;
+      display:flex; justify-content:space-between; align-items:center;
+      z-index:1000;
+      background-color: rgba(0,0,0,0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
     .logo img { height:75px; }
     .nav-links { display:flex; gap:30px; }
-    .nav-links a { color:white; text-decoration:none; font-weight:500; font-size:0.9rem; text-transform:uppercase; letter-spacing:1px; transition: color .3s; }
+    .nav-links a {
+      color:white; font-weight:500; font-size:0.9rem;
+      text-transform:uppercase; letter-spacing:1px; transition: color .3s;
+    }
     .nav-links a:hover { color: var(--peach); }
     .nav-icons { display:flex; align-items:center; gap:20px; }
-    .cart-btn { border:1px solid white; padding:8px 18px; border-radius:30px; display:inline-flex; align-items:center; justify-content:center; transition: all .3s; color: white; text-decoration: none; cursor: pointer; }
-    .cart-btn:hover { border-color: var(--peach); color: var(--peach); }
+    .nav-icons a { color:white; font-size:0.9rem; text-transform:uppercase; transition: all .3s; }
+    .nav-icons a:hover { color: var(--peach); }
+    .cart-btn {
+      border:1px solid white; padding:8px 18px; border-radius:30px;
+      display:inline-flex; align-items:center; justify-content:center; transition: all .3s;
+    }
+    .cart-btn:hover { border-color: var(--peach); }
 
-    /* Content Layout */
-    .policy-container { max-width: 1000px; margin: 40px auto 80px; padding: 0 40px; font-family: 'Space Grotesk', sans-serif; flex: 1; width: 100%; }
-    
-    /* Gap-ul negru general pentru sectiuni (actioneaza ca border) */
-    .black-gap {
-      background-color: var(--dark);
-      padding: 8px; /* Grosimea border-ului negru */
-      border-radius: 16px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    /* PAGE HEADER */
+    .page-header {
+      background: var(--dark);
+      color: white;
+      padding: 180px 20px 80px;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 15px;
+      background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textGradientMove 4s linear infinite;
+    }
+    .page-header p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: #ccc;
     }
 
-    .white-card {
-      background-color: white;
-      padding: 40px;
+    @keyframes textGradientMove { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+
+    /* POLICY CONTAINER */
+    .policy-container {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 50px;
+      background: white;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.05);
       border-radius: 12px;
-      flex: 1;
     }
+    .policy-container h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      color: var(--dark);
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    .policy-container h2:first-child { margin-top: 0; }
+    .policy-container p { font-size: 1rem; line-height: 1.8; color: #555; margin-bottom: 15px; text-align: justify; }
+    .policy-container ul { margin-left: 20px; margin-bottom: 20px; color: #555; }
+    .policy-container li { margin-bottom: 10px; line-height: 1.6; text-align: justify;}
+    .policy-container strong { color: var(--dark); font-weight: 600; }
 
-    .section-title { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 1.8rem; margin-bottom: 30px; color: var(--dark); border-bottom: 2px solid var(--peach); padding-bottom: 10px; text-transform: uppercase; }
-    
-    .policy-content h3 { font-weight: 700; margin: 25px 0 15px; font-size: 1.2rem; color: var(--dark); }
-    .policy-content p { line-height: 1.8; color: #555; margin-bottom: 15px; font-size: 0.95rem; }
-    .policy-content ul { margin-left: 20px; margin-bottom: 15px; color: #555; }
-    .policy-content li { margin-bottom: 8px; line-height: 1.6; font-size: 0.95rem; }
-
-    /* Footer */
+    /* FOOTER */
     footer { background-color:#0b0b0b; padding:80px 50px 30px; display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:40px; color:#fff; border-top:1px solid #222; }
-    .footer-col h2 { font-family:'DM Serif Display',serif; color:var(--peach); font-size:2.2rem; margin-bottom:20px; }
+    .footer-col h2 { color:var(--peach); font-size:2.2rem; margin-bottom:20px; font-weight:700; }
     .footer-col h3 { font-size:1rem; font-weight:700; margin-bottom:30px; letter-spacing:1px; text-transform:uppercase; color:#fff; }
     .footer-desc { font-size:0.9rem; color:#999; line-height:1.8; margin-bottom:30px; }
     .social-links { display:flex; gap:15px; }
-    .social-icon-circle { width:40px; height:40px; background:#222; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; text-decoration:none; transition:.3s; }
+    .social-icon-circle { width:40px; height:40px; background:#222; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; transition:.3s; }
     .social-icon-circle:hover { background: linear-gradient(to right, var(--pink), var(--peach)); color:black; transform:translateY(-3px); }
-    .footer-col ul { list-style:none; padding:0; display:flex; flex-direction:column; gap:15px; }
-    .footer-col ul a { text-decoration:none; color:#999; font-size:0.9rem; transition:.3s; display:inline-block; }
+    .footer-col ul { list-style:none; display:flex; flex-direction:column; gap:15px; padding:0; margin:0;}
+    .footer-col ul a { color:#999; font-size:0.9rem; transition:.3s; display:inline-block; }
     .footer-col ul a:hover { color:var(--peach); transform:translateX(5px); }
     .footer-bottom { grid-column:1 / -1; text-align:center; padding-top:40px; border-top:1px solid #222; color:#555; font-size:0.8rem; margin-top:20px; }
     .anpc-img { max-width:180px; width:100%; height:auto; display:block; margin-bottom:15px; transition:opacity .3s; }
     .anpc-img:hover { opacity:0.7; }
+    .company-info { margin-top: 25px; font-size: 0.85rem; color: #888; line-height: 1.6; }
 
-    @media (max-width:900px) { nav { flex-direction:column; gap:15px; padding:15px; } body { padding-top: 130px; } .policy-container { padding: 0 20px; } .white-card { padding: 25px; } footer { padding: 40px 20px; } }
+    @media (max-width:768px) {
+      nav { flex-direction:column; gap:15px; padding:15px; }
+      .nav-links { flex-wrap:wrap; justify-content:center; gap:15px; }
+      .policy-container { margin: 30px 15px; padding: 25px 15px; }
+      footer { padding:40px 20px; }
+    }
   </style>
 </head>
 <body>
 
+  <!-- NAVBAR -->
   <nav>
-    <a href="index.html" class="logo"><img src="logo.png" alt="H-TIME Logo"></a>
+    <a href="index.html" class="logo"><img src="logo.webp" alt="H-TIME Logo" onerror="this.src='logo.png'"></a>
     <div class="nav-links">
       <a href="index.html" data-i18n="nav_home">Acasă</a>
       <a href="magazin.html" data-i18n="nav_shop">Magazin</a>
@@ -82,7 +144,7 @@
       <a href="contact.html" data-i18n="nav_contact">Contactează-ne</a>
     </div>
     <div class="nav-icons">
-      <select id="languageSwitcher" style="background:black;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase; font-family:'Montserrat';">
+      <select id="languageSwitcher" aria-label="Selectează limba" style="background:black;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase;font-family:'Montserrat', sans-serif;">
         <option value="ro">RO</option>
         <option value="en">EN</option>
         <option value="fr">FR</option>
@@ -90,47 +152,60 @@
         <option value="es">ES</option>
         <option value="it">IT</option>
       </select>
-      <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
+      <a href="checkout.html" id="cart-nav-btn" class="cart-btn" style="font-family:'Montserrat', sans-serif;">Cart (0)</a>
     </div>
   </nav>
 
+  <!-- HEADER PAGINĂ -->
+  <header class="page-header">
+    <h1 data-i18n="delivery_title">Politica de Livrare</h1>
+    <p data-i18n="delivery_subtitle">Rapiditate, siguranță și eleganță la fiecare comandă.</p>
+  </header>
+
+  <!-- CONȚINUT POLITICĂ -->
   <main class="policy-container">
-    <div class="black-gap">
-      <div class="white-card">
-        <h1 class="section-title" data-i18n="delivery_title">Politica de Livrare</h1>
-        
-        <div class="policy-content">
-          <p data-i18n="delivery_p1">La H-TIME Luxury Experience, ne asigurăm că bijuteriile și ceasurile dumneavoastră ajung în condiții perfecte și în cel mai scurt timp posibil. Fiecare colet este ambalat cu grijă, reflectând eleganța brandului nostru.</p>
+    <p data-i18n="delivery_p1">La H-TIME Luxury Experience, ne asigurăm că bijuteriile și ceasurile dumneavoastră ajung în condiții perfecte și în cel mai scurt timp posibil. Fiecare colet este ambalat cu grijă, reflectând eleganța brandului nostru.</p>
           
-          <h3 data-i18n="delivery_h1">1. Metode de Livrare</h3>
-          <p data-i18n="delivery_p2">Colaborăm cu firme de curierat premium pentru a garanta o livrare sigură și rapidă pe întreg teritoriul României.</p>
-          <ul>
-            <li data-i18n="delivery_li1"><strong>Curier Rapid (Standard):</strong> Livrare la domiciliu în 24-48 de ore lucrătoare de la confirmarea comenzii.</li>
-          </ul>
+    <h2 data-i18n="delivery_h1">1. Metode de Livrare</h2>
+    <p data-i18n="delivery_p2">Colaborăm cu firme de curierat partenere de încredere, precum FAN Courier, Sameday și Cargus, pentru a garanta o livrare sigură și rapidă pe întreg teritoriul României.</p>
+    <ul>
+      <li data-i18n="delivery_li1"><strong>Curier Rapid (Standard):</strong> Livrare la domiciliu în 24-48 de ore lucrătoare de la confirmarea comenzii.</li>
+      <li data-i18n="delivery_li2"><strong>Livrare la locker (easybox / FANbox):</strong> Ridicare flexibilă, 24/7, din cel mai apropiat punct de livrare Sameday easybox sau FAN Courier FANbox.</li>
+    </ul>
 
-          <h3 data-i18n="delivery_h2">2. Costuri de Livrare</h3>
-          <p data-i18n="delivery_p3">Costul standard pentru livrarea oricărei comenzi pe teritoriul României este de <strong>5 Lei</strong>.</p>
+    <h2 data-i18n="delivery_h2">2. Costuri de Livrare</h2>
+    <p data-i18n="delivery_p3">Costul standard pentru livrarea oricărei comenzi pe teritoriul României este de <strong>25 Lei</strong>, indiferent de metoda aleasă (curier la domiciliu sau locker).</p>
 
-          <h3 data-i18n="delivery_h3">3. Timpul de Procesare</h3>
-          <p data-i18n="delivery_p4">Comenzile plasate de luni până vineri până în ora 14:00 vor fi procesate și expediate în aceeași zi. Comenzile plasate în weekend sau în zilele de sărbătoare legală vor fi procesate în următoarea zi lucrătoare.</p>
+    <h2 data-i18n="delivery_h3">3. Timpul de Procesare</h2>
+    <p data-i18n="delivery_p4">Comenzile plasate de luni până vineri până în ora 14:00 vor fi procesate și expediate în aceeași zi. Comenzile plasate în weekend sau în zilele de sărbătoare legală vor fi procesate în următoarea zi lucrătoare.</p>
 
-          <h3 data-i18n="delivery_h4">4. Urmărirea Comenzii</h3>
-          <p data-i18n="delivery_p5">După predarea coletului către firma de curierat, veți primi un e-mail / SMS de confirmare cu numărul de AWB pentru a putea urmări traseul pachetului dumneavoastră în timp real.</p>
-        </div>
-      </div>
-    </div>
+    <h2 data-i18n="delivery_h4">4. Urmărirea Comenzii</h2>
+    <p data-i18n="delivery_p5">După predarea coletului către firma de curierat, veți primi un e-mail / SMS de confirmare cu numărul de AWB pentru a putea urmări traseul pachetului dumneavoastră în timp real.</p>
   </main>
 
+  <!-- FOOTER -->
   <footer>
     <div class="footer-col">
       <h2>H-TIME</h2>
       <p class="footer-desc" data-i18n="footer_desc">Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.</p>
       <div class="social-links">
-        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-        <a href="#" class="social-icon-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+        <a href="#" class="social-icon-circle" title="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
+        <a href="https://www.instagram.com/bijuterii.h_time/" class="social-icon-circle" title="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="#" class="social-icon-circle" title="TikTok">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+        </a>
+      </div>
+      <div class="company-info">
+        <p><strong>CUI:</strong> 83241620</p>
+        <p><strong>Reg. Com.:</strong> J22/4620/2024</p>
+        <p><strong>Sediu:</strong> Strada Milcov 18A, Iași 70025</p>
       </div>
     </div>
+
     <div class="footer-col">
       <h3 data-i18n="footer_nav">NAVIGARE RAPIDĂ</h3>
       <ul>
@@ -140,42 +215,226 @@
         <li><a href="contact.html" data-i18n="footer_contact">Contact & Suport</a></li>
       </ul>
     </div>
+
     <div class="footer-col">
       <h3 data-i18n="footer_info">INFORMAȚII & POLITICI</h3>
       <ul>
         <li><a href="termeni.html" data-i18n="footer_terms">Termeni și Condiții</a></li>
         <li><a href="confidentialitate.html" data-i18n="footer_privacy">Politică de Confidențialitate</a></li>
-        <li><a href="politica_livrare.html" data-i18n="footer_delivery">Politică de Livrare</a></li>
+        <li><a href="politica_cookies.html" data-i18n="footer_cookies">Politică de Cookies</a></li>
+        <li><a href="politica_livrare.html" style="color:var(--peach);" data-i18n="footer_delivery">Politică de Livrare</a></li>
         <li><a href="politici_retur.html" data-i18n="footer_return">Politică de Retur (14 zile)</a></li>
         <li><a href="ingrijirea_bijuteriilor.html" data-i18n="footer_care">Îngrijirea Bijuteriilor</a></li>
+        <li><a href="date_identificare.html" data-i18n="footer_id_data">Date de identificare ale societății</a></li>
       </ul>
     </div>
+
     <div class="footer-col">
       <h3 data-i18n="footer_consumer">PROTECȚIA CONSUMATORULUI</h3>
       <div>
-        <a href="https://anpc.ro/ce-este-sal/" target="_blank"><img src="https://ro.pandora.net/mobify/bundle/1108/static/img/SAL-PICTOGRAMA.png?app=pdp" alt="ANPC SAL" class="anpc-img"></a>
-        <a href="https://ec.europa.eu/consumers/odr" target="_blank"><img src="https://ro.pandora.net/mobify/bundle/1108/static/img/pictogramaSOL.png?app=pdp" alt="ANPC SOL" class="anpc-img"></a>
+        <a href="https://anpc.ro/ce-este-sal/" target="_blank">
+          <img src="https://ro.pandora.net/mobify/bundle/1108/static/img/SAL-PICTOGRAMA.png?app=pdp" alt="ANPC SAL" class="anpc-img">
+        </a>
+        <a href="https://ec.europa.eu/consumers/odr" target="_blank">
+          <img src="https://ro.pandora.net/mobify/bundle/1108/static/img/pictogramaSOL.png?app=pdp" alt="ANPC SOL" class="anpc-img">
+        </a>
       </div>
     </div>
+
     <div class="footer-bottom">© 2024 - 2026 H-TIME Luxury Experience. Toate drepturile sunt rezervate.</div>
   </footer>
 
   <script src="script.js"></script>
   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+      const cartBtn = document.getElementById('cart-nav-btn');
+      if (cartBtn) cartBtn.innerText = `Cart (${cart.length})`;
+
+      const switcher = document.getElementById('languageSwitcher');
+      const savedLang = localStorage.getItem('htime_lang') || 'ro';
+      if (switcher) switcher.value = savedLang;
+      applyTranslations(savedLang);
+
+      if (switcher) {
+        switcher.addEventListener('change', () => {
+          const lang = switcher.value;
+          localStorage.setItem('htime_lang', lang);
+          applyTranslations(lang);
+        });
+      }
+    });
+
     const translations = {
-      ro: { nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne", footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul.", footer_nav: "NAVIGARE RAPIDĂ", footer_home: "Acasă - Pagina principală", footer_shop: "Magazin - Toate Colecțiile", footer_about: "Povestea Noastră", footer_contact: "Contact & Suport", footer_info: "INFORMAȚII & POLITICI", footer_terms: "Termeni și Condiții", footer_privacy: "Politică de Confidențialitate", footer_delivery: "Politică de Livrare", footer_return: "Politică de Retur (14 zile)", footer_care: "Îngrijirea Bijuteriilor", footer_consumer: "PROTECȚIA CONSUMATORULUI", delivery_title: "Politica de Livrare", delivery_p1: "La H-TIME Luxury Experience, ne asigurăm că bijuteriile și ceasurile dumneavoastră ajung în condiții perfecte și în cel mai scurt timp posibil. Fiecare colet este ambalat cu grijă, reflectând eleganța brandului nostru.", delivery_h1: "1. Metode de Livrare", delivery_p2: "Colaborăm cu firme de curierat premium pentru a garanta o livrare sigură și rapidă pe întreg teritoriul României.", delivery_li1: "Curier Rapid (Standard): Livrare la domiciliu în 24-48 de ore lucrătoare de la confirmarea comenzii.", delivery_h2: "2. Costuri de Livrare", delivery_p3: "Costul standard pentru livrarea oricărei comenzi pe teritoriul României este de 5 Lei.", delivery_h3: "3. Timpul de Procesare", delivery_p4: "Comenzile plasate de luni până vineri până în ora 14:00 vor fi procesate și expediate în aceeași zi. Comenzile plasate în weekend sau în zilele de sărbătoare legală vor fi procesate în următoarea zi lucrătoare.", delivery_h4: "4. Urmărirea Comenzii", delivery_p5: "După predarea coletului către firma de curierat, veți primi un e-mail / SMS de confirmare cu numărul de AWB pentru a putea urmări traseul pachetului dumneavoastră în timp real." },
-      en: { nav_home: "Home", nav_shop: "Shop", nav_about: "About Us", nav_team: "H-Time Team", nav_contact: "Contact Us", footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement.", footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections", footer_about: "Our Story", footer_contact: "Contact & Support", footer_info: "INFORMATION & POLICIES", footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_delivery: "Delivery Policy", footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care", footer_consumer: "CONSUMER PROTECTION", delivery_title: "Delivery Policy", delivery_p1: "At H-TIME Luxury Experience, we ensure your jewelry and watches arrive in perfect condition and as quickly as possible. Every package is carefully wrapped, reflecting our brand's elegance.", delivery_h1: "1. Delivery Methods", delivery_p2: "We collaborate with premium courier companies to guarantee safe and fast delivery across Romania.", delivery_li1: "Express Courier (Standard): Home delivery within 24-48 working hours from order confirmation.", delivery_h2: "2. Delivery Costs", delivery_p3: "The standard delivery cost for any order within Romania is 5 Lei.", delivery_h3: "3. Processing Time", delivery_p4: "Orders placed Monday to Friday before 14:00 will be processed and shipped the same day. Orders placed on weekends or public holidays will be processed the next working day.", delivery_h4: "4. Order Tracking", delivery_p5: "After handing over the package to the courier, you will receive a confirmation email / SMS with the AWB number to track your package's route in real time." },
-      fr: { nav_home: "Accueil", nav_shop: "Boutique", nav_about: "À propos", nav_team: "Équipe H-Time", nav_contact: "Contactez-nous", footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe dédiée à ceux qui apprécient le raffinement.", footer_nav: "NAVIGATION RAPIDE", footer_home: "Accueil - Page principale", footer_shop: "Boutique - Toutes les collections", footer_about: "Notre histoire", footer_contact: "Contact & Support", footer_info: "INFORMATIONS & POLITIQUES", footer_terms: "Conditions générales", footer_privacy: "Politique de confidentialité", footer_delivery: "Politique de livraison", footer_return: "Politique de retour (14 jours)", footer_care: "Entretien des bijoux", footer_consumer: "PROTECTION DU CONSOMMATEUR", delivery_title: "Politique de Livraison", delivery_p1: "Chez H-TIME Luxury Experience, nous nous assurons que vos bijoux arrivent en parfait état et le plus rapidement possible.", delivery_h1: "1. Méthodes de livraison", delivery_p2: "Nous collaborons avec des coursiers premium.", delivery_li1: "Courrier Express: Livraison à domicile en 24-48 heures.", delivery_h2: "2. Frais de livraison", delivery_p3: "Les frais standard sont de 5 Lei.", delivery_h3: "3. Temps de traitement", delivery_p4: "Les commandes passées avant 14:00 sont expédiées le jour même.", delivery_h4: "4. Suivi", delivery_p5: "Vous recevrez un AWB pour le suivi." },
-      de: { nav_home: "Startseite", nav_shop: "Shop", nav_about: "Über uns", nav_team: "H-Time Team", nav_contact: "Kontakt", footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique für Liebhaber von Raffinesse.", footer_nav: "SCHNELLNAVIGATION", footer_home: "Startseite - Hauptseite", footer_shop: "Shop - Alle Kollektionen", footer_about: "Unsere Geschichte", footer_contact: "Kontakt & Support", footer_info: "INFORMATIONEN & RICHTLINIEN", footer_terms: "Allgemeine Geschäftsbedingungen", footer_privacy: "Datenschutzrichtlinie", footer_delivery: "Lieferbedingungen", footer_return: "Rückgaberecht (14 Tage)", footer_care: "Schmuckpflege", footer_consumer: "VERBRAUCHERSCHUTZ", delivery_title: "Lieferbedingungen", delivery_p1: "Wir sorgen dafür, dass Ihr Schmuck in einwandfreiem Zustand ankommt.", delivery_h1: "1. Liefermethoden", delivery_p2: "Wir arbeiten mit Premium-Kurieren zusammen.", delivery_li1: "Expresskurier: Lieferung innerhalb von 24-48 Stunden.", delivery_h2: "2. Lieferkosten", delivery_p3: "Die Standardkosten betragen 5 Lei.", delivery_h3: "3. Bearbeitungszeit", delivery_p4: "Bestellungen vor 14:00 Uhr werden am selben Tag versandt.", delivery_h4: "4. Sendungsverfolgung", delivery_p5: "Sie erhalten eine AWB zur Verfolgung." },
-      es: { nav_home: "Inicio", nav_shop: "Tienda", nav_about: "Sobre Nosotros", nav_team: "Equipo H-Time", nav_contact: "Contáctanos", footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo dedicada a quienes aprecian el refinamiento.", footer_nav: "NAVEGACIÓN RÁPIDA", footer_home: "Inicio - Página principal", footer_shop: "Tienda - Todas las colecciones", footer_about: "Nuestra historia", footer_contact: "Contacto & Soporte", footer_info: "INFORMACIÓN & POLÍTICAS", footer_terms: "Términos y condiciones", footer_privacy: "Política de privacidad", footer_delivery: "Política de entrega", footer_return: "Política de devolución (14 días)", footer_care: "Cuidado de las joyas", footer_consumer: "PROTECCIÓN AL CONSUMIDOR", delivery_title: "Política de Entrega", delivery_p1: "Aseguramos que sus joyas lleguen en perfecto estado y lo más rápido posible.", delivery_h1: "1. Métodos de entrega", delivery_p2: "Colaboramos con mensajeros premium.", delivery_li1: "Mensajería Express: Entrega en 24-48 horas.", delivery_h2: "2. Costos de envío", delivery_p3: "El costo estándar es de 5 Lei.", delivery_h3: "3. Tiempo de procesamiento", delivery_p4: "Pedidos antes de las 14:00 se envían el mismo día.", delivery_h4: "4. Seguimiento", delivery_p5: "Recibirá un AWB para el seguimiento." },
-      it: { nav_home: "Home", nav_shop: "Negozio", nav_about: "Chi Siamo", nav_team: "Team H-Time", nav_contact: "Contattaci", footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso dedicata a chi apprezza la raffinatezza.", footer_nav: "NAVIGAZIONE RAPIDA", footer_home: "Home - Pagina principale", footer_shop: "Negozio - Tutte le collezioni", footer_about: "La nostra storia", footer_contact: "Contatto & Supporto", footer_info: "INFORMAZIONI & POLITICHE", footer_terms: "Termini e condizioni", footer_privacy: "Informativa sulla privacy", footer_delivery: "Politica di consegna", footer_return: "Politica di reso (14 giorni)", footer_care: "Cura dei gioielli", footer_consumer: "PROTEZIONE DEL CONSUMATORE", delivery_title: "Politica di Consegna", delivery_p1: "Garantiamo che i tuoi gioielli arrivino in perfette condizioni e il più rapidamente possibile.", delivery_h1: "1. Metodi di consegna", delivery_p2: "Collaboriamo con corrieri premium.", delivery_li1: "Corriere Espresso: Consegna in 24-48 ore.", delivery_h2: "2. Costi di spedizione", delivery_p3: "Il costo standard è di 5 Lei.", delivery_h3: "3. Tempi di elaborazione", delivery_p4: "Gli ordini entro le 14:00 partono lo stesso giorno.", delivery_h4: "4. Tracciamento", delivery_p5: "Riceverai un AWB per il tracciamento." }
+      ro: { 
+        title: "Politica de Livrare | H-TIME",
+        nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne", 
+        footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.", 
+        footer_nav: "NAVIGARE RAPIDĂ", footer_home: "Acasă - Pagina principală", footer_shop: "Magazin - Toate Colecțiile", 
+        footer_about: "Povestea Noastră", footer_contact: "Contact & Suport", footer_info: "INFORMAȚII & POLITICI", 
+        footer_terms: "Termeni și Condiții", footer_privacy: "Politică de Confidențialitate", footer_cookies: "Politică de Cookies", footer_delivery: "Politica de Livrare", 
+        footer_return: "Politică de Retur (14 zile)", footer_care: "Îngrijirea Bijuteriilor", footer_consumer: "PROTECȚIA CONSUMATORULUI", 
+        footer_id_data: "Date de identificare ale societății",
+        
+        delivery_title: "Politica de Livrare",
+        delivery_subtitle: "Rapiditate, siguranță și eleganță la fiecare comandă.",
+        delivery_p1: "La H-TIME Luxury Experience, ne asigurăm că bijuteriile și ceasurile dumneavoastră ajung în condiții perfecte și în cel mai scurt timp posibil. Fiecare colet este ambalat cu grijă, reflectând eleganța brandului nostru.",
+        delivery_h1: "1. Metode de Livrare",
+        delivery_p2: "Colaborăm cu firme de curierat partenere de încredere, precum FAN Courier, Sameday și Cargus, pentru a garanta o livrare sigură și rapidă pe întreg teritoriul României.",
+        delivery_li1: "<strong>Curier Rapid (Standard):</strong> Livrare la domiciliu în 24-48 de ore lucrătoare de la confirmarea comenzii.",
+        delivery_li2: "<strong>Livrare la locker (easybox / FANbox):</strong> Ridicare flexibilă, 24/7, din cel mai apropiat punct de livrare Sameday easybox sau FAN Courier FANbox.",
+        delivery_h2: "2. Costuri de Livrare",
+        delivery_p3: "Costul standard pentru livrarea oricărei comenzi pe teritoriul României este de <strong>25 Lei</strong>, indiferent de metoda aleasă (curier la domiciliu sau locker).",
+        delivery_h3: "3. Timpul de Procesare",
+        delivery_p4: "Comenzile plasate de luni până vineri până în ora 14:00 vor fi procesate și expediate în aceeași zi. Comenzile plasate în weekend sau în zilele de sărbătoare legală vor fi procesate în următoarea zi lucrătoare.",
+        delivery_h4: "4. Urmărirea Comenzii",
+        delivery_p5: "După predarea coletului către firma de curierat, veți primi un e-mail / SMS de confirmare cu numărul de AWB pentru a putea urmări traseul pachetului dumneavoastră în timp real."
+      },
+      en: { 
+        title: "Delivery Policy | H-TIME",
+        nav_home: "Home", nav_shop: "Shop", nav_about: "About Us", nav_team: "H-Time Team", nav_contact: "Contact Us", 
+        footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement, premium quality, and stories told through unique jewelry and watches.", 
+        footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections", 
+        footer_about: "Our Story", footer_contact: "Contact & Support", footer_info: "INFORMATION & POLICIES", 
+        footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_cookies: "Cookie Policy", footer_delivery: "Delivery Policy", 
+        footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care", footer_consumer: "CONSUMER PROTECTION", 
+        footer_id_data: "Company Identification Data",
+        
+        delivery_title: "Delivery Policy",
+        delivery_subtitle: "Speed, safety, and elegance with every order.",
+        delivery_p1: "At H-TIME Luxury Experience, we ensure your jewelry and watches arrive in perfect condition and as quickly as possible. Every package is carefully wrapped, reflecting our brand's elegance.",
+        delivery_h1: "1. Delivery Methods",
+        delivery_p2: "We collaborate with trusted partner courier companies, such as FAN Courier, Sameday, and Cargus, to guarantee safe and fast delivery across Romania.",
+        delivery_li1: "<strong>Express Courier (Standard):</strong> Home delivery within 24-48 working hours from order confirmation.",
+        delivery_li2: "<strong>Locker Delivery (easybox / FANbox):</strong> Flexible 24/7 pick-up from your nearest Sameday easybox or FAN Courier FANbox location.",
+        delivery_h2: "2. Delivery Costs",
+        delivery_p3: "The standard delivery cost for any order within Romania is <strong>25 Lei</strong>, regardless of the chosen method (home delivery or locker).",
+        delivery_h3: "3. Processing Time",
+        delivery_p4: "Orders placed Monday to Friday before 14:00 will be processed and shipped the same day. Orders placed on weekends or public holidays will be processed the next working day.",
+        delivery_h4: "4. Order Tracking",
+        delivery_p5: "After handing over the package to the courier, you will receive a confirmation email / SMS with the AWB number to track your package's route in real time."
+      },
+      fr: { 
+        title: "Politique de Livraison | H-TIME",
+        nav_home: "Accueil", nav_shop: "Boutique", nav_about: "À propos", nav_team: "Équipe H-Time", nav_contact: "Contactez-nous", 
+        footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe dédiée aux personnes qui apprécient le raffinement, la qualité supérieure et les histoires racontées à travers des bijoux et des montres uniques.", 
+        footer_nav: "NAVIGATION RAPIDE", footer_home: "Accueil - Page principale", footer_shop: "Boutique - Toutes les collections", 
+        footer_about: "Notre histoire", footer_contact: "Contact & Support", footer_info: "INFORMATIONS & POLITIQUES", 
+        footer_terms: "Conditions générales", footer_privacy: "Politique de confidentialité", footer_cookies: "Politique de cookies", footer_delivery: "Politique de livraison", 
+        footer_return: "Politique de retour (14 jours)", footer_care: "Entretien des bijoux", footer_consumer: "PROTECTION DU CONSOMMATEUR", 
+        footer_id_data: "Données d'identification de l'entreprise",
+        
+        delivery_title: "Politique de Livraison",
+        delivery_subtitle: "Rapidité, sécurité et élégance à chaque commande.",
+        delivery_p1: "Chez H-TIME Luxury Experience, nous nous assurons que vos bijoux et montres arrivent en parfait état et le plus rapidement possible. Chaque colis est emballé avec soin, reflétant l'élégance de notre marque.",
+        delivery_h1: "1. Méthodes de Livraison",
+        delivery_p2: "Nous collaborons avec des sociétés de messagerie partenaires de confiance, telles que FAN Courier, Sameday et Cargus, pour garantir une livraison sûre et rapide dans toute la Roumanie.",
+        delivery_li1: "<strong>Courrier Express (Standard) :</strong> Livraison à domicile en 24-48 heures ouvrables à compter de la confirmation de la commande.",
+        delivery_li2: "<strong>Livraison en consigne (easybox / FANbox) :</strong> Retrait flexible 24h/24 et 7j/7 dans la consigne Sameday easybox ou FAN Courier FANbox la plus proche.",
+        delivery_h2: "2. Frais de Livraison",
+        delivery_p3: "Le coût de livraison standard pour toute commande en Roumanie est de <strong>25 Lei</strong>, quelle que soit la méthode choisie (livraison à domicile ou consigne).",
+        delivery_h3: "3. Temps de Traitement",
+        delivery_p4: "Les commandes passées du lundi au vendredi avant 14h00 seront traitées et expédiées le jour même. Les commandes passées le week-end ou les jours fériés seront traitées le jour ouvrable suivant.",
+        delivery_h4: "4. Suivi de la Commande",
+        delivery_p5: "Après la remise du colis au transporteur, vous recevrez un e-mail / SMS de confirmation avec le numéro AWB pour pouvoir suivre l'itinéraire de votre colis en temps réel."
+      },
+      de: { 
+        title: "Lieferbedingungen | H-TIME",
+        nav_home: "Startseite", nav_shop: "Shop", nav_about: "Über uns", nav_team: "H-Time Team", nav_contact: "Kontakt", 
+        footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique, die sich Personen widmet, die Raffinesse, erstklassige Qualität und Geschichten schätzen, die durch einzigartige Schmuckstücke und Uhren erzählt werden.", 
+        footer_nav: "SCHNELLNAVIGATION", footer_home: "Startseite - Hauptseite", footer_shop: "Shop - Alle Kollektionen", 
+        footer_about: "Unsere Geschichte", footer_contact: "Kontakt & Support", footer_info: "INFORMATIONEN & RICHTLINIEN", 
+        footer_terms: "Allgemeine Geschäftsbedingungen", footer_privacy: "Datenschutzrichtlinie", footer_cookies: "Cookie-Richtlinie", footer_delivery: "Lieferbedingungen", 
+        footer_return: "Rückgaberecht (14 Tage)", footer_care: "Schmuckpflege", footer_consumer: "VERBRAUCHERSCHUTZ", 
+        footer_id_data: "Unternehmensidentifikationsdaten",
+        
+        delivery_title: "Lieferbedingungen",
+        delivery_subtitle: "Schnelligkeit, Sicherheit und Eleganz bei jeder Bestellung.",
+        delivery_p1: "Bei H-TIME Luxury Experience stellen wir sicher, dass Ihr Schmuck und Ihre Uhren in einwandfreiem Zustand und so schnell wie möglich bei Ihnen ankommen. Jedes Paket wird sorgfältig verpackt und spiegelt die Eleganz unserer Marke wider.",
+        delivery_h1: "1. Liefermethoden",
+        delivery_p2: "Wir arbeiten mit vertrauenswürdigen Partner-Kurierunternehmen wie FAN Courier, Sameday und Cargus zusammen, um eine sichere und schnelle Lieferung in ganz Rumänien zu gewährleisten.",
+        delivery_li1: "<strong>Expresskurier (Standard):</strong> Lieferung nach Hause innerhalb von 24-48 Werktunden nach Bestellbestätigung.",
+        delivery_li2: "<strong>Schließfach-Lieferung (easybox / FANbox):</strong> Flexible Abholung rund um die Uhr am nächstgelegenen Standort von Sameday easybox oder FAN Courier FANbox.",
+        delivery_h2: "2. Lieferkosten",
+        delivery_p3: "Die Standardlieferkosten für jede Bestellung innerhalb Rumäniens betragen <strong>25 Lei</strong>, unabhängig von der gewählten Methode (Lieferung nach Hause oder Schließfach).",
+        delivery_h3: "3. Bearbeitungszeit",
+        delivery_p4: "Bestellungen, die von Montag bis Freitag vor 14:00 Uhr aufgegeben werden, werden noch am selben Tag bearbeitet und versandt. Bestellungen, die an Wochenenden oder Feiertagen aufgegeben werden, werden am nächsten Werktag bearbeitet.",
+        delivery_h4: "4. Sendungsverfolgung",
+        delivery_p5: "Nach Übergabe des Pakets an den Kurier erhalten Sie eine Bestätigungs-E-Mail / SMS mit der AWB-Nummer, um die Route Ihres Pakets in Echtzeit zu verfolgen."
+      },
+      es: { 
+        title: "Política de Entrega | H-TIME",
+        nav_home: "Inicio", nav_shop: "Tienda", nav_about: "Sobre Nosotros", nav_team: "Equipo H-Time", nav_contact: "Contáctanos", 
+        footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo dedicada a personas que aprecian el refinamiento, la calidad superior y las historias contadas a través de joyas y relojes únicos.", 
+        footer_nav: "NAVEGACIÓN RÁPIDA", footer_home: "Inicio - Página principal", footer_shop: "Tienda - Todas las colecciones", 
+        footer_about: "Nuestra historia", footer_contact: "Contacto & Soporte", footer_info: "INFORMACIÓN & POLÍTICAS", 
+        footer_terms: "Términos y condiciones", footer_privacy: "Política de privacidad", footer_cookies: "Política de Cookies", footer_delivery: "Política de entrega", 
+        footer_return: "Política de devolución (14 días)", footer_care: "Cuidado de las joyas", footer_consumer: "PROTECCIÓN AL CONSUMIDOR", 
+        footer_id_data: "Datos de identificación de la empresa",
+        
+        delivery_title: "Política de Entrega",
+        delivery_subtitle: "Rapidez, seguridad y elegancia en cada pedido.",
+        delivery_p1: "En H-TIME Luxury Experience, nos aseguramos de que sus joyas y relojes lleguen en perfectas condiciones y lo más rápido posible. Cada paquete se envuelve cuidadosamente, reflejando la elegancia de nuestra marca.",
+        delivery_h1: "1. Métodos de Entrega",
+        delivery_p2: "Colaboramos con empresas de mensajería asociadas de confianza, como FAN Courier, Sameday y Cargus, para garantizar una entrega segura y rápida en toda Rumania.",
+        delivery_li1: "<strong>Mensajería Exprés (Estándar):</strong> Entrega a domicilio en 24-48 horas laborables desde la confirmación del pedido.",
+        delivery_li2: "<strong>Entrega en taquilla (easybox / FANbox):</strong> Recogida flexible 24/7 en la taquilla Sameday easybox o FAN Courier FANbox más cercana.",
+        delivery_h2: "2. Costos de Entrega",
+        delivery_p3: "El costo de envío estándar para cualquier pedido dentro de Rumania es de <strong>25 Lei</strong>, independientemente del método elegido (entrega a domicilio o taquilla).",
+        delivery_h3: "3. Tiempo de Procesamiento",
+        delivery_p4: "Los pedidos realizados de lunes a viernes antes de las 14:00 se procesarán y enviarán el mismo día. Los pedidos realizados los fines de semana o días festivos se procesarán el siguiente día laborable.",
+        delivery_h4: "4. Seguimiento del Pedido",
+        delivery_p5: "Tras la entrega del paquete a la empresa de mensajería, recibirá un correo electrónico / SMS de confirmación con el número de AWB para poder seguir la ruta de su paquete en tiempo real."
+      },
+      it: { 
+        title: "Politica di Consegna | H-TIME",
+        nav_home: "Home", nav_shop: "Negozio", nav_about: "Chi Siamo", nav_team: "Team H-Time", nav_contact: "Contattaci", 
+        footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso dedicata alle persone che apprezzano la raffinatezza, la qualità superiore e le storie raccontate attraverso gioielli e orologi unici.", 
+        footer_nav: "NAVIGAZIONE RAPIDA", footer_home: "Home - Pagina principale", footer_shop: "Negozio - Tutte le collezioni", 
+        footer_about: "La nostra storia", footer_contact: "Contatto & Supporto", footer_info: "INFORMAZIONI & POLITICHE", 
+        footer_terms: "Termini e condizioni", footer_privacy: "Privacy", footer_cookies: "Informativa sui cookie", footer_delivery: "Politica di consegna", 
+        footer_return: "Politica di reso (14 giorni)", footer_care: "Cura dei gioielli", footer_consumer: "PROTEZIONE DEL CONSUMATORE", 
+        footer_id_data: "Dati identificativi dell'azienda",
+        
+        delivery_title: "Politica di Consegna",
+        delivery_subtitle: "Velocità, sicurezza ed eleganza in ogni ordine.",
+        delivery_p1: "In H-TIME Luxury Experience, ci assicuriamo che i tuoi gioielli e orologi arrivino in perfette condizioni e nel più breve tempo possibile. Ogni pacco è confezionato con cura, riflettendo l'eleganza del nostro marchio.",
+        delivery_h1: "1. Metodi di Consegna",
+        delivery_p2: "Collaboriamo con corrieri partner di fiducia, come FAN Courier, Sameday e Cargus, per garantire una consegna sicura e veloce in tutta la Romania.",
+        delivery_li1: "<strong>Corriere Espresso (Standard):</strong> Consegna a domicilio in 24-48 ore lavorative dalla conferma dell'ordine.",
+        delivery_li2: "<strong>Consegna al locker (easybox / FANbox):</strong> Ritiro flessibile 24/7 presso il locker Sameday easybox o FAN Courier FANbox più vicino.",
+        delivery_h2: "2. Costi di Spedizione",
+        delivery_p3: "Il costo di spedizione standard per qualsiasi ordine all'interno della Romania è di <strong>25 Lei</strong>, indipendentemente dal metodo scelto (consegna a domicilio o locker).",
+        delivery_h3: "3. Tempi di Elaborazione",
+        delivery_p4: "Gli ordini effettuati dal lunedì al venerdì entro le 14:00 verranno elaborati e spediti lo stesso giorno. Gli ordini effettuati nei fine settimana o nei giorni festivi verranno elaborati il giorno lavorativo successivo.",
+        delivery_h4: "4. Tracciamento dell'Ordine",
+        delivery_p5: "Dopo aver consegnato il pacco al corriere, riceverai un'e-mail / SMS di conferma con il numero AWB per poter tracciare il percorso del tuo pacco in tempo reale."
+      }
     };
-    function applyTranslations(lang) { const dict = translations[lang] || translations.ro; document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.getAttribute('data-i18n'); if (dict[key]) el.innerText = dict[key]; }); }
+    
+    function applyTranslations(lang) { 
+      const dict = translations[lang] || translations.ro; 
+      document.querySelectorAll('[data-i18n]').forEach(el => { 
+        const key = el.getAttribute('data-i18n'); 
+        if (dict[key]) el.innerHTML = dict[key]; 
+      }); 
+      if (dict.title) document.title = dict.title;
+    }
+    
     document.addEventListener('DOMContentLoaded', () => {
       const switcher = document.getElementById('languageSwitcher');
-      if(switcher) { switcher.value = localStorage.getItem('htime_lang') || 'ro'; switcher.addEventListener('change', () => { localStorage.setItem('htime_lang', switcher.value); applyTranslations(switcher.value); }); }
+      if(switcher) { 
+        switcher.value = localStorage.getItem('htime_lang') || 'ro'; 
+        switcher.addEventListener('change', () => { 
+          localStorage.setItem('htime_lang', switcher.value); 
+          applyTranslations(switcher.value); 
+        }); 
+      }
       applyTranslations(localStorage.getItem('htime_lang') || 'ro');
-      if (typeof actualizeazaNumarCos === 'function') actualizeazaNumarCos();
+      
+      let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
+      const cartBtn = document.getElementById('cart-nav-btn');
+      if (cartBtn) cartBtn.innerText = `Cart (${cart.length})`;
     });
   </script>
 </body>
