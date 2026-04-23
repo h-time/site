@@ -349,7 +349,8 @@
         </div>
         <div class="form-group">
           <label data-i18n="form_email">Adresa de E-mail</label>
-          <input type="email" name="Email" required data-i18n-placeholder="ph_email" placeholder="contact@exemplu.ro">
+          <!-- Este foarte important ca numele aici sa fie "email" cu e mic pentru ca _autoresponse sa functioneze -->
+          <input type="email" name="email" required data-i18n-placeholder="ph_email" placeholder="contact@exemplu.ro">
         </div>
         <div class="form-group">
           <label data-i18n="form_message">Mesaj</label>
@@ -441,10 +442,14 @@
 
       // Colectăm datele din formular
       const formData = new FormData(form);
-      // Adăugăm subiect automat
+      
+      // Parametri ascunsi pentru FormSubmit
       formData.append("_subject", "Mesaj nou de contact H-TIME");
-      // Dezactivăm captcha vizual (Formsubmit face verificări în background)
       formData.append("_captcha", "false");
+      
+      // AUTO-REPLY: Trimitem un mesaj pe adresa persoanei care a completat formularul
+      const autoReplyMessage = dict.autoresponse_msg || "Vă mulțumim pentru mesaj! Am primit solicitarea dumneavoastră și vă vom răspunde în cel mai scurt timp. Echipa H-TIME.";
+      formData.append("_autoresponse", autoReplyMessage);
 
       // Trimitem cererea AJAX către emailul specificat
       fetch("https://formsubmit.co/ajax/razvanstelian2019@gmail.com", {
@@ -485,6 +490,7 @@
         contact_address_title: "Adresă", contact_phone_title: "Telefon", contact_email_title: "E-mail", contact_program_title: "Program", contact_program_val: "Luni - Vineri: 10:00 - 18:00", 
         contact_form_title: "Trimite un mesaj", form_name: "Nume complet", form_email: "Adresa de E-mail", form_message: "Mesaj", 
         btn_send: "Trimite Mesajul", btn_sending: "Se trimite...", form_success_msg: "Mesajul tău a fost trimis cu succes! Te vom contacta în curând.", form_error: "A apărut o eroare la trimitere. Vă rugăm să încercați din nou.",
+        autoresponse_msg: "Vă mulțumim pentru mesaj! Am primit solicitarea dumneavoastră și vă vom răspunde în cel mai scurt timp. - Echipa H-TIME",
         ph_fname: "Popescu Ion", ph_email: "contact@exemplu.ro", ph_message: "Scrieți mesajul aici...",
         footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.", 
         footer_nav: "NAVIGARE RAPIDĂ", footer_home: "Acasă - Pagina principală", footer_shop: "Magazin - Toate Colecțiile", footer_about: "Povestea Noastră", footer_contact: "Contact & Suport", 
@@ -497,6 +503,7 @@
         contact_address_title: "Address", contact_phone_title: "Phone", contact_email_title: "E-mail", contact_program_title: "Schedule", contact_program_val: "Monday - Friday: 10:00 - 18:00", 
         contact_form_title: "Send a message", form_name: "Full Name", form_email: "Email Address", form_message: "Message", 
         btn_send: "Send Message", btn_sending: "Sending...", form_success_msg: "Your message has been sent successfully! We will contact you soon.", form_error: "An error occurred while sending. Please try again.",
+        autoresponse_msg: "Thank you for your message! We have received your request and will get back to you as soon as possible. - The H-TIME Team",
         ph_fname: "John Doe", ph_email: "contact@example.com", ph_message: "Write your message here...",
         footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement, premium quality, and stories told through unique jewelry and watches.", 
         footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections", footer_about: "Our Story", footer_contact: "Contact & Support", 
@@ -509,6 +516,7 @@
         contact_address_title: "Adresse", contact_phone_title: "Téléphone", contact_email_title: "E-mail", contact_program_title: "Horaires", contact_program_val: "Lundi - Vendredi: 10:00 - 18:00", 
         contact_form_title: "Envoyer un message", form_name: "Nom complet", form_email: "Adresse Email", form_message: "Message", 
         btn_send: "Envoyer", btn_sending: "Envoi en cours...", form_success_msg: "Votre message a été envoyé avec succès ! Nous vous contacterons bientôt.", form_error: "Une erreur s'est produite. Veuillez réessayer.",
+        autoresponse_msg: "Merci pour votre message ! Nous avons bien reçu votre demande et nous vous répondrons dans les plus brefs délais. - L'équipe H-TIME",
         ph_fname: "Jean Dupont", ph_email: "contact@exemple.fr", ph_message: "Écrivez votre message ici...",
         footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe dédiée aux personnes qui apprécient le raffinement.", 
         footer_nav: "NAVIGATION RAPIDE", footer_home: "Accueil - Page principale", footer_shop: "Boutique - Toutes les collections", footer_about: "Notre histoire", footer_contact: "Contact & Support", 
@@ -521,6 +529,7 @@
         contact_address_title: "Adresse", contact_phone_title: "Telefon", contact_email_title: "E-Mail", contact_program_title: "Öffnungszeiten", contact_program_val: "Montag - Freitag: 10:00 - 18:00", 
         contact_form_title: "Nachricht senden", form_name: "Vollständiger Name", form_email: "E-Mail Adresse", form_message: "Nachricht", 
         btn_send: "Senden", btn_sending: "Wird gesendet...", form_success_msg: "Ihre Nachricht wurde erfolgreich gesendet! Wir werden Sie bald kontaktieren.", form_error: "Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+        autoresponse_msg: "Vielen Dank für Ihre Nachricht! Wir haben Ihre Anfrage erhalten und werden uns so schnell wie möglich bei Ihnen melden. - Ihr H-TIME Team",
         ph_fname: "Hans Müller", ph_email: "kontakt@beispiel.de", ph_message: "Schreiben Sie hier Ihre Nachricht...",
         footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique für Liebhaber von Raffinesse.", 
         footer_nav: "SCHNELLNAVIGATION", footer_home: "Startseite - Hauptseite", footer_shop: "Shop - Alle Kollektionen", footer_about: "Unsere Geschichte", footer_contact: "Kontakt & Support", 
@@ -533,6 +542,7 @@
         contact_address_title: "Dirección", contact_phone_title: "Teléfono", contact_email_title: "Correo", contact_program_title: "Horario", contact_program_val: "Lunes - Viernes: 10:00 - 18:00", 
         contact_form_title: "Enviar un mensaje", form_name: "Nombre completo", form_email: "Correo Electrónico", form_message: "Mensaje", 
         btn_send: "Enviar Mensaje", btn_sending: "Enviando...", form_success_msg: "¡Tu mensaje ha sido enviado con éxito! Nos pondremos en contacto contigo pronto.", form_error: "Ocurrió un error al enviar. Por favor, inténtalo de nuevo.",
+        autoresponse_msg: "¡Gracias por su mensaje! Hemos recibido su solicitud y le responderemos lo antes posible. - El equipo de H-TIME",
         ph_fname: "Carlos García", ph_email: "contacto@ejemplo.es", ph_message: "Escribe tu mensaje aquí...",
         footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo dedicada a quienes aprecian el refinamiento.", 
         footer_nav: "NAVEGACIÓN RÁPIDA", footer_home: "Inicio - Página principal", footer_shop: "Tienda - Todas las colecciones", footer_about: "Nuestra historia", footer_contact: "Contacto & Soporte", 
@@ -545,6 +555,7 @@
         contact_address_title: "Indirizzo", contact_phone_title: "Telefono", contact_email_title: "E-mail", contact_program_title: "Orari", contact_program_val: "Lunedì - Venerdì: 10:00 - 18:00", 
         contact_form_title: "Invia un messaggio", form_name: "Nome completo", form_email: "Indirizzo Email", form_message: "Messaggio", 
         btn_send: "Invia Messaggio", btn_sending: "Invio in corso...", form_success_msg: "Il tuo messaggio è stato inviato con successo! Ti contatteremo presto.", form_error: "Si è verificato un errore durante l'invio. Riprova.",
+        autoresponse_msg: "Grazie per il tuo messaggio! Abbiamo ricevuto la tua richiesta e ti risponderemo il prima possibile. - Il team H-TIME",
         ph_fname: "Mario Rossi", ph_email: "contatto@esempio.it", ph_message: "Scrivi qui il tuo messaggio...",
         footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso dedicata a chi apprezza la raffinatezza.", 
         footer_nav: "NAVIGAZIONE RAPIDA", footer_home: "Home - Pagina principale", footer_shop: "Negozio - Tutte le collezioni", footer_about: "La nostra storia", footer_contact: "Contatto & Supporto", 
