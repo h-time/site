@@ -57,16 +57,18 @@
 
     .nav-icons { display:flex; align-items:center; gap:25px; }
     
-    .cart-btn {
+    a.cart-btn, a.cart-btn:visited {
       border: 1px solid rgba(255,255,255,0.3); padding: 10px 22px; border-radius: 30px;
-      font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 500;
+      font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; 
+      font-weight: 700 !important; /* Setat pe Bold */
       display: inline-flex; align-items: center; justify-content: center; 
-      transition: var(--transition); background: transparent; color: white !important;
-      cursor: pointer;
+      transition: var(--transition); background: transparent; 
+      color: white !important; /* Fortat culoarea alba */
     }
-    .cart-btn:hover { 
+    a.cart-btn:hover { 
       border-color: var(--peach); background: var(--peach);
-      color: var(--dark) !important; transform: translateY(-2px);
+      color: var(--dark) !important; /* Daca vrei ca si la hover sa fie alb, schimba var(--dark) cu white */
+      transform: translateY(-2px);
     }
 
     #languageSwitcher {
@@ -77,6 +79,14 @@
     }
     #languageSwitcher:hover { border-color: var(--peach); }
     #languageSwitcher option { background: var(--dark); color: white; }
+
+    .gradient-underline { position:relative; display:inline-block; padding-bottom:15px; }
+    .gradient-underline::after {
+      content:''; position:absolute; left:0; bottom:0; width:100%; height:4px;
+      background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
+      background-size:200% auto; animation:textGradientMove 4s linear infinite; border-radius:2px;
+    }
+
 
     /* ================= CONTACT HERO ================= */
     .contact-hero {
