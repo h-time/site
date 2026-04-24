@@ -56,7 +56,7 @@
       color: #ccc;
     }
 
-    /* ================= CONTACT LAYOUT (CARDURI SUPRAPUSE) ================= */
+    /* ================= CONTACT LAYOUT ================= */
     .contact-wrapper {
       max-width: 1200px;
       margin: -100px auto 80px;
@@ -89,12 +89,7 @@
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-    .info-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 20px;
-      margin-bottom: 30px;
-    }
+    .info-item { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 30px; }
     .info-icon {
       width: 45px;
       height: 45px;
@@ -106,21 +101,10 @@
       color: var(--peach);
       flex-shrink: 0;
     }
-    .info-text h4 {
-      font-weight: 700;
-      text-transform: uppercase;
-      font-size: 0.9rem;
-      color: var(--peach);
-      margin-bottom: 8px;
-      letter-spacing: 1px;
-    }
-    .info-text p {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: #ddd;
-    }
+    .info-text h4 { font-weight: 700; text-transform: uppercase; font-size: 0.9rem; color: var(--peach); margin-bottom: 8px; letter-spacing: 1px; }
+    .info-text p { font-size: 0.95rem; line-height: 1.6; color: #ddd; }
 
-    /* Harta Mică din Interiorul Panoului Negru */
+    /* Harta Mică */
     .map-wrapper-small {
       width: 100%;
       height: 250px;
@@ -130,12 +114,7 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       background: var(--dark);
     }
-    .map-wrapper-small iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      filter: grayscale(15%) contrast(105%);
-    }
+    .map-wrapper-small iframe { width: 100%; height: 100%; border: none; filter: grayscale(15%) contrast(105%); }
 
     /* Panoul din Dreapta - Formular */
     .contact-form-panel {
@@ -156,73 +135,25 @@
     }
     .form-group { margin-bottom: 25px; position: relative; }
     .form-group label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: #555;
-      margin-bottom: 10px;
+      display: block; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: #555; margin-bottom: 10px;
     }
     .form-group input, .form-group textarea {
-      width: 100%;
-      padding: 16px 20px;
-      background: #f9f9f9;
-      border: 1px solid #eee;
-      border-radius: 12px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.95rem;
-      outline: none;
-      transition: all 0.3s;
-      color: var(--dark);
+      width: 100%; padding: 16px 20px; background: #f9f9f9; border: 1px solid #eee; border-radius: 12px;
+      font-family: 'Montserrat', sans-serif; font-size: 0.95rem; outline: none; transition: all 0.3s; color: var(--dark);
     }
     .form-group input:focus, .form-group textarea:focus {
-      background: white;
-      border-color: var(--peach);
-      box-shadow: 0 0 0 4px rgba(252, 191, 136, 0.15);
+      background: white; border-color: var(--peach); box-shadow: 0 0 0 4px rgba(252, 191, 136, 0.15);
     }
     .form-group textarea { resize: vertical; min-height: 150px; }
     
     .btn-submit {
-      width: 100%;
-      background: var(--dark);
-      color: white;
-      border: none;
-      padding: 18px;
-      border-radius: 40px;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      cursor: pointer;
-      transition: 0.3s;
-      margin-top: 10px;
+      width: 100%; background: var(--dark); color: white; border: none; padding: 18px; border-radius: 40px;
+      font-family: 'Montserrat', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+      cursor: pointer; transition: 0.3s; margin-top: 10px;
     }
     .btn-submit:hover { 
-      background: linear-gradient(to right, var(--pink), var(--peach));
-      color: var(--dark);
-      transform: translateY(-3px); 
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
-    }
-
-    /* ================= MESAJE FORMULAR ================= */
-    #form-success-msg, #form-error-msg {
-      display: none;
-      padding: 15px 20px;
-      border-radius: 12px;
-      margin-bottom: 25px;
-      font-weight: 600;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-    #form-success-msg {
-      background: #e8f5e9;
-      color: #2e7d32;
-      border: 1px solid #c8e6c9;
-    }
-    #form-error-msg {
-      background: #ffebee;
-      color: #c62828;
-      border: 1px solid #ffcdd2;
+      background: linear-gradient(to right, var(--pink), var(--peach)); color: var(--dark);
+      transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
     }
 
     /* ================= FOOTER ================= */
@@ -334,7 +265,7 @@
         </div>
       </div>
 
-      <!-- Harta Mică în interiorul chenarului din stânga -->
+      <!-- Harta Mică -->
       <div class="map-wrapper-small">
         <iframe src="https://maps.google.com/maps?q=Liceul%20Tehnologic%20Economic%20de%20Turism,%20Strada%20Milcov%2018A,%20Iasi&t=&z=16&ie=UTF8&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
@@ -345,29 +276,28 @@
     <div class="contact-form-panel">
       <h2 data-i18n="contact_form_title">Trimite un mesaj</h2>
       
-      <!-- Mesaje status -->
-      <div id="form-success-msg" data-i18n="form_success_msg">
-        Mesajul tău a fost trimis cu succes! Te vom contacta în curând.
-      </div>
-      <div id="form-error-msg">
-        <span data-i18n="form_error">Eroare de trimitere. Dacă e prima dată când testezi, verifică adresa ta de email (h.time.business@gmail.com) și dă click pe "Activate Form" în mesajul primit de la FormSubmit!</span>
-      </div>
-
-      <form id="contact-form" onsubmit="handleContactSubmit(event)">
+      <!-- Am pus varianta CLASICĂ a formularului pentru a asigura primirea mailului de activare -->
+      <form action="https://formsubmit.co/h.time.business@gmail.com" method="POST">
+        
+        <!-- Input-uri ascunse pentru funcțiile FormSubmit -->
+        <input type="hidden" name="_subject" value="Mesaj nou de contact H-TIME">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_autoresponse" value="Confirmare de primire: Mesajul tău a fost livrat cu succes către echipa H-TIME! Găsești o copie a mesajului tău mai jos. Te vom contacta în curând.">
+        
         <div class="form-group">
           <label data-i18n="form_name">Nume complet</label>
           <input type="text" name="Nume" required data-i18n-placeholder="ph_fname" placeholder="Popescu Ion">
         </div>
         <div class="form-group">
           <label data-i18n="form_email">Adresa de E-mail</label>
-          <!-- Atributul name trebuie sa fie "email" pentru functia autoresponse -->
+          <!-- Atributul name trebuie sa fie neapărat "email" pentru ca vizitatorul să primească răspunsul automat -->
           <input type="email" name="email" required data-i18n-placeholder="ph_email" placeholder="contact@exemplu.ro">
         </div>
         <div class="form-group">
           <label data-i18n="form_message">Mesaj</label>
           <textarea name="Mesaj" required data-i18n-placeholder="ph_message" placeholder="Scrieți mesajul aici..."></textarea>
         </div>
-        <button type="submit" class="btn-submit" id="submit-btn">
+        <button type="submit" class="btn-submit">
           <span data-i18n="btn_send">Trimite Mesajul</span>
         </button>
       </form>
@@ -435,66 +365,6 @@
       }
     }
 
-    // --- LOGICĂ FORMULAR AJAX ---
-    function handleContactSubmit(event) {
-      event.preventDefault(); 
-      const form = event.target;
-      const submitBtn = document.getElementById('submit-btn');
-      const successMsg = document.getElementById('form-success-msg');
-      const errorMsg = document.getElementById('form-error-msg');
-      
-      const currentLang = localStorage.getItem('htime_lang') || 'ro';
-      const dict = translations[currentLang] || translations.ro;
-
-      successMsg.style.display = 'none';
-      errorMsg.style.display = 'none';
-
-      const originalBtnText = submitBtn.innerHTML;
-      submitBtn.innerHTML = `<span data-i18n="btn_sending">${dict.btn_sending || 'Se trimite...'}</span>`;
-      submitBtn.disabled = true;
-
-      const formData = new FormData(form);
-      formData.append("_subject", "Mesaj nou de contact H-TIME");
-      formData.append("_captcha", "false");
-      
-      const autoReplyMessage = dict.autoresponse_msg || "Confirmare de primire: Mesajul tău a fost livrat cu succes către echipa H-TIME! Găsești o copie a mesajului tău mai jos. Te vom contacta în curând.";
-      formData.append("_autoresponse", autoReplyMessage);
-
-      // AICI ESTE EMAILUL CORECT: h.time.business@gmail.com
-      fetch("https://formsubmit.co/ajax/h.time.business@gmail.com", {
-        method: "POST",
-        headers: { 
-            'Accept': 'application/json'
-        },
-        body: formData
-      })
-      .then(response => {
-        if(!response.ok) throw new Error("Network response was not ok");
-        return response.json();
-      })
-      .then(data => {
-        // Dacă FormSubmit ne întoarce success true
-        if(data.success === "true" || data.success === true) {
-            form.reset();
-            submitBtn.innerHTML = originalBtnText;
-            submitBtn.disabled = false;
-            
-            successMsg.style.display = 'block';
-            setTimeout(() => { successMsg.style.display = 'none'; }, 6000);
-        } else {
-            throw new Error(data.message || "Unknown error");
-        }
-      })
-      .catch(error => {
-        console.error("FormSubmit Error:", error);
-        submitBtn.innerHTML = originalBtnText;
-        submitBtn.disabled = false;
-        
-        // Afișăm un div de eroare roșu și clar pe ecran
-        errorMsg.style.display = 'block';
-      });
-    }
-
     // --- DICTIONAR TRADUCERI ---
     const translations = {
       ro: { 
@@ -503,10 +373,7 @@
         contact_info_heading: "Date de contact",
         contact_address_title: "Adresă", contact_phone_title: "Telefon", contact_email_title: "E-mail", contact_program_title: "Program", contact_program_val: "Luni - Vineri: 10:00 - 18:00", 
         contact_form_title: "Trimite un mesaj", form_name: "Nume complet", form_email: "Adresa de E-mail", form_message: "Mesaj", 
-        btn_send: "Trimite Mesajul", btn_sending: "Se trimite...", 
-        form_success_msg: "Mesajul tău a fost trimis cu succes! Te vom contacta în curând.", 
-        form_error: "Eroare de trimitere. Dacă e prima dată când testezi, verifică adresa ta de email (h.time.business@gmail.com) și dă click pe \"Activate Form\" în mesajul primit de la FormSubmit!",
-        autoresponse_msg: "Confirmare de primire: Mesajul tău a fost livrat cu succes către echipa H-TIME! Găsești o copie a datelor transmise mai jos. Te vom contacta în curând.",
+        btn_send: "Trimite Mesajul",
         ph_fname: "Popescu Ion", ph_email: "contact@exemplu.ro", ph_message: "Scrieți mesajul aici...",
         footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.", 
         footer_nav: "NAVIGARE RAPIDĂ", footer_home: "Acasă - Pagina principală", footer_shop: "Magazin - Toate Colecțiile", footer_about: "Povestea Noastră", footer_contact: "Contact & Suport", 
@@ -518,10 +385,7 @@
         contact_info_heading: "Contact Info",
         contact_address_title: "Address", contact_phone_title: "Phone", contact_email_title: "E-mail", contact_program_title: "Schedule", contact_program_val: "Monday - Friday: 10:00 - 18:00", 
         contact_form_title: "Send a message", form_name: "Full Name", form_email: "Email Address", form_message: "Message", 
-        btn_send: "Send Message", btn_sending: "Sending...", 
-        form_success_msg: "Your message has been sent successfully! We will contact you soon.", 
-        form_error: "Sending error. If this is your first test, check your email inbox to Activate Form!",
-        autoresponse_msg: "Receipt confirmation: Your message has been successfully delivered to the H-TIME team! A copy of your submitted data is below. We will contact you soon.",
+        btn_send: "Send Message",
         ph_fname: "John Doe", ph_email: "contact@example.com", ph_message: "Write your message here...",
         footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement, premium quality, and stories told through unique jewelry and watches.", 
         footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections", footer_about: "Our Story", footer_contact: "Contact & Support", 
@@ -533,10 +397,7 @@
         contact_info_heading: "Coordonnées",
         contact_address_title: "Adresse", contact_phone_title: "Téléphone", contact_email_title: "E-mail", contact_program_title: "Horaires", contact_program_val: "Lundi - Vendredi: 10:00 - 18:00", 
         contact_form_title: "Envoyer un message", form_name: "Nom complet", form_email: "Adresse Email", form_message: "Message", 
-        btn_send: "Envoyer", btn_sending: "Envoi en cours...", 
-        form_success_msg: "Votre message a été envoyé avec succès ! Nous vous contacterons bientôt.", 
-        form_error: "Erreur d'envoi. Veuillez vérifier que le formulaire a été activé par e-mail.",
-        autoresponse_msg: "Confirmation de réception : Votre message a été livré avec succès à l'équipe H-TIME ! Une copie de vos données soumises se trouve ci-dessous. Nous vous contacterons bientôt.",
+        btn_send: "Envoyer",
         ph_fname: "Jean Dupont", ph_email: "contact@exemple.fr", ph_message: "Écrivez votre message ici...",
         footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe dédiée aux personnes qui apprécient le raffinement.", 
         footer_nav: "NAVIGATION RAPIDE", footer_home: "Accueil - Page principale", footer_shop: "Boutique - Toutes les collections", footer_about: "Notre histoire", footer_contact: "Contact & Support", 
@@ -548,10 +409,7 @@
         contact_info_heading: "Kontaktdaten",
         contact_address_title: "Adresse", contact_phone_title: "Telefon", contact_email_title: "E-Mail", contact_program_title: "Öffnungszeiten", contact_program_val: "Montag - Freitag: 10:00 - 18:00", 
         contact_form_title: "Nachricht senden", form_name: "Vollständiger Name", form_email: "E-Mail Adresse", form_message: "Nachricht", 
-        btn_send: "Senden", btn_sending: "Wird gesendet...", 
-        form_success_msg: "Ihre Nachricht wurde erfolgreich gesendet! Wir werden Sie bald kontaktieren.", 
-        form_error: "Fehler beim Senden. Bitte überprüfen Sie die E-Mail-Aktivierung.",
-        autoresponse_msg: "Empfangsbestätigung: Ihre Nachricht wurde erfolgreich an das H-TIME-Team zugestellt! Eine Kopie Ihrer übermittelten Daten finden Sie unten. Wir werden uns in Kürze bei Ihnen melden.",
+        btn_send: "Senden",
         ph_fname: "Hans Müller", ph_email: "kontakt@beispiel.de", ph_message: "Schreiben Sie hier Ihre Nachricht...",
         footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique für Liebhaber von Raffinesse.", 
         footer_nav: "SCHNELLNAVIGATION", footer_home: "Startseite - Hauptseite", footer_shop: "Shop - Alle Kollektionen", footer_about: "Unsere Geschichte", footer_contact: "Kontakt & Support", 
@@ -563,10 +421,7 @@
         contact_info_heading: "Datos de contacto",
         contact_address_title: "Dirección", contact_phone_title: "Teléfono", contact_email_title: "Correo", contact_program_title: "Horario", contact_program_val: "Lunes - Viernes: 10:00 - 18:00", 
         contact_form_title: "Enviar un mensaje", form_name: "Nombre completo", form_email: "Correo Electrónico", form_message: "Mensaje", 
-        btn_send: "Enviar Mensaje", btn_sending: "Enviando...", 
-        form_success_msg: "¡Tu mensaje ha sido enviado con éxito! Nos pondremos en contacto contigo pronto.", 
-        form_error: "Error de envío. Asegúrese de activar el formulario en su correo.",
-        autoresponse_msg: "Confirmación de recepción: ¡Su mensaje ha sido entregado con éxito al equipo de H-TIME! A continuación encontrará una copia de los datos enviados. Nos pondremos en contacto con usted pronto.",
+        btn_send: "Enviar Mensaje",
         ph_fname: "Carlos García", ph_email: "contacto@ejemplo.es", ph_message: "Escribe tu mensaje aquí...",
         footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo dedicada a quienes aprecian el refinamiento.", 
         footer_nav: "NAVEGACIÓN RÁPIDA", footer_home: "Inicio - Página principal", footer_shop: "Tienda - Todas las colecciones", footer_about: "Nuestra historia", footer_contact: "Contacto & Soporte", 
@@ -578,10 +433,7 @@
         contact_info_heading: "Info Contatti",
         contact_address_title: "Indirizzo", contact_phone_title: "Telefono", contact_email_title: "E-mail", contact_program_title: "Orari", contact_program_val: "Lunedì - Venerdì: 10:00 - 18:00", 
         contact_form_title: "Invia un messaggio", form_name: "Nome completo", form_email: "Indirizzo Email", form_message: "Messaggio", 
-        btn_send: "Invia Messaggio", btn_sending: "Invio in corso...", 
-        form_success_msg: "Il tuo messaggio è stato inviato con successo! Ti contatteremo presto.", 
-        form_error: "Errore di invio. Assicurati di attivare il modulo via email.",
-        autoresponse_msg: "Conferma di ricezione: Il tuo messaggio è stato consegnato con successo al team H-TIME! Una copia dei dati inviati è riportata di seguito. Ti contatteremo presto.",
+        btn_send: "Invia Messaggio",
         ph_fname: "Mario Rossi", ph_email: "contatto@esempio.it", ph_message: "Scrivi qui il tuo messaggio...",
         footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso dedicata a chi apprezza la raffinatezza.", 
         footer_nav: "NAVIGAZIONE RAPIDA", footer_home: "Home - Pagina principale", footer_shop: "Negozio - Tutte le collezioni", footer_about: "La nostra storia", footer_contact: "Contatto & Supporto", 
@@ -591,12 +443,10 @@
     
     function applyTranslations(lang) { 
       const dict = translations[lang] || translations.ro; 
-      // Texte simple
       document.querySelectorAll('[data-i18n]').forEach(el => { 
         const key = el.getAttribute('data-i18n'); 
         if (dict[key]) el.innerText = dict[key]; 
       }); 
-      // Placeholdere
       document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { 
         const key = el.getAttribute('data-i18n-placeholder'); 
         if (dict[key]) el.placeholder = dict[key]; 
