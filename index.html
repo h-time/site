@@ -641,7 +641,7 @@
 
       <div class="obj-col">
         <h3 data-i18n="obj3_title">O MOȘTENIRE ETERNĂ</h3>
-        <p data-i18n="obj3_text">Dincolo de strălucirea efemeră, scopul nostru este să făurim amintiri care sfidează timpul. Fiecare piesă este created pentru a deveni o comoară de suflet, menită să fie purtată cu pasiune și transmisă din generație în generație, păstrând mereu vie o poveste nemuritoare.</p>
+        <p data-i18n="obj3_text">Dincolo de strălucirea efemeră, scopul nostru este să făurim amintiri care sfidează timpul. Fiecare piesă este creată pentru a deveni o comoară de suflet, menită să fie purtată cu pasiune și transmisă din generație în generație, păstrând mereu vie o poveste nemuritoare.</p>
         <p data-i18n="obj3_extra">Ne asumăm responsabilitatea calității: materiale atent selecționate, finisaje durabile și servicii care susțin longevitatea pieselor. H-TIME nu vinde doar obiecte — cultivăm o moștenire.</p>
       </div>
     </div>
@@ -906,9 +906,12 @@
           promoVideo.currentTime = startSecond;
         }
 
-        promoVideo.addEventListener('ended', () => {
-          promoVideo.currentTime = startSecond;
-          promoVideo.play();
+        // AM MODIFICAT AICI: Am inlocuit 'ended' cu 'timeupdate'
+        promoVideo.addEventListener('timeupdate', () => {
+          if (promoVideo.duration && promoVideo.currentTime >= promoVideo.duration - 0.2) {
+            promoVideo.currentTime = startSecond;
+            promoVideo.play();
+          }
         });
 
         if (muteToggle) {
