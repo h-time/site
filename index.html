@@ -10,14 +10,22 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
 
   <style>
+    /* ================= VARIABILE & BAZĂ ================= */
     :root {
       --peach: #fcbf88;
       --pink: #ffb6c1;
       --dark: #111111;
-      --light-bg: #f8f5f2;
+      --light-bg: #fdfbf9;
+      --card-bg: #ffffff;
+      --shadow-sm: 0 4px 15px rgba(0,0,0,0.03);
+      --shadow-md: 0 15px 35px rgba(0,0,0,0.06);
+      --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
+    
+    a, a:hover, a:visited, a:active { text-decoration: none !important; color: inherit !important; }
+
     body {
       font-family: 'Montserrat', sans-serif;
       font-weight: 300;
@@ -27,36 +35,64 @@
     }
     h1,h2,h3,h4 { font-weight: normal; }
 
+    @keyframes textGradientMove { 
+      0% { background-position: 0% 50%; } 
+      100% { background-position: 200% 50%; } 
+    }
+
+    /* ================= NAVIGAȚIE (Glassmorphism) ================= */
     nav {
       position: fixed;
       top:0; left:0; width:100%;
       padding:15px 50px;
       display:flex; justify-content:space-between; align-items:center;
       z-index:1000;
-      background-color: rgba(0,0,0,0.6);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      background-color: rgba(17, 17, 17, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: var(--transition);
     }
 
-    .logo img { height:75px; }
+    .logo img { height:75px; transition: transform 0.3s; }
+    .logo img:hover { transform: scale(1.02); }
 
-    .nav-links { display:flex; gap:30px; }
+    .nav-links { display:flex; gap:35px; }
     .nav-links a {
-      color:white; text-decoration:none; font-weight:500; font-size:0.9rem;
-      text-transform:uppercase; letter-spacing:1px; transition: color .3s;
+      color:white !important; font-weight:500; font-size:0.85rem;
+      text-transform:uppercase; letter-spacing:1.5px; 
+      position: relative;
+      padding-bottom: 5px;
     }
-    .nav-links a:hover { color: var(--peach); }
+    .nav-links a::after {
+      content: ''; position: absolute; width: 0; height: 2px;
+      bottom: 0; left: 50%; background-color: var(--peach);
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+    .nav-links a:hover::after { width: 100%; left: 0; }
+    .nav-links a:hover { color: var(--peach) !important; }
 
-    .nav-icons { display:flex; align-items:center; gap:20px; }
-    .nav-icons a { color:white; text-decoration:none; font-size:0.9rem; text-transform:uppercase; transition: all .3s; }
-    .nav-icons a:hover { color: var(--peach); }
-
+    .nav-icons { display:flex; align-items:center; gap:25px; }
+    
     .cart-btn {
-      border:1px solid white; padding:8px 18px; border-radius:30px;
-      display:inline-flex; align-items:center; justify-content:center; transition: all .3s;
+      border: 1px solid rgba(255,255,255,0.3); padding: 10px 22px; border-radius: 30px;
+      font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 500;
+      display: inline-flex; align-items: center; justify-content: center; 
+      transition: var(--transition); background: transparent; color: white !important;
     }
-    .cart-btn:hover { border-color: var(--peach); }
+    .cart-btn:hover { 
+      border-color: var(--peach); background: var(--peach);
+      color: var(--dark) !important; transform: translateY(-2px);
+    }
+
+    #languageSwitcher {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2);
+      color: white; padding: 8px 12px; border-radius: 20px; font-size: 0.8rem;
+      text-transform: uppercase; font-family: 'Montserrat', sans-serif;
+      cursor: pointer; outline: none; transition: all 0.3s;
+    }
+    #languageSwitcher:hover { border-color: var(--peach); }
+    #languageSwitcher option { background: var(--dark); color: white; }
 
     .gradient-underline { position:relative; display:inline-block; padding-bottom:15px; }
     .gradient-underline::after {
@@ -65,32 +101,20 @@
       background-size:200% auto; animation:textGradientMove 4s linear infinite; border-radius:2px;
     }
 
+    /* ================= HERO SECTION ================= */
     .hero {
       height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center;
       text-align:center; background-color:var(--dark); color:white; position:relative;
       background-size:cover; background-position:center; background-repeat:no-repeat; padding-bottom:50px;
     }
     
-    /* ================= ANIMAȚIE MORPH LOGO -> TEXT ================= */
-    .hero-morph-wrapper {
-      position: relative;
-      display: inline-block;
-      margin-bottom: 20px;
-    }
+    .hero-morph-wrapper { position: relative; display: inline-block; margin-bottom: 20px; }
 
     .hero-logo-morph {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: clamp(140px, 20vw, 300px);
-      z-index: 20;
-      pointer-events: none;
-      /* Animația este pusă acum separat pentru a fi declanșată din JS */
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: clamp(140px, 20vw, 300px); z-index: 20; pointer-events: none;
     }
-    .hero-logo-morph.start-anim {
-      animation: morphLogo 4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
+    .hero-logo-morph.start-anim { animation: morphLogo 4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
 
     @keyframes morphLogo {
       0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); filter: blur(10px); }
@@ -100,23 +124,12 @@
       100% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); filter: blur(20px); visibility: hidden; }
     }
 
-    /* Titlul Mare */
     .hero-title-container {
-      position: relative;
-      display: inline-block;
-      font-family: 'DM Serif Display', serif; 
-      font-size: clamp(5rem, 16vw, 18rem);
-      font-weight: 400;
-      line-height: 1;
-      z-index: 10;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-      opacity: 0;
-      /* Animația este pusă acum separat pentru a fi declanșată din JS */
+      position: relative; display: inline-block; font-family: 'DM Serif Display', serif; 
+      font-size: clamp(5rem, 16vw, 18rem); font-weight: 400; line-height: 1;
+      z-index: 10; cursor: pointer; transition: transform 0.3s ease; opacity: 0;
     }
-    .hero-title-container.start-anim {
-      animation: morphText 4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-    }
+    .hero-title-container.start-anim { animation: morphText 4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
 
     @keyframes morphText {
       0%, 40% { opacity: 0; transform: scale(0.6); letter-spacing: -30px; filter: blur(20px); }
@@ -124,48 +137,27 @@
       100% { opacity: 1; transform: scale(1); letter-spacing: 2px; filter: blur(0); }
     }
 
-    .hero-text-base {
-      position: relative;
-      z-index: 2;
-      text-shadow: 0px 10px 30px rgba(0,0,0,0.5);
-    }
+    .hero-text-base { position: relative; z-index: 2; text-shadow: 0px 10px 30px rgba(0,0,0,0.5); }
 
     .hero-title-stroke {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 1;
-      color: transparent;
-      -webkit-text-stroke: 8px transparent;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 1; color: transparent; -webkit-text-stroke: 8px transparent;
       background: linear-gradient(to right, var(--pink), var(--peach), var(--pink)) border-box;
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      opacity: 0;
-      pointer-events: none;
-      animation: textGradientMove 4s linear infinite; 
+      background-size: 200% auto; -webkit-background-clip: text; opacity: 0;
+      pointer-events: none; animation: textGradientMove 4s linear infinite; 
     }
 
-    .hero-title-stroke.play-initial {
-      animation: textGradientMove 4s linear infinite, fadeStrokeOnce 3s ease-in-out 2.5s forwards;
-    }
-    .hero-title-stroke.play-hover {
-      animation: textGradientMove 4s linear infinite, fadeOnHover 1.8s ease-in-out forwards;
-    }
+    .hero-title-stroke.play-initial { animation: textGradientMove 4s linear infinite, fadeStrokeOnce 3s ease-in-out 2.5s forwards; }
+    .hero-title-stroke.play-hover { animation: textGradientMove 4s linear infinite, fadeOnHover 1.8s ease-in-out forwards; }
 
     @keyframes fadeStrokeOnce { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
     @keyframes fadeOnHover { 0% { opacity: 0; } 30% { opacity: 1; } 100% { opacity: 0; } }
 
     .hero h4 { 
-      font-family: 'Playfair Display', serif; 
-      font-size: clamp(1.2rem,3vw,2.5rem); 
-      font-weight: 400; 
-      margin: 0; 
-      z-index: 10; 
-      opacity: 0;
+      font-family: 'Playfair Display', serif; font-size: clamp(1.2rem,3vw,2.5rem); 
+      font-weight: 400; margin: 0; z-index: 10; opacity: 0;
     }
-    .hero h4.start-anim {
-      animation: revealSubtitle 1.5s ease-out 3s forwards;
-    }
-
+    .hero h4.start-anim { animation: revealSubtitle 1.5s ease-out 3s forwards; }
     @keyframes revealSubtitle { 0% { opacity: 0; transform: translateY(15px); } 100% { opacity: 1; transform: translateY(0); } }
 
     .text-highlight { position:relative; display:inline-block; color:#000; z-index:1; padding:0 15px; font-style:italic; font-weight:600; }
@@ -180,188 +172,208 @@
     .hero-divider-bottom svg { display:block; width:calc(100% + 1.3px); height:6vw; }
     .hero-divider-bottom .shape-fill { fill: var(--light-bg); }
 
-    /* FEATURES */
-    .features-section { background-color:var(--light-bg); padding:60px 20px; display:flex; justify-content:center; align-items:flex-start; text-align:center; gap:40px; flex-wrap:wrap; position:relative; z-index:10; }
-    .feature-item { flex:1; min-width:250px; max-width:320px; }
-    .feature-icon { display:flex; justify-content:center; margin-bottom:20px; color:var(--dark); }
-    .feature-icon svg { transition: stroke .3s, transform .3s; }
-    .feature-item:hover .feature-icon svg { stroke:var(--peach); transform:translateY(-5px); }
-    .feature-item h3 { font-weight:700; font-size:1.1rem; text-transform:uppercase; margin-bottom:10px; letter-spacing:1px; }
-    .feature-item p { font-size:0.9rem; color:#666; line-height:1.5; }
+    /* ================= FEATURES ================= */
+    .features-section { background-color:var(--light-bg); padding:80px 40px; display:flex; justify-content:center; align-items:stretch; gap:40px; flex-wrap:wrap; position:relative; z-index:10; }
+    .feature-item { 
+      flex:1; min-width:280px; max-width:350px; 
+      background: var(--card-bg); padding: 40px 30px; border-radius: 16px; 
+      border: 1px solid rgba(0,0,0,0.03); box-shadow: var(--shadow-sm); 
+      transition: var(--transition); text-align: center;
+    }
+    .feature-item:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: rgba(252, 191, 136, 0.3); }
+    
+    .feature-icon { 
+      width: 70px; height: 70px; border-radius: 50%; 
+      background: linear-gradient(135deg, var(--light-bg), #fff); 
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05); border: 1px solid rgba(252, 191, 136, 0.3); 
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; 
+      color: var(--dark); transition: var(--transition);
+    }
+    .feature-icon svg { width: 30px; height: 30px; transition: stroke .3s, transform .3s; }
+    .feature-item:hover .feature-icon { transform: scale(1.1); }
+    .feature-item:hover .feature-icon svg { stroke:var(--peach); }
+    
+    .feature-item h3 { font-weight:700; font-size:1.1rem; text-transform:uppercase; margin-bottom:15px; letter-spacing:1px; color: var(--dark); }
+    .feature-item p { font-size:0.95rem; color:#666; line-height:1.6; }
 
-    /* ================= VIDEO BANNER SECTION ================= */
+    /* ================= VIDEO BANNER ================= */
     .video-banner-section {
-      width: 100%;
-      height: 75vh;
-      max-height: 800px;
-      min-height: 400px;
-      position: relative;
-      background-color: #000;
-      overflow: hidden;
-      margin: 0;
-      padding: 0;
+      width: 100%; height: 75vh; max-height: 800px; min-height: 400px;
+      position: relative; background-color: #000; overflow: hidden; margin: 0; padding: 0;
     }
-    .promo-video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    .promo-video { width: 100%; height: 100%; object-fit: cover; display: block; }
     .mute-toggle-btn {
-      position: absolute;
-      bottom: 40px;
-      right: 40px;
-      background: rgba(17, 17, 17, 0.5);
-      backdrop-filter: blur(5px);
-      color: white;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 50%;
-      width: 55px;
-      height: 55px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 10;
-      transition: all 0.3s ease;
-      outline: none;
+      position: absolute; bottom: 40px; right: 40px;
+      background: rgba(17, 17, 17, 0.5); backdrop-filter: blur(5px); color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50%;
+      width: 55px; height: 55px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 10; transition: all 0.3s ease; outline: none;
     }
-    .mute-toggle-btn:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: var(--peach);
-      color: var(--peach);
-      transform: scale(1.05);
-    }
+    .mute-toggle-btn:hover { background: rgba(255, 255, 255, 0.1); border-color: var(--peach); color: var(--peach); transform: scale(1.05); }
 
     /* ================= CATEGORII ================= */
-    .categories-section { text-align:center; padding:80px 20px 80px; position: relative; z-index: 20; }
-    .categories-section h2 { margin-bottom:25px; font-size:2.5rem; font-weight:700; letter-spacing:2px; position: relative; z-index: 1; }
+    .categories-section { text-align:center; padding:100px 20px; position: relative; z-index: 20; background: var(--light-bg); }
+    .categories-section h2 { margin-bottom:40px; font-size:2.5rem; font-weight:700; letter-spacing:2px; position: relative; z-index: 1; color: var(--dark); }
     
     .circles-container { 
-      display:flex; justify-content:center; gap: clamp(15px, 3vw, 40px); 
-      flex-wrap: nowrap; width: 100%; max-width: 1200px; margin: 0 auto 20px;
+      display:flex; justify-content:center; gap: clamp(20px, 4vw, 50px); 
+      flex-wrap: nowrap; width: 100%; max-width: 1200px; margin: 0 auto 30px;
       overflow-x: auto; padding: 25px 15px 40px; position: relative; z-index: 10;
     }
     
-    .circle-item { text-align:center; cursor:pointer; flex: 0 0 auto; width: clamp(130px, 20vw, 250px); }
+    .circle-item { text-align:center; cursor:pointer; flex: 0 0 auto; width: clamp(140px, 20vw, 250px); }
     .circle-img-wrapper {
-      width: 100%; aspect-ratio: 1/1; border-radius: 50%; overflow: hidden; margin-bottom: 20px;
-      box-shadow: 0 0 0 transparent; transition: box-shadow .4s, transform .4s; transform: translateZ(0);
+      width: 100%; aspect-ratio: 1/1; border-radius: 50%; overflow: hidden; margin-bottom: 25px;
+      box-shadow: var(--shadow-sm); transition: box-shadow .4s, transform .4s; transform: translateZ(0);
+      border: 5px solid #fff;
     }
     .circle-img { width: 100%; height: 100%; object-fit:cover; display: block; transition: transform .4s; }
     .circle-item:hover .circle-img { transform: scale(1.1); }
-    .circle-item:hover .circle-img-wrapper { box-shadow: 0 15px 30px rgba(0,0,0,0.15); transform: translateY(-5px); }
-    .circle-item h3 { font-size:clamp(0.9rem, 1.5vw, 1.2rem); margin-bottom:10px; font-weight:600; letter-spacing:1px; }
-    .circle-item p { font-size:clamp(0.75rem, 1vw, 0.85rem); color:#555; }
-    .dynamic-price { font-weight: 600; color: var(--dark); }
+    .circle-item:hover .circle-img-wrapper { box-shadow: var(--shadow-md); transform: translateY(-5px); border-color: var(--peach); }
+    .circle-item h3 { font-size:clamp(1rem, 1.5vw, 1.2rem); margin-bottom:10px; font-weight:700; letter-spacing:1px; color: var(--dark); }
+    .circle-item p { font-size:clamp(0.8rem, 1vw, 0.9rem); color:#666; }
+    .dynamic-price { font-weight: 700; color: var(--dark); }
 
     .btn-descopera {
-      background:black; color:white; padding:15px 35px; border-radius:30px; border:none; cursor:pointer;
-      font-weight:600; text-transform:uppercase; font-size:0.9rem; transition:.3s; margin-top:20px; font-family: 'Montserrat', sans-serif;
+      background: var(--dark); color: white !important; border: 1px solid var(--dark);
+      padding: 16px 40px; border-radius: 30px; cursor: pointer; font-weight: 700;
+      text-transform: uppercase; font-size: 0.9rem; transition: var(--transition);
+      letter-spacing: 1.5px; position: relative; overflow: hidden; z-index: 1; font-family: 'Montserrat', sans-serif;
+      display: inline-block;
     }
-    .btn-descopera:hover {
-      background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
-      background-size:200% auto; animation:textGradientMove 4s linear infinite; color:black;
+    .btn-descopera::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(to right, var(--pink), var(--peach), var(--pink));
+      background-size: 200% auto; z-index: -1; transition: opacity 0.4s; opacity: 0;
     }
+    .btn-descopera:hover { border-color: transparent; color: var(--dark) !important; }
+    .btn-descopera:hover::before { opacity: 1; animation: textGradientMove 3s linear infinite; }
 
     /* ================= SALE SECTION ================= */
-    .sale-marquee-section { background:#000; padding:80px 0; overflow:hidden; margin:0; width:100%; position:relative; }
+    .sale-marquee-section { background:#0b0b0b; padding:80px 0; overflow:hidden; margin:0; width:100%; position:relative; }
     .sale-marquee-section h2 {
-      text-align:center; font-family: 'Montserrat', sans-serif; font-size:clamp(3rem,7vw,5.5rem); font-weight:700; margin-bottom:50px; letter-spacing:4px;
+      text-align:center; font-family: 'Montserrat', sans-serif; font-size:clamp(2.5rem,6vw,4.5rem); font-weight:700; margin-bottom:50px; letter-spacing:4px;
       background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
       background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent;
       text-shadow:0px 4px 15px rgba(255,182,193,0.2); animation:textGradientMove 4s linear infinite;
     }
 
-    @keyframes textGradientMove { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
-
-    .sale-track { display:flex; width:max-content; gap:30px; animation:scroll-left-marquee 20s ease-in-out infinite; padding:0 15px; }
-    .sale-card { width:280px; background:#fff; padding:15px; display:flex; flex-direction:column; align-items:center; text-align:center; transition:transform .3s; position:relative; border-radius: 8px;}
-    .sale-card:hover { transform:translateY(-5px); box-shadow:0 10px 20px rgba(255,255,255,0.1); }
-    .sale-card img { width:100%; height:250px; object-fit:cover; margin-bottom:20px; background:#000; border-radius: 6px; }
+    .sale-track { display:flex; width:max-content; gap:30px; animation:scroll-left-marquee 25s linear infinite; padding:0 15px; }
+    
+    .sale-card { 
+      width:280px; background: var(--card-bg); padding:15px; display:flex; flex-direction:column; 
+      align-items:center; text-align:center; transition: var(--transition); position:relative; 
+      border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); box-shadow: var(--shadow-sm);
+    }
+    .sale-card:hover { transform:translateY(-8px); box-shadow: var(--shadow-md); }
+    .sale-card img { width:100%; height:260px; object-fit:cover; margin-bottom:20px; border-radius: 10px; background:#f5f5f5; }
     
     .sale-badge { 
       position:absolute; top:25px; left:25px; 
       background: linear-gradient(to right, var(--pink), var(--peach), var(--pink)); 
       background-size:200% auto; animation:textGradientMove 4s linear infinite; 
-      color:black; padding:5px 10px; font-weight:700; font-size:0.8rem; z-index:5; border-radius: 4px;
+      color: var(--dark); padding:6px 12px; font-weight:700; font-size:0.8rem; z-index:5; border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(252, 191, 136, 0.4); letter-spacing: 1px;
     }
     
-    .sale-card h3 { color:#000; font-size:0.95rem; margin:0 0 15px 0; font-weight:600; min-height:40px; }
+    .sale-card h3 { color:var(--dark); font-size:1rem; margin:0 0 15px 0; font-weight:600; min-height:45px; line-height: 1.4; }
     .price-container { margin-top:auto; display:flex; align-items:center; justify-content:center; gap:15px; }
-    .new-price { color:#000; font-weight:bold; font-size:1.1rem; }
-    .old-price { color:#999; text-decoration:line-through; font-size:0.9rem; }
+    .new-price { color:var(--dark); font-weight:700; font-size:1.15rem; }
+    .old-price { color:#999; text-decoration:line-through; font-size:0.95rem; }
 
-    @keyframes scroll-left-marquee {
-      0%,20% { transform:translateX(0); }
-      25%,45% { transform:translateX(calc(-16.66% - 5px)); }
-      50%,70% { transform:translateX(calc(-33.33% - 10px)); }
-      75%,95% { transform:translateX(calc(-50% - 15px)); }
-      100% { transform:translateX(calc(-50% - 15px)); }
+    @keyframes scroll-left-marquee { 0% { transform:translateX(0); } 100% { transform:translateX(calc(-50% - 15px)); } }
+
+    /* ================= ESENȚA H-TIME ================= */
+    .objectives-section { max-width:1200px; margin:100px auto; padding:0 40px; text-align:center; }
+    .objectives-header { display:flex; align-items:center; justify-content:center; margin-bottom:70px; }
+    .objectives-header::before, .objectives-header::after { content:""; flex:1; border-bottom:1px solid rgba(0,0,0,0.1); margin:0 30px; }
+    .objectives-header h2 { font-size:2.5rem; letter-spacing:2px; font-weight:700; color: var(--dark); }
+    
+    .objectives-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap:50px; text-align:left; }
+    .obj-col { background: transparent; }
+    .obj-col h3 { font-size:1.3rem; border-bottom:2px solid var(--peach); padding-bottom:15px; margin-bottom:25px; font-weight:700; color: var(--dark); display: inline-block; }
+    .obj-col p { font-size:0.95rem; line-height:1.8; color:#555; margin-bottom: 20px;}
+
+    /* ================= QUOTES ================= */
+    .quotes-section { padding:80px 0; background:#0b0b0b; overflow:hidden; display:flex; flex-direction:column; gap:50px; width:100%; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);}
+    .quote-track { display:flex; width:max-content; white-space:nowrap; gap:100px; font-family: 'Playfair Display', serif; font-style:italic; font-size:2rem; color:#fff; }
+    .quote-item span { color:var(--peach); font-family: 'Montserrat', sans-serif; font-weight:500; font-style:normal; font-size:1.1rem; margin-left:25px; }
+    
+    .scroll-right-fast { animation:scroll-right 45s linear infinite; }
+    .scroll-left-fast { animation:scroll-left 45s linear infinite; }
+    
+    @keyframes scroll-right { 0%{transform:translateX(calc(-50% - 50px));} 100%{transform:translateX(0);} }
+    @keyframes scroll-left { 0%{transform:translateX(0);} 100%{transform:translateX(calc(-50% - 50px));} }
+
+    /* ================= CONTACT TEASER ================= */
+    .contact-teaser { 
+      background: linear-gradient(to right, var(--pink), var(--peach), var(--pink)); 
+      background-size:200% auto; animation:textGradientMove 6s linear infinite; 
+      padding:100px 20px; text-align:center; color: var(--dark); 
     }
+    .contact-teaser h2 { font-size:3rem; margin-bottom:25px; font-weight:700; letter-spacing: -1px; }
+    .contact-teaser p { font-size:1.1rem; max-width:650px; margin:0 auto 35px; line-height:1.6; font-weight: 500; }
 
-    /* ESENȚA H-TIME */
-    .objectives-section { max-width:1200px; margin:80px auto; padding:0 20px; text-align:center; }
-    .objectives-header { display:flex; align-items:center; justify-content:center; margin-bottom:60px; }
-    .objectives-header::before, .objectives-header::after { content:""; flex:1; border-bottom:2px solid black; margin:0 20px; }
-    .objectives-header h2 { font-size:2.5rem; letter-spacing:2px; font-weight:700; }
-    .objectives-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap:40px; text-align:left; }
-    .obj-col h3 { font-size:1.2rem; border-bottom:2px solid black; padding-bottom:10px; margin-bottom:20px; font-weight:600; }
-    .obj-col p { font-size:0.95rem; line-height:1.8; color:#333; margin-bottom: 15px;}
+    .zigzag-separator { display:block; width:100%; height:40px; background: linear-gradient(to right, var(--pink), var(--peach), var(--pink)); background-size:200% auto; animation:textGradientMove 6s linear infinite; margin-bottom:-1px; }
 
-    /* QUOTES */
-    .quotes-section { padding:80px 0; background:#000; overflow:hidden; display:flex; flex-direction:column; gap:40px; width:100%; }
-    .quote-track { display:flex; width:max-content; white-space:nowrap; gap:80px; font-family: 'Playfair Display', serif; font-style:italic; font-size:1.8rem; color:#fff; }
-    .quote-item span { color:var(--peach); font-family: 'Montserrat', sans-serif; font-weight:500; font-style:normal; font-size:1rem; margin-left:20px; }
-    
-    .scroll-right-fast { animation:scroll-right 40s linear infinite; }
-    .scroll-left-fast { animation:scroll-left 40s linear infinite; }
-    
-    @keyframes scroll-right { 0%{transform:translateX(calc(-50% - 40px));} 100%{transform:translateX(0);} }
-    @keyframes scroll-left { 0%{transform:translateX(0);} 100%{transform:translateX(calc(-50% - 40px));} }
-
-    .contact-teaser { background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink)); background-size:200% auto; animation:textGradientMove 4s linear infinite; padding:80px 20px; text-align:center; color:black; }
-    .contact-teaser h2 { font-size:3rem; margin-bottom:20px; font-weight:700; }
-    .contact-teaser p { font-size:1.1rem; max-width:600px; margin:0 auto; line-height:1.6; }
-
-    .zigzag-separator { display:block; width:100%; height:40px; background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink)); background-size:200% auto; animation:textGradientMove 4s linear infinite; margin-bottom:-1px; }
-
-    /* FAQ */
-    .faq-section { background:var(--dark); padding:80px 20px 100px; color:white; }
+    /* ================= FAQ (Restaurat la Gri/Dark Original cu Text Gradient la hover) ================= */
+    .faq-section { background:var(--dark); padding:100px 20px; color:white; }
     .faq-container { max-width:900px; margin:0 auto; }
     .faq-container h2 { font-size:3.5rem; margin-bottom:50px; color:var(--peach); font-weight:700; }
-    .faq-item { border-bottom:1px solid #333; }
+    
+    .faq-item { border-bottom:1px solid #333; margin-bottom: 5px;}
     .faq-question {
       width:100%; padding:25px 0; display:flex; justify-content:space-between; align-items:center;
-      background:none; border:none; color:white; cursor:pointer; font-weight:600; font-size:1.2rem; text-align:left; transition:all .3s; font-family: 'Montserrat', sans-serif;
+      background:none; border:none; color:white; cursor:pointer; font-weight:600; font-size:1.2rem; 
+      text-align:left; transition:var(--transition); font-family: 'Montserrat', sans-serif;
     }
+    
+    /* Efectul original de gradient pe text la hover */
     .faq-question:hover {
       background: linear-gradient(to right, var(--pink), var(--peach), #ffffff, var(--peach), var(--pink));
       background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:textGradientMove 4s linear infinite;
     }
-    .faq-icon { font-size:2rem; color:var(--peach); font-weight:normal; }
+    
+    .faq-icon { font-size:2rem; color:var(--peach); font-weight:normal; transition: transform 0.3s; -webkit-text-fill-color: var(--peach); }
+    .faq-item.active .faq-icon { transform: rotate(45deg); } 
+
     .faq-answer { max-height:0; overflow:hidden; transition:max-height .4s ease-out; color:#ccc; font-size:0.95rem; line-height:1.6; }
     .faq-answer-content { padding-bottom:25px; padding-right:40px; }
     .faq-answer-content p { margin-bottom: 15px; }
     .faq-answer-content p:last-child { margin-bottom: 0; }
 
-    /* FOOTER */
-    footer { background-color:#0b0b0b; padding:80px 50px 30px; display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:40px; color:#fff; border-top:1px solid #222; }
-    .footer-col h2 { color:var(--peach); font-size:2.2rem; margin-bottom:20px; font-weight:700; }
-    .footer-col h3 { font-size:1rem; font-weight:700; margin-bottom:30px; letter-spacing:1px; text-transform:uppercase; color:#fff; }
+    /* ================= FOOTER ================= */
+    footer { 
+      background-color:#0b0b0b; padding:80px 50px 30px; 
+      display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:50px; 
+      color:#fff; border-top:1px solid #222; 
+    }
+    .footer-col h2 { font-family:'DM Serif Display',serif; color:var(--peach); font-size:2.2rem; margin-bottom:20px; font-weight: normal;}
+    .footer-col h3 { font-size:1rem; font-weight:700; margin-bottom:30px; letter-spacing:1.5px; text-transform:uppercase; color:#fff; }
     .footer-desc { font-size:0.9rem; color:#999; line-height:1.8; margin-bottom:30px; }
+    
     .social-links { display:flex; gap:15px; }
-    .social-icon-circle { width:40px; height:40px; background:#222; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; text-decoration:none; transition:.3s; }
-    .social-icon-circle:hover { background: linear-gradient(to right, var(--pink), var(--peach)); color:black; transform:translateY(-3px); }
-    .footer-col ul { list-style:none; padding:0; display:flex; flex-direction:column; gap:15px; }
-    .footer-col ul a { text-decoration:none; color:#999; font-size:0.9rem; transition:.3s; display:inline-block; }
-    .footer-col ul a:hover { color:var(--peach); transform:translateX(5px); }
-    .footer-bottom { grid-column:1 / -1; text-align:center; padding-top:40px; border-top:1px solid #222; color:#555; font-size:0.8rem; margin-top:20px; }
-    .anpc-img { max-width:180px; width:100%; height:auto; display:block; margin-bottom:15px; transition:opacity .3s; }
-    .anpc-img:hover { opacity:0.7; }
-    .company-info { margin-top: 25px; font-size: 0.85rem; color: #888; line-height: 1.6; }
+    .social-icon-circle { 
+      width:42px; height:42px; background:rgba(255,255,255,0.05); border-radius:50%; 
+      display:flex; align-items:center; justify-content:center; color:white !important; 
+      transition: var(--transition); border: 1px solid rgba(255,255,255,0.1);
+    }
+    .social-icon-circle:hover { background: var(--peach); color:var(--dark) !important; border-color: var(--peach); transform:translateY(-5px); }
+    
+    .footer-col ul { list-style:none; padding:0; display:flex; flex-direction:column; gap:16px; }
+    .footer-col ul a { color:#999 !important; font-size:0.9rem; transition: var(--transition); display:inline-block; }
+    .footer-col ul a:hover { color:var(--peach) !important; transform:translateX(8px); }
+    
+    .company-info { margin-top: 25px; font-size: 0.85rem; color: #888; line-height: 1.8; }
+    .anpc-img { max-width:180px; width:100%; height:auto; display:block; margin-bottom:15px; transition:opacity .3s; opacity: 0.7; }
+    .anpc-img:hover { opacity:1; }
 
-    /* COOKIE BANNER OVERLAY */
+    .footer-bottom { 
+      grid-column:1 / -1; text-align:center; padding-top:40px; border-top:1px solid rgba(255,255,255,0.05); 
+      color:#666; font-size:0.85rem; margin-top:30px; letter-spacing: 0.5px;
+    }
+
+    /* ================= COOKIE BANNER OVERLAY ================= */
     .cookie-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px);
@@ -372,33 +384,38 @@
     .cookie-banner {
       position: fixed; bottom: -100%; left: 0; width: 100%;
       background: rgba(17, 17, 17, 0.95); backdrop-filter: blur(15px); color: white;
-      padding: 30px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
+      padding: 40px 30px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
       z-index: 2000; box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
       transition: bottom 0.6s cubic-bezier(0.4, 0, 0.2, 1); border-top: 1px solid rgba(255,255,255,0.1);
     }
     .cookie-banner.show { bottom: 0; }
     .cookie-content { max-width: 800px; text-align: left; }
-    .cookie-content h3 { font-size: 1.3rem; margin-bottom: 15px; font-weight: 600; color: var(--peach); }
-    .cookie-content p { font-size: 0.9rem; line-height: 1.6; color: #ccc; }
+    .cookie-content h3 { font-size: 1.4rem; margin-bottom: 15px; font-weight: 600; color: var(--peach); }
+    .cookie-content p { font-size: 0.95rem; line-height: 1.6; color: #ddd; }
     .cookie-content a { color: var(--peach); text-decoration: underline; transition: color 0.3s; font-weight: 500; }
     .cookie-content a:hover { color: var(--pink); }
     
-    .cookie-actions { display: flex; flex-direction: column; gap: 12px; min-width: 280px; width: 100%; }
-    .cookie-buttons-row { display: flex; gap: 10px; width: 100%; }
+    .cookie-actions { display: flex; flex-direction: column; gap: 12px; min-width: 320px; width: 100%; }
+    .cookie-buttons-row { display: flex; gap: 12px; width: 100%; }
     .cookie-actions button, .cookie-pref-footer button {
-      padding: 12px 15px; border-radius: 30px; font-family: 'Montserrat', sans-serif;
-      font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.3s; text-transform: uppercase;
+      padding: 14px 20px; border-radius: 30px; font-family: 'Montserrat', sans-serif;
+      font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;
     }
     .cookie-actions button { flex: 1; }
-    .btn-accept-c { background: linear-gradient(to right, var(--pink), var(--peach)); color: black; border: none; box-shadow: 0 4px 15px rgba(252, 191, 136, 0.2); }
-    .btn-accept-c:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(252, 191, 136, 0.4); }
-    .btn-reject-c { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.3); }
-    .btn-reject-c:hover { border-color: var(--peach); color: var(--peach); }
+    
+    .btn-accept-c { 
+      background: linear-gradient(to right, var(--pink), var(--peach)); color: var(--dark) !important; 
+      border: none; box-shadow: 0 4px 15px rgba(252, 191, 136, 0.3); 
+    }
+    .btn-accept-c:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(252, 191, 136, 0.5); color: var(--dark) !important; }
+    
+    .btn-reject-c { background: transparent; color: white !important; border: 1px solid rgba(255,255,255,0.3); }
+    .btn-reject-c:hover { border-color: var(--peach); color: var(--peach) !important; }
     
     .btn-manage-c { 
-      background: transparent !important; color: #999 !important; border: none !important; 
-      text-decoration: underline !important; text-transform: none !important; font-size: 0.85rem !important; 
-      padding: 5px !important; box-shadow: none !important;
+      background: transparent !important; color: #aaa !important; border: none !important; 
+      text-decoration: underline !important; text-transform: none !important; font-size: 0.9rem !important; 
+      padding: 5px !important; box-shadow: none !important; letter-spacing: normal; font-weight: 500;
     }
     .btn-manage-c:hover { color: white !important; transform: none !important;}
 
@@ -406,61 +423,61 @@
     .cookie-pref-modal {
       position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.95);
       background: rgba(17, 17, 17, 0.98); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 12px; width: 90%; max-width: 500px; z-index: 2001; color: white;
+      border-radius: 16px; width: 90%; max-width: 500px; z-index: 2001; color: white;
       opacity: 0; visibility: hidden; transition: all 0.3s ease; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
     }
     .cookie-pref-modal.show { opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1); }
-    .cookie-pref-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-    .cookie-pref-header h3 { font-size: 1.2rem; color: var(--peach); margin: 0; font-weight: 600; }
-    .close-pref { background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; transition: color 0.3s; line-height: 1; }
+    .cookie-pref-header { display: flex; justify-content: space-between; align-items: center; padding: 25px 30px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .cookie-pref-header h3 { font-size: 1.3rem; color: var(--peach); margin: 0; font-weight: 600; }
+    .close-pref { background: none; border: none; color: white; font-size: 2rem; cursor: pointer; transition: color 0.3s; line-height: 1; font-weight: 300;}
     .close-pref:hover { color: var(--pink); }
-    .cookie-pref-body { padding: 20px; max-height: 60vh; overflow-y: auto; }
-    .pref-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 15px; }
+    .cookie-pref-body { padding: 30px; max-height: 60vh; overflow-y: auto; }
+    .pref-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; gap: 20px; }
     .pref-item:last-child { margin-bottom: 0; }
-    .pref-info h4 { font-size: 1rem; margin-bottom: 5px; font-weight: 600; font-family: 'Montserrat', sans-serif; }
-    .pref-info p { font-size: 0.8rem; color: #aaa; line-height: 1.4; margin: 0; }
-    .cookie-pref-footer { padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: flex-end; }
+    .pref-info h4 { font-size: 1.05rem; margin-bottom: 8px; font-weight: 600; font-family: 'Montserrat', sans-serif; }
+    .pref-info p { font-size: 0.85rem; color: #aaa; line-height: 1.5; margin: 0; }
+    .cookie-pref-footer { padding: 25px 30px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: flex-end; }
     
-    .switch { position: relative; display: inline-block; width: 46px; height: 24px; flex-shrink: 0; }
+    .switch { position: relative; display: inline-block; width: 50px; height: 26px; flex-shrink: 0; }
     .switch input { opacity: 0; width: 0; height: 0; }
-    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(255,255,255,0.2); transition: .4s; border-radius: 24px; }
-    .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(255,255,255,0.2); transition: .4s; border-radius: 26px; }
+    .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
     .switch input:checked + .slider { background: linear-gradient(to right, var(--pink), var(--peach)); }
-    .switch input:checked + .slider:before { transform: translateX(22px); }
+    .switch input:checked + .slider:before { transform: translateX(24px); }
     .switch input:disabled + .slider { opacity: 0.5; cursor: not-allowed; }
 
     @media (min-width: 992px) {
-      .cookie-banner { flex-direction: row; justify-content: center; padding: 40px 50px; gap: 50px; }
-      .cookie-actions { width: auto; min-width: 350px; }
+      .cookie-banner { flex-direction: row; justify-content: center; padding: 40px 50px; gap: 60px; }
+      .cookie-actions { width: auto; min-width: 380px; }
     }
 
+    /* ================= RESPONSIVE ================= */
+    @media (max-width:1024px) {
+      .objectives-grid { grid-template-columns: 1fr; }
+    }
     @media (max-width:768px) {
-      nav { flex-direction:column; gap:15px; padding:15px; background:rgba(0,0,0,0.8); }
-      .nav-links { flex-wrap:wrap; justify-content:center; gap:15px; }
+      nav { flex-direction:column; gap:15px; padding:15px; background:rgba(17,17,17,0.98); }
+      .nav-links { flex-wrap:wrap; justify-content:center; gap:20px; }
       .hero-title-container { font-size: 20vw; }
+      .features-section { padding: 50px 20px; }
       .categories-section h2, .objectives-header h2 { font-size:1.8rem; }
-      footer { padding:40px 20px; display:flex; flex-direction:column; }
+      footer { padding:60px 20px 30px; display:flex; flex-direction:column; gap: 40px; }
       .cookie-buttons-row { flex-direction: column; }
       .video-banner-section { height: 60vh; }
       .mute-toggle-btn { bottom: 20px; right: 20px; width: 45px; height: 45px; }
+      .contact-teaser { padding: 60px 20px; }
     }
 
     img { max-width: 100%; height: auto; object-fit: cover; }
-    @media screen and (max-width: 768px) {
-        body, p, a, li { font-size: 16px !important; }
-        .container, section, main { width: 100% !important; padding-left: 15px !important; padding-right: 15px !important; box-sizing: border-box; }
-        .produse, .grid, .row, .rand { display: flex !important; flex-direction: column !important; align-items: center !important; gap: 20px; }
-        .btn-descopera { width: 100% !important; padding: 15px !important; margin-bottom: 10px; }
-    }
   </style>
 </head>
 <body>
 
   <nav>
-    <a href="index.html" class="logo"><img src="logo.webp" alt="H-TIME Logo"></a>
+    <a href="index.html" class="logo"><img src="logo.webp" alt="H-TIME Logo" onerror="this.src='logo.png'"></a>
 
     <div class="nav-links">
-      <a href="index.html" data-i18n="nav_home">Acasă</a>
+      <a href="index.html" data-i18n="nav_home" style="color:var(--peach) !important;">Acasă</a>
       <a href="magazin.html" data-i18n="nav_shop">Magazin</a>
       <a href="despre-noi.html" data-i18n="nav_about">Despre Noi</a>
       <a href="echipa.html" data-i18n="nav_team">Echipa H-Time</a>
@@ -468,7 +485,7 @@
     </div>
 
     <div class="nav-icons">
-      <select id="languageSwitcher" aria-label="Selectează limba" style="background:black;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase;font-family:'Montserrat', sans-serif;">
+      <select id="languageSwitcher" aria-label="Selectează limba">
         <option value="ro">RO</option>
         <option value="en">EN</option>
         <option value="fr">FR</option>
@@ -476,7 +493,7 @@
         <option value="es">ES</option>
         <option value="it">IT</option>
       </select>
-      <a href="checkout.html" id="cart-nav-btn" class="cart-btn" style="font-family:'Montserrat', sans-serif; text-transform: uppercase;">CART (0)</a>
+      <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
     </div>
   </nav>
 
@@ -502,7 +519,7 @@
   <section class="features-section">
     <div class="feature-item">
       <span class="feature-icon">
-        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <rect x="1" y="3" width="15" height="13"></rect>
           <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
           <circle cx="5.5" cy="18.5" r="2.5"></circle>
@@ -515,7 +532,7 @@
 
     <div class="feature-item">
       <span class="feature-icon">
-        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
           <path d="M9 12l2 2 4-4"></path>
         </svg>
@@ -526,7 +543,7 @@
 
     <div class="feature-item">
       <span class="feature-icon">
-        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
           <path d="M3 3v5h5"></path>
         </svg>
@@ -536,21 +553,21 @@
     </div>
   </section>
 
-  <!-- ================= VIDEO BANNER ================= -->
+  <!-- ================= VIDEO BANNER (Loop secunda 3) ================= -->
   <section class="video-banner-section">
     <video id="promoVideo" class="promo-video" autoplay muted playsinline>
-      <source src="clip.mp4" type="video/mp4">
+      <source src="clip.mp4#t=3" type="video/mp4">
       Browserul tău nu suportă elementul video.
     </video>
     
     <button id="muteToggle" class="mute-toggle-btn" aria-label="Pornește/Oprește Sunet">
-      <!-- Icon Mute (default pt că video e muted la început) -->
+      <!-- Icon Mute -->
       <svg id="icon-muted" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
         <line x1="23" y1="9" x2="17" y2="15"></line>
         <line x1="17" y1="9" x2="23" y2="15"></line>
       </svg>
-      <!-- Icon Unmuted (ascuns la început) -->
+      <!-- Icon Unmuted -->
       <svg id="icon-unmuted" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
         <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
         <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
@@ -624,8 +641,8 @@
 
       <div class="obj-col">
         <h3 data-i18n="obj3_title">O MOȘTENIRE ETERNĂ</h3>
-        <p data-i18n="obj3_text">Dincolo de strălucirea efemeră, scopul nostru este să făurim amintiri care sfidează timpul. Fiecare piesă este creată pentru a deveni o comoară de suflet, menită să fie purtată cu pasiune și transmisă din generație în generație, păstrând mereu vie o poveste nemuritoare.</p>
-        <p data-i18n="obj3_extra">Ne asumăm responsabilitatea calității: materiale atent selecționate, finisaje durabile și servicii care susțin longevitatea pieselor. H‑TIME nu vinde doar obiecte — cultivăm o moștenire.</p>
+        <p data-i18n="obj3_text">Dincolo de strălucirea efemeră, scopul nostru este să făurim amintiri care sfidează timpul. Fiecare piesă este created pentru a deveni o comoară de suflet, menită să fie purtată cu pasiune și transmisă din generație în generație, păstrând mereu vie o poveste nemuritoare.</p>
+        <p data-i18n="obj3_extra">Ne asumăm responsabilitatea calității: materiale atent selecționate, finisaje durabile și servicii care susțin longevitatea pieselor. H-TIME nu vinde doar obiecte — cultivăm o moștenire.</p>
       </div>
     </div>
   </section>
@@ -649,6 +666,7 @@
   <section class="contact-teaser">
     <h2 data-i18n="contact_title">CONTACTEAZĂ-NE</h2>
     <p data-i18n="contact_text">Ai vrea să ne sugerezi o idee sau să colaborezi cu noi? Scrie-ne, abia așteptăm să auzim!</p>
+    <button class="btn-descopera" style="background: var(--dark); color: white !important;" onclick="window.location.href='contact.html'" data-i18n="nav_contact">Contactează-ne</button>
   </section>
 
   <svg class="zigzag-separator" viewBox="0 0 100 10" preserveAspectRatio="none">
@@ -740,7 +758,7 @@
     <div class="footer-col">
       <h3 data-i18n="footer_nav">NAVIGARE RAPIDĂ</h3>
       <ul>
-        <li><a href="index.html" data-i18n="footer_home">Acasă - Pagina principală</a></li>
+        <li><a href="index.html" data-i18n="footer_home" style="color:var(--peach) !important; font-weight: 500;">Acasă - Pagina principală</a></li>
         <li><a href="magazin.html" data-i18n="footer_shop">Magazin - Toate Colecțiile</a></li>
         <li><a href="despre-noi.html" data-i18n="footer_about">Povestea Noastră</a></li>
         <li><a href="contact.html" data-i18n="footer_contact">Contact & Suport</a></li>
@@ -871,30 +889,28 @@
       const randomImgUrl = heroImages[Math.floor(Math.random()*heroImages.length)];
       if (heroSection) heroSection.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('${randomImgUrl}')`;
 
-      // --- LOGICA VIDEO PROMO ---
+      // --- LOGICA VIDEO PROMO IMBUNATATITA (Loop secunda 3) ---
       const promoVideo = document.getElementById('promoVideo');
       const muteToggle = document.getElementById('muteToggle');
       const iconMuted = document.getElementById('icon-muted');
       const iconUnmuted = document.getElementById('icon-unmuted');
 
       if (promoVideo) {
-        // Asigurăm pornirea de la secunda 3 la încărcare
+        const startSecond = 3; 
+
         promoVideo.addEventListener('loadedmetadata', () => {
-          promoVideo.currentTime = 3;
+          promoVideo.currentTime = startSecond;
         });
         
-        // Dacă e deja încărcat
         if (promoVideo.readyState >= 1) {
-          promoVideo.currentTime = 3;
+          promoVideo.currentTime = startSecond;
         }
 
-        // Când se termină videoclipul, forțăm să revină la secunda 3
         promoVideo.addEventListener('ended', () => {
-          promoVideo.currentTime = 3;
+          promoVideo.currentTime = startSecond;
           promoVideo.play();
         });
 
-        // Logica butonului de mut/unmut
         if (muteToggle) {
           muteToggle.addEventListener('click', () => {
             if (promoVideo.muted) {
@@ -909,7 +925,6 @@
           });
         }
       }
-      // --------------------------
 
       // --- LOGICA PENTRU ANIMAȚIA TITLULUI H-TIME ---
       const mainTitle = document.getElementById('main-title');
@@ -933,7 +948,6 @@
         });
       }
 
-      // Funcție pentru a porni animațiile secțiunii Hero
       function startHeroAnimations() {
         const logoMorph = document.getElementById('hero-logo');
         const titleContainer = document.getElementById('main-title');
@@ -958,38 +972,32 @@
         if (cookieOverlay) cookieOverlay.classList.remove('show');
       }
 
-      // Verificăm dacă există deja decizia în localStorage (pe întregul site)
       const isCookieHandled = localStorage.getItem('htime_cookies_accepted');
 
       if (!isCookieHandled && cookieBanner) {
-        // Dacă e prima dată pe site, arată pop-up-ul
         setTimeout(() => { 
           cookieBanner.classList.add('show'); 
           if(cookieOverlay) cookieOverlay.classList.add('show');
         }, 800);
       } else {
-        // Dacă decizia a fost luată deja, pornește animația instant
         startHeroAnimations();
       }
       
-      // Buton Accept Toate
       if (acceptBtn) {
         acceptBtn.addEventListener('click', () => {
           localStorage.setItem('htime_cookies_accepted', 'true');
           hideCookies();
-          startHeroAnimations(); // Pornește animația abia acum
+          startHeroAnimations();
         });
       }
-      // Buton Refuză Toate
       if (rejectBtn) {
         rejectBtn.addEventListener('click', () => {
           localStorage.setItem('htime_cookies_accepted', 'false');
           hideCookies();
-          startHeroAnimations(); // Pornește animația abia acum
+          startHeroAnimations();
         });
       }
       
-      // Buton Administrează (Deschide modalul de preferințe)
       const prefModal = document.getElementById('cookie-preferences-modal');
       const closePrefBtn = document.getElementById('close-pref');
       const savePrefBtn = document.getElementById('save-preferences');
@@ -1004,7 +1012,7 @@
       if (closePrefBtn) {
         closePrefBtn.addEventListener('click', () => {
           if (prefModal) prefModal.classList.remove('show');
-          if (cookieBanner) cookieBanner.classList.add('show'); // Întoarcere la bannerul principal
+          if (cookieBanner) cookieBanner.classList.add('show');
         });
       }
 
@@ -1071,21 +1079,17 @@
         button.addEventListener('click', () => {
           const item = button.parentElement;
           const answer = item.querySelector('.faq-answer');
-          const icon = item.querySelector('.faq-icon');
+          
           if (item.classList.contains('active')) {
             item.classList.remove('active');
             answer.style.maxHeight = null;
-            if (icon) icon.innerText = '+';
           } else {
             document.querySelectorAll('.faq-item.active').forEach(activeItem => {
               activeItem.classList.remove('active');
               activeItem.querySelector('.faq-answer').style.maxHeight = null;
-              const ai = activeItem.querySelector('.faq-icon');
-              if (ai) ai.innerText = '+';
             });
             item.classList.add('active');
             answer.style.maxHeight = answer.scrollHeight + "px";
-            if (icon) icon.innerText = '-';
           }
         });
       });
@@ -1337,7 +1341,7 @@
         contact_title: "CONTÁCTANOS", contact_text: "¿Quieres sugerir una idea o colaborar con nosotros? Escríbenos, ¡esperamos saber de ti!",
         faq_title: "FAQS",
         faq1_q: "¿QUÉ MATERIALES UTILIZAN?", faq1_a: "<p>En H-TIME, utilizamos exclusivamente materiales de primera calidad de origen ético y sostenible. Nuestros metales base son el oro de 18k y el platino.</p><p>Los diamantes y piedras preciosas son cuidadosamente seleccionados, cumpliendo estrictamente con las regulaciones internacionales libres de conflictos.</p>",
-        faq2_q: "¿CÓMO FUNCIONA EL PROCESO DE CREACIÓN A MEDIDA?", faq2_a: "<p>La creación de una joya Bespoke es un viaje íntimo. Todo comienza con una consulta privada para discutir su visión. Luego creamos bocetos detallados.</p><p>Tras la aprobación, pasamos al modelado 3D y la elección de piedras. Usted participará en cada paso importante.</p><p>Finalmente, nuestros maestros joyeros dan vida a una obra maestra única.</p>",
+        faq2_q: "¿CÓMO FUNCIONA EL PROCESSO DE CREACIÓN A MEDIDA?", faq2_a: "<p>La creación de una joya Bespoke es un viaje íntimo. Todo comienza con una consulta privada para discutir su visión. Luego creamos bocetos detallados.</p><p>Tras la aprobación, pasamos al modelado 3D y la elección de piedras. Usted participará en cada paso importante.</p><p>Finalmente, nuestros maestros joyeros dan vida a una obra maestra única.</p>",
         faq3_q: "¿QUÉ SIGNIFICAN LOS SÍMBOLOS EN SUS COLECCIONES?", faq3_a: "<p>Nuestras colecciones están profundamente arraigadas en la mitología griega y la geometría sagrada. Reinterpretamos símbolos antiguos en una estética moderna.</p><p>Las formas circulares representan el infinito. Cada colección rinde homenaje a un mito, ofreciendo un aura de misterio.</p>",
         faq4_q: "¿CÓMO GARANTIZAN LA AUTENTICIDAD?", faq4_a: "<p>Cada joya pasa por un riguroso control de calidad de tres etapas. Verificamos el engaste, el acabado y la estructura.</p><p>Además, cada compra viene con un Certificado de Autenticidad que garantiza la pureza de la pieza.</p>",
         faq5_q: "¿QUÉ SIMBOLIZA EL ESLOGAN 'EMOCIONES ESCULPIDAS EN ELEGANCIA'?", faq5_a: "<p>Este eslogan resume la filosofía de H-TIME. Una joya es una promesa, un recuerdo congelado en el tiempo.</p><p>Al esculpir la materia, damos forma a sus emociones para crear algo elegante y eterno.</p>",
@@ -1363,11 +1367,11 @@
       },
 
       it: {
-        title: "H-TIME | Esperienza di Lusso",
+        title: "H-TIME | Esperienza di Lujo",
         nav_home: "Home", nav_shop: "Negozio", nav_about: "Chi Siamo", nav_team: "Team H-Time", nav_contact: "Contattaci",
         hero_subtitle: "Emozioni scolpite nell'eleganza",
         feat1_title: "SPEDIZIONE GRATUITA", feat1_text: "Per tutti gli ordini superiori a 300 €, consegnati direttamente a casa.",
-        feat2_title: "GARANZIA 24 MESI", feat2_text: "Tutti i nostri pezzi sono accompagnati da certificato di autenticità e garanzia.",
+        feat2_title: "GARANZIA 24 MESI", feat2_text: "Tutti i nostri pezzi sono accompagnati da certificato di autenticidad e garanzia.",
         feat3_title: "RESI SEMPLICI", feat3_text: "Hai 14 giorni di calendario per cambiare il prodotto.",
         cat_title: "COSA OFFRIAMO", 
         cat1_title: "OROLOGI", cat2_title: "ANELLI", cat3_title: "ORECCHINI", cat4_title: "BRACCIALI", 
@@ -1390,7 +1394,7 @@
         faq3_q: "QUAL È IL SIGNIFICATO DEI VOSTRI SIMBOLI?", faq3_a: "<p>Le nostre collezioni sono profondamente radicate nella mitologia greca e nella geometria sacra. Reinterpretiamo i simboli antichi in un'estetica moderna.</p><p>Le forme circolari rappresentano l'infinito. Ogni collezione rende omaggio a un mito, offrendo un'aura di mistero.</p>",
         faq4_q: "COME GARANTITE L'AUTENTICITÀ?", faq4_a: "<p>Ogni gioiello è sottoposto a un rigoroso controllo di qualità in tre fasi. Controlliamo l'incastonatura, la finitura e la struttura.</p><p>Inoltre, ogni acquisto è accompagnato da un Certificato di Autenticità che garantisce la purezza della lega e delle pietre.</p>",
         faq5_q: "COSA SIMBOLEGGIA LO SLOGAN 'EMOZIONI SCOLPITE NELL'ELEGANZA'?", faq5_a: "<p>Questo slogan racchiude la filosofia di H-TIME. Un gioiello è una promessa, un ricordo congelato nel tempo.</p><p>Scolpendo la materia, diamo forma alle tue emozioni in un'eleganza eterna.</p>",
-        footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso dedicata a chi apprezza la raffinatezza.",
+        footer_desc: "Emozioni sculptate nell'eleganza. Una boutique di lusso dedicata a chi apprezza la raffinatezza.",
         footer_nav: "NAVIGAZIONE RAPIDA", footer_home: "Home - Pagina principale", footer_shop: "Negozio - Tutte le collezioni",
         footer_about: "La nostra storia", footer_contact: "Contatto & Supporto", footer_info: "INFORMAZIONI & POLITICHE",
         footer_terms: "Termini e condizioni", footer_privacy: "Privacy", footer_cookies: "Informativa sui cookie", footer_delivery: "Consegna",

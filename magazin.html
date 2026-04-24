@@ -7,7 +7,6 @@
   <link rel="icon" href="logo.webp" type="image/webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Am păstrat doar DM Serif Display, Playfair Display (pentru elemente animate/slogan) și Montserrat (pentru restul site-ului) -->
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
 
   <style>
@@ -15,12 +14,15 @@
       --peach: #fcbf88;
       --pink: #ffb6c1;
       --dark: #111111;
-      --light-bg: #f8f5f2;
+      --light-bg: #fdfbf9; /* Ușor mai luminos pentru un aspect mai curat */
+      --card-bg: #ffffff;
+      --shadow-sm: 0 4px 15px rgba(0,0,0,0.03);
+      --shadow-md: 0 15px 35px rgba(0,0,0,0.06);
+      --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
     
-    /* REZOLVARE SUBLINIERI: Fortam toate linkurile sa fie curate si de culoarea textului */
     a, a:hover, a:visited, a:active { text-decoration: none !important; color: inherit !important; }
 
     body {
@@ -41,85 +43,141 @@
       100% { background-position: 200% 50%; } 
     }
 
-    /* ================= NAVIGAȚIE ================= */
+    /* ================= NAVIGAȚIE (Îmbunătățită cu efect de sticlă) ================= */
     nav {
       position: fixed;
       top:0; left:0; width:100%;
       padding:15px 50px;
       display:flex; justify-content:space-between; align-items:center;
       z-index:1000;
-      background-color: var(--dark);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      background-color: rgba(17, 17, 17, 0.95); /* Semi-transparent */
+      backdrop-filter: blur(10px); /* Efect de glassmorphism */
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: var(--transition);
     }
-    .logo img { height:75px; }
-    .nav-links { display:flex; gap:30px; }
+    .logo img { height:75px; transition: transform 0.3s; }
+    .logo img:hover { transform: scale(1.02); }
+
+    .nav-links { display:flex; gap:35px; }
     .nav-links a {
-      color:white !important; font-weight:500; font-size:0.9rem;
-      text-transform:uppercase; letter-spacing:1px; transition: color .3s;
+      color:white !important; font-weight:500; font-size:0.85rem;
+      text-transform:uppercase; letter-spacing:1.5px; 
+      position: relative;
+      padding-bottom: 5px;
+    }
+    
+    /* Animație elegantă la hover pe meniu */
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background-color: var(--peach);
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+      left: 0;
     }
     .nav-links a:hover { color: var(--peach) !important; }
 
-    .nav-icons { display:flex; align-items:center; gap:20px; }
-    .nav-icons a { color:white !important; font-size:0.9rem; text-transform:uppercase; transition: all .3s; }
-    .nav-icons a:hover { color: var(--peach) !important; }
+    .nav-icons { display:flex; align-items:center; gap:25px; }
+    
+    /* Buton Cart rafinat */
     .cart-btn {
-      border:1px solid white; padding:8px 18px; border-radius:30px;
-      display:inline-flex; align-items:center; justify-content:center; transition: all .3s;
+      border: 1px solid rgba(255,255,255,0.3); 
+      padding: 10px 22px; 
+      border-radius: 30px;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 500;
+      display: inline-flex; align-items: center; justify-content: center; 
+      transition: var(--transition);
+      background: transparent;
+      color: white !important;
     }
-    .cart-btn:hover { border-color: var(--peach); }
+    .cart-btn:hover { 
+      border-color: var(--peach); 
+      background: var(--peach);
+      color: var(--dark) !important;
+      transform: translateY(-2px);
+    }
+
+    /* Selector limbă stilizat */
+    #languageSwitcher {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.3s;
+    }
+    #languageSwitcher:hover { border-color: var(--peach); }
+    #languageSwitcher option { background: var(--dark); color: white; }
 
     /* ================= LAYOUT MAGAZIN ================= */
     .shop-container { 
       display: flex; 
       width: 100%; 
-      max-width: 1400px; 
-      margin: 40px auto; 
+      max-width: 1450px; 
+      margin: 50px auto; 
       padding: 0 40px; 
       flex-grow: 1; 
-      gap: 50px;
+      gap: 60px;
       font-family: 'Montserrat', sans-serif;
     }
 
-    /* SIDEBAR (FILTRE) */
+    /* ================= SIDEBAR (Acum cu poziție FIXĂ la scroll) ================= */
     .sidebar { 
       width: 260px; 
       flex-shrink: 0; 
+      position: sticky; /* NOU: Ajută navigarea enorm */
+      top: 130px; /* Distanța față de meniul de sus */
+      align-self: flex-start;
+      padding-right: 15px;
     }
     
     .sidebar p.filter-label { 
-      font-size: 0.8rem; 
-      color: #888; 
-      margin-bottom: 5px; 
+      font-size: 0.75rem; 
+      color: #999; 
+      margin-bottom: 8px; 
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
+      font-weight: 500;
     }
     
     .sidebar h2 { 
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       font-size: 1.8rem; 
-      margin-bottom: 30px; 
+      margin-bottom: 35px; 
       text-transform: uppercase; 
       color: var(--dark);
-      line-height: 1.2;
+      letter-spacing: -0.5px;
     }
 
-    .category-list { 
-      list-style: none; 
-      margin-bottom: 50px; 
-    }
+    .category-list { list-style: none; margin-bottom: 50px; }
     
     .category-list li { 
-      margin-bottom: 15px; 
+      margin-bottom: 18px; 
       cursor: pointer; 
-      transition: 0.3s; 
+      transition: var(--transition); 
       font-size: 0.95rem; 
       text-transform: uppercase; 
       letter-spacing: 1px;
-      font-weight: 700;
-      color: #555;
+      font-weight: 600;
+      color: #777;
       display: flex;
       align-items: center;
+      position: relative;
     }
     
     .category-list li::before {
@@ -128,96 +186,93 @@
       width: 6px; height: 6px;
       border-radius: 50%;
       background: var(--peach);
-      margin-right: 10px;
+      margin-right: 12px;
       opacity: 0;
-      transition: opacity 0.3s, transform 0.3s;
-      transform: translateX(-10px);
+      transition: var(--transition);
+      transform: scale(0);
     }
 
-    .category-list li:hover { color: var(--dark); }
-    .category-list li.active { color: var(--dark); }
-    .category-list li.active::before { opacity: 1; transform: translateX(0); }
+    .category-list li:hover { color: var(--dark); transform: translateX(5px); }
+    .category-list li.active { color: var(--dark); font-weight: 700; }
+    .category-list li.active::before { opacity: 1; transform: scale(1); }
 
     .category-list li.sale-category-badge {
-      background: linear-gradient(to right, var(--pink), var(--peach), var(--pink), var(--peach), var(--pink));
-      background-size: 200% auto;
-      animation: textGradientMove 4s linear infinite;
-      color: black;
-      padding: 8px 16px;
-      border-radius: 6px;
+      background: linear-gradient(to right, var(--pink), var(--peach), var(--pink), var(--peach));
+      background-size: 300% auto;
+      animation: textGradientMove 6s linear infinite;
+      color: var(--dark);
+      padding: 10px 18px;
+      border-radius: 8px;
       width: max-content;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      margin-bottom: 15px;
+      box-shadow: 0 4px 15px rgba(252, 191, 136, 0.2);
+      margin-bottom: 25px;
+      font-weight: 700;
     }
-    .category-list li.sale-category-badge::before {
-      display: none; 
-    }
+    .category-list li.sale-category-badge::before { display: none; }
     .category-list li.sale-category-badge:hover, .category-list li.sale-category-badge.active {
-      transform: scale(1.05);
-      color: black;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 20px rgba(252, 191, 136, 0.4);
     }
 
     /* FILTRE */
-    .filter-group { margin-bottom: 40px; }
+    .filter-group { margin-bottom: 45px; }
     .filter-group h4 { 
-      font-family: 'Montserrat', sans-serif;
       font-size: 0.85rem; 
       color: var(--dark); 
-      margin-bottom: 20px; 
+      margin-bottom: 25px; 
       text-transform: uppercase; 
-      letter-spacing: 1px; 
+      letter-spacing: 1.5px; 
       font-weight: 700;
     }
     
-    /* SLIDER DUAL */
+    /* SLIDER DUAL MAI ELEGANT */
     .slider-wrapper { position: relative; width: 100%; height: 25px; display: flex; align-items: center; }
-    .slider-track { position: absolute; width: 100%; height: 4px; background: #ddd; border-radius: 5px; z-index: 1; }
-    .slider-inner-track { position: absolute; height: 4px; background: var(--dark); border-radius: 5px; z-index: 2; }
+    .slider-track { position: absolute; width: 100%; height: 3px; background: #e5e5e5; border-radius: 5px; z-index: 1; }
+    .slider-inner-track { position: absolute; height: 3px; background: var(--dark); border-radius: 5px; z-index: 2; transition: left 0.1s, width 0.1s; }
     .slider-wrapper input[type="range"] {
       position: absolute; width: 100%; background: none; pointer-events: none; -webkit-appearance: none; z-index: 3; outline: none;
     }
     input[type="range"]::-webkit-slider-thumb {
       -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: white; 
-      border: 2px solid var(--dark); cursor: pointer; pointer-events: auto; transition: 0.2s;
+      border: 2px solid var(--dark); cursor: pointer; pointer-events: auto; transition: var(--transition);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-    input[type="range"]::-webkit-slider-thumb:hover { border-color: var(--peach); transform: scale(1.1); }
+    input[type="range"]::-webkit-slider-thumb:hover { border-color: var(--peach); transform: scale(1.2); box-shadow: 0 3px 8px rgba(0,0,0,0.15); }
     
-    .price-labels { display: flex; justify-content: space-between; margin-top: 15px; font-weight: 700; font-size: 0.9rem; color: #444; }
+    .price-labels { display: flex; justify-content: space-between; margin-top: 20px; font-weight: 600; font-size: 0.85rem; color: #555; }
 
     /* DROPDOWN SORTARE */
     .sort-select { 
-      width: 100%; 
-      padding: 12px; 
-      font-family: 'Montserrat', sans-serif; 
-      font-size: 0.9rem;
-      border: 1px solid #ccc; 
-      border-radius: 8px; 
-      background: white; 
-      cursor: pointer;
-      outline: none;
-      color: #333;
-      font-weight: 700;
+      width: 100%; padding: 14px 16px; font-family: 'Montserrat', sans-serif; font-size: 0.85rem;
+      border: 1px solid #e0e0e0; border-radius: 10px; background: var(--card-bg); 
+      cursor: pointer; outline: none; color: var(--dark); font-weight: 600;
+      transition: var(--transition);
+      appearance: none; /* Elimina sageata default */
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-size: 14px;
     }
-    .sort-select:focus { border-color: var(--dark); }
+    .sort-select:focus, .sort-select:hover { border-color: var(--dark); box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
 
     /* ================= GRID PRODUSE ================= */
     .products-grid { 
       display: grid; 
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-      gap: 40px; 
+      gap: 45px; 
       flex-grow: 1; 
       align-content: flex-start;
-      margin-bottom: 60px; 
+      margin-bottom: 80px; 
     }
 
-    /* CARD PRODUS */
+    /* CARD PRODUS (Rafinat cu umbre și borduri fine) */
     .product-card { 
-      background: white; 
+      background: var(--card-bg); 
       padding: 20px; 
-      border-radius: 12px; 
-      box-shadow: 0 5px 20px rgba(0,0,0,0.03); 
-      transition: all 0.4s ease; 
+      border-radius: 16px; 
+      border: 1px solid rgba(0,0,0,0.03);
+      box-shadow: var(--shadow-sm); 
+      transition: var(--transition); 
       display: flex; 
       flex-direction: column; 
       position: relative;
@@ -225,50 +280,51 @@
     
     .product-card:hover { 
       transform: translateY(-8px); 
-      box-shadow: 0 15px 30px rgba(0,0,0,0.08); 
+      box-shadow: var(--shadow-md); 
+      border-color: rgba(252, 191, 136, 0.3); /* Un contur subtil peach la hover */
     }
 
     .img-container { 
       position: relative; 
       overflow: hidden; 
-      border-radius: 8px; 
-      margin-bottom: 20px; 
+      border-radius: 12px; 
+      margin-bottom: 25px; 
       aspect-ratio: 1/1; 
-      background: #fdfdfd;
+      background: #f9f9f9;
     }
     
     .img-container img { 
-      width: 100%; 
-      height: 100%; 
-      object-fit: cover; 
-      transition: opacity 0.5s ease, transform 0.5s ease; 
+      width: 100%; height: 100%; object-fit: cover; 
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); 
     }
     
     .hover-img { position: absolute; top: 0; left: 0; opacity: 0; }
-    .product-card:hover .hover-img { opacity: 1; transform: scale(1.05); }
-    .product-card:hover .main-img { opacity: 0; }
+    .product-card:hover .hover-img { opacity: 1; transform: scale(1.08); }
+    .product-card:hover .main-img { opacity: 0; transform: scale(0.95); }
 
     .product-card-title { 
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.1rem; 
+      font-size: 1.05rem; 
       font-weight: 700;
-      margin-bottom: 10px; 
+      margin-bottom: 12px; 
       color: var(--dark) !important;
-      line-height: 1.4;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     
-    .price-box { margin-bottom: 20px; font-weight: 600; font-size: 1.15rem; margin-top: auto; }
-    .old-price { text-decoration: line-through !important; color: #aaa !important; font-size: 0.95rem; margin-right: 8px; font-weight: 400; }
-    .new-price { color: var(--dark) !important; }
+    .price-box { margin-bottom: 25px; font-weight: 600; font-size: 1.2rem; margin-top: auto; }
+    .old-price { text-decoration: line-through !important; color: #aaa !important; font-size: 0.9rem; margin-right: 10px; font-weight: 500; }
+    .new-price { color: var(--dark) !important; font-weight: 700; }
     .regular-price { color: var(--dark) !important; }
 
-    /* FIX: Culoare alba explicita pentru buton cu prioritate maxima */
-    a.add-to-cart-btn, a.add-to-cart-btn:visited, a.add-to-cart-btn:active { 
-      font-family: 'Montserrat', sans-serif;
+    /* Buton "Vezi Produs" stilizat mai fin */
+    a.add-to-cart-btn { 
       background: var(--dark); 
       color: white !important; 
-      border: none; 
-      padding: 14px; 
+      border: 1px solid var(--dark); 
+      padding: 15px; 
       border-radius: 30px; 
       cursor: pointer; 
       width: 100%; 
@@ -276,76 +332,90 @@
       text-transform: uppercase; 
       font-size: 0.8rem; 
       text-align: center; 
-      transition: 0.3s;
-      letter-spacing: 1px;
+      transition: var(--transition);
+      letter-spacing: 1.5px;
       display: inline-block;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
     }
     
-    a.add-to-cart-btn:hover { 
-      background: linear-gradient(to right, var(--pink), var(--peach), var(--pink), var(--peach), var(--pink));
-      background-size: 200% auto; 
-      animation: textGradientMove 4s linear infinite; 
-      color: black !important; 
+    /* Efect de umplere cu gradient la hover */
+    a.add-to-cart-btn::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(to right, var(--pink), var(--peach), var(--pink));
+      background-size: 200% auto;
+      z-index: -1;
+      transition: opacity 0.4s;
+      opacity: 0;
     }
+    a.add-to-cart-btn:hover { border-color: transparent; color: var(--dark) !important; }
+    a.add-to-cart-btn:hover::before { opacity: 1; animation: textGradientMove 3s linear infinite; }
 
     .sale-badge {
-      position: absolute; top: 10px; left: 10px; z-index: 10;
-      background: linear-gradient(to right, var(--pink), var(--peach), var(--pink)); background-size: 200% auto; animation: textGradientMove 4s linear infinite;
-      color: black !important; padding: 4px 10px; font-weight: 700; font-size: 0.75rem; border-radius: 4px;
-      font-family: 'Montserrat', sans-serif;
-      transition: transform 0.3s ease;
+      position: absolute; top: 12px; left: 12px; z-index: 10;
+      background: linear-gradient(to right, var(--pink), var(--peach)); 
+      color: var(--dark) !important; padding: 6px 12px; font-weight: 700; font-size: 0.75rem; border-radius: 6px;
+      letter-spacing: 1px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      transition: var(--transition);
     }
+    .product-card:hover .sale-badge { transform: scale(1.05) translateY(-2px); }
     
-    .product-card:hover .sale-badge {
-      transform: scale(1.05);
-    }
     .sale-badge .badge-hover { display: none; }
     .product-card:hover .sale-badge .badge-default { display: none; }
     .product-card:hover .sale-badge .badge-hover { display: inline; }
 
-    .no-products-msg {
-      grid-column: 1 / -1;
-      font-size: 1.2rem;
-      color: #666;
-      text-align: center;
-      padding: 40px;
-    }
+    .no-products-msg { grid-column: 1 / -1; font-size: 1.2rem; color: #666; text-align: center; padding: 60px; font-weight: 500; }
 
     /* ================= FOOTER ================= */
     footer { 
-      background-color:#0b0b0b; 
-      padding:80px 50px 30px; 
-      display:grid; 
-      grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); 
-      gap:40px; 
-      color:#fff; 
-      border-top:1px solid #222; 
+      background-color:#0b0b0b; padding:80px 50px 30px; 
+      display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:50px; 
+      color:#fff; border-top:1px solid #222; 
     }
     .footer-col h2 { font-family:'DM Serif Display',serif; color:var(--peach); font-size:2.2rem; margin-bottom:20px; }
-    .footer-col h3 { font-size:1rem; font-weight:700; margin-bottom:30px; letter-spacing:1px; text-transform:uppercase; color:#fff; }
+    .footer-col h3 { font-size:1rem; font-weight:700; margin-bottom:30px; letter-spacing:1.5px; text-transform:uppercase; color:#fff; }
     .footer-desc { font-size:0.9rem; color:#999; line-height:1.8; margin-bottom:30px; }
+    
     .social-links { display:flex; gap:15px; }
-    .social-icon-circle { width:40px; height:40px; background:#222; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white !important; transition:.3s; }
-    .social-icon-circle:hover { background: linear-gradient(to right, var(--pink), var(--peach)); color:black !important; transform:translateY(-3px); }
-    .footer-col ul { list-style:none; padding:0; display:flex; flex-direction:column; gap:15px; }
-    .footer-col ul a { color:#999 !important; font-size:0.9rem; transition:.3s; display:inline-block; }
-    .footer-col ul a:hover { color:var(--peach) !important; transform:translateX(5px); }
-    .footer-bottom { grid-column:1 / -1; text-align:center; padding-top:40px; border-top:1px solid #222; color:#555; font-size:0.8rem; margin-top:20px; }
-    .anpc-img { max-width:180px; width:100%; height:auto; display:block; margin-bottom:15px; transition:opacity .3s; }
-    .anpc-img:hover { opacity:0.7; }
-    .company-info { margin-top: 25px; font-size: 0.85rem; color: #888; line-height: 1.6; }
+    .social-icon-circle { 
+      width:42px; height:42px; background:rgba(255,255,255,0.05); border-radius:50%; 
+      display:flex; align-items:center; justify-content:center; color:white !important; 
+      transition: var(--transition); border: 1px solid rgba(255,255,255,0.1);
+    }
+    .social-icon-circle:hover { background: var(--peach); color:var(--dark) !important; border-color: var(--peach); transform:translateY(-5px); }
+    
+    .footer-col ul { list-style:none; padding:0; display:flex; flex-direction:column; gap:16px; }
+    .footer-col ul a { color:#999 !important; font-size:0.9rem; transition: var(--transition); display:inline-block; }
+    .footer-col ul a:hover { color:var(--peach) !important; transform:translateX(8px); }
+    
+    .company-info { margin-top: 25px; font-size: 0.85rem; color: #888; line-height: 1.8; }
+    .anpc-img { max-width:180px; width:100%; height:auto; display:block; margin-bottom:15px; transition:opacity .3s; opacity: 0.7; }
+    .anpc-img:hover { opacity:1; }
 
+    .footer-bottom { 
+      grid-column:1 / -1; text-align:center; padding-top:40px; border-top:1px solid rgba(255,255,255,0.05); 
+      color:#666; font-size:0.85rem; margin-top:30px; letter-spacing: 0.5px;
+    }
+
+    /* ================= RESPONSIVE ================= */
     @media (max-width: 1024px) { 
-      .shop-container { flex-direction: column; padding: 0 20px; gap: 30px; }
-      .sidebar { width: 100%; border-right: none; border-bottom: 1px solid #ddd; padding-bottom: 30px; margin-bottom: 20px; }
-      .category-list { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 30px; }
+      .shop-container { flex-direction: column; padding: 0 20px; gap: 40px; }
+      .sidebar { 
+        width: 100%; border-right: none; position: relative; top: 0;
+        border-bottom: 1px solid #eaeaea; padding-bottom: 30px; margin-bottom: 10px; 
+      }
+      .category-list { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 30px; }
       .category-list li { margin-bottom: 0; }
     }
     @media (max-width:768px) {
-      nav { flex-direction:column; gap:15px; padding:15px; background:rgba(0,0,0,0.8); }
-      .nav-links { flex-wrap:wrap; justify-content:center; gap:15px; }
-      footer { padding:40px 20px; display:flex; flex-direction:column; }
-      body { padding-top: 130px; }
+      nav { flex-direction:column; gap:20px; padding:20px; background:rgba(17,17,17,0.98); }
+      .nav-links { flex-wrap:wrap; justify-content:center; gap:20px; }
+      footer { padding:60px 20px 30px; display:flex; flex-direction:column; gap: 40px; }
+      body { padding-top: 160px; }
+      .products-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 25px; }
     }
   </style>
 </head>
@@ -363,7 +433,7 @@
     </div>
 
     <div class="nav-icons">
-      <select id="languageSwitcher" aria-label="Selectează limba" style="background:black;border:1px solid rgba(255,255,255,0.12);color:white;padding:6px 8px;border-radius:6px;font-size:0.85rem;text-transform:uppercase; font-family: 'Montserrat', sans-serif;">
+      <select id="languageSwitcher" aria-label="Selectează limba">
         <option value="ro">RO</option>
         <option value="en">EN</option>
         <option value="fr">FR</option>
@@ -371,7 +441,7 @@
         <option value="es">ES</option>
         <option value="it">IT</option>
       </select>
-      <a href="checkout.html" id="cart-nav-btn" class="cart-btn" style="font-family: 'Montserrat', sans-serif;">Cart (0)</a>
+      <a href="checkout.html" id="cart-nav-btn" class="cart-btn">Cart (0)</a>
     </div>
   </nav>
 
@@ -382,7 +452,7 @@
       <h2 id="category-title" data-i18n="shop_cat_all_title">TOATE</h2>
       
       <ul class="category-list">
-        <li class="sale-category-badge" onclick="updateFilters({cat: 'oferte'}, event)" data-i18n="shop_cat_sale">Oferte</li>
+        <li class="sale-category-badge" onclick="updateFilters({cat: 'oferte'}, event)" data-i18n="shop_cat_sale">Oferte Speciale</li>
         <li class="active" onclick="updateFilters({cat: 'all'}, event)" data-i18n="shop_cat_all">Toate</li>
         <li onclick="updateFilters({cat: 'ceasuri'}, event)" data-i18n="shop_cat_watches">Ceasuri</li>
         <li onclick="updateFilters({cat: 'inele'}, event)" data-i18n="shop_cat_rings">Inele</li>
@@ -405,9 +475,9 @@
       </div>
 
       <div class="filter-group">
-        <h4 data-i18n="shop_sort">Sortează</h4>
+        <h4 data-i18n="shop_sort">Sortează Produse</h4>
         <select class="sort-select" onchange="updateFilters({sort: this.value})">
-          <option value="default" data-i18n="shop_sort_default">Implicit</option>
+          <option value="default" data-i18n="shop_sort_default">Sortează: Implicit</option>
           <option value="price-asc" data-i18n="shop_sort_asc">Preț: Mic la Mare</option>
           <option value="price-desc" data-i18n="shop_sort_desc">Preț: Mare la Mic</option>
         </select>
@@ -415,7 +485,8 @@
     </div>
 
     <div class="products-grid" id="products-container">
-      </div>
+      <!-- Produsele se generează automat aici prin JS -->
+    </div>
   </div>
 
   <footer>
@@ -438,7 +509,7 @@
       <h3 data-i18n="footer_nav">NAVIGARE RAPIDĂ</h3>
       <ul>
         <li><a href="index.html" data-i18n="footer_home">Acasă - Pagina principală</a></li>
-        <li><a href="magazin.html" style="color:var(--peach);" data-i18n="footer_shop">Magazin - Toate Colecțiile</a></li>
+        <li><a href="magazin.html" style="color:var(--peach) !important; font-weight: 500;" data-i18n="footer_shop">Magazin - Toate Colecțiile</a></li>
         <li><a href="despre-noi.html" data-i18n="footer_about">Povestea Noastră</a></li>
         <li><a href="contact.html" data-i18n="footer_contact">Contact & Suport</a></li>
       </ul>
@@ -581,7 +652,7 @@
       const currentLang = localStorage.getItem('htime_lang') || 'ro';
 
       if (lista.length === 0) {
-        container.innerHTML = `<div class="no-products-msg" data-i18n="shop_no_products">Niciun produs găsit.</div>`;
+        container.innerHTML = `<div class="no-products-msg" data-i18n="shop_no_products">Niciun produs găsit conform filtrelor selectate.</div>`;
       } else {
         container.innerHTML = "";
         lista.forEach(p => {
@@ -632,12 +703,10 @@
     }
 
     function updateCartCounter() {
-      // Prioritizeaza functia globala pentru consistenta
       if (typeof actualizeazaNumarCos === 'function') {
         actualizeazaNumarCos();
       } else {
         let cart = JSON.parse(localStorage.getItem('htimeCart')) || [];
-        // Calculam cantitatea totala in loc sa numaram liniile array-ului
         let count = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
         const cartBtn = document.getElementById('cart-nav-btn');
         if(cartBtn) cartBtn.innerText = `Cart (${count})`;
@@ -648,158 +717,86 @@
       ro: {
         nav_home: "Acasă", nav_shop: "Magazin", nav_about: "Despre Noi", nav_team: "Echipa H-Time", nav_contact: "Contactează-ne",
         
-        shop_filter: "Filtrează /",
-        shop_cat_all_title: "TOATE COLECȚIILE",
-        shop_cat_all: "Toate",
-        shop_cat_watches: "Ceasuri",
-        shop_cat_rings: "Inele",
-        shop_cat_earrings: "Cercei",
-        shop_cat_bracelets: "Brățări",
-        shop_cat_sale: "Oferte",
-        shop_cat_sale_title: "OFERTE EXCLUSIVE",
-        shop_price_range: "Interval Preț",
-        shop_sort: "Sortează",
-        shop_sort_default: "Implicit",
-        shop_sort_asc: "Preț: Mic la Mare",
-        shop_sort_desc: "Preț: Mare la Mic",
-        shop_no_products: "Niciun produs găsit.",
-        shop_view_product: "Vezi Produs",
+        shop_filter: "Filtrează /", shop_cat_all_title: "TOATE COLECȚIILE", shop_cat_all: "Toate", shop_cat_watches: "Ceasuri",
+        shop_cat_rings: "Inele", shop_cat_earrings: "Cercei", shop_cat_bracelets: "Brățări", shop_cat_sale: "Oferte Speciale",
+        shop_cat_sale_title: "OFERTE EXCLUSIVE", shop_price_range: "Interval Preț", shop_sort: "Sortează Produse", shop_sort_default: "Sortează: Implicit",
+        shop_sort_asc: "Preț: Mic la Mare", shop_sort_desc: "Preț: Mare la Mic", shop_no_products: "Niciun produs găsit conform filtrelor selectate.", shop_view_product: "Vezi Produs", badge_sale: "SALE",
 
         footer_desc: "Emoții sculptate în eleganță. Un boutique de lux dedicat persoanelor care apreciază rafinamentul, calitatea superioară și poveștile spuse prin intermediul bijuteriilor și ceasurilor unice.",
-        footer_nav: "NAVIGARE RAPIDĂ", footer_home: "Acasă - Pagina principală", footer_shop: "Magazin - Toate Colecțiile",
-        footer_about: "Povestea Noastră", footer_contact: "Contact & Suport", footer_info: "INFORMAȚII & POLITICI",
-        footer_terms: "Termeni și Condiții", footer_privacy: "Politică de Confidențialitate", footer_cookies: "Politică de Cookies", footer_delivery: "Politica de Livrare",
-        footer_return: "Politică de Retur (14 zile)", footer_care: "Îngrijirea Bijuteriilor", footer_consumer: "PROTECȚIA CONSUMATORULUI", footer_id_data: "Date de identificare ale societății"
+        footer_nav: "NAVIGARE RAPIDĂ", footer_home: "Acasă - Pagina principală", footer_shop: "Magazin - Toate Colecțiile", footer_about: "Povestea Noastră",
+        footer_contact: "Contact & Suport", footer_info: "INFORMAȚII & POLITICI", footer_terms: "Termeni și Condiții", footer_privacy: "Politică de Confidențialitate",
+        footer_cookies: "Politică de Cookies", footer_delivery: "Politica de Livrare", footer_return: "Politică de Retur (14 zile)", footer_care: "Îngrijirea Bijuteriilor",
+        footer_consumer: "PROTECȚIA CONSUMATORULUI", footer_id_data: "Date de identificare ale societății"
       },
       en: {
         nav_home: "Home", nav_shop: "Shop", nav_about: "About Us", nav_team: "H-Time Team", nav_contact: "Contact Us",
         
-        shop_filter: "Filter /",
-        shop_cat_all_title: "ALL COLLECTIONS",
-        shop_cat_all: "All",
-        shop_cat_watches: "Watches",
-        shop_cat_rings: "Rings",
-        shop_cat_earrings: "Earrings",
-        shop_cat_bracelets: "Bracelets",
-        shop_cat_sale: "Sale",
-        shop_cat_sale_title: "EXCLUSIVE OFFERS",
-        shop_price_range: "Price Range",
-        shop_sort: "Sort by",
-        shop_sort_default: "Default",
-        shop_sort_asc: "Price: Low to High",
-        shop_sort_desc: "Price: High to Low",
-        shop_no_products: "No products found.",
-        shop_view_product: "View Product",
+        shop_filter: "Filter /", shop_cat_all_title: "ALL COLLECTIONS", shop_cat_all: "All", shop_cat_watches: "Watches",
+        shop_cat_rings: "Rings", shop_cat_earrings: "Earrings", shop_cat_bracelets: "Bracelets", shop_cat_sale: "Special Offers",
+        shop_cat_sale_title: "EXCLUSIVE OFFERS", shop_price_range: "Price Range", shop_sort: "Sort Products", shop_sort_default: "Sort: Default",
+        shop_sort_asc: "Price: Low to High", shop_sort_desc: "Price: High to Low", shop_no_products: "No products found matching your filters.", shop_view_product: "View Product", badge_sale: "SALE",
 
         footer_desc: "Emotions sculpted in elegance. A luxury boutique dedicated to people who appreciate refinement, premium quality, and stories told through unique jewelry and watches.",
-        footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections",
-        footer_about: "Our Story", footer_contact: "Contact & Support", footer_info: "INFORMATION & POLICIES",
-        footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy", footer_cookies: "Cookie Policy", footer_delivery: "Delivery Policy",
-        footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care", footer_consumer: "CONSUMER PROTECTION", footer_id_data: "Company Identification Data"
+        footer_nav: "QUICK NAVIGATION", footer_home: "Home - Main Page", footer_shop: "Shop - All Collections", footer_about: "Our Story",
+        footer_contact: "Contact & Support", footer_info: "INFORMATION & POLICIES", footer_terms: "Terms and Conditions", footer_privacy: "Privacy Policy",
+        footer_cookies: "Cookie Policy", footer_delivery: "Delivery Policy", footer_return: "Return Policy (14 days)", footer_care: "Jewelry Care",
+        footer_consumer: "CONSUMER PROTECTION", footer_id_data: "Company Identification Data"
       },
       fr: {
         nav_home: "Accueil", nav_shop: "Boutique", nav_about: "À propos", nav_team: "Équipe H-Time", nav_contact: "Contactez-nous",
         
-        shop_filter: "Filtrer /",
-        shop_cat_all_title: "TOUTES LES COLLECTIONS",
-        shop_cat_all: "Tout",
-        shop_cat_watches: "Montres",
-        shop_cat_rings: "Bagues",
-        shop_cat_earrings: "Boucles d'oreilles",
-        shop_cat_bracelets: "Bracelets",
-        shop_cat_sale: "Soldes",
-        shop_cat_sale_title: "OFFRES EXCLUSIVES",
-        shop_price_range: "Gamme de Prix",
-        shop_sort: "Trier par",
-        shop_sort_default: "Par défaut",
-        shop_sort_asc: "Prix: Croissant",
-        shop_sort_desc: "Prix: Décroissant",
-        shop_no_products: "Aucun produit trouvé.",
-        shop_view_product: "Voir Produit",
+        shop_filter: "Filtrer /", shop_cat_all_title: "TOUTES LES COLLECTIONS", shop_cat_all: "Tout", shop_cat_watches: "Montres",
+        shop_cat_rings: "Bagues", shop_cat_earrings: "Boucles d'oreilles", shop_cat_bracelets: "Bracelets", shop_cat_sale: "Offres Spéciales",
+        shop_cat_sale_title: "OFFRES EXCLUSIVES", shop_price_range: "Gamme de Prix", shop_sort: "Trier les Produits", shop_sort_default: "Trier: Par défaut",
+        shop_sort_asc: "Prix: Croissant", shop_sort_desc: "Prix: Décroissant", shop_no_products: "Aucun produit trouvé avec ces filtres.", shop_view_product: "Voir Produit", badge_sale: "SOLDES",
 
         footer_desc: "Émotions sculptées dans l'élégance. Une boutique de luxe dédiée aux personnes qui apprécient le raffinement, la qualité supérieure et les histoires racontées à travers des bijoux et des montres uniques.",
-        footer_nav: "NAVIGATION RAPIDE", footer_home: "Accueil - Page principale", footer_shop: "Boutique - Toutes les collections",
-        footer_about: "Notre histoire", footer_contact: "Contact & Support", footer_info: "INFORMATIONS & POLITIQUES",
-        footer_terms: "Conditions générales", footer_privacy: "Politique de confidentialité", footer_cookies: "Politique de cookies", footer_delivery: "Politique de livraison",
-        footer_return: "Politique de retour (14 jours)", footer_care: "Entretien des bijoux", footer_consumer: "PROTECTION DU CONSOMMATEUR", footer_id_data: "Données d'identification de l'entreprise"
+        footer_nav: "NAVIGATION RAPIDE", footer_home: "Accueil - Page principale", footer_shop: "Boutique - Toutes les collections", footer_about: "Notre histoire",
+        footer_contact: "Contact & Support", footer_info: "INFORMATIONS & POLITIQUES", footer_terms: "Conditions générales", footer_privacy: "Politique de confidentialité",
+        footer_cookies: "Politique de cookies", footer_delivery: "Politique de livraison", footer_return: "Politique de retour (14 jours)", footer_care: "Entretien des bijoux",
+        footer_consumer: "PROTECTION DU CONSOMMATEUR", footer_id_data: "Données d'identification de l'entreprise"
       },
       de: {
         nav_home: "Startseite", nav_shop: "Shop", nav_about: "Über uns", nav_team: "H-Time Team", nav_contact: "Kontakt",
         
-        shop_filter: "Filtern /",
-        shop_cat_all_title: "ALLE KOLLEKTIONEN",
-        shop_cat_all: "Alle",
-        shop_cat_watches: "Uhren",
-        shop_cat_rings: "Ringe",
-        shop_cat_earrings: "Ohrringe",
-        shop_cat_bracelets: "Armbänder",
-        shop_cat_sale: "Angebote",
-        shop_cat_sale_title: "EXKLUSIVE ANGEBOTE",
-        shop_price_range: "Preisspanne",
-        shop_sort: "Sortieren nach",
-        shop_sort_default: "Standard",
-        shop_sort_asc: "Preis: Aufsteigend",
-        shop_sort_desc: "Preis: Absteigend",
-        shop_no_products: "Keine Produkte gefunden.",
-        shop_view_product: "Produkt ansehen",
+        shop_filter: "Filtern /", shop_cat_all_title: "ALLE KOLLEKTIONEN", shop_cat_all: "Alle", shop_cat_watches: "Uhren",
+        shop_cat_rings: "Ringe", shop_cat_earrings: "Ohrringe", shop_cat_bracelets: "Armbänder", shop_cat_sale: "Sonderangebote",
+        shop_cat_sale_title: "EXKLUSIVE ANGEBOTE", shop_price_range: "Preisspanne", shop_sort: "Produkte sortieren", shop_sort_default: "Sortieren: Standard",
+        shop_sort_asc: "Preis: Aufsteigend", shop_sort_desc: "Preis: Absteigend", shop_no_products: "Keine Produkte für diese Filter gefunden.", shop_view_product: "Produkt ansehen", badge_sale: "ANGEBOT",
 
         footer_desc: "Emotionen in Eleganz gemeißelt. Eine Luxus-Boutique, die sich Personen widmet, die Raffinesse, erstklassige Qualität und Geschichten schätzen, die durch einzigartige Schmuckstücke und Uhren erzählt werden.",
-        footer_nav: "SCHNELLNAVIGATION", footer_home: "Startseite - Hauptseite", footer_shop: "Shop - Alle Kollektionen",
-        footer_about: "Unsere Geschichte", footer_contact: "Kontakt & Support", footer_info: "INFORMATIONEN & RICHTLINIEN",
-        footer_terms: "Allgemeine Geschäftsbedingungen", footer_privacy: "Datenschutzrichtlinie", footer_cookies: "Cookie-Richtlinie", footer_delivery: "Lieferbedingungen",
-        footer_return: "Rückgaberecht (14 Tage)", footer_care: "Schmuckpflege", footer_consumer: "VERBRAUCHERSCHUTZ", footer_id_data: "Unternehmensidentifikationsdaten"
+        footer_nav: "SCHNELLNAVIGATION", footer_home: "Startseite - Hauptseite", footer_shop: "Shop - Alle Kollektionen", footer_about: "Unsere Geschichte",
+        footer_contact: "Kontakt & Support", footer_info: "INFORMATIONEN & RICHTLINIEN", footer_terms: "Allgemeine Geschäftsbedingungen", footer_privacy: "Datenschutzrichtlinie",
+        footer_cookies: "Cookie-Richtlinie", footer_delivery: "Lieferbedingungen", footer_return: "Rückgaberecht (14 Tage)", footer_care: "Schmuckpflege",
+        footer_consumer: "VERBRAUCHERSCHUTZ", footer_id_data: "Unternehmensidentifikationsdaten"
       },
       es: {
         nav_home: "Inicio", nav_shop: "Tienda", nav_about: "Sobre Nosotros", nav_team: "Equipo H-Time", nav_contact: "Contáctanos",
         
-        shop_filter: "Filtrar /",
-        shop_cat_all_title: "TODAS LAS COLECCIONES",
-        shop_cat_all: "Todo",
-        shop_cat_watches: "Relojes",
-        shop_cat_rings: "Anillos",
-        shop_cat_earrings: "Pendientes",
-        shop_cat_bracelets: "Pulseras",
-        shop_cat_sale: "Ofertas",
-        shop_cat_sale_title: "OFERTAS EXCLUSIVAS",
-        shop_price_range: "Rango de Precios",
-        shop_sort: "Ordenar por",
-        shop_sort_default: "Por defecto",
-        shop_sort_asc: "Precio: Menor a Mayor",
-        shop_sort_desc: "Precio: Mayor a Menor",
-        shop_no_products: "No se encontraron productos.",
-        shop_view_product: "Ver Producto",
+        shop_filter: "Filtrar /", shop_cat_all_title: "TODAS LAS COLECCIONES", shop_cat_all: "Todo", shop_cat_watches: "Relojes",
+        shop_cat_rings: "Anillos", shop_cat_earrings: "Pendientes", shop_cat_bracelets: "Pulseras", shop_cat_sale: "Ofertas Especiales",
+        shop_cat_sale_title: "OFERTAS EXCLUSIVAS", shop_price_range: "Rango de Precios", shop_sort: "Ordenar Productos", shop_sort_default: "Ordenar: Por defecto",
+        shop_sort_asc: "Precio: Menor a Mayor", shop_sort_desc: "Precio: Mayor a Menor", shop_no_products: "No se encontraron productos con estos filtros.", shop_view_product: "Ver Producto", badge_sale: "REBAJA",
 
         footer_desc: "Emociones esculpidas en elegancia. Una boutique de lujo dedicada a personas que aprecian el refinamiento, la calidad superior y las historias contadas a través de joyas y relojes únicos.",
-        footer_nav: "NAVEGACIÓN RÁPIDA", footer_home: "Inicio - Página principal", footer_shop: "Tienda - Todas las colecciones",
-        footer_about: "Nuestra historia", footer_contact: "Contacto & Soporte", footer_info: "INFORMACIÓN & POLÍTICAS",
-        footer_terms: "Términos y condiciones", footer_privacy: "Política de privacidad", footer_cookies: "Política de Cookies", footer_delivery: "Política de entrega",
-        footer_return: "Política de devolución (14 días)", footer_care: "Cuidado de las joyas", footer_consumer: "PROTECCIÓN AL CONSUMIDOR", footer_id_data: "Datos de identificación de la empresa"
+        footer_nav: "NAVEGACIÓN RÁPIDA", footer_home: "Inicio - Página principal", footer_shop: "Tienda - Todas las colecciones", footer_about: "Nuestra historia",
+        footer_contact: "Contacto & Soporte", footer_info: "INFORMACIÓN & POLÍTICAS", footer_terms: "Términos y condiciones", footer_privacy: "Política de privacidad",
+        footer_cookies: "Política de Cookies", footer_delivery: "Política de entrega", footer_return: "Política de devolución (14 días)", footer_care: "Cuidado de las joyas",
+        footer_consumer: "PROTECCIÓN AL CONSUMIDOR", footer_id_data: "Datos de identificación de la empresa"
       },
       it: {
         nav_home: "Home", nav_shop: "Negozio", nav_about: "Chi Siamo", nav_team: "Team H-Time", nav_contact: "Contattaci",
         
-        shop_filter: "Filtra /",
-        shop_cat_all_title: "TUTTE LE COLLEZIONI",
-        shop_cat_all: "Tutto",
-        shop_cat_watches: "Orologi",
-        shop_cat_rings: "Anelli",
-        shop_cat_earrings: "Orecchini",
-        shop_cat_bracelets: "Bracciali",
-        shop_cat_sale: "Offerte",
-        shop_cat_sale_title: "OFFERTE ESCLUSIVE",
-        shop_price_range: "Fascia di Prezzo",
-        shop_sort: "Ordina per",
-        shop_sort_default: "Predefinito",
-        shop_sort_asc: "Prezzo: Crescente",
-        shop_sort_desc: "Prezzo: Decrescente",
-        shop_no_products: "Nessun prodotto trovato.",
-        shop_view_product: "Vedi Prodotto",
+        shop_filter: "Filtra /", shop_cat_all_title: "TUTTE LE COLLEZIONI", shop_cat_all: "Tutto", shop_cat_watches: "Orologi",
+        shop_cat_rings: "Anelli", shop_cat_earrings: "Orecchini", shop_cat_bracelets: "Bracciali", shop_cat_sale: "Offerte Speciali",
+        shop_cat_sale_title: "OFFERTE ESCLUSIVE", shop_price_range: "Fascia di Prezzo", shop_sort: "Ordina Prodotti", shop_sort_default: "Ordina: Predefinito",
+        shop_sort_asc: "Prezzo: Crescente", shop_sort_desc: "Prezzo: Decrescente", shop_no_products: "Nessun prodotto trovato con questi filtri.", shop_view_product: "Vedi Prodotto", badge_sale: "SALDI",
 
         footer_desc: "Emozioni scolpite nell'eleganza. Una boutique di lusso dedicata alle persone che apprezzano la raffinatezza, la qualità superiore e le storie raccontate attraverso gioielli e orologi unici.",
-        footer_nav: "NAVIGAZIONE RAPIDA", footer_home: "Home - Pagina principale", footer_shop: "Negozio - Tutte le collezioni",
-        footer_about: "La nostra storia", footer_contact: "Contatto & Supporto", footer_info: "INFORMAZIONI & POLITICHE",
-        footer_terms: "Termini e condizioni", footer_privacy: "Informativa sulla privacy", footer_cookies: "Informativa sui cookie", footer_delivery: "Politica di consegna",
-        footer_return: "Politica di reso (14 giorni)", footer_care: "Cura dei gioielli", footer_consumer: "PROTEZIONE DEL CONSUMATORE", footer_id_data: "Dati identificativi dell'azienda"
+        footer_nav: "NAVIGAZIONE RAPIDA", footer_home: "Home - Pagina principale", footer_shop: "Negozio - Tutte le collezioni", footer_about: "La nostra storia",
+        footer_contact: "Contatto & Supporto", footer_info: "INFORMAZIONI & POLITICHE", footer_terms: "Termini e condizioni", footer_privacy: "Informativa sulla privacy",
+        footer_cookies: "Informativa sui cookie", footer_delivery: "Politica di consegna", footer_return: "Politica di reso (14 giorni)", footer_care: "Cura dei gioielli",
+        footer_consumer: "PROTEZIONE DEL CONSUMATORE", footer_id_data: "Dati identificativi dell'azienda"
       }
     };
 
@@ -821,6 +818,25 @@
     }
 
     window.onload = () => {
+      // Verificam daca exista un filtru salvat (ex: venit de pe homepage cu categorii)
+      const pendingFilter = localStorage.getItem('htime_filter_cat');
+      if (pendingFilter) {
+          state.category = pendingFilter;
+          localStorage.removeItem('htime_filter_cat');
+          
+          const catTitleEl = document.getElementById('category-title');
+          if (catDictKeys[pendingFilter]) {
+              catTitleEl.setAttribute('data-i18n', catDictKeys[pendingFilter]);
+          }
+          
+          document.querySelectorAll('.category-list li').forEach(li => {
+              li.classList.remove('active');
+              if (li.getAttribute('onclick') && li.getAttribute('onclick').includes(`'${pendingFilter}'`)) {
+                  li.classList.add('active');
+              }
+          });
+      }
+
       handlePriceSlider(); 
       updateCartCounter();
       
@@ -836,7 +852,6 @@
           const lang = switcher.value;
           localStorage.setItem('htime_lang', lang);
           applyTranslations(lang);
-          
           handlePriceSlider();
         });
       }
